@@ -1,4 +1,4 @@
-# 120----WE NEED HAIRY ASS.
+# 120----FINAL PROJECT
 Sorta Official Document for the final 120 game.
 Title.
 Start: Cutscene that player eats "food" and needs to shit.
