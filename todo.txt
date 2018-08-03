@@ -1,5 +1,5 @@
 ASSET
-* Need player sprite, emeny sprites
+* Need player sprite, enemy sprites
 * Effects & particles
 
 SYSTEM
