@@ -1,7 +1,5 @@
 # 120----FINAL PROJECT
 
-## Sorta Official Document for the final 120 game.
-
 ## Title Goes Here:
 
 ## Description:
