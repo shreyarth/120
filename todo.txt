@@ -1,0 +1,6 @@
+ASSET
+* Need player sprite, emeny sprites
+* Effects & particles
+
+SYSTEM
+* Camera shake movement on enemy explosion / player hit?
