@@ -5,14 +5,14 @@ function Player(game, key, frame) {
 	//Phaser.Sprite.call(this, game, 64, 110, key, frame);
 	//Phaser.Sprite.call(this, game, 470, 500, 0,'player', 33);
 	
-	Phaser.Sprite(this, game, 300, 300, 'player');
-	this.scale.x = 3;
-	this.scale.y = 3;
+	Phaser.Sprite.call(this, game, 300, 300, 'player');
+	this.scale.x = 0.1;
+	this.scale.y = 0.1;
 	// physics crap
-	game.physics.arcade.enable(player);
-	player.body.bounce.y = 0.2;
-	player.body.gravity.y = 500;
-	player.body.collideWorldBounds = true;
+	game.physics.enable(this, Phaser.Physics.ARCADE);
+	this.body.bounce.y = 0.2;
+	this.body.gravity.y = 200;
+	this.body.collideWorldBounds = true;
 
 
 	
@@ -24,7 +24,7 @@ function Player(game, key, frame) {
 	this.health = 100;
 	this.pooCount = 100;
 
-	game.physics.enable(this);
+	//game.physics.enable(this);
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
