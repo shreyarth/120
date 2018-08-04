@@ -2,6 +2,20 @@ var play = function() {
 	// Global state variables
 	var platform;
 }
+function death(){
+	if(pooCount < 0){
+		player.kill();
+		console.log("death from no poo");
+		player.reset(300,300);
+		pooCount = 10;
+	}
+	if(pooCount > 100){
+		player.kill();
+		console.log("death from too much poo");
+		player.reset(300,300);
+		pooCount = 90;
+	}
+};
 
 play.prototype = {
 	preload: function() {
@@ -35,6 +49,8 @@ play.prototype = {
 		bullets.checkWorldBounds = true;
 		bullets.outOfBoundsKill = true;
 
+		pooCount = 100;
+
 
 
 		// Set camera to platformer follow up
@@ -56,8 +72,14 @@ play.prototype = {
 	fire: function(){
 		var star = bullets.getFirstExists(false);
 		if(star){
-			star.reset(player.x, player.y - 20);
-			star.body.velocity.x = 30;
+			star.reset(player.x + 10, player.y - 10);
+			star.body.velocity.x = 80;
+			pooCount --;
+
+			console.log(pooCount);
+			if(pooCount < 0 || pooCount > 100){
+				death();
+			}
 		}
 	},
 
