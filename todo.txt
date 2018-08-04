@@ -2,5 +2,8 @@ ASSET
 * Need player sprite, enemy sprites
 * Effects & particles
 
+Programming
+* A counter variable to keep track of poop usage for shooting/jumping
+
 SYSTEM
 * Camera shake movement on enemy explosion / player hit?
