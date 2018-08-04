@@ -11,7 +11,7 @@ function Player(game, key, frame) {
 	// physics crap
 	game.physics.enable(this, Phaser.Physics.ARCADE);
 	this.body.bounce.y = 0.2;
-	this.body.gravity.y = 200;
+	this.body.gravity.y = 300;
 	this.body.collideWorldBounds = true;
 
 
@@ -26,6 +26,30 @@ function Player(game, key, frame) {
 
 	//game.physics.enable(this);
 }
+function fire(){
+	var star = bullets.getFirstExists(false);
+	if(star){
+		star.reset(player.x - 10, player.y + 17);
+		star.body.velocity.y = 30;
+		pooCount --;
+		console.log(pooCount);
+	}
+};
+
+function death(){
+	if(pooCount < 0){
+		player.kill();
+		player.reset(300,300);
+		console.log("death from no poo");
+		pooCount = 10;
+	}
+	if(pooCount > 100){
+		player.kill();
+		player.reset(300,300);
+		console.log("death from too much poo");
+		pooCount = 90;
+	}
+}
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -35,18 +59,37 @@ Player.prototype.constructor = Player;
 Player.prototype.update = function() {
 	// Controls
 	if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-		this.body.velocity.x -= 5;
+		this.body.acceleration.x -= 3;
+		
+		if(this.body.acceleration.x < -150){
+			this.body.velocity.x = -150;
+		}else
+		this.body.velocity.x = this.body.acceleration.x;
 		console.log("left");
-	}
-	if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-		this.body.velocity.x += 5;
+	}else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+		this.body.acceleration.x += 3;
+
+		if(this.body.acceleration.x > 150){
+			this.body.velocity.x = 150;
+			console.log(this.body.velocity.x);
+		}else
+		this.body.velocity.x = this.body.acceleration.x;
+		console.log(this.body.velocity.x);
+		
 		console.log("right");
+	}else{
+		this.body.acceleration.x = 0;
+		this.body.velocity.x = 0;
 	}
 
-	// Jump (need double jump)
+	// poopack for jumping
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.UP)){
-		this.body.velocity.y -= 200;
+		this.body.velocity.y = -175;
+		fire();
 		console.log("jump");
+		if(pooCount < 0 || pooCount > 100){
+			death();
+		}
 	}
 
 	// Attack move
