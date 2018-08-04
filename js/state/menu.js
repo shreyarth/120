@@ -14,9 +14,10 @@ menu.prototype = {
 	},
 	create: function() {
 		// Asset implementaion
+		game.stage.backgroundColor = "#895f2b";
 		console.log("menu state to check implementation");
-		var playText = game.add.text(100, game.height*.3, 
-				'To Shit or not to shit...Push spacebar to continue', 
+		var playText = game.add.text(250, game.height*.3, 
+				'    To shit or not to shit...\nPush spacebar to continue', 
 				{font: 'Helvetica', fontSize: '24px', fill: '#fff'});
 	},
 	update: function() {
