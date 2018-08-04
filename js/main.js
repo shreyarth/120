@@ -1,6 +1,7 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
 // Global vars
+var star;
 // Main char
 var player;
 // Enemy group
