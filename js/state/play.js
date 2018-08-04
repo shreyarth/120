@@ -1,6 +1,6 @@
 var play = function() {
 	// Global state variables
-	var platform;
+
 }
 function death(){
 	if(pooCount < 0){
@@ -39,6 +39,10 @@ play.prototype = {
 		player = new Player(game, 'player', 3,3);
 		game.add.existing(player);
 
+		// enemy
+		enemy = new Enemy(game, 'enemy', 3, 3);
+		game.add.existing(enemy);
+
 
 		bullets = game.add.group();
 		bullets.enableBody = true;
@@ -64,7 +68,16 @@ play.prototype = {
 	},
 	update: function() {
 		// Update function
+		// player and enemies collision with platforms
 		game.physics.arcade.collide(player, platform);
+		game.physics.arcade.collide(enemy, platform);
+
+		// enemy movement towards player
+		// if(game.physics.arcade.collide(enemy, platform)){
+		// 	game.physics.arcade.moveToObject(enemy, player);
+		// }
+
+		//shooting
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 			this.fire();
 		}
@@ -76,15 +89,18 @@ play.prototype = {
 	fire: function(){
 		star = bullets.getFirstExists(false);
 		if(star){
+			// gravity for poo
 			game.physics.enable(this, Phaser.Physics.ARCADE);
-			star.body.bounce.y = 0.2;
-			star.body.gravity.y = 10;
+			star.body.bounce.y = 1;
+			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
 			star.reset(player.x + 10, player.y - 10);
-			star.body.velocity.x = 200;
-			//star.gravity = 100;
+			star.body.velocity.x = 250;
+
+			// poo decrement
 			pooCount --;
 
+			// checking pooCount
 			console.log(pooCount);
 			if(pooCount < 0 || pooCount > 100){
 				death();

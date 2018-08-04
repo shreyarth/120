@@ -2,10 +2,11 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
 // Global vars
 var star;
+var platform;
 // Main char
 var player;
 // Enemy group
-var ememies;
+var enemy;
 
 // State management
 game.state.add('menu', menu);

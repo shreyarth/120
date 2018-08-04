@@ -29,31 +29,18 @@ function Player(game, key, frame) {
 function fire(){
 	star = bullets.getFirstExists(false);
 	if(star){
+		//poo physics
 		game.physics.enable(this, Phaser.Physics.ARCADE);
 		star.body.bounce.y = 0.2;
-		star.body.gravity.y = 50;
+		star.body.gravity.y = 300;
 		star.body.collideWorldBounds = false;	
+		//placement of where poo spawns
 		star.reset(player.x - 10, player.y + 17);
-		star.body.velocity.y = 30;
+		star.body.velocity.y = 100;
 		pooCount --;
 		console.log(pooCount);
 	}
 };
-
-function death(){
-	if(pooCount < 0){
-		player.kill();
-		player.reset(300,300);
-		console.log("death from no poo");
-		pooCount = 10;
-	}
-	if(pooCount > 100){
-		player.kill();
-		player.reset(300,300);
-		console.log("death from too much poo");
-		pooCount = 90;
-	}
-}
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -62,6 +49,7 @@ Player.prototype.constructor = Player;
 // override Phaser.Sprite update
 Player.prototype.update = function() {
 	// Controls
+	// movement
 	if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
 		this.body.acceleration.x -= 3;
 		
@@ -91,6 +79,7 @@ Player.prototype.update = function() {
 		this.body.velocity.y = -175;
 		fire();
 		console.log("jump");
+		// death if poo count is too high or low
 		if(pooCount < 0 || pooCount > 100){
 			death();
 		}
