@@ -48,6 +48,7 @@ play.prototype = {
 		//bullets.callAll('events.onOutOfBounds.add', 'events.outOfBounds', resetstar);
 		bullets.checkWorldBounds = true;
 		bullets.outOfBoundsKill = true;
+		//bullets.gravity = 300;
 
 		pooCount = 100;
 
@@ -67,13 +68,21 @@ play.prototype = {
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 			this.fire();
 		}
+		if(game.physics.arcade.collide(star, platform)){
+			star.kill();
+		}
 	},
 
 	fire: function(){
-		var star = bullets.getFirstExists(false);
+		star = bullets.getFirstExists(false);
 		if(star){
+			game.physics.enable(this, Phaser.Physics.ARCADE);
+			star.body.bounce.y = 0.2;
+			star.body.gravity.y = 10;
+			star.body.collideWorldBounds = false;
 			star.reset(player.x + 10, player.y - 10);
-			star.body.velocity.x = 80;
+			star.body.velocity.x = 200;
+			//star.gravity = 100;
 			pooCount --;
 
 			console.log(pooCount);
