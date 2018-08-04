@@ -21,14 +21,18 @@ function Player(game, key, frame) {
 	this.anchor.set(0.5);
 
 	// Character info
-	this.health = 100;
+	// this.health = 100;	// pooCount = health. left the line in case we need it later for some reason
 	this.pooCount = 100;
 
 	//game.physics.enable(this);
 }
 function fire(){
-	var star = bullets.getFirstExists(false);
+	star = bullets.getFirstExists(false);
 	if(star){
+		game.physics.enable(this, Phaser.Physics.ARCADE);
+		star.body.bounce.y = 0.2;
+		star.body.gravity.y = 50;
+		star.body.collideWorldBounds = false;	
 		star.reset(player.x - 10, player.y + 17);
 		star.body.velocity.y = 30;
 		pooCount --;
