@@ -4,6 +4,10 @@ var menu = function() {
 
 menu.prototype = {
 	preload: function() {
+		game.load.path = 'assets/';
+		game.load.image('player', 'img/player.png');
+		game.load.image('poo', 'img/star.png');
+		game.load.image('platform', 'img/platform.png');
 		// Call menu assets
 	},
 	create: function() {
