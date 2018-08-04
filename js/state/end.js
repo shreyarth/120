@@ -1,3 +1,4 @@
+
 // end
 var end = function(game) {};
 end.prototype = {
@@ -30,4 +31,4 @@ end.prototype = {
 		//to return to game
 		
 	}
-};
+}
