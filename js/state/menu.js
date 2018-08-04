@@ -8,6 +8,7 @@ menu.prototype = {
 		game.load.image('player', 'img/player.png');
 		game.load.image('poo', 'img/star.png');
 		game.load.image('platform', 'img/platform.png');
+		game.load.image('star', 'img/star.png');
 		// Call menu assets
 	},
 	create: function() {

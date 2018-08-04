@@ -26,7 +26,14 @@ play.prototype = {
 		game.add.existing(player);
 
 
-
+		bullets = game.add.group();
+		bullets.enableBody = true;
+		bullets.physicsBodyType = Phaser.Physics.ARCADE;
+		bullets.createMultiple(200, 'star');
+		//bullets.setAll('checkWorldBounds', true);
+		//bullets.callAll('events.onOutOfBounds.add', 'events.outOfBounds', resetstar);
+		bullets.checkWorldBounds = true;
+		bullets.outOfBoundsKill = true;
 
 
 
@@ -40,6 +47,22 @@ play.prototype = {
 	},
 	update: function() {
 		// Update function
+		game.physics.arcade.collide(player, platform);
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
+			this.fire();
+		}
+	},
+
+	fire: function(){
+		var star = bullets.getFirstExists(false);
+		if(star){
+			star.reset(player.x, player.y - 20);
+			star.body.velocity.x = 30;
+		}
+	},
+
+	resetstar: function(star){
+		star.kill();
 	}
 	// Char control is implemented in player.js
 }
