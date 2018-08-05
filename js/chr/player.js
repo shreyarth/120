@@ -2,11 +2,10 @@
 function Player(game, key, frame) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	//Phaser.Sprite.call(this, game, 64, 110, key, frame);
-	
 	Phaser.Sprite.call(this, game, 300, 300, 'player');
 	this.scale.x = 0.1;
 	this.scale.y = 0.1;
+
 	// physics crap
 	game.physics.enable(this, Phaser.Physics.ARCADE);
 	this.body.bounce.y = 0.2;
@@ -20,9 +19,8 @@ function Player(game, key, frame) {
 	// Character info
 	// this.health = 100;	// pooCount = health. left the line in case we need it later for some reason
 	this.pooCount = 100;
-
-	//game.physics.enable(this);
 }
+
 function fire(){
 	star = bullets.getFirstExists(false);
 	if(star){
@@ -53,7 +51,7 @@ Player.prototype.update = function() {
 		if(this.body.acceleration.x < -150)
 			this.body.velocity.x = -150;
 		else
-			this.body.velocity.x -= this.body.acceleration.x;
+			this.body.velocity.x = this.body.acceleration.x;
 		console.log("left");
 	}
 	else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
@@ -62,9 +60,8 @@ Player.prototype.update = function() {
 		if(this.body.acceleration.x > 150)
 			this.body.velocity.x = 150;
 		else
-			this.body.velocity.x += this.body.acceleration.x;
-		console.log(this.body.velocity.x);
-		
+			this.body.velocity.x = this.body.acceleration.x;
+		//console.log(this.body.velocity.x);
 		console.log("right");
 	}
 	else{
@@ -75,7 +72,7 @@ Player.prototype.update = function() {
 	// poopack for jumping
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.UP)){
 		this.body.velocity.y = -175;
-		this.fire();
+		fire();
 		console.log("jump");
 		// death if poo count is too high or low
 		if(pooCount < 0 || pooCount > 100){
