@@ -2,20 +2,6 @@ var play = function() {
 	// Global state variables
 
 }
-function death(){
-	if(pooCount < 0){
-		player.kill();
-		console.log("death from no poo");
-		player.reset(300,300);
-		pooCount = 10;
-	}
-	if(pooCount > 100){
-		player.kill();
-		console.log("death from too much poo");
-		player.reset(300,300);
-		pooCount = 90;
-	}
-};
 
 play.prototype = {
 	preload: function() {
@@ -60,7 +46,7 @@ play.prototype = {
 
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
-		// game.camera.follow('player', FOLLOW_PLATFORMER, 0.25, 0.25);
+		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
 		// var ui = something;
@@ -103,7 +89,7 @@ play.prototype = {
 			// checking pooCount
 			console.log(pooCount);
 			if(pooCount < 0 || pooCount > 100){
-				death();
+				Player.death();
 			}
 		}
 	},
