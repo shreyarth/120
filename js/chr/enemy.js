@@ -28,8 +28,10 @@ Enemy.prototype.update = function() {
 	if(game.physics.arcade.collide(enemy, player)){
 		if(pooCount > 50){
 			pooCount = pooCount +10;
+			console.log(pooCount);
 		}else
 		pooCount = pooCount -10;
+		console.log(pooCount);
 	}
 	if(game.physics.arcade.collide(enemy, star)){
 		this.kill();
