@@ -2,14 +2,17 @@
 function Enemy(game, key, frame) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, game.rnd.integerInRange(0,game.width), game.rnd.integerInRange(37,game.height-37), key, frame);
+	Phaser.Sprite.call(this, game, 500, 300, 'enemy', frame);
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
-	this.anchor.set(0.5);
-
-	// Enemy info
-	this.health = 100;
+	this.scale.x = 0.1;
+	this.scale.y = 0.1;
+	// physics crap
+	game.physics.enable(this, Phaser.Physics.ARCADE);
+	this.body.bounce.y = 0.2;
+	this.body.gravity.y = 300;
+	this.body.collideWorldBounds = true;
 	// needs enemy type
 
 	game.physics.enable(this);
@@ -21,6 +24,32 @@ Enemy.prototype.constructor = Enemy;
 
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
+	
+	if(game.physics.arcade.collide(this, player)){
+		if(pooCount > 50){
+			pooCount = pooCount +10;
+			//console.log(pooCount);
+		}else
+		pooCount = pooCount -10;
+		//console.log(pooCount);
+	}
+	if(game.physics.arcade.collide(this, star)){
+		this.kill();
+		this.reset(500, 400);
+		star.kill();
 	// Random movement
 	// Simple AI when protag approaches within the param
+	}
+	// trying to get enemy to move towards player when its on a platform
+	// not working, its floating around like a ghost
+	/*
+	if(game.physics.arcade.collide(this, platform)){
+			game.physics.arcade.moveToObject(enemy, player);
+			console.log("moving towards player");
+			this.body.velocity.y = 100;
+		}
+		game.physics.arcade.moveToObject(enemy, player);
+*/
+	
+	
 }

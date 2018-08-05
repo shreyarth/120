@@ -24,6 +24,7 @@ function Poo(game, key) {
 
 	//game.physics.enable(this);
 }
+/*
 function fire(){
 	poo = bullets.getFirstExists(false);
 	if(poo){
@@ -34,19 +35,19 @@ function fire(){
 	}
 };
 
-
+*/
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
-Player.prototype = Object.create(Phaser.Sprite.prototype);
-Player.prototype.constructor = Player;
+Poo.prototype = Object.create(Phaser.Sprite.prototype);
+Poo.prototype.constructor = Poo;
 
 // override Phaser.Sprite update
-Player.prototype.update = function() {
+Poo.prototype.update = function() {
 	
-	
+	/*
 	if(game.physics.arcade.collide(star, platform)){
 			poo.kill();
 		}
-	
+	*/
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 			fire();
 	}
