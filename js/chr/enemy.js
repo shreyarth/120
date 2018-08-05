@@ -25,15 +25,15 @@ Enemy.prototype.constructor = Enemy;
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
 	
-	if(game.physics.arcade.collide(enemy, player)){
+	if(game.physics.arcade.collide(this, player)){
 		if(pooCount > 50){
 			pooCount = pooCount +10;
-			console.log(pooCount);
+			//console.log(pooCount);
 		}else
 		pooCount = pooCount -10;
-		console.log(pooCount);
+		//console.log(pooCount);
 	}
-	if(game.physics.arcade.collide(enemy, star)){
+	if(game.physics.arcade.collide(this, star)){
 		this.kill();
 		this.reset(500, 400);
 		star.kill();
@@ -42,12 +42,13 @@ Enemy.prototype.update = function() {
 	}
 	// trying to get enemy to move towards player when its on a platform
 	// not working, its floating around like a ghost
-	if(game.physics.arcade.collide(enemy, platform)){
+	/*
+	if(game.physics.arcade.collide(this, platform)){
 			game.physics.arcade.moveToObject(enemy, player);
 			console.log("moving towards player");
 		}
 		game.physics.arcade.moveToObject(enemy, player);
-
+*/
 	
 	
 }
