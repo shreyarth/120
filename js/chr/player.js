@@ -22,6 +22,7 @@ function Player(game, key, frame, bulletKey) {
 	this.direction = 'right';
 	// Timer obj for invincible time or any other stuffs.. in cases for need of timer...
 	this.timer = game.time.create(game, false);
+	this.timer.start();
 	this.isInvincible = false;
 
 	// Character info

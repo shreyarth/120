@@ -47,7 +47,7 @@ Enemy.prototype.pooModifier = function() {
 		console.log(player.pooCount);
 		player.death();
 		player.isInvincible = true;
-		player.timer.add(500, function() {console.log("fire timed event"); player.isInvincible = false;}, game);
+		player.timer.add(500, function() {console.log("fire timed event"); this.isInvincible = false;}, player);
 	}
 }
 
@@ -55,4 +55,14 @@ Enemy.prototype.death = function(player, bullet) {
 	this.kill();
 	this.reset(500, 400);
 	bullet.kill();
+}
+
+Enemy.prototype.chasePlayer = function() {
+	// When player is left
+	if (player.body.x < this.body.x) {
+		this.velocity.x = -50;
+	}
+	else if (player.body.x > this.body.x) {
+		this.velocity.x = 50;
+	}
 }
