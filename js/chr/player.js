@@ -97,6 +97,7 @@ Player.prototype.fire = function(isJump) {
 			star.body.gravity.y = 50;
 			star.reset(player.x - 10, player.y + 17);
 			star.body.velocity.y = 30;
+			star.angle = 90;
 		}
 		else {
 			star.body.bounce.y = 1;
