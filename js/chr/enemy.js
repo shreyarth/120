@@ -3,18 +3,19 @@ function Enemy(game, key, frame) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	Phaser.Sprite.call(this, game, 500, 300, 'enemy', frame);
-	// needs enemy type
-
+	
 	// anchor: Origin of the texture
 	// 0.5 = center
 	this.scale.x = 0.1;
 	this.scale.y = 0.1;
-
 	// physics crap
 	game.physics.enable(this, Phaser.Physics.ARCADE);
 	this.body.bounce.y = 0.2;
 	this.body.gravity.y = 300;
 	this.body.collideWorldBounds = true;
+	// needs enemy type
+
+	game.physics.enable(this);
 }
 function turkey(){
 	var turk = game.add.audio('turkey', 1);
@@ -32,11 +33,15 @@ Enemy.prototype.update = function() {
 		console.log("colliding with player");
 	}
 	game.physics.arcade.collide(this, player.bullets, this.death, null, this);
-	this.chasePlayer();
 	// trying to get enemy to move towards player when its on a platform
 	// not working, its floating around like a ghost
-
-	//game.physics.arcade.moveToObject(this, player);
+	/*
+	if(game.physics.arcade.collide(this, platform)){
+			game.physics.arcade.moveToObject(enemy, player);
+			console.log("moving towards player");
+		}
+		game.physics.arcade.moveToObject(enemy, player);
+*/
 }
 
 Enemy.prototype.pooModifier = function() {
@@ -62,7 +67,6 @@ Enemy.prototype.death = function(player, bullet) {
 }
 
 Enemy.prototype.chasePlayer = function() {
-	/*
 	// When player is left
 	if (player.body.x < this.body.x) {
 		this.velocity.x = -50;
@@ -70,5 +74,4 @@ Enemy.prototype.chasePlayer = function() {
 	else if (player.body.x > this.body.x) {
 		this.velocity.x = 50;
 	}
-	*/
 }

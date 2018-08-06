@@ -131,9 +131,10 @@ Player.prototype.fire = function(isJump) {
 }
 
 Player.prototype.death = function() {
+	var rasp = game.add.audio('rasp', 0.5);
 	if(this.pooCount < 0){
 		this.kill();
-		var rasp = game.add.audio('rasp', 0.5);
+		//var rasp = game.add.audio('rasp', 0.5);
 		rasp.play();
 		this.reset(300,300);
 		console.log("death from no poo");
@@ -141,6 +142,7 @@ Player.prototype.death = function() {
 	}
 	if(this.pooCount > 100){
 		this.kill();
+		rasp.play();
 		this.reset(300,300);
 		console.log("death from too much poo");
 		this.pooCount = 90;
