@@ -30,6 +30,7 @@ function Player(game, key, frame, bulletKey) {
 
 	// Bullets
 	this.bullets = game.add.group();
+	//this.bullets.scale.setTo(0.1);
 	this.bullets.enableBody = true;
 	this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
 	this.bullets.createMultiple(200, bulletKey);
@@ -91,15 +92,17 @@ Player.prototype.update = function() {
 Player.prototype.fire = function(isJump) {
 	let star = this.bullets.getFirstExists(false);
 	if(star){
+			star.scale.setTo(0.1,0.1);
 		game.physics.enable(this, Phaser.Physics.ARCADE);
 		if (isJump) {
 			star.body.bounce.y = 0.2;
 			star.body.gravity.y = 50;
-			star.reset(player.x - 10, player.y + 17);
+			star.reset(player.x + 27, player.y + 20);
 			star.body.velocity.y = 30;
 			star.angle = 90;
 		}
 		else {
+
 			star.body.bounce.y = 1;
 			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
