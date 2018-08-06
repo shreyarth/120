@@ -112,10 +112,14 @@ Player.prototype.fire = function(isJump) {
 			if (this.direction == 'right') {
 				star.reset(player.x + 10, player.y - 10);
 				star.body.velocity.x = 250;
+				//recoil to player from shooting
+				this.body.velocity.x = -70;
 			}
 			else {
 				star.reset(player.x - 10, player.y - 10);
 				star.body.velocity.x = -250;
+				//recoil 
+				this.body.velocity.x = 70;
 			}
 		}
 		console.log(this.pooCount);
