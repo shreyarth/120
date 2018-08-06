@@ -70,29 +70,40 @@ Player.prototype.update = function() {
 	// poopack for jumping
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.UP)){
 		this.body.velocity.y = -175;
-		this.fire();
+		this.fire(true);
 		console.log("jump");
-		// death if poo count is too high or low
-		if(this.pooCount < 0 || this.pooCount > 100){
-			this.death();
-		}
 	}
+
 	// Attack move
+	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+		this.fire(false);
+	}
 }
 
-// Might have to move certain portion to bullet prefab
-Player.prototype.fire = function() {
-	// Where the hell the bullets came from?
+// isJump: set to true if its not attack
+Player.prototype.fire = function(isJump) {
 	let star = this.bullets.getFirstExists(false);
 	if(star){
 		game.physics.enable(this, Phaser.Physics.ARCADE);
-		star.body.bounce.y = 0.2;
-		star.body.gravity.y = 50;
-		star.body.collideWorldBounds = false;	
-		star.reset(player.x - 10, player.y + 17);
-		star.body.velocity.y = 30;
-		this.pooCount --;
+		if (isJump) {
+			star.body.bounce.y = 0.2;
+			star.body.gravity.y = 50;
+			star.reset(player.x - 10, player.y + 17);
+			star.body.velocity.y = 30;
+		}
+		else {
+			star.body.bounce.y = 1;
+			star.body.gravity.y = 90;
+			star.body.collideWorldBounds = false;
+			star.reset(player.x + 10, player.y - 10);
+			star.body.velocity.x = 250;
+		}
 		console.log(this.pooCount);
+		this.pooCount--;
+		star.body.collideWorldBounds = false;
+
+		// Check pooCount after action
+		this.death();
 	}
 }
 
