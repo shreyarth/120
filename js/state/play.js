@@ -26,6 +26,9 @@ play.prototype = {
 		game.load.image('platform', 'img/platform.png');
 		game.load.image('star', 'img/star.png');
 		game.load.image('enemy', 'img/enemy.png');
+		//sounds
+		game.load.audio('fart', 'audio/fart.mp3');
+		game.load.audio('rasp', 'audio/Rasp.mp3');
 	},
 	create: function() {
 		// Asset implementaion

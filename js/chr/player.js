@@ -104,6 +104,8 @@ Player.prototype.fire = function(isJump) {
 		console.log(this.pooCount);
 		this.pooCount--;
 		star.body.collideWorldBounds = false;
+		var fart = game.add.audio('fart', 0.5);
+		fart.play();
 
 		// Check pooCount after action
 		this.death();
