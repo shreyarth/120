@@ -2,7 +2,7 @@
 function Player(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, 300, 300, key);
+	Phaser.Sprite.call(this, game, 300, 480, key);
 
 	this.scale.x = 0.2;
 	this.scale.y = 0.2;

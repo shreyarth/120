@@ -2,13 +2,15 @@
 function Enemy(game, key, frame) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, 500, 300, 'enemy', frame);
+	Phaser.Sprite.call(this, game, 500, 480, 'enemy', frame);
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
-	this.scale.x = 0.1;
-	this.scale.y = 0.1;
-	// physics crap
+	// this.scale.x = 0.1;
+	this.scale.setTo(0.1);
+	this.anchor.set(0.5);
+	// this.scale.y = 0.1;
+	// // physics crap
 	game.physics.enable(this, Phaser.Physics.ARCADE);
 	this.body.bounce.y = 0.2;
 	this.body.gravity.y = 300;
@@ -42,6 +44,12 @@ Enemy.prototype.update = function() {
 		}
 		game.physics.arcade.moveToObject(enemy, player);
 */
+	if(this.body.velocity.x > 0){
+		this.scale.setTo(-0.1, 0.1);
+	}
+	if(this.body.velocity.x < 0){
+		this.scale.setTo(0.1, 0.1);
+	}
 }
 
 Enemy.prototype.pooModifier = function() {
@@ -63,7 +71,7 @@ Enemy.prototype.death = function(player, bullet) {
 	turkey();
 	// game.camera.shake(0.005, 400);
 	this.kill();
-	this.reset(500, 400);
+	this.reset(500, 480);
 	bullet.kill();
 }
 
