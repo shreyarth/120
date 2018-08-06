@@ -97,7 +97,7 @@ Player.prototype.fire = function(isJump) {
 		game.physics.enable(this, Phaser.Physics.ARCADE);
 		if (isJump) {
 			star.body.bounce.y = 0.2;
-			star.body.gravity.y = 50;
+			star.body.gravity.y = 90;
 			star.reset(player.x + 27, player.y + 20);
 			star.body.velocity.y = 150;
 			star.angle = 90;
