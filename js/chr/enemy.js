@@ -56,7 +56,7 @@ Enemy.prototype.pooModifier = function() {
 
 Enemy.prototype.death = function(player, bullet) {
 	turkey();
-	game.camera.shake(0.005, 400);
+	// game.camera.shake(0.005, 400);
 	this.kill();
 	this.reset(500, 400);
 	bullet.kill();
