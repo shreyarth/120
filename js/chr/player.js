@@ -4,8 +4,8 @@ function Player(game, key, frame, bulletKey) {
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	Phaser.Sprite.call(this, game, 300, 300, key);
 
-	this.scale.x = 0.1;
-	this.scale.y = 0.1;
+	this.scale.x = 0.2;
+	this.scale.y = 0.2;
 	
 	// physics crap
 	game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -115,6 +115,10 @@ Player.prototype.fire = function(isJump) {
 		console.log(this.pooCount);
 		this.pooCount--;
 		star.body.collideWorldBounds = false;
+		var fart = game.add.audio('fart', 0.5);
+		if(this.pooCount < 100 && this.pooCount > -1){
+			fart.play();
+		}
 
 		// Check pooCount after action
 		this.death();
@@ -122,13 +126,15 @@ Player.prototype.fire = function(isJump) {
 }
 
 Player.prototype.death = function() {
-	if(this.pooCount <= 0){
+	if(this.pooCount < 0){
 		this.kill();
+		var rasp = game.add.audio('rasp', 0.5);
+		rasp.play();
 		this.reset(300,300);
 		console.log("death from no poo");
 		this.pooCount = 10;
 	}
-	if(this.pooCount >= 100){
+	if(this.pooCount > 100){
 		this.kill();
 		this.reset(300,300);
 		console.log("death from too much poo");
