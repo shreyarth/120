@@ -15,4 +15,4 @@ game.state.add('end', end);
 
 // Start from menu screen
 // Might need separate loading screen in case asset loading takes time
-game.state.start('play');
+game.state.start('menu');

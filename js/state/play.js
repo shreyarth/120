@@ -6,18 +6,19 @@ var play = function() {
 
 play.prototype = {
 	preload: function() {
-		game.load.path = 'assets/';
-		game.load.image('player', 'img/player.png');
-		game.load.image('poo', 'img/poo.png');
-		game.load.image('platform', 'img/platform.png');
-		game.load.image('star', 'img/star.png');
-		game.load.image('enemy', 'img/enemy.png');
-		game.load.image('turd', 'img/turd.png');
-		game.load.image('porter', 'img/porter.png');
+		// game.load.path = 'assets/';
+		// game.load.image('player', 'img/player.png');
+		// game.load.image('poo', 'img/poo.png');
+		// game.load.image('platform', 'img/platform.png');
+		// game.load.image('star', 'img/star.png');
+		// game.load.image('enemy', 'img/enemy.png');
+		// game.load.image('turd', 'img/turd.png');
+		// game.load.image('porter', 'img/porter.png');
 
-		//sounds
-		game.load.audio('fart', 'audio/fart.mp3');
-		game.load.audio('rasp', 'audio/Rasp.mp3');
+		// //sounds
+		// game.load.audio('fart', 'audio/fart.mp3');
+		// game.load.audio('rasp', 'audio/Rasp.mp3');
+		// game.load.audio('turkey', 'audio/turkey.mp3');
 	},
 	create: function() {
 		// Asset implementaion

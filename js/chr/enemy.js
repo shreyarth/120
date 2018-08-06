@@ -16,6 +16,11 @@ function Enemy(game, key, frame) {
 	this.body.gravity.y = 300;
 	this.body.collideWorldBounds = true;
 }
+function turkey(){
+	var turk = game.add.audio('turkey', 1);
+	turk.allowMultiple = false;
+	turk.play();
+}
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -23,7 +28,9 @@ Enemy.prototype.constructor = Enemy;
 
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
-	game.physics.arcade.collide(this, player, this.pooModifier, null, this);
+	if(game.physics.arcade.collide(this, player, this.pooModifier, null, this)){
+		console.log("colliding with player");
+	}
 	game.physics.arcade.collide(this, player.bullets, this.death, null, this);
 	this.chasePlayer();
 	// trying to get enemy to move towards player when its on a platform
@@ -43,10 +50,12 @@ Enemy.prototype.pooModifier = function() {
 		player.death();
 		player.isInvincible = true;
 		player.timer.add(500, function() {console.log("fire timed event"); this.isInvincible = false;}, player);
+		turkey();
 	}
 }
 
 Enemy.prototype.death = function(player, bullet) {
+	turkey();
 	this.kill();
 	this.reset(500, 400);
 	bullet.kill();
