@@ -4,8 +4,8 @@ function Player(game, key, frame, bulletKey) {
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	Phaser.Sprite.call(this, game, 300, 300, key);
 
-	this.scale.x = 0.1;
-	this.scale.y = 0.1;
+	this.scale.x = 0.2;
+	this.scale.y = 0.2;
 	
 	// physics crap
 	game.physics.enable(this, Phaser.Physics.ARCADE);

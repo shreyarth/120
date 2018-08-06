@@ -22,10 +22,12 @@ play.prototype = {
 	preload: function() {
 		game.load.path = 'assets/';
 		game.load.image('player', 'img/player.png');
-		game.load.image('poo', 'img/star.png');
+		game.load.image('poo', 'img/poo.png');
 		game.load.image('platform', 'img/platform.png');
 		game.load.image('star', 'img/star.png');
 		game.load.image('enemy', 'img/enemy.png');
+		game.load.image('turd', 'img/turd.png');
+
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');
 		game.load.audio('rasp', 'audio/Rasp.mp3');
@@ -45,7 +47,7 @@ play.prototype = {
 		ground.body.immovable = true;
 
 		// player
-		player = new Player(game, 'player', null, 'star');
+		player = new Player(game, 'player', null, 'poo');
 		game.add.existing(player);
 
 		// enemy

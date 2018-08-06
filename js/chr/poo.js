@@ -1,9 +1,10 @@
 // Constructor
 function Poo(game, key) {
 	
-	Phaser.Sprite.call(this, game, null, null, 'star');
+	Phaser.Sprite.call(this, game, null, null, 'poo');
 	game.physics.enable(this, Phaser.Physics.ARCADE);
 	//this.body.bounce.y = 0.2;
+	this.scale.setTo(0.01);
 	//this.body.gravity.y = 100;
 	//this.body.collideWorldBounds = true;
 
