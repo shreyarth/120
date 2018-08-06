@@ -27,6 +27,7 @@ play.prototype = {
 		game.load.image('star', 'img/star.png');
 		game.load.image('enemy', 'img/enemy.png');
 		game.load.image('turd', 'img/turd.png');
+		game.load.image('porter', 'img/porter.png');
 
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');
@@ -35,7 +36,12 @@ play.prototype = {
 	create: function() {
 		// Asset implementaion
 		console.log("play state to check implementation");
-		game.stage.backgroundColor = "#facade";
+		//game.stage.backgroundColor = "#facade";
+		
+		var background = game.add.sprite(0, 0, 'porter');
+		background.scale.setTo(2,1.5);
+		background.width = game.width;
+		background.height = game.height;
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
