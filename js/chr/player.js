@@ -105,7 +105,9 @@ Player.prototype.fire = function(isJump) {
 		this.pooCount--;
 		star.body.collideWorldBounds = false;
 		var fart = game.add.audio('fart', 0.5);
-		fart.play();
+		if(this.pooCount < 100 && this.pooCount > -1){
+			fart.play();
+		}
 
 		// Check pooCount after action
 		this.death();
@@ -113,13 +115,15 @@ Player.prototype.fire = function(isJump) {
 }
 
 Player.prototype.death = function() {
-	if(this.pooCount <= 0){
+	if(this.pooCount < 0){
 		this.kill();
+		var rasp = game.add.audio('rasp', 0.5);
+		rasp.play();
 		this.reset(300,300);
 		console.log("death from no poo");
 		this.pooCount = 10;
 	}
-	if(this.pooCount >= 100){
+	if(this.pooCount > 100){
 		this.kill();
 		this.reset(300,300);
 		console.log("death from too much poo");
