@@ -12,4 +12,4 @@ Programming
 * probably will need a prefab for the projectiles enemies can shoot too. 
 
 SYSTEM
-* Camera shake movement on enemy explosion / player hit?
+* Camera shake movement on enemy explosion / player hit? //Added shake on enemy death and player jump(for now)

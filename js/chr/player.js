@@ -101,6 +101,7 @@ Player.prototype.fire = function(isJump) {
 			star.reset(player.x + 27, player.y + 20);
 			star.body.velocity.y = 30;
 			star.angle = 90;
+			// game.camera.shake(0.005, 500);
 		}
 		else {
 
@@ -139,6 +140,7 @@ Player.prototype.death = function() {
 		this.reset(300,300);
 		console.log("death from no poo");
 		this.pooCount = 10;
+		game.camera.shake(0.005, 400);
 	}
 	if(this.pooCount > 100){
 		this.kill();
@@ -146,5 +148,6 @@ Player.prototype.death = function() {
 		this.reset(300,300);
 		console.log("death from too much poo");
 		this.pooCount = 90;
+		game.camera.shake(0.005, 400);
 	}
 }
