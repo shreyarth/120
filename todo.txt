@@ -1,12 +1,14 @@
 ASSET
-* URGENT: Need player sprite, enemy sprites, poo sprite
-* URGENT: Need layout of first level
+* Player animation
+* More enemies
+* Enemies animation
+* Splatter to load on screen when player dies, brown and red
+* layout of first level
 * Effects & particles:  add effects to player when poo is being shot out
 
 Programming
 * A counter variable to keep track of poop usage for shooting/jumping//DONE
 * fix ai for enemy so it has to be on the ground to start chasing player, instead of floating around like a ghost
-* fix poo prefab and implement it
 * probably will need a prefab for the projectiles enemies can shoot too. 
 
 SYSTEM
