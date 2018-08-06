@@ -24,22 +24,8 @@ Enemy.prototype.constructor = Enemy;
 
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
-	
-	if(game.physics.arcade.collide(this, player)){
-		if(pooCount > 50){
-			pooCount = pooCount +10;
-			//console.log(pooCount);
-		}else
-		pooCount = pooCount -10;
-		//console.log(pooCount);
-	}
-	if(game.physics.arcade.collide(this, star)){
-		this.kill();
-		this.reset(500, 400);
-		star.kill();
-	// Random movement
-	// Simple AI when protag approaches within the param
-	}
+	game.physics.arcade.collide(this, player, this.pooModifier, null, this);
+	game.physics.arcade.collide(this, player.bullets, this.death, null, this);
 	// trying to get enemy to move towards player when its on a platform
 	// not working, its floating around like a ghost
 	/*
@@ -49,6 +35,24 @@ Enemy.prototype.update = function() {
 		}
 		game.physics.arcade.moveToObject(enemy, player);
 */
-	
-	
+}
+
+Enemy.prototype.pooModifier = function() {
+	if (!player.isInvincible) {
+		if(player.pooCount > 50)
+			player.pooCount += 10;
+		else
+			player.pooCount -= 10;
+
+		console.log(player.pooCount);
+		player.death();
+		player.isInvincible = true;
+		player.timer.add(500, function() {console.log("fire timed event"); player.isInvincible = false;}, game);
+	}
+}
+
+Enemy.prototype.death = function(player, bullet) {
+	this.kill();
+	this.reset(500, 400);
+	bullet.kill();
 }

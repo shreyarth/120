@@ -16,11 +16,14 @@ function Player(game, key, frame, bulletKey) {
 	// 0.5 = center
 	this.anchor.set(0.5);
 	this.body.drag.set(100);
-	this.body.maxVelocity.x = 200;
+	this.direction = 'right';
+	// Timer obj for invincible time or any other stuffs.. in cases for need of timer...
+	this.timer = game.time.create(game, false);
+	this.isInvincible = false;
 
 	// Character info
 	// this.health = 100;	// pooCount = health. left the line in case we need it later for some reason
-	this.pooCount = 100;
+	this.pooCount = 50;
 
 	// Bullets
 	this.bullets = game.add.group();
@@ -43,14 +46,16 @@ Player.prototype.update = function() {
 		
 		if(this.body.acceleration.x < -150 || this.body.velocity.x < -150)
 			this.body.velocity.x = -150;
-		console.log("left");
+
+		this.direction = 'left';
 	}
 	else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
 		this.body.acceleration.x += 3;
 
 		if(this.body.acceleration.x > 150 || this.body.velocity.x > 150)
 			this.body.velocity.x = 150;
-		console.log("right");
+
+		this.direction = 'right';
 	}
 	else{
 		this.body.acceleration.x = 0;
@@ -75,9 +80,8 @@ Player.prototype.update = function() {
 	}
 
 	// Attack move
-	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
 		this.fire(false);
-	}
 }
 
 // isJump: set to true if its not attack
@@ -95,8 +99,15 @@ Player.prototype.fire = function(isJump) {
 			star.body.bounce.y = 1;
 			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
-			star.reset(player.x + 10, player.y - 10);
-			star.body.velocity.x = 250;
+			// Need to tweak numbers for starting point for shooting
+			if (this.direction == 'right') {
+				star.reset(player.x + 10, player.y - 10);
+				star.body.velocity.x = 250;
+			}
+			else {
+				star.reset(player.x - 10, player.y - 10);
+				star.body.velocity.x = -250;
+			}
 		}
 		console.log(this.pooCount);
 		this.pooCount--;

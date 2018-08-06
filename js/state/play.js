@@ -76,8 +76,8 @@ play.prototype = {
 			star.kill();
 		}
 	},
-	resetstar: function(star){
-		star.kill();
+	render: function() {
+		game.debug.text('Events: ' + player.timer.events, 32, 32, '#ffff00');
 	}
 	// Char control is implemented in player.js
 }
