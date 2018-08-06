@@ -32,6 +32,7 @@ play.prototype = {
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');
 		game.load.audio('rasp', 'audio/Rasp.mp3');
+		game.load.audio('turkey', 'audio/turkey.mp3');
 	},
 	create: function() {
 		// Asset implementaion
