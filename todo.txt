@@ -13,8 +13,8 @@ ASSET
 Programming
 * A counter variable to keep track of poop usage for shooting/jumping//DONE
 * fix ai for enemy so it has to be on the ground to start chasing player, instead of floating around like a ghost//DONE
-* Fix movement so its smoother
-* add recoil to player when shooting
+* Fix movement so its smoother //Done
+* add recoil to player when shooting //Done
 * temp poo meter, placed either at top or bottom of screen
 * probably will need a prefab for the projectiles enemies can shoot too. 
 
