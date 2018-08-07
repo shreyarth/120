@@ -87,6 +87,9 @@ Player.prototype.update = function() {
 	// Attack move
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
 		this.fire(false);
+
+	// Bullet rotation
+	this.bullets.forEachAlive(function(bullet){bullet.rotation += Phaser.Math.degToRad(2); }, this);
 }
 
 // isJump: set to true if its not attack
