@@ -19,11 +19,6 @@ function Enemy(game, key, frame) {
 
 	game.physics.enable(this);
 }
-function turkey(){
-	var turk = game.add.audio('turkey', 1);
-	turk.allowMultiple = false;
-	turk.play();
-}
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -54,21 +49,27 @@ Enemy.prototype.update = function() {
 
 Enemy.prototype.pooModifier = function() {
 	if (!player.isInvincible) {
-		if(player.pooCount > 50)
+		let rando = game.rnd.integerInRange(1, 1000);
+		if (rando % 4 == 0) {
+			if(player.pooCount > 50)
+				player.pooCount += 10;
+			else
+				player.pooCount -= 10;
+		}
+		else {
 			player.pooCount += 10;
-		else
-			player.pooCount -= 10;
+		}
 
 		console.log(player.pooCount);
 		player.death();
 		player.isInvincible = true;
 		player.timer.add(500, function() {console.log("fire timed event"); this.isInvincible = false;}, player);
-		turkey();
+		this.turkey();
 	}
 }
 
 Enemy.prototype.death = function(player, bullet) {
-	turkey();
+	this.turkey();
 	// game.camera.shake(0.005, 400);
 	this.kill();
 	this.reset(500, 480);
@@ -83,4 +84,10 @@ Enemy.prototype.chasePlayer = function() {
 	else if (player.body.x > this.body.x) {
 		this.velocity.x = 50;
 	}
+}
+
+Enemy.prototype.turkey = function(){
+	let turk = game.add.audio('turkey', 1);
+	turk.allowMultiple = false;
+	turk.play();
 }

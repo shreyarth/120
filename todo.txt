@@ -15,7 +15,7 @@ Programming
 * fix ai for enemy so it has to be on the ground to start chasing player, instead of floating around like a ghost//DONE
 * Fix movement so its smoother
 * add recoil to player when shooting
-* temp poo meter, placed either at top or bottom of screen
+* temp poo meter, placed either at top or bottom of screen //DONE
 * probably will need a prefab for the projectiles enemies can shoot too. 
 
 SYSTEM

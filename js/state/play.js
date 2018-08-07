@@ -1,7 +1,9 @@
 var play = function() {
 	// Global state variables
 	this.bullets, this.enemy;
-	this.platform; var en3;
+	this.platform; this.en3;
+
+	this.ui;
 }
 
 play.prototype = {
@@ -48,9 +50,9 @@ play.prototype = {
 		this.enemy.add(en2);
 
 		//test for flying enemy
-		en3 = new Enemy(game, 'enemy');
-		game.add.existing(en3);
-		en3.body.reset(30,400);
+		this.en3 = new Enemy(game, 'enemy');
+		game.add.existing(this.en3);
+		this.en3.body.reset(30,400);
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
@@ -69,8 +71,24 @@ play.prototype = {
 		// game.camera.follow('player', FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
-		// var ui = something;
-		// ui.fixedToCamera = true;
+		this.ui = this.pooMeter(player.pooCount);
+		this.ui.fixedToCamera = true;
+	},
+	pooMeter: function(pooNum) {
+		let obj = null;
+
+		// create primitive
+		let g = game.add.graphics();
+		g.beginFill(0x00FF00);
+		g.drawRect(32, 32, pooNum * 10, 32);	// Starting point, width, height
+		g.endFill();
+
+		// transform primitive into sprite and destroy primitive
+		obj = game.add.sprite(32, 32, g.generateTexture());
+		//obj.anchor.set(0.5, 0.5);
+		g.destroy();
+
+		return obj;
 	},
 	update: function() {
 		// Update function
@@ -82,7 +100,11 @@ play.prototype = {
 		// if(game.physics.arcade.collide(enemy, platform)){
 		// 	game.physics.arcade.moveToObject(enemy, player);
 		// }
-		game.physics.arcade.moveToObject(en3, player);
+		game.physics.arcade.moveToObject(this.en3, player);
+
+		// UI update
+		this.ui.destroy();
+		this.ui = this.pooMeter(player.pooCount);
 
 		//shooting
 		/*
@@ -92,10 +114,6 @@ play.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
-	},
-	render: function() {
-		game.debug.text('Events: ' + player.timer.events, 32, 32, '#ffff00');
-		game.debug.text('Enemy: ' + this.enemy, 32, 64, '#ffff00');
 	}
 	// Char control is implemented in player.js
 }
