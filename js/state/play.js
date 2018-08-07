@@ -1,29 +1,16 @@
 var play = function() {
 	// Global state variables
 	this.bullets, this.enemy;
-	this.platform;
+	this.platform; var en3;
 }
 
 play.prototype = {
 	preload: function() {
-		// game.load.path = 'assets/';
-		// game.load.image('player', 'img/player.png');
-		// game.load.image('poo', 'img/poo.png');
-		// game.load.image('platform', 'img/platform.png');
-		// game.load.image('star', 'img/star.png');
-		// game.load.image('enemy', 'img/enemy.png');
-		// game.load.image('turd', 'img/turd.png');
-		// game.load.image('porter', 'img/porter.png');
-
-		// //sounds
-		// game.load.audio('fart', 'audio/fart.mp3');
-		// game.load.audio('rasp', 'audio/Rasp.mp3');
-		// game.load.audio('turkey', 'audio/turkey.mp3');
+		
 	},
 	create: function() {
 		// Asset implementaion
 		console.log("play state to check implementation");
-		//game.stage.backgroundColor = "#facade";
 		
 		var background = game.add.sprite(0, 0, 'porter');
 		background.scale.setTo(2,1);
@@ -44,13 +31,6 @@ play.prototype = {
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
-		// //ground
-		// this.platform = game.add.group();
-		// this.platform.enableBody = true;
-		// let ground = this.platform.create(0, game.world.height -64, 'platform');
-		// ground.scale.setTo(2,2);
-		// ground.body.immovable = true;
-
 		// player
 		player = new Player(game, 'player', null, 'poo');
 		game.add.existing(player);
@@ -61,6 +41,16 @@ play.prototype = {
 		let en = new Enemy(game, 'enemy', null, this.platform);
 		game.add.existing(en);
 		this.enemy.add(en);
+
+		//test for 2nd enemy on screen
+		let en2 = new Enemy(game, 'enemy', null);
+		game.add.existing(en2);
+		this.enemy.add(en2);
+
+		//test for flying enemy
+		en3 = new Enemy(game, 'enemy');
+		game.add.existing(en3);
+		en3.body.reset(30,400);
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
@@ -92,6 +82,7 @@ play.prototype = {
 		// if(game.physics.arcade.collide(enemy, platform)){
 		// 	game.physics.arcade.moveToObject(enemy, player);
 		// }
+		game.physics.arcade.moveToObject(en3, player);
 
 		//shooting
 		/*
