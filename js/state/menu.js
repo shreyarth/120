@@ -12,6 +12,7 @@ menu.prototype = {
 		game.load.image('enemy', 'img/enemy.png');
 		game.load.image('turd', 'img/turd.png');
 		game.load.image('porter', 'img/porter.png');
+		game.load.image('heller', 'img/HellerDr.png');
 
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');
