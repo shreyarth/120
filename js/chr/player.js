@@ -18,7 +18,7 @@ function Player(game, key, frame, bulletKey) {
 	// anchor: Origin of the texture
 	// 0.5 = center
 	this.anchor.set(0.5);
-	this.body.drag.set(100);
+	this.body.drag.set(50);
 	this.direction = 'right';
 	// Timer obj for invincible time or any other stuffs.. in cases for need of timer...
 	this.timer = game.time.create(game, false);
@@ -47,7 +47,7 @@ Player.prototype.constructor = Player;
 Player.prototype.update = function() {
 	// Controls
 	if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-		this.body.acceleration.x -= 3;
+		this.body.velocity.x -= 3;
 		
 		if(this.body.acceleration.x < -150 || this.body.velocity.x < -150)
 			this.body.velocity.x = -150;
@@ -55,7 +55,7 @@ Player.prototype.update = function() {
 		this.direction = 'left';
 	}
 	else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-		this.body.acceleration.x += 3;
+		this.body.velocity.x += 3;
 
 		if(this.body.acceleration.x > 150 || this.body.velocity.x > 150)
 			this.body.velocity.x = 150;
