@@ -101,6 +101,7 @@ Player.prototype.fire = function(isJump) {
 			star.reset(player.x + 27, player.y + 20);
 			star.body.velocity.y = 150;
 			star.angle = 90;
+			star.scale.x = 0.15;
 			// game.camera.shake(0.005, 500);
 		}
 		else {
