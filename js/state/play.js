@@ -26,18 +26,30 @@ play.prototype = {
 		//game.stage.backgroundColor = "#facade";
 		
 		var background = game.add.sprite(0, 0, 'porter');
-		background.scale.setTo(2,1.5);
+		background.scale.setTo(2,1);
 		background.width = game.width;
-		background.height = game.height;
-
-		game.physics.startSystem(Phaser.Physics.ARCADE);
+		//background.height = game.height;
 
 		//ground
 		this.platform = game.add.group();
 		this.platform.enableBody = true;
-		let ground = this.platform.create(0, game.world.height -64, 'platform');
-		ground.scale.setTo(2,2);
+		let ground = this.platform.create(0, game.world.height -32, 'platform');
+		ground.scale.setTo(2,1);
 		ground.body.immovable = true;
+
+		// the background wrap
+		var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
+		wrapGround.scale.setTo(2,0.8);
+		wrapGround.width = game.width;
+
+		game.physics.startSystem(Phaser.Physics.ARCADE);
+
+		// //ground
+		// this.platform = game.add.group();
+		// this.platform.enableBody = true;
+		// let ground = this.platform.create(0, game.world.height -64, 'platform');
+		// ground.scale.setTo(2,2);
+		// ground.body.immovable = true;
 
 		// player
 		player = new Player(game, 'player', null, 'poo');
