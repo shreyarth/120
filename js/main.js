@@ -1,6 +1,7 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
 // Global vars
+var pooCount;
 var star;
 //var platform;
 // Main char

@@ -8,9 +8,10 @@ function Player(game, key, frame, bulletKey) {
 	this.scale.y = 0.2;
 	
 	// physics crap
-	game.physics.enable(this, Phaser.Physics.ARCADE);
-	this.body.bounce.y = 0.2;
-	this.body.gravity.y = 300;
+	game.physics.startSystem(Phaser.Physics.P2JS);
+	game.physics.p2.enable(this, true);
+	this.body.bounce = 0.2;
+	this.body.gravity = 300;
 	this.body.collideWorldBounds = true;
 
 
@@ -18,7 +19,7 @@ function Player(game, key, frame, bulletKey) {
 	// anchor: Origin of the texture
 	// 0.5 = center
 	this.anchor.set(0.5);
-	this.body.drag.set(50);
+	// this.body.drag.set(50);
 	this.direction = 'right';
 	// Timer obj for invincible time or any other stuffs.. in cases for need of timer...
 	this.timer = game.time.create(game, false);
@@ -63,10 +64,10 @@ Player.prototype.update = function() {
 		this.direction = 'right';
 	}
 	else{
-		this.body.acceleration.x = 0;
-		if (this.body.velocity.x < 0) {
-			if (this.body.velocity.x > 0)
-				this.body.velocity.x = 0;
+		this.body.acceleration = 0;
+		if (this.body.velocity < 0) {
+			if (this.body.velocity > 0)
+				this.body.velocity = 0;
 			else
 				this.body.velocity.x += 3;
 		}
