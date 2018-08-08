@@ -12,7 +12,7 @@ you use too much, your internals will explode. This is a mish-mash of frustratio
 
 ## Contributors:
   **Artist**: Anthony Medina  
-  **Lead Programmer**: Haneul Jung 
+  **Lead Programmer**: Haneul Jung   
   **Programmers**: Sung Baek, Shreyarth Bhatt  
   
 ## Source:
