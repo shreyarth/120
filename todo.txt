@@ -1,22 +1,25 @@
 ASSET
 * temp artwork for prototype //DONE
 * porto potty
-* platforms 
+* URGENT!! platforms 
 * Player animation
 * More enemies
 * Enemies animation
 * Splatter to load on screen when player dies, brown and red
-* layout of first level
-* tilemap?  
+* URGENT!! layout of first level
+* URGENT!! tilemap?  
 * Effects & particles:  add effects to player when poo is being shot out
+* enemy projectiles(pepto and laxative?)
 
 Programming
 * A counter variable to keep track of poop usage for shooting/jumping//DONE
 * fix ai for enemy so it has to be on the ground to start chasing player, instead of floating around like a ghost//DONE
 * Fix movement so its smoother //Done
 * add recoil to player when shooting //Done
-* temp poo meter, placed either at top or bottom of screen
+* temp poo meter, placed either at top or bottom of screen //DONE
 * probably will need a prefab for the projectiles enemies can shoot too. 
+* Enemies that fire projectiles
+* Shoot two different types depending on poobar
 
 SYSTEM
 * Cmaera shake on player death //DONE
