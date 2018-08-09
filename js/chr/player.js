@@ -3,7 +3,8 @@ function Player(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	Phaser.Sprite.call(this, game, 300, 480, key);
-
+	
+	// Need to rescale the sprite img file
 	this.scale.x = 0.2;
 	this.scale.y = 0.2;
 	
@@ -11,14 +12,12 @@ function Player(game, key, frame, bulletKey) {
 	game.physics.enable(this, Phaser.Physics.ARCADE);
 	this.body.bounce.y = 0.2;
 	this.body.gravity.y = 300;
+	this.body.drag.set(50);
 	this.body.collideWorldBounds = true;
-
-
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
 	this.anchor.set(0.5);
-	this.body.drag.set(50);
 	this.direction = 'right';
 	// Timer obj for invincible time or any other stuffs.. in cases for need of timer...
 	this.timer = game.time.create(game, false);
@@ -53,6 +52,7 @@ Player.prototype.update = function() {
 			this.body.velocity.x = -150;
 
 		this.direction = 'left';
+		this.scale.x = -0.2;
 	}
 	else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
 		this.body.velocity.x += 3;
@@ -61,6 +61,7 @@ Player.prototype.update = function() {
 			this.body.velocity.x = 150;
 
 		this.direction = 'right';
+		this.scale.x = 0.2;
 	}
 	else{
 		this.body.acceleration.x = 0;
@@ -81,7 +82,7 @@ Player.prototype.update = function() {
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.UP)){
 		this.body.velocity.y = -175;
 		this.fire(true);
-		console.log("jump");
+		//console.log("jump");
 	}
 
 	// Attack move
@@ -141,7 +142,7 @@ Player.prototype.fire = function(isJump) {
 
 Player.prototype.death = function() {
 	var rasp = game.add.audio('rasp', 0.5);
-	console.log('in death fn');
+	//console.log('in death fn');
 	if(this.pooCount < 0){
 		this.kill();
 		//var rasp = game.add.audio('rasp', 0.5);
@@ -161,5 +162,8 @@ Player.prototype.death = function() {
 		game.camera.shake(0.005, 400);
 		game.state.start('end');
 	}
+}
 
+Player.prototype.flipInvc = function() {
+	this.isInvincible = !this.isInvincible;
 }
