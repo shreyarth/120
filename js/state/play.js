@@ -2,7 +2,7 @@ var play = function() {
 	// Global state variables
 	this.bullets, this.enemy;
 	this.platform; this.en3;
-
+	this.heller = null;
 	this.ui;
 }
 
@@ -17,7 +17,7 @@ play.prototype = {
 		var background = game.add.sprite(0, 0, 'porter');
 		background.scale.setTo(2,1);
 		background.width = game.width;
-		//background.height = game.height;
+		background.height = game.height;
 
 		//ground
 		this.platform = game.add.group();
@@ -27,9 +27,10 @@ play.prototype = {
 		ground.body.immovable = true;
 
 		// the background wrap
-		var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
-		wrapGround.scale.setTo(2,0.8);
-		wrapGround.width = game.width;
+		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
+		// wrapGround.scale.setTo(2,0.8);
+		// wrapGround.width = game.width;
+		this.heller = this.add.tileSprite(0, game.world.height - 300, game.width, game.height/2, 'heller');
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -96,6 +97,7 @@ play.prototype = {
 		game.physics.arcade.collide(player, this.platform);
 		game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
 
+		this.heller.tilePosition.x -= 4;
 		// enemy movement towards player
 		// if(game.physics.arcade.collide(enemy, platform)){
 		// 	game.physics.arcade.moveToObject(enemy, player);
