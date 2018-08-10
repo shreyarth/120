@@ -27,7 +27,7 @@ Enemy.prototype.constructor = Enemy;
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
 	if(game.physics.arcade.collide(this, player, this.pooModifier, null, this)){
-		console.log("colliding with player");
+		//console.log("colliding with player");
 	}
 	game.physics.arcade.collide(this, player.bullets, this.death, null, this);
 	// trying to get enemy to move towards player when its on a platform
@@ -62,8 +62,9 @@ Enemy.prototype.pooModifier = function() {
 
 		console.log(player.pooCount);
 		player.death();
-		player.isInvincible = true;
-		player.timer.add(500, function() {console.log("fire timed event"); this.isInvincible = false;}, player);
+		player.flipInvc();
+		// Adding timer * only works once for some reason
+		player.timer.add(500, player.flipInvc);
 		this.turkey();
 	}
 }

@@ -2,6 +2,9 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
 // Global vars
 var star;
+var keys = [];
+var bgcolor = "#895f2b"
+var noset = true;
 //var platform;
 // Main char
 var player;
@@ -10,6 +13,7 @@ var player;
 
 // State management
 game.state.add('menu', menu);
+game.state.add('setting', setting);
 game.state.add('play', play);
 game.state.add('end', end);
 

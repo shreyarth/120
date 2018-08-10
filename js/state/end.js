@@ -1,10 +1,10 @@
+var end = function() {
+	// state global var
+}
 
-// end
-var end = function(game) {};
 end.prototype = {
-	
 	create: function() {
-			game.stage.backgroundColor = "#895f2b";
+			game.stage.backgroundColor = bgcolor;
 			game.add.text(game.width/2-100, game.height*.3, 
 			'Could not hold shit', 
 			{font: 'Helvetica', fontSize: '24px', fill: '#fff'});
