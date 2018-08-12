@@ -10,6 +10,15 @@ ASSET
 * URGENT!! tilemap?  
 * Effects & particles:  add effects to player when poo is being shot out
 * enemy projectiles(pepto and laxative?)
+* Level design for 2nd level
+* Final boss sprite.  Will need 3 seperate sprites that we can put together in programming, 
+* since there will be 3 different hit boxes.  Or we can put invisible boxes in 1 sprite, that may work...?
+* 
+
+
+SOUNDS
+* Splat sound for when poo collides
+* Music for each level
 
 Programming
 * A counter variable to keep track of poop usage for shooting/jumping//DONE
@@ -19,7 +28,10 @@ Programming
 * temp poo meter, placed either at top or bottom of screen //DONE
 * probably will need a prefab for the projectiles enemies can shoot too. 
 * Enemies that fire projectiles
-* Shoot two different types depending on poobar
+* Enemies will shoot two different types depending on poobar
+* Fix player and enemies(?) collision box and mechanic
+* URGENT:  Implement the first map/world
+
 
 SYSTEM
 * Cmaera shake on player death //DONE
