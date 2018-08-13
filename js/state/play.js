@@ -21,6 +21,7 @@ play.prototype = {
 		background.height = 700;
 		this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
 		this.heller.height = 800;
+
 		//ground
 		this.platform = game.add.group();
 		this.platform.enableBody = true;
@@ -45,14 +46,31 @@ play.prototype = {
 
 
 
-		//platforms
-		// for(var i = 0; i < 20; ++i){
-		// 	let platforms = this.platform.create(game.rnd.integerInRange(400,game.world.width),
-		// 	 game.rnd.integerInRange(150, game.world.height), 'platform');
-		// 	platforms.scale.setTo(game.rnd.integerInRange(1,3), 
-		// 		game.rnd.integerInRange(1,3));
-		// 	platforms.body.immovable = true;
-		// }
+		//platforms in order, left to right
+		
+		let platforms = this.platform.create(0, 100, 'platform');
+		platforms.body.immovable = true;
+		platforms.scale.setTo(0.7,1);
+
+		platforms = this.platform.create(800, 580, 'platform');
+		platforms.body.immovable = true;
+		platforms.scale.setTo(0.3,0.3);
+
+		platforms = this.platform.create(1300, 300, 'platform');
+		platforms.body.immovable = true;
+		platforms.scale.setTo(0.3,0.3);
+
+		platforms = this.platform.create(1700, 280, 'platform');
+		platforms.body.immovable = true;
+		platforms.scale.setTo(0.3,0.3);
+
+		platforms = this.platform.create(2400,400, 'platform');
+		platforms.body.immovable = true;
+		platforms.scale.setTo(0.5, 0.4);
+			// platforms.scale.setTo(game.rnd.integerInRange(1,2), 
+			// 	game.rnd.integerInRange(1,2));
+			//platforms.body.immovable = true;
+		
 		
 		//let platforms = this.platform.create(0)
 
