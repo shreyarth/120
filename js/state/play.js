@@ -2,6 +2,7 @@ var play = function() {
 	// Global state variables
 	this.bullets, this.enemy;
 	this.platform; this.en3;
+	this.obstacle;
 	this.heller = null;
 	this.ui;
 }
@@ -71,7 +72,24 @@ play.prototype = {
 			// 	game.rnd.integerInRange(1,2));
 			//platforms.body.immovable = true;
 		
+		//obstacles
+		this.obstacle = game.add.group();
+		this.obstacle.enableBody = true;
+		//game.physics.enable(this.obstacle, Phaser.Physics.ARCADE);
 		
+		//trying to add physics to the obstacles before placing them
+		let bus = this.obstacle.create(200, 100, 'bus');
+		//game.physics.enable(bus, Phaser.Physics.ARCADE);
+		bus.enableBody = true;
+
+		let ycar = this.obstacle.create(400, 300, 'ycar');
+		ycar.scale.setTo(0.5);
+
+		let bcar = this.obstacle.create(700, 500, 'bcar');
+		bcar.scale.setTo(0.5);
+
+
+
 		//let platforms = this.platform.create(0)
 
 		// the background wrap
