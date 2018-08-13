@@ -16,11 +16,17 @@ menu.prototype = {
 		game.load.image('turd', 'img/turd.png');
 		game.load.image('porter', 'img/porter.png');
 		game.load.image('heller', 'img/HellerDr.png');
+		game.load.image('bcar', 'img/blackCar.png');
+		game.load.image('ycar', 'img/yellowCar.png');
+		game.load.image('poosplat', 'img/shit.png');
+		game.load.image('bloodsplat', 'img/blood.png');
+		game.load.image('bus', 'img/bus.png');
 
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');
 		game.load.audio('rasp', 'audio/Rasp.mp3');
 		game.load.audio('turkey', 'audio/turkey.mp3');
+		game.load.audio('menumusic', 'audio/blocks.wav');
 		// Call menu assets
 	},
 	create: function() {
