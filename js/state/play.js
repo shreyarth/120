@@ -102,7 +102,14 @@ play.prototype = {
 		game.physics.arcade.collide(player, this.platform);
 		game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
 
-		this.heller.tilePosition.x -= 4;
+		if(player.body.velocity.x == 0){
+			this.heller.tilePosition.x = this.heller.tilePosition.x;
+		}else if(player.body.velocity.x > 0){
+			this.heller.tilePosition.x -= 4;
+		}else{
+			this.heller.tilePosition.x += 4;
+		}
+		
 		// enemy movement towards player
 		// if(game.physics.arcade.collide(enemy, platform)){
 		// 	game.physics.arcade.moveToObject(enemy, player);
