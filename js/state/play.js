@@ -12,7 +12,7 @@ play.prototype = {
 	},
 	create: function() {
 		// Asset implementaion
-		game.world.setBounds( 0, 0, 3000, 1200);
+		game.world.setBounds( 0, 0, 4000, 1200);
 		console.log("play state to check implementation");
 		
 		var background = game.add.sprite(0, 0, 'porter');
@@ -38,10 +38,10 @@ play.prototype = {
 		ground.scale.setTo(2,10);
 		ground.body.immovable = true;
 		ground = this.platform.create(2400,game.world.height -390, 'platform' );
-		ground.scale.setTo(2,10);
+		ground.scale.setTo(2,30);
 		ground.body.immovable = true;
-		ground = this.platform.create(3000,game.world.height -400, 'platform' );
-		ground.scale.setTo(2,20);
+		ground = this.platform.create(3300,game.world.height -400, 'platform' );
+		ground.scale.setTo(3,30);
 		ground.body.immovable = true;
 
 
