@@ -12,12 +12,13 @@ play.prototype = {
 	},
 	create: function() {
 		// Asset implementaion
+		game.world.setBounds( 0, 0, 3000, 1200);
 		console.log("play state to check implementation");
 		
 		var background = game.add.sprite(0, 0, 'porter');
-		background.scale.setTo(2,1);
-		background.width = game.width;
-		background.height = game.height;
+		//background.scale.setTo(5,2);
+		background.width = game.world.width;
+		background.height = 800;
 
 		//ground
 		this.platform = game.add.group();
@@ -30,13 +31,17 @@ play.prototype = {
 		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
 		// wrapGround.scale.setTo(2,0.8);
 		// wrapGround.width = game.width;
-		this.heller = this.add.tileSprite(0, game.world.height - 300, game.width, game.height/2, 'heller');
+		this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		// player
 		player = new Player(game, 'player', null, 'poo');
 		game.add.existing(player);
+
+		//camera
+		game.camera.follow(player);
+
 
 		// enemy
 		this.enemy = game.add.group();
