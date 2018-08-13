@@ -1,4 +1,4 @@
-var play = function() {
+var boss = function() {
 	// Global state variables
 	this.bullets, this.enemy;
 	this.platform; this.en3;
@@ -6,7 +6,7 @@ var play = function() {
 	this.ui;
 }
 
-play.prototype = {
+boss.prototype = {
 	preload: function() {
 		
 	},

@@ -15,6 +15,8 @@ var player;
 game.state.add('menu', menu);
 game.state.add('setting', setting);
 game.state.add('play', play);
+game.state.add('play2', play2);
+game.state.add('boss', boss);
 game.state.add('end', end);
 
 // Start from menu screen
