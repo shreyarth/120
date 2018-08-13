@@ -18,20 +18,49 @@ play.prototype = {
 		var background = game.add.sprite(0, 0, 'porter');
 		//background.scale.setTo(5,2);
 		background.width = game.world.width;
-		background.height = 800;
-
+		background.height = 700;
+		this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
+		this.heller.height = 800;
 		//ground
 		this.platform = game.add.group();
 		this.platform.enableBody = true;
-		let ground = this.platform.create(0, game.world.height -32, 'platform');
-		ground.scale.setTo(2,1);
+		let ground = this.platform.create(0, game.world.height -64, 'platform');
+		ground.scale.setTo(2,10);
 		ground.body.immovable = true;
+		ground = this.platform.create(400,game.world.height -160, 'platform' );
+		ground.scale.setTo(2,10);
+		ground.body.immovable = true;
+		ground = this.platform.create(1000,game.world.height -234, 'platform' );
+		ground.scale.setTo(2,10);
+		ground.body.immovable = true;
+		ground = this.platform.create(1800,game.world.height -320, 'platform' );
+		ground.scale.setTo(2,10);
+		ground.body.immovable = true;
+		ground = this.platform.create(2400,game.world.height -390, 'platform' );
+		ground.scale.setTo(2,10);
+		ground.body.immovable = true;
+		ground = this.platform.create(3000,game.world.height -400, 'platform' );
+		ground.scale.setTo(2,20);
+		ground.body.immovable = true;
+
+
+
+		//platforms
+		// for(var i = 0; i < 20; ++i){
+		// 	let platforms = this.platform.create(game.rnd.integerInRange(400,game.world.width),
+		// 	 game.rnd.integerInRange(150, game.world.height), 'platform');
+		// 	platforms.scale.setTo(game.rnd.integerInRange(1,3), 
+		// 		game.rnd.integerInRange(1,3));
+		// 	platforms.body.immovable = true;
+		// }
+		
+		//let platforms = this.platform.create(0)
 
 		// the background wrap
 		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
 		// wrapGround.scale.setTo(2,0.8);
 		// wrapGround.width = game.width;
-		this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
+		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
