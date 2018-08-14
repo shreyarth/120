@@ -45,19 +45,19 @@ Player.prototype.update = function() {
 		if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
 			this.body.velocity.x -= 3;
 			// changing values for test, uncomment out commented code for normal value
-			this.body.velocity.x -= 10;
+			//this.body.velocity.x -= 10;
 			
-			// if(this.body.acceleration.x < -150 || this.body.velocity.x < -150)
-			// 	this.body.velocity.x = -150;
+			if(this.body.acceleration.x < -150 || this.body.velocity.x < -150)
+				this.body.velocity.x = -150;
 
 			this.direction = 'left';
 			this.scale.x = -0.2;
 		}
 		else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-			//this.body.velocity.x += 3;
-			this.body.velocity.x += 10;
-			// if(this.body.acceleration.x > 150 || this.body.velocity.x > 150)
-			// 	this.body.velocity.x = 150;
+			this.body.velocity.x += 3;
+			//this.body.velocity.x += 10;
+			if(this.body.acceleration.x > 150 || this.body.velocity.x > 150)
+				this.body.velocity.x = 150;
 
 			this.direction = 'right';
 			this.scale.x = 0.2;

@@ -101,19 +101,26 @@ play.prototype = {
 		// enemy
 		this.enemy = game.add.group();
 		this.enemy.enableBody = true;
-		let en = new Enemy(game, 1000, 1000, 'enemy');
-		game.add.existing(en);
-		this.enemy.add(en);
+		
+		for(var i = 0; i < 30; ++i){
+			let en = new Enemy(game, game.rnd.integerInRange(400,4900),
+				game.rnd.integerInRange(200,1000), 'enemy');
+			game.add.existing(en);
+			this.enemy.add(en);
+		}
 
 		//test for 2nd enemy on screen
-		en = new Enemy(game, 30, 1000, 'enemy');
-		game.add.existing(en);
-		this.enemy.add(en);
+		// en = new Enemy(game, 30, 1000, 'enemy');
+		// game.add.existing(en);
+		// this.enemy.add(en);
 
 		//test for flying enemy
-		en = new Enemy(game, 30, 400, 'enemy');
-		game.add.existing(en);
-		this.enemy.add(en);
+		for(var i = 0; i < 10; ++i){
+			en = new Enemy(game, game.rnd.integerInRange(700,4000),
+			 400, 'enemy');
+			game.add.existing(en);
+			this.enemy.add(en);
+		}
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;

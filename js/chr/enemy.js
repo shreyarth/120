@@ -118,7 +118,8 @@ Enemy.prototype.death = function(player, bullet) {
 	this.turkey();
 	// game.camera.shake(0.005, 400);
 	this.kill();
-	this.reset(500, 480);
+	this.reset(game.rnd.integerInRange(700,5000),
+		game.rnd.integerInRange(100,1000));
 	bullet.kill();
 }
 
