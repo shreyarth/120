@@ -168,6 +168,11 @@ play.prototype = {
 		this.bullets.checkWorldBounds = true;
 		this.bullets.outOfBoundsKill = true;
 
+		//sign for end of level
+		let sign = this.platform.create(4800, 900, 'sign');
+		sign.body.immovable = true;
+		sign.scale.setTo(1,1);
+
 		//pooCount = 100;
 
 		// Set camera to platformer follow up
