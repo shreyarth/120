@@ -18,6 +18,15 @@ function Enemy(game, key, frame) {
 	// needs enemy type
 
 	game.physics.enable(this);
+
+	//enemy bullets
+	this.bulletE = game.add.group();
+	//this.bulletE.scale.setTo(4);
+	this.bulletE.enableBody = true;
+	this.bulletE.physicsBodyType = Phaser.Physics.ARCADE;
+	this.bulletE.createMultiple(200, 'star');
+	this.bulletE.checkWorldBounds = true;
+	this.bulletE.outOfBoundsKill = true;
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -45,6 +54,11 @@ Enemy.prototype.update = function() {
 	if(this.body.velocity.x < 0){
 		this.scale.setTo(0.1, 0.1);
 	}
+
+	//shooting
+	if(player.position.x < 400){
+		this.fire();
+	}
 }
 
 Enemy.prototype.pooModifier = function() {
@@ -68,7 +82,26 @@ Enemy.prototype.pooModifier = function() {
 		this.turkey();
 	}
 }
-
+Enemy.prototype.fire = function() {
+	let star = this.bulletE.getFirstExists(false);
+	if(star){
+		star.scale.setTo(1,1);
+		game.physics.enable(this, Phaser.Physics.ARCADE);
+		
+		if (this.body.velocity.x < 0) {
+			star.reset(this.x + 10, this.y - 10);
+			star.body.velocity.x = -250;
+			//recoil to player from shooting
+				
+		}
+		else {
+			star.reset(this.x - 10, this.y - 10);
+			star.body.velocity.x = 250;
+			//recoil 
+				
+		}
+	}
+}
 Enemy.prototype.death = function(player, bullet) {
 	this.turkey();
 	// game.camera.shake(0.005, 400);
