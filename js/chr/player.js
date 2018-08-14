@@ -2,7 +2,8 @@
 function Player(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, 300, 480, key);
+	//Phaser.Sprite.call(this, game, 10, 1100, key);
+	Phaser.Sprite.call(this, game, 20, 1100, key);
 	
 	// Need to rescale the sprite img file
 	this.scale.x = 0.2;

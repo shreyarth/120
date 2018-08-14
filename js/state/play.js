@@ -62,20 +62,47 @@ play.prototype = {
 		platforms.body.immovable = true;
 		platforms.scale.setTo(0.5,0.5);
 
-		platforms = this.platform.create(1850, 615, 'busObs');
+		//double verticle bus
+		platforms = this.platform.create(1850, 900, 'bus');
 		platforms.body.immovable = true;
-		platforms.scale.setTo(0.7,0.7);
+		platforms.anchor.setTo(0.5, 0.5);
+		platforms.angle = 90;
+		platforms.scale.setTo(1,1);
+		platforms = this.platform.create(2050, 900, 'bus');
+		platforms.body.immovable = true;
+		platforms.anchor.setTo(0.5, 0.5);
+		platforms.angle = -90;
+		platforms.scale.setTo(1,1);
 
-		platforms = this.platform.create(2970, 550, 'bcar');
+
+		//stack of car and bus
+
+		platforms = this.platform.create(2970, 500, 'bcar');
 		platforms.body.immovable = true;
 		platforms.anchor.setTo(0.5, 0.5);
 		platforms.rotation = -.85;
 		platforms.scale.setTo(0.3, 0.3);
 
-		platforms = this.platform.create(3700, 900, 'carObs');
+		platforms = this.platform.create(3700, 740, 'rcar');
+		platforms.body.immovable = true;
+		platforms.rotation = -.30;
+		platforms.anchor.setTo(0.5, 0.5);
+		platforms.scale.setTo(0.5, 0.5);
+		platforms = this.platform.create(3600, 1040, 'ycar');
+		platforms.body.immovable = true;
+		platforms.rotation = -3;
+		platforms.anchor.setTo(0.5, 0.5);
+		platforms.scale.setTo(0.5, 0.5);
+		platforms = this.platform.create(3750, 900, 'bus');
 		platforms.body.immovable = true;
 		platforms.anchor.setTo(0.5, 0.5);
-		platforms.scale.setTo(0.8, 0.8);
+		platforms.rotation = 3.1;
+		platforms.scale.setTo(1, 1);
+		platforms = this.platform.create(3700, 1000, 'bcar');
+		platforms.body.immovable = true;
+		//platforms.anchor.setTo(0.5, 0.5);
+		platforms.scale.setTo(0.5, 0.5);
+		platforms.rotation = .2;
 			// platforms.scale.setTo(game.rnd.integerInRange(1,2), 
 			// 	game.rnd.integerInRange(1,2));
 			//platforms.body.immovable = true;

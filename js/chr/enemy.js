@@ -2,7 +2,7 @@
 function Enemy(game, key, frame) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, 500, 480, 'enemy', frame);
+	Phaser.Sprite.call(this, game, 1000, 1000, 'enemy', frame);
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
@@ -56,7 +56,7 @@ Enemy.prototype.update = function() {
 	}
 
 	//shooting
-	if(player.position.x < 400){
+	if(player.position.x < (150 + this.position.x)){
 		this.fire();
 	}
 }
