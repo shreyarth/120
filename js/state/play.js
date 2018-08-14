@@ -70,7 +70,7 @@ play.prototype = {
 		platforms.scale.setTo(0.4,0.4);
 
 		//crashed cars and bus in buildings
-		platforms = this.platform.create(1480, 450, 'wreckC');
+		platforms = this.platform.create(1680, 420, 'wreckC');
 		platforms.body.immovable = true;
 		platforms.scale.setTo(0.6,0.6); 
 
