@@ -40,12 +40,9 @@ Enemy.prototype.constructor = Enemy;
 
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
-	if(game.physics.arcade.collide(this, player, this.pooModifier, null, this)){
-		//console.log("colliding with player");
-	}
-	if(game.physics.arcade.collide(this.bulletE, player, this.pooModifier, null, this)){
-		//this.bulletE.destroy();
-
+	if (!player.isInvincible) {
+		game.physics.arcade.collide(this, player, this.collideBody, null, this);
+		game.physics.arcade.collide(this.bulletE, player, this.collideBullet, null, this);
 	}
 	game.physics.arcade.collide(this, player.bullets, this.death, null, this);
 	// trying to get enemy to move towards player when its on a platform
@@ -70,8 +67,17 @@ Enemy.prototype.update = function() {
 	
 }
 
+Enemy.prototype.collideBody = function() {
+	this.turkey();
+	this.pooModifier();
+}
+
+Enemy.prototype.collideBullet = function(player, bull) {
+	bull.kill();
+	this.pooModifier();
+}
+
 Enemy.prototype.pooModifier = function() {
-	if (!player.isInvincible) {
 		let rando = game.rnd.integerInRange(1, 1000);
 		if (rando % 4 == 0) {
 			if(player.pooCount > 50)
@@ -85,13 +91,7 @@ Enemy.prototype.pooModifier = function() {
 
 		console.log(player.pooCount);
 		player.death();
-		//player.flipInvc();
-		// Adding timer * only works once for some reason
-		//player.timer.add(500, player.flipInvc);
 		player.hit();
-
-		this.turkey();
-	}
 }
 Enemy.prototype.fire = function() {
 	let star = this.bulletE.getFirstExists(false);
