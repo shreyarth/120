@@ -175,11 +175,11 @@ play.prototype = {
 		// create primitive
 		let g = game.add.graphics();
 		g.beginFill(0x00FF00);
-		g.drawRect(32, game.world.height-580, pooNum * 10, 32);	// Starting point, width, height
+		g.drawRect(32, 32, pooNum * 5, 32);	// Starting point, width, height
 		g.endFill();
 
 		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(32, game.world.height-580, g.generateTexture());
+		obj = game.add.sprite(32, 32, g.generateTexture());
 		obj.fixedToCamera = true;
 		obj.cameraOffset.setTo(32, 16);
 		g.destroy();

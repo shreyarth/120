@@ -40,54 +40,56 @@ Player.prototype.constructor = Player;
 
 // override Phaser.Sprite update
 Player.prototype.update = function() {
-	// Controls
-	if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-		this.body.velocity.x -= 3;
-		// changing values for test, uncomment out commented code for normal value
-		this.body.velocity.x -= 10;
-		
-		// if(this.body.acceleration.x < -150 || this.body.velocity.x < -150)
-		// 	this.body.velocity.x = -150;
+	if (this.alive) {
+		// Controls
+		if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
+			this.body.velocity.x -= 3;
+			// changing values for test, uncomment out commented code for normal value
+			this.body.velocity.x -= 10;
+			
+			// if(this.body.acceleration.x < -150 || this.body.velocity.x < -150)
+			// 	this.body.velocity.x = -150;
 
-		this.direction = 'left';
-		this.scale.x = -0.2;
-	}
-	else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-		//this.body.velocity.x += 3;
-		this.body.velocity.x += 10;
-		// if(this.body.acceleration.x > 150 || this.body.velocity.x > 150)
-		// 	this.body.velocity.x = 150;
-
-		this.direction = 'right';
-		this.scale.x = 0.2;
-	}
-	else{
-		this.body.acceleration.x = 0;
-		if (this.body.velocity.x < 0) {
-			if (this.body.velocity.x > 0)
-				this.body.velocity.x = 0;
-			else
-				this.body.velocity.x += 3;
+			this.direction = 'left';
+			this.scale.x = -0.2;
 		}
-		if (this.body.velocity.x > 0)
-			if (this.body.velocity.x < 0)
-				this.body.velocity.x = 0;
-			else
-				this.body.velocity.x -= 3;
+		else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+			//this.body.velocity.x += 3;
+			this.body.velocity.x += 10;
+			// if(this.body.acceleration.x > 150 || this.body.velocity.x > 150)
+			// 	this.body.velocity.x = 150;
+
+			this.direction = 'right';
+			this.scale.x = 0.2;
+		}
+		else{
+			this.body.acceleration.x = 0;
+			if (this.body.velocity.x < 0) {
+				if (this.body.velocity.x > 0)
+					this.body.velocity.x = 0;
+				else
+					this.body.velocity.x += 3;
+			}
+			if (this.body.velocity.x > 0)
+				if (this.body.velocity.x < 0)
+					this.body.velocity.x = 0;
+				else
+					this.body.velocity.x -= 3;
+		}
+
+		// poopack for jumping
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.UP)){
+			this.body.velocity.y = -175;
+			this.fire(true);
+		}
+
+		// Attack move
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
+			this.fire(false);
+
+		// Bullet rotation
+		this.bullets.forEachAlive(function(bullet){bullet.rotation += Phaser.Math.degToRad(2); }, this);
 	}
-
-	// poopack for jumping
-	if(game.input.keyboard.justPressed(Phaser.Keyboard.UP)){
-		this.body.velocity.y = -175;
-		this.fire(true);
-	}
-
-	// Attack move
-	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
-		this.fire(false);
-
-	// Bullet rotation
-	this.bullets.forEachAlive(function(bullet){bullet.rotation += Phaser.Math.degToRad(2); }, this);
 }
 
 // isJump: set to true if its not attack
@@ -138,37 +140,27 @@ Player.prototype.fire = function(isJump) {
 }
 
 Player.prototype.death = function() {
-	var rasp = game.add.audio('rasp', 0.5);
-	//console.log('in death fn');
-	if(this.pooCount < 0){
-		this.kill();
-		//var rasp = game.add.audio('rasp', 0.5);
-		rasp.play();
-		//this.reset(300,300);
-		console.log("death from no poo");
-		//this.pooCount = 10;
-		game.camera.shake(0.005, 400);
-		blood = game.add.sprite(this.x, this.y, 'bloodsplat');
-		blood.anchor.set(0.5);
-		blood.scale.x = 2;
-		blood.scale.y = 5;
-		game.time.events.add(Phaser.Timer.SECOND * 2, this.changeState, this);
-		
+	let deathSprite, overflow;
 
+	if(this.pooCount < 0){
+		console.log("death from no poo");
+		deathSprite = game.add.sprite(this.x, this.y, 'bloodsplat');
+		overflow = false;
 	}
-	if(this.pooCount > 100){
+	else if(this.pooCount > 100){
+		console.log("death from too much poo");
+		deathSprite = game.add.sprite(this.x, this.y, 'poosplat');
+		overflow = true;
+	}
+	if (deathSprite){
+		var rasp = game.add.audio('rasp', 0.5);
 		this.kill();
 		rasp.play();
-		// this.reset(300,300);
-		console.log("death from too much poo");
-		// this.pooCount = 90;
 		game.camera.shake(0.005, 400);
-		plood = game.add.sprite(this.x, this.y, 'poosplat');
-		plood.anchor.set(0.5);
-		plood.scale.x = 2;
-		plood.scale.y = 5;
+		deathSprite.anchor.set(0.5);
+		deathSprite.scale.x = 2;
+		deathSprite.scale.y = 5;
 		game.time.events.add(Phaser.Timer.SECOND * 2, this.changeState, this);
-		//game.state.start('end');
 	}
 }
 
