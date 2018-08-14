@@ -168,7 +168,6 @@ play.prototype = {
 
 		// Fix UI to the camera
 		this.ui = this.pooMeter(player.pooCount);
-		this.ui.fixedToCamera = true;
 	},
 	pooMeter: function(pooNum) {
 		let obj = null;
@@ -176,12 +175,13 @@ play.prototype = {
 		// create primitive
 		let g = game.add.graphics();
 		g.beginFill(0x00FF00);
-		g.drawRect(32, 32, pooNum * 10, 32);	// Starting point, width, height
+		g.drawRect(32, game.world.height-580, pooNum * 10, 32);	// Starting point, width, height
 		g.endFill();
 
 		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(32, 32, g.generateTexture());
-		//obj.anchor.set(0.5, 0.5);
+		obj = game.add.sprite(32, game.world.height-580, g.generateTexture());
+		obj.fixedToCamera = true;
+		obj.cameraOffset.setTo(32, 16);
 		g.destroy();
 
 		return obj;
