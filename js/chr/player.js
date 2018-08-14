@@ -22,7 +22,7 @@ function Player(game, key, frame, bulletKey) {
 	this.isInvincible = false;
 
 	// Character info
-	this.pooCount = 50;
+	this.pooCount = 200;
 
 	// Bullets
 	this.bullets = game.add.group();
@@ -149,6 +149,7 @@ Player.prototype.death = function() {
 		//this.pooCount = 10;
 		game.camera.shake(0.005, 400);
 		game.add.sprite(this.x, this.y, 'bloodsplat');
+
 		game.time.events.add(Phaser.Timer.SECOND * 2, this.changeState, this);
 		
 
@@ -160,7 +161,9 @@ Player.prototype.death = function() {
 		console.log("death from too much poo");
 		// this.pooCount = 90;
 		game.camera.shake(0.005, 400);
-		game.state.start('end');
+		game.add.sprite(this.x, this.y, 'poosplat');
+		game.time.events.add(Phaser.Timer.SECOND * 2, this.changeState, this);
+		//game.state.start('end');
 	}
 }
 
