@@ -72,16 +72,14 @@ menu.prototype = {
 	checkInput: function() {
 		// Input function (menu selction)
 		// Highlight the selected section (or any other indicator to show selected)
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN)) {
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN))
 			this.mCount++;
-			console.log(this.mCount);
-		}
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)) {
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP))
 			this.mCount--;
-			console.log(this.mCount);
-		}
+
 		if (this.mCount < 0)
 			this.mCount = 0;
+		
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 			switch (this.mCount%3) {
 				case 0:
