@@ -135,20 +135,19 @@ play.prototype = {
 		// enemy
 		this.enemy = game.add.group();
 		this.enemy.enableBody = true;
-		let en = new Enemy(game, 'enemy', null, this.platform);
+		let en = new Enemy(game, 1000, 1000, 'enemy');
 		game.add.existing(en);
 		this.enemy.add(en);
 
 		//test for 2nd enemy on screen
-		let en2 = new Enemy(game, 'enemy', null);
-		game.add.existing(en2);
-		this.enemy.add(en2);
-		en2.body.reset(30, 1000);
+		en = new Enemy(game, 30, 1000, 'enemy');
+		game.add.existing(en);
+		this.enemy.add(en);
 
 		//test for flying enemy
-		this.en3 = new Enemy(game, 'enemy');
-		game.add.existing(this.en3);
-		this.en3.body.reset(30,400);
+		en = new Enemy(game, 30, 400, 'enemy');
+		game.add.existing(en);
+		this.enemy.add(en);
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
@@ -217,7 +216,7 @@ play.prototype = {
 		// if(game.physics.arcade.collide(enemy, platform)){
 		// 	game.physics.arcade.moveToObject(enemy, player);
 		// }
-		game.physics.arcade.moveToObject(this.en3, player);
+		//game.physics.arcade.moveToObject(this.en3, player);
 
 		// UI update
 		this.ui.destroy();

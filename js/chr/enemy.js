@@ -1,8 +1,8 @@
 // Constructor
-function Enemy(game, key, frame) {
+function Enemy(game, x, y, key, frame) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, 1000, 1000, 'enemy', frame);
+	Phaser.Sprite.call(this, game, x, y, 'enemy', frame);
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
