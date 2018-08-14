@@ -148,7 +148,10 @@ Player.prototype.death = function() {
 		console.log("death from no poo");
 		//this.pooCount = 10;
 		game.camera.shake(0.005, 400);
-		game.state.start('end');
+		game.add.sprite(this.x, this.y, 'bloodsplat');
+		game.time.events.add(Phaser.Timer.SECOND * 2, this.changeState, this);
+		
+
 	}
 	if(this.pooCount > 100){
 		this.kill();
@@ -175,4 +178,8 @@ Player.prototype.hit = function() {
 	inviTime.onComplete.add(function(){this.isInvincible = false; this.alpha = 1;}, this);
 
 	inviTime.start();
+}
+
+Player.prototype.changeState = function(){
+	game.state.start('end');
 }
