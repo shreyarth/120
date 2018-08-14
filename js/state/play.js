@@ -99,7 +99,7 @@ play.prototype = {
 		this.enemy.enableBody = true;
 		
 		for(var i = 0; i < 30; ++i){
-			let en = new Enemy(game, game.rnd.integerInRange(400,4900),
+			let en = new Enemy(game, game.rnd.integerInRange(600,4900),
 				game.rnd.integerInRange(200,1000), 'enemy');
 			game.add.existing(en);
 			this.enemy.add(en);
@@ -112,7 +112,7 @@ play.prototype = {
 
 		//test for flying enemy
 		for(var i = 0; i < 10; ++i){
-			en = new Enemy(game, game.rnd.integerInRange(700,4000),
+			en = new Enemy(game, game.rnd.integerInRange(1000,4800),
 			 400, 'enemy');
 			game.add.existing(en);
 			this.enemy.add(en);
@@ -121,7 +121,7 @@ play.prototype = {
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
 		this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-		this.bullets.createMultiple(200, 'star');
+		//this.bullets.createMultiple(200, 'star');
 		//bullets.setAll('checkWorldBounds', true);
 		//bullets.callAll('events.onOutOfBounds.add', 'events.outOfBounds', resetstar);
 		this.bullets.checkWorldBounds = true;

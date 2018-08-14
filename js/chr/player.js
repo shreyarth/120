@@ -29,7 +29,7 @@ function Player(game, key, frame, bulletKey) {
 	//this.bullets.scale.setTo(0.1);
 	this.bullets.enableBody = true;
 	this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-	this.bullets.createMultiple(100, bulletKey);
+	this.bullets.createMultiple(300, bulletKey);
 	this.bullets.checkWorldBounds = true;
 	this.bullets.outOfBoundsKill = true;
 }
