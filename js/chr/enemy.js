@@ -43,6 +43,10 @@ Enemy.prototype.update = function() {
 	if(game.physics.arcade.collide(this, player, this.pooModifier, null, this)){
 		//console.log("colliding with player");
 	}
+	if(game.physics.arcade.collide(this.bulletE, player, this.pooModifier, null, this)){
+		//this.bulletE.destroy();
+
+	}
 	game.physics.arcade.collide(this, player.bullets, this.death, null, this);
 	// trying to get enemy to move towards player when its on a platform
 	// not working, its floating around like a ghost
@@ -91,7 +95,7 @@ Enemy.prototype.pooModifier = function() {
 }
 Enemy.prototype.fire = function() {
 	let star = this.bulletE.getFirstExists(false);
-	//this.game.time.events.add(Phaser.Timer.SECOND * 1);
+	
 	if(star){
 		star.scale.setTo(1,1);
 		game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -100,15 +104,12 @@ Enemy.prototype.fire = function() {
 				
 				star.reset(this.x + 10, this.y - 10);
 				star.body.velocity.x = -150;
-				//recoil to player from shooting
 			}
 				
 	}else{
 		if(this.body.x > player.x-300){
 		star.reset(this.x - 10, this.y - 10);
-		star.body.velocity.x = 150;
-		//recoil 
-				
+		star.body.velocity.x = 150;				
 		}
 	}
 }
