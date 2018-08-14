@@ -27,6 +27,11 @@ function Enemy(game, key, frame) {
 	this.bulletE.createMultiple(200, 'star');
 	this.bulletE.checkWorldBounds = true;
 	this.bulletE.outOfBoundsKill = true;
+
+	//timer
+	timer = game.time.create(false);
+	timer.loop(1300, this.fire, this);
+	timer.start();
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -57,7 +62,7 @@ Enemy.prototype.update = function() {
 
 	//shooting
 	
-	this.fire();
+	//this.fire();
 	
 }
 
@@ -86,6 +91,7 @@ Enemy.prototype.pooModifier = function() {
 }
 Enemy.prototype.fire = function() {
 	let star = this.bulletE.getFirstExists(false);
+	//this.game.time.events.add(Phaser.Timer.SECOND * 1);
 	if(star){
 		star.scale.setTo(1,1);
 		game.physics.enable(this, Phaser.Physics.ARCADE);
