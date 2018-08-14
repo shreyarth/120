@@ -148,7 +148,9 @@ Player.prototype.death = function() {
 		console.log("death from no poo");
 		//this.pooCount = 10;
 		game.camera.shake(0.005, 400);
-		game.add.sprite(this.x, this.y, 'bloodsplat');
+		blood = game.add.sprite(this.x, this.y - 200, 'bloodsplat');
+		blood.scale.x = 2;
+		blood.scale.y = 4;
 		game.time.events.add(Phaser.Timer.SECOND * 2, this.changeState, this);
 		
 
