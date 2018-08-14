@@ -56,9 +56,9 @@ Enemy.prototype.update = function() {
 	}
 
 	//shooting
-	if(player.position.x < (150 + this.position.x)){
-		this.fire();
-	}
+	
+	this.fire();
+	
 }
 
 Enemy.prototype.pooModifier = function() {
@@ -87,20 +87,23 @@ Enemy.prototype.fire = function() {
 	if(star){
 		star.scale.setTo(1,1);
 		game.physics.enable(this, Phaser.Physics.ARCADE);
-		
-		if (this.body.velocity.x < 0) {
-			star.reset(this.x + 10, this.y - 10);
-			star.body.velocity.x = -250;
-			//recoil to player from shooting
+		if(this.body.x > player.x){
+			if(this.body.x < player.x+300){
 				
-		}
-		else {
-			star.reset(this.x - 10, this.y - 10);
-			star.body.velocity.x = 250;
-			//recoil 
+				star.reset(this.x + 10, this.y - 10);
+				star.body.velocity.x = -150;
+				//recoil to player from shooting
+			}
+				
+	}else{
+		if(this.body.x > player.x-300){
+		star.reset(this.x - 10, this.y - 10);
+		star.body.velocity.x = 150;
+		//recoil 
 				
 		}
 	}
+}
 }
 Enemy.prototype.death = function(player, bullet) {
 	this.turkey();
