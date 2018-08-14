@@ -36,8 +36,10 @@ menu.prototype = {
 	create: function() {
 		// Asset implementaion
 		game.stage.backgroundColor = bgcolor;
-		this.music = game.add.audio('menumusic', 0.5);
-		this.music.play();
+		if (!this.music || this.music.isPlaying === false) {
+			this.music = game.add.audio('menumusic', 0.5);
+			this.music.play();
+		}
 		
 		let style = {font: 'Helvetica', fontSize: '24px', fill: '#fff'};
 		let playText = game.add.text(game.world.centerX, game.height*.3,

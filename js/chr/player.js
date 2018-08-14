@@ -2,7 +2,6 @@
 function Player(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	//Phaser.Sprite.call(this, game, 10, 1100, key);
 	Phaser.Sprite.call(this, game, 20, 1100, key);
 	
 	// Need to rescale the sprite img file
@@ -20,13 +19,9 @@ function Player(game, key, frame, bulletKey) {
 	// 0.5 = center
 	this.anchor.set(0.5);
 	this.direction = 'right';
-	// Timer obj for invincible time or any other stuffs.. in cases for need of timer...
-	this.timer = game.time.create(game, false);
-	this.timer.start();
 	this.isInvincible = false;
 
 	// Character info
-	// this.health = 100;	// pooCount = health. left the line in case we need it later for some reason
 	this.pooCount = 50;
 
 	// Bullets
@@ -34,7 +29,7 @@ function Player(game, key, frame, bulletKey) {
 	//this.bullets.scale.setTo(0.1);
 	this.bullets.enableBody = true;
 	this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-	this.bullets.createMultiple(200, bulletKey);
+	this.bullets.createMultiple(100, bulletKey);
 	this.bullets.checkWorldBounds = true;
 	this.bullets.outOfBoundsKill = true;
 }
@@ -85,7 +80,6 @@ Player.prototype.update = function() {
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.UP)){
 		this.body.velocity.y = -175;
 		this.fire(true);
-		//console.log("jump");
 	}
 
 	// Attack move
@@ -167,6 +161,18 @@ Player.prototype.death = function() {
 	}
 }
 
-Player.prototype.flipInvc = function() {
-	this.isInvincible = !this.isInvincible;
+Player.prototype.hit = function() {
+	// Check if the player is already invincible
+	// If it is, return nada
+	if (this.isInvincible) return;
+	// Else, run this code
+	this.isInvincible = true;
+	var inviTime = game.time.create(true);
+	// Blinking sprite while invincible
+	// timer.repeat(delay time, num repeat, function(pls don't touch this), ref(also, don't touch this))
+	inviTime.repeat(50, 10, function() {if (this.alpha == 1) this.alpha = 0; else this.alpha = 1;}, this);
+	// After super invincibility time, go back to normal state
+	inviTime.onComplete.add(function(){this.isInvincible = false; this.alpha = 1;}, this);
+
+	inviTime.start();
 }
