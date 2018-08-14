@@ -143,6 +143,7 @@ play.prototype = {
 		let en2 = new Enemy(game, 'enemy', null);
 		game.add.existing(en2);
 		this.enemy.add(en2);
+		en2.body.reset(30, 1000);
 
 		//test for flying enemy
 		this.en3 = new Enemy(game, 'enemy');
