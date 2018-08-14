@@ -29,24 +29,7 @@ play.prototype = {
 		let ground = this.platform.create(0, game.world.height -32, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
 		ground.body.immovable = true;
-		// ground = this.platform.create(400,game.world.height -160, 'platform' );
-		// ground.scale.setTo(2,10);
-		// ground.body.immovable = true;
-		// ground = this.platform.create(1000,game.world.height -234, 'platform' );
-		// ground.scale.setTo(2,10);
-		// ground.body.immovable = true;
-		// ground = this.platform.create(1800,game.world.height -320, 'platform' );
-		// ground.scale.setTo(2,10);
-		// ground.body.immovable = true;
-		// ground = this.platform.create(2400,game.world.height -390, 'platform' );
-		// ground.scale.setTo(2,30);
-		// ground.body.immovable = true;
-		// ground = this.platform.create(3300,game.world.height -400, 'platform' );
-		// ground.scale.setTo(3,30);
-		// ground.body.immovable = true;
-
-
-
+		
 		//platforms in order, left to right
 		
 		let platforms = this.platform.create(400, 890, 'bus');
@@ -56,6 +39,19 @@ play.prototype = {
 		platforms = this.platform.create(1000, 1040, 'rcar');
 		platforms.body.immovable = true;
 
+		platforms.scale.setTo(0.5,0.5);
+
+		platforms = this.platform.create(2900, 700, 'bus');
+		platforms.body.immovable = true;
+		platforms.anchor.setTo(0.5, 0.5);
+		platforms.angle = 180;
+		platforms.scale.setTo(1,1);
+
+		platforms = this.platform.create(2400, 1040, 'ycar');
+		platforms.body.immovable = true;
+		platforms.scale.setTo(0.5,0.5);
+		platforms = this.platform.create(2960, 1040, 'rcar');
+		platforms.body.immovable = true;
 		platforms.scale.setTo(0.5,0.5);
 
 		platforms = this.platform.create(1600, 1040, 'ycar');
