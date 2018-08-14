@@ -79,7 +79,7 @@ Player.prototype.update = function() {
 
 		// poopack for jumping
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.UP)){
-			this.body.velocity.y = -175;
+			this.body.velocity.y = -100;
 			this.fire(true);
 		}
 
