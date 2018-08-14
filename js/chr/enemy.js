@@ -76,9 +76,11 @@ Enemy.prototype.pooModifier = function() {
 
 		console.log(player.pooCount);
 		player.death();
-		player.flipInvc();
+		//player.flipInvc();
 		// Adding timer * only works once for some reason
-		player.timer.add(500, player.flipInvc);
+		//player.timer.add(500, player.flipInvc);
+		player.hit();
+
 		this.turkey();
 	}
 }

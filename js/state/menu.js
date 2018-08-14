@@ -36,8 +36,10 @@ menu.prototype = {
 	create: function() {
 		// Asset implementaion
 		game.stage.backgroundColor = bgcolor;
-		this.music = game.add.audio('menumusic', 0.5);
-		this.music.play();
+		if (!this.music || this.music.isPlaying === false) {
+			this.music = game.add.audio('menumusic', 0.5);
+			this.music.play();
+		}
 		
 		let style = {font: 'Helvetica', fontSize: '24px', fill: '#fff'};
 		let playText = game.add.text(game.world.centerX, game.height*.3,
@@ -84,16 +86,14 @@ menu.prototype = {
 	checkInput: function() {
 		// Input function (menu selction)
 		// Highlight the selected section (or any other indicator to show selected)
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN)) {
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN))
 			this.mCount++;
-			console.log(this.mCount);
-		}
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)) {
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP))
 			this.mCount--;
-			console.log(this.mCount);
-		}
+
 		if (this.mCount < 0)
 			this.mCount = 0;
+		
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 			switch (this.mCount%3) {
 				case 0:

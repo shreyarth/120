@@ -55,18 +55,11 @@ setting.prototype = {
 	checkInput: function() {
 		// Input function (menu selction)
 		// Highlight the selected section (or any other indicator to show selected)
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.RIGHT)) {
-			this.mCount++;
-			console.log(this.mCount);
-		}
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.LEFT)) {
-			this.mCount--;
-			console.log(this.mCount);
-		}
-		if (this.mCount < 0)
-			this.mCount = 0;
-		if (this.mCount > 1)
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.RIGHT))
 			this.mCount = 1;
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.LEFT))
+			this.mCount = 0;
+
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 			switch (this.mCount%2) {
 				case 0:
