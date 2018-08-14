@@ -22,6 +22,9 @@ menu.prototype = {
 		game.load.image('poosplat', 'img/shit.png');
 		game.load.image('bloodsplat', 'img/blood.png');
 		game.load.image('bus', 'img/bus.png');
+		game.load.image('busObs', 'img/busObs.png');
+		game.load.image('carObs', 'img/carObs.png');
+		game.load.image('rcar', 'img/redCar.png');
 
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');
