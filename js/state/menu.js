@@ -26,6 +26,8 @@ menu.prototype = {
 		game.load.image('carObs', 'img/carObs.png');
 		game.load.image('rcar', 'img/redCar.png');
 		game.load.image('sign', 'img/sign.png');
+		game.load.image('wreckC', 'img/wreckedcar.png');
+		game.load.image('wreckB', 'img/wreckedbus.png');
 
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');
