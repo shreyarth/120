@@ -187,7 +187,7 @@ play.prototype = {
 
 		// create primitive
 		let g = game.add.graphics();
-		g.beginFill(0x00FF00);
+		g.beginFill(0x492008);
 		g.drawRect(32, 32, pooNum * 5, 32);	// Starting point, width, height
 		g.endFill();
 
