@@ -3,6 +3,7 @@ var menu = function() {
 	this.menu = ['start', 'settings', 'exit'];
 	this.mCount = 0;
 	this.select;
+	this.music;
 }
 
 menu.prototype = {
@@ -16,16 +17,27 @@ menu.prototype = {
 		game.load.image('turd', 'img/turd.png');
 		game.load.image('porter', 'img/porter.png');
 		game.load.image('heller', 'img/HellerDr.png');
+		game.load.image('bcar', 'img/blackCar.png');
+		game.load.image('ycar', 'img/yellowCar.png');
+		game.load.image('poosplat', 'img/shit.png');
+		game.load.image('bloodsplat', 'img/blood.png');
+		game.load.image('bus', 'img/bus.png');
+		game.load.image('busObs', 'img/busObs.png');
+		game.load.image('carObs', 'img/carObs.png');
+		game.load.image('rcar', 'img/redCar.png');
 
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');
 		game.load.audio('rasp', 'audio/Rasp.mp3');
 		game.load.audio('turkey', 'audio/turkey.mp3');
+		game.load.audio('menumusic', 'audio/blocks.wav');
 		// Call menu assets
 	},
 	create: function() {
 		// Asset implementaion
 		game.stage.backgroundColor = bgcolor;
+		this.music = game.add.audio('menumusic', 0.5);
+		this.music.play();
 		
 		let style = {font: 'Helvetica', fontSize: '24px', fill: '#fff'};
 		let playText = game.add.text(game.world.centerX, game.height*.3,
@@ -84,6 +96,7 @@ menu.prototype = {
 			switch (this.mCount%3) {
 				case 0:
 					game.state.start('play');
+					this.music.stop();
 					break;
 				case 1:
 					if (noset)

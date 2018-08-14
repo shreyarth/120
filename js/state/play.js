@@ -2,6 +2,7 @@ var play = function() {
 	// Global state variables
 	this.bullets, this.enemy;
 	this.platform; this.en3;
+	this.obstacle;
 	this.heller = null;
 	this.ui;
 }
@@ -12,66 +13,91 @@ play.prototype = {
 	},
 	create: function() {
 		// Asset implementaion
-		game.world.setBounds( 0, 0, 3000, 1200);
+		game.world.setBounds( 0, 0, 5000, 1200);
 		console.log("play state to check implementation");
 		
 		var background = game.add.sprite(0, 0, 'porter');
 		//background.scale.setTo(5,2);
 		background.width = game.world.width;
-		background.height = 700;
-		this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
-		this.heller.height = 800;
+		background.height = game.world.height -32;
+		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
+		// this.heller.height = 800;
 
 		//ground
 		this.platform = game.add.group();
 		this.platform.enableBody = true;
-		let ground = this.platform.create(0, game.world.height -64, 'platform');
-		ground.scale.setTo(2,10);
+		let ground = this.platform.create(0, game.world.height -32, 'platform');
+		ground.scale.setTo(game.world.width, 1 );
 		ground.body.immovable = true;
-		ground = this.platform.create(400,game.world.height -160, 'platform' );
-		ground.scale.setTo(2,10);
-		ground.body.immovable = true;
-		ground = this.platform.create(1000,game.world.height -234, 'platform' );
-		ground.scale.setTo(2,10);
-		ground.body.immovable = true;
-		ground = this.platform.create(1800,game.world.height -320, 'platform' );
-		ground.scale.setTo(2,10);
-		ground.body.immovable = true;
-		ground = this.platform.create(2400,game.world.height -390, 'platform' );
-		ground.scale.setTo(2,10);
-		ground.body.immovable = true;
-		ground = this.platform.create(3000,game.world.height -400, 'platform' );
-		ground.scale.setTo(2,20);
-		ground.body.immovable = true;
+		// ground = this.platform.create(400,game.world.height -160, 'platform' );
+		// ground.scale.setTo(2,10);
+		// ground.body.immovable = true;
+		// ground = this.platform.create(1000,game.world.height -234, 'platform' );
+		// ground.scale.setTo(2,10);
+		// ground.body.immovable = true;
+		// ground = this.platform.create(1800,game.world.height -320, 'platform' );
+		// ground.scale.setTo(2,10);
+		// ground.body.immovable = true;
+		// ground = this.platform.create(2400,game.world.height -390, 'platform' );
+		// ground.scale.setTo(2,30);
+		// ground.body.immovable = true;
+		// ground = this.platform.create(3300,game.world.height -400, 'platform' );
+		// ground.scale.setTo(3,30);
+		// ground.body.immovable = true;
 
 
 
 		//platforms in order, left to right
 		
-		let platforms = this.platform.create(0, 100, 'platform');
+		let platforms = this.platform.create(400, 890, 'bus');
 		platforms.body.immovable = true;
-		platforms.scale.setTo(0.7,1);
+		platforms.scale.setTo(1,1);
 
-		platforms = this.platform.create(800, 580, 'platform');
+		platforms = this.platform.create(1000, 1040, 'rcar');
 		platforms.body.immovable = true;
-		platforms.scale.setTo(0.3,0.3);
 
-		platforms = this.platform.create(1300, 300, 'platform');
-		platforms.body.immovable = true;
-		platforms.scale.setTo(0.3,0.3);
+		platforms.scale.setTo(0.5,0.5);
 
-		platforms = this.platform.create(1700, 280, 'platform');
+		platforms = this.platform.create(1600, 1040, 'ycar');
 		platforms.body.immovable = true;
-		platforms.scale.setTo(0.3,0.3);
+		platforms.scale.setTo(0.5,0.5);
 
-		platforms = this.platform.create(2400,400, 'platform');
+		platforms = this.platform.create(1850, 615, 'busObs');
 		platforms.body.immovable = true;
-		platforms.scale.setTo(0.5, 0.4);
+		platforms.scale.setTo(0.7,0.7);
+
+		platforms = this.platform.create(2970, 550, 'bcar');
+		platforms.body.immovable = true;
+		platforms.anchor.setTo(0.5, 0.5);
+		platforms.rotation = -.85;
+		platforms.scale.setTo(0.3, 0.3);
+
+		platforms = this.platform.create(3700, 900, 'carObs');
+		platforms.body.immovable = true;
+		platforms.anchor.setTo(0.5, 0.5);
+		platforms.scale.setTo(0.8, 0.8);
 			// platforms.scale.setTo(game.rnd.integerInRange(1,2), 
 			// 	game.rnd.integerInRange(1,2));
 			//platforms.body.immovable = true;
 		
+		//obstacles
+		this.obstacle = game.add.group();
+		this.obstacle.enableBody = true;
+		//game.physics.enable(this.obstacle, Phaser.Physics.ARCADE);
 		
+		//trying to add physics to the obstacles before placing them
+		let bus = this.obstacle.create(200, 100, 'bus');
+		//game.physics.enable(bus, Phaser.Physics.ARCADE);
+		bus.enableBody = true;
+
+		let ycar = this.obstacle.create(400, 300, 'ycar');
+		ycar.scale.setTo(0.5);
+
+		let bcar = this.obstacle.create(700, 500, 'bcar');
+		bcar.scale.setTo(0.5);
+
+
+
 		//let platforms = this.platform.create(0)
 
 		// the background wrap
@@ -149,13 +175,13 @@ play.prototype = {
 		game.physics.arcade.collide(player, this.platform);
 		game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
 
-		if(player.body.velocity.x == 0){
-			this.heller.tilePosition.x = this.heller.tilePosition.x;
-		}else if(player.body.velocity.x > 0){
-			this.heller.tilePosition.x -= 4;
-		}else{
-			this.heller.tilePosition.x += 4;
-		}
+		// if(player.body.velocity.x == 0){
+		// 	this.heller.tilePosition.x = this.heller.tilePosition.x;
+		// }else if(player.body.velocity.x > 0){
+		// 	this.heller.tilePosition.x -= 4;
+		// }else{
+		// 	this.heller.tilePosition.x += 4;
+		// }
 		
 		// enemy movement towards player
 		// if(game.physics.arcade.collide(enemy, platform)){
