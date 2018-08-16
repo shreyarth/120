@@ -84,7 +84,7 @@ play.prototype = {
 		// wrapGround.width = game.width;
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
 
-		game.physics.startSystem(Phaser.Physics.ARCADE);
+		game.physics.startSystem(Phaser.Physics.p2);
 
 		// player
 		player = new Player(game, 'player', null, 'poo');
@@ -120,7 +120,7 @@ play.prototype = {
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
-		this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+		this.bullets.physicsBodyType = Phaser.Physics.p2;
 		//this.bullets.createMultiple(200, 'star');
 		//bullets.setAll('checkWorldBounds', true);
 		//bullets.callAll('events.onOutOfBounds.add', 'events.outOfBounds', resetstar);
@@ -131,7 +131,7 @@ play.prototype = {
 		//enemies bullets
 		this.bulletE = game.add.group();
 		this.bulletE.enableBody = true;
-		this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+		this.bullets.physicsBodyType = Phaser.Physics.p2;
 		this.bullets.createMultiple(200, 'star');
 		this.bullets.checkWorldBounds = true;
 		this.bullets.outOfBoundsKill = true;

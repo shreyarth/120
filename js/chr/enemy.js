@@ -10,20 +10,17 @@ function Enemy(game, x, y, key, frame) {
 	this.scale.setTo(0.1);
 	this.anchor.set(0.5);
 	// this.scale.y = 0.1;
-	// // physics crap
-	game.physics.enable(this, Phaser.Physics.ARCADE);
-	this.body.bounce.y = 0.2;
+	// physics crap
+	game.physics.enable(this, Phaser.Physics.p2);
 	this.body.gravity.y = 300;
 	this.body.collideWorldBounds = true;
 	// needs enemy type
-
-	game.physics.enable(this);
 
 	//enemy bullets
 	this.bulletE = game.add.group();
 	//this.bulletE.scale.setTo(4);
 	this.bulletE.enableBody = true;
-	this.bulletE.physicsBodyType = Phaser.Physics.ARCADE;
+	this.bulletE.physicsBodyType = Phaser.Physics.p2;
 	this.bulletE.createMultiple(200, 'star');
 	this.bulletE.checkWorldBounds = true;
 	this.bulletE.outOfBoundsKill = true;
