@@ -84,10 +84,10 @@ play.prototype = {
 		// wrapGround.width = game.width;
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
 
-		game.physics.startSystem(Phaser.Physics.p2);
+		game.physics.startSystem(Phaser.Physics.P2JS);
 
 		// player
-		player = new Player(game, 'player', null, 'poo');
+		player = new P2layer(game, 'player', null, 'poo');
 		game.add.existing(player);
 
 		//camera
