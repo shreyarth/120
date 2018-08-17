@@ -11,8 +11,9 @@ function Enemy(game, x, y, key, frame) {
 	this.anchor.set(0.5);
 	// this.scale.y = 0.1;
 	// physics crap
-	game.physics.enable(this, Phaser.Physics.p2);
-	this.body.gravity.y = 300;
+	game.physics.p2.enable(this);
+	this.body.fixedRotation = true;
+	this.game.physics.p2.gravity.y = 300;
 	this.body.collideWorldBounds = true;
 	// needs enemy type
 
