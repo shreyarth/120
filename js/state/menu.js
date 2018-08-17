@@ -134,3 +134,4 @@ menu.prototype = {
 		game.debug.text('Arrow keys to select, SPACECBAR to select', 32, 32, 'yellow');
 	}
 }
+
