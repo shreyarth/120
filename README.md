@@ -1,6 +1,6 @@
-# 120----FINAL PROJECT
+# Runs
 
-## Title Goes Here:
+## 120----FINAL PROJECT
 
 ## Description:
 This is a repository for the final project for 120 classes. The game is using phaser framework and written in javascript.
@@ -12,7 +12,7 @@ you use too much, your internals will explode. This is a mish-mash of frustratio
 
 ## Contributors:
   **Artist**: Anthony Medina  
-  **Lead Programmer**: Haneul Jung  
+  **Lead Programmer**: Haneul Jung   
   **Programmers**: Sung Baek, Shreyarth Bhatt  
   
 ## Source:

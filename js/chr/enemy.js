@@ -135,4 +135,3 @@ Enemy.prototype.turkey = function(){
 	let turk = game.add.audio('turkey', 1);
 	turk.allowMultiple = false;
 	turk.play();
-}
