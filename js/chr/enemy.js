@@ -12,7 +12,8 @@ function Enemy(game, x, y, key, frame) {
 	// this.scale.y = 0.1;
 	// physics crap
 	game.physics.p2.enable(this);
-	this.body.gravity.y = 300;
+	this.body.fixedRotation = true;
+	this.game.physics.p2.gravity.y = 300;
 	this.body.collideWorldBounds = true;
 	// needs enemy type
 
