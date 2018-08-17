@@ -15,6 +15,7 @@ play.prototype = {
 		// Asset implementaion
 		game.world.setBounds( 0, 0, 5000, 1200);
 		console.log("play state to check implementation");
+		game.physics.startSystem(Phaser.Physics.P2jS);
 		
 		var background = game.add.sprite(0, 0, 'porter');
 		//background.scale.setTo(5,2);
