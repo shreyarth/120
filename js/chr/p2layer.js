@@ -36,4 +36,5 @@ P2layer.prototype.update = function() {
     	//this.body.data.gravityScale = 5;
 
     }
+
 }

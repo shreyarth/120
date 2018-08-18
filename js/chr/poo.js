@@ -33,4 +33,5 @@ Poo.prototype.update = function() {
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 			fire();
 	}
+
 }

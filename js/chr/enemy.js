@@ -20,9 +20,8 @@ function Enemy(game, x, y, key, frame) {
 	//enemy bullets
 	this.bulletE = game.add.group();
 	//this.bulletE.scale.setTo(4);
-	game.physics.p2.enable(this.bulletE);
-	//this.bulletE.enableBody = true;
-	//this.bulletE.physicsBodyType = Phaser.Physics.p2;
+	this.bulletE.enableBody = true;
+	this.bulletE.physicsBodyType = Phaser.Physics.p2;
 	this.bulletE.createMultiple(200, 'star');
 	this.bulletE.checkWorldBounds = true;
 	this.bulletE.outOfBoundsKill = true;
@@ -102,13 +101,13 @@ Enemy.prototype.fire = function() {
 			if(this.body.x < player.x+300){
 				
 				star.reset(this.x + 10, this.y - 10);
-				//star.body.velocity.x = -150;
+				star.body.velocity.x = -150;
 			}
 				
 	}else{
 		if(this.body.x > player.x-300){
 		star.reset(this.x - 10, this.y - 10);
-		//star.body.velocity.x = 150;				
+		star.body.velocity.x = 150;				
 		}
 	}
 }

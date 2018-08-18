@@ -83,3 +83,4 @@ setting.prototype = {
 		}
 	}
 }
+

@@ -130,4 +130,5 @@ play2.prototype = {
 		game.physics.arcade.moveToObject(en, player);
 	}
 	// Char control is implemented in player.js
+
 }
