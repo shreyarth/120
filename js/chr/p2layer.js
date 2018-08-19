@@ -2,6 +2,8 @@ function P2layer(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	Phaser.Sprite.call(this, game, 30, 1100, key);
+	// Animation settings
+	this.animations.add('jump', [1, 2, 3, 4, 3, 2], 15);
 
 	game.physics.p2.enable(this, true);
 
@@ -29,12 +31,14 @@ P2layer.prototype.update = function() {
 	if (move.up.justDown)
     {
     	this.body.velocity.y = -150;
+		this.animations.play('jump');
     	//this.body.moveUp(5000);
     }
     else{
     	//game.physics.p2.gravity.y = 1000;
     	//this.body.data.gravityScale = 5;
-
+		if (this.animations.isFinished)
+			this.animations.stop(null, true);
     }
 
 }

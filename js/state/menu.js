@@ -9,7 +9,8 @@ var menu = function() {
 menu.prototype = {
 	preload: function() {
 		game.load.path = 'assets/';
-		game.load.image('player', 'img/player.png');
+		//game.load.image('player', 'img/player.png');
+		game.load.spritesheet('player', 'img/player_spritesheet.png', 315, 405);
 		game.load.image('poo', 'img/poo.png');
 		game.load.image('platform', 'img/platform.png');
 		game.load.image('star', 'img/star.png');
