@@ -101,6 +101,7 @@ play.prototype = {
 		// enemy
 		this.enemy = game.add.group();
 		this.enemy.enableBody = true;
+		this.enemy.physicsBodyType = Phaser.Physics.P2JS;
 		
 		for(var i = 0; i < 30; ++i){
 			let en = new Enemy(game, game.rnd.integerInRange(600,4900),

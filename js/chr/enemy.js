@@ -6,10 +6,9 @@ function Enemy(game, x, y, key, frame) {
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
-	// this.scale.x = 0.1;
 	this.scale.setTo(0.1);
 	this.anchor.set(0.5);
-	// this.scale.y = 0.1;
+
 	// physics crap
 	game.physics.p2.enable(this);
 	this.body.fixedRotation = true;
@@ -19,9 +18,8 @@ function Enemy(game, x, y, key, frame) {
 
 	//enemy bullets
 	this.bulletE = game.add.group();
-	//this.bulletE.scale.setTo(4);
 	this.bulletE.enableBody = true;
-	this.bulletE.physicsBodyType = Phaser.Physics.p2;
+	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
 	this.bulletE.createMultiple(200, 'star');
 	this.bulletE.checkWorldBounds = true;
 	this.bulletE.outOfBoundsKill = true;
@@ -39,8 +37,8 @@ Enemy.prototype.constructor = Enemy;
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
 	if (!player.isInvincible) {
-		game.physics.arcade.collide(this, player, this.collideBody, null, this);
-		game.physics.arcade.collide(this.bulletE, player, this.collideBullet, null, this);
+		//game.physics.p2.collide(this, player, this.collideBody, null, this);
+		//game.physics.p2.collide(this.bulletE, player, this.collideBullet, null, this);
 	}
 	game.physics.arcade.collide(this, player.bullets, this.death, null, this);
 	// trying to get enemy to move towards player when its on a platform
