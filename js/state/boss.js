@@ -7,7 +7,7 @@ var boss = function() {
 	this.ui;
 }
 
-play.prototype = {
+boss.prototype = {
 	preload: function() {
 		
 	},
