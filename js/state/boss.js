@@ -13,7 +13,7 @@ boss.prototype = {
 	},
 	create: function() {
 		// Asset implementaion
-		game.world.setBounds( 0, 0, 800, 800);
+		game.world.setBounds( 0, 0, 1000, 800);
 		console.log("play state to check implementation");
 		game.physics.startSystem(Phaser.Physics.P2jS);
 		
@@ -31,54 +31,8 @@ boss.prototype = {
 		ground.scale.setTo(game.world.width, 1 );
 		ground.body.immovable = true;
 		
-		//platforms in order, left to right
 		
-		let platforms = this.platform.create(400, 890, 'bus');
-		platforms.body.immovable = true;
-		platforms.scale.setTo(1,1);
-
-		platforms = this.platform.create(1000, 1040, 'rcar');
-		platforms.body.immovable = true;
-
-		platforms.scale.setTo(0.5,0.5);
-
-		platforms = this.platform.create(2900, 700, 'bus');
-		platforms.body.immovable = true;
-		platforms.anchor.setTo(0.5, 0.5);
-		platforms.angle = 180;
-		platforms.scale.setTo(1,1);
-
-		platforms = this.platform.create(2400, 1040, 'ycar');
-		platforms.body.immovable = true;
-		platforms.scale.setTo(0.5,0.5);
-		platforms = this.platform.create(2960, 1040, 'rcar');
-		platforms.body.immovable = true;
-		platforms.scale.setTo(0.5,0.5);
-
-		platforms = this.platform.create(1600, 1040, 'ycar');
-		platforms.body.immovable = true;
-		platforms.scale.setTo(0.5,0.5);
-
-		//double verticle bus
-		platforms = this.platform.create(1850, 630, 'busObs');
-		platforms.body.immovable = true;
-		platforms.scale.setTo(0.35,0.35);
-
-
-		//stack of car and bus
-		platforms = this.platform.create(3300, 670, 'carObs');
-		platforms.body.immovable = true;
-		platforms.scale.setTo(0.4,0.4);
-
-		//crashed cars and bus in buildings
-		platforms = this.platform.create(1680, 420, 'wreckC');
-		platforms.body.immovable = true;
-		platforms.scale.setTo(0.6,0.6); 
-
-		platforms = this.platform.create(2530, 300, 'wreckB');
-		platforms.body.immovable = true;
-		platforms.scale.setTo(1,1);
-
+		
 		// the background wrap
 		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
 		// wrapGround.scale.setTo(2,0.8);
@@ -94,17 +48,28 @@ boss.prototype = {
 		//camera
 		game.camera.follow(player);
 
+		//boss
+		let bosseye = game.add.sprite(400, 570, 'star');
+		bosseye.anchor.setTo(0.5,0.5);
+
+		let bosseye2 = game.add.sprite(420, 610, 'star');
+		bosseye2.anchor.setTo(0.5,0.5);
+
+		let bossmouth = game.add.sprite(410, 690, 'star');
+		bossmouth.scale.setTo(2,2);
+		bossmouth.anchor.setTo(0.5, 0.5);
+
 
 		// enemy
-		this.enemy = game.add.group();
-		this.enemy.enableBody = true;
+		// this.enemy = game.add.group();
+		// this.enemy.enableBody = true;
 		
-		for(var i = 0; i < 30; ++i){
-			let en = new Enemy(game, game.rnd.integerInRange(600,4900),
-				game.rnd.integerInRange(200,1000), 'enemy');
-			game.add.existing(en);
-			this.enemy.add(en);
-		}
+		// for(var i = 0; i < 30; ++i){
+		// 	let en = new Enemy(game, game.rnd.integerInRange(600,4900),
+		// 		game.rnd.integerInRange(200,1000), 'enemy');
+		// 	game.add.existing(en);
+		// 	this.enemy.add(en);
+		// }
 
 		//test for 2nd enemy on screen
 		// en = new Enemy(game, 30, 1000, 'enemy');
@@ -112,12 +77,12 @@ boss.prototype = {
 		// this.enemy.add(en);
 
 		//test for flying enemy
-		for(var i = 0; i < 10; ++i){
-			en = new Enemy(game, game.rnd.integerInRange(1000,4800),
-			 400, 'enemy');
-			game.add.existing(en);
-			this.enemy.add(en);
-		}
+		// for(var i = 0; i < 10; ++i){
+		// 	en = new Enemy(game, game.rnd.integerInRange(1000,4800),
+		// 	 400, 'enemy');
+		// 	game.add.existing(en);
+		// 	this.enemy.add(en);
+		// }
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
@@ -137,11 +102,6 @@ boss.prototype = {
 		this.bullets.checkWorldBounds = true;
 		this.bullets.outOfBoundsKill = true;
 
-		//sign for end of level
-		let sign = this.platform.create(4800, 900, 'sign');
-		sign.body.immovable = true;
-		sign.scale.setTo(1,1);
-
 		//pooCount = 100;
 
 		// Set camera to platformer follow up
@@ -150,6 +110,7 @@ boss.prototype = {
 
 		// Fix UI to the camera
 		this.ui = this.pooMeter(player.pooCount);
+		//this.ui = this.bossHealth(boss.hpCount);
 	},
 	pooMeter: function(pooNum) {
 		let obj = null;
@@ -168,39 +129,32 @@ boss.prototype = {
 
 		return obj;
 	},
+	// bossHealth: funtion(bosshp){
+	// 	let obje = null;
+	// 	//boss health bar
+	// 	let b = game.add.graphics();
+	// 	b.beginFill(0x492008);
+	// 	b.drawRect(32, 32, pooNum * 5, 32);	// Starting point, width, height
+	// 	b.endFill();
+
+	// 	obj = game.add.sprite(700, 500, g.generateTexture());
+	// 	obj.fixedToCamera = true;
+	// 	obj.cameraOffset.setTo(32, 16);
+	// 	g.destroy();
+
+	// 	return obje;
+	// },
 	update: function() {
 		// Update function
 		// player and enemies collision with platforms
 		game.physics.arcade.collide(player, this.platform);
 		game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
 
-		// if(player.body.velocity.x == 0){
-		// 	this.heller.tilePosition.x = this.heller.tilePosition.x;
-		// }else if(player.body.velocity.x > 0){
-		// 	this.heller.tilePosition.x -= 4;
-		// }else{
-		// 	this.heller.tilePosition.x += 4;
-		// }
-		
-		// enemy movement towards player
-		// if(game.physics.arcade.collide(enemy, platform)){
-		// 	game.physics.arcade.moveToObject(enemy, player);
-		// }
-		//game.physics.arcade.moveToObject(this.en3, player);
-
 		// UI update
 		this.ui.destroy();
 		this.ui = this.pooMeter(player.pooCount);
 
-		//shooting
-		/*
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
-			player.fire();
-		}*/
-		//for end of level
-		if(player.x +30 > game.world.width){
-			game.state.start('end');
-		}
+		
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
