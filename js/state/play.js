@@ -15,7 +15,7 @@ play.prototype = {
 		// Asset implementaion
 		game.world.setBounds( 0, 0, 5000, 1200);
 		console.log("play state to check implementation");
-		game.physics.startSystem(Phaser.Physics.P2jS);
+		game.physics.startSystem(Phaser.Physics.P2JS);
 		
 		var background = game.add.sprite(0, 0, 'porter');
 		//background.scale.setTo(5,2);
@@ -24,59 +24,61 @@ play.prototype = {
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
 		// this.heller.height = 800;
 
+
 		//ground
 		this.platform = game.add.group();
+		this.platform.physicsBodyType = Phaser.Physics.P2JS;
 		this.platform.enableBody = true;
 		let ground = this.platform.create(0, game.world.height -32, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
-		ground.body.immovable = true;
+		ground.body.kinematic = true;
 		
 		//platforms in order, left to right
 		
 		let platforms = this.platform.create(400, 890, 'bus');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 		platforms.scale.setTo(1,1);
 
 		platforms = this.platform.create(1000, 1040, 'rcar');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 
 		platforms.scale.setTo(0.5,0.5);
 
 		platforms = this.platform.create(2900, 700, 'bus');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 		platforms.anchor.setTo(0.5, 0.5);
 		platforms.angle = 180;
 		platforms.scale.setTo(1,1);
 
 		platforms = this.platform.create(2400, 1040, 'ycar');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 		platforms.scale.setTo(0.5,0.5);
 		platforms = this.platform.create(2960, 1040, 'rcar');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 		platforms.scale.setTo(0.5,0.5);
 
 		platforms = this.platform.create(1600, 1040, 'ycar');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 		platforms.scale.setTo(0.5,0.5);
 
 		//double verticle bus
 		platforms = this.platform.create(1850, 630, 'busObs');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 		platforms.scale.setTo(0.35,0.35);
 
 
 		//stack of car and bus
 		platforms = this.platform.create(3300, 670, 'carObs');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 		platforms.scale.setTo(0.4,0.4);
 
 		//crashed cars and bus in buildings
 		platforms = this.platform.create(1680, 420, 'wreckC');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 		platforms.scale.setTo(0.6,0.6); 
 
 		platforms = this.platform.create(2530, 300, 'wreckB');
-		platforms.body.immovable = true;
+		platforms.body.kinematic = true;
 		platforms.scale.setTo(1,1);
 
 		// the background wrap
@@ -92,7 +94,8 @@ play.prototype = {
 		game.add.existing(player);
 
 		//camera
-		game.camera.follow(player);
+		// game.camera.follow(player);
+		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER);
 
 
 		// enemy
@@ -119,23 +122,23 @@ play.prototype = {
 			this.enemy.add(en);
 		}
 
-		this.bullets = game.add.group();
-		this.bullets.enableBody = true;
-		this.bullets.physicsBodyType = Phaser.Physics.p2;
-		//this.bullets.createMultiple(200, 'star');
-		//bullets.setAll('checkWorldBounds', true);
-		//bullets.callAll('events.onOutOfBounds.add', 'events.outOfBounds', resetstar);
-		this.bullets.checkWorldBounds = true;
-		this.bullets.outOfBoundsKill = true;
+		// this.bullets = game.add.group();
+		// this.bullets.enableBody = true;
+		// this.bullets.physicsBodyType = Phaser.Physics.p2;
+		// //this.bullets.createMultiple(200, 'star');
+		// //bullets.setAll('checkWorldBounds', true);
+		// //bullets.callAll('events.onOutOfBounds.add', 'events.outOfBounds', resetstar);
+		// this.bullets.checkWorldBounds = true;
+		// this.bullets.outOfBoundsKill = true;
 		//bullets.gravity = 300;
 
 		//enemies bullets
 		this.bulletE = game.add.group();
 		this.bulletE.enableBody = true;
-		this.bullets.physicsBodyType = Phaser.Physics.p2;
-		this.bullets.createMultiple(200, 'star');
-		this.bullets.checkWorldBounds = true;
-		this.bullets.outOfBoundsKill = true;
+		this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
+		this.bulletE.createMultiple(200, 'star');
+		this.bulletE.checkWorldBounds = true;
+		this.bulletE.outOfBoundsKill = true;
 
 		//sign for end of level
 		let sign = this.platform.create(4800, 900, 'sign');
@@ -171,8 +174,9 @@ play.prototype = {
 	update: function() {
 		// Update function
 		// player and enemies collision with platforms
-		game.physics.arcade.collide(player, this.platform);
-		game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
+		// game.physics.arcade.collide(player, this.platform);
+		// game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
+		// player.body.collides(player, this.platform);
 
 		// if(player.body.velocity.x == 0){
 		// 	this.heller.tilePosition.x = this.heller.tilePosition.x;

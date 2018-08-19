@@ -21,7 +21,7 @@ function P2layer(game, key, frame, bulletKey) {
 	this.bullets = game.add.group();
 	//this.bullets.scale.setTo(0.1);
 	this.bullets.enableBody = true;
-	this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+	this.bullets.physicsBodyType = Phaser.Physics.P2JS;
 	this.bullets.createMultiple(300, bulletKey);
 	this.bullets.checkWorldBounds = true;
 	this.bullets.outOfBoundsKill = true;
@@ -80,9 +80,9 @@ P2layer.prototype.fire = function() {
 	let star = this.bullets.getFirstExists(false);
 	if(star){
 			star.scale.setTo(0.1,0.1);
-		game.physics.p2.enable(this, Phaser.Physics.P2JS);
+		game.physics.p2.enable(star);
 		if (this.alive) {
-			star.body.bounce.y = 0.2;
+			// star.body.bounce.y = 0.2;
 			star.body.gravity.y = 90;
 			star.reset(player.x + 5, player.y + 20);
 			star.body.velocity.y = 150;
