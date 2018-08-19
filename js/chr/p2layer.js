@@ -40,6 +40,19 @@ P2layer.prototype.update = function() {
 	else if(move.right.isDown){
 		this.body.velocity.x = 150;
 	}
+	else {
+		// Decceleration
+		if (this.body.velocity.x > 0) {
+			this.body.velocity.x -= 3;
+			if (this.body.velocity.x < 0)
+				this.body.velocity.x = 0;
+		}
+		else if (this.body.velocity.x > 0) {
+			this.body.velocity.x += 3;
+			if (this.body.velocity.x > 0)
+				this.body.velocity.x = 0;
+		}
+	}
 	if (move.up.justDown)
     {
     	this.body.velocity.y = -150;
