@@ -101,6 +101,7 @@ menu.prototype = {
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 			switch (this.mCount%3) {
 				case 0:
+					//game.state.start('boss');
 					game.state.start('play');
 					this.music.stop();
 					break;
