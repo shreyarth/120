@@ -12,6 +12,8 @@ var player;
 //var enemy;
 
 // State management
+game.state.add('boot', boot);
+game.state.add('load', load);
 game.state.add('menu', menu);
 game.state.add('setting', setting);
 game.state.add('play', play);
@@ -21,5 +23,5 @@ game.state.add('end', end);
 
 // Start from menu screen
 // Might need separate loading screen in case asset loading takes time
-game.state.start('menu');
+game.state.start('boot');
 
