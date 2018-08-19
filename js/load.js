@@ -10,51 +10,34 @@ load.prototype = {
 
 		// Load all the assets
 		// Graphic
-		game.load.path = 'assets/img/';
-		// UI
-		game.load.image('feed', 'feed_btn.png');
-		game.load.image('pet', 'pet_btn.png');
-		game.load.image('config', 'config_btn.png');
-		// Sprites
-		game.load.spritesheet('egg', 'egg.png', 15, 14);
-		game.load.spritesheet('bb', 'bb.png', 15, 14);
-		game.load.spritesheet('furry', 'furry.png', 20, 19);
-		game.load.spritesheet('newt', 'newt.png', 20, 19);
-		game.load.spritesheet('fiery', 'fiery.png', 20, 19);
-		game.load.spritesheet('feet', 'feet.png', 35, 19);
-		game.load.spritesheet('wing', 'wing.png', 35, 19);
-		game.load.spritesheet('spark', 'spark.png', 35, 19);
-		game.load.image('rip', 'rip.png');
-		game.load.image('pix', 'fragment.png');
-		// Sound
-		game.load.path = 'assets/audio/';
+		game.load.path = 'assets/';
+		game.load.spritesheet('player', 'img/player_spritesheet.png', 315, 405);
+		game.load.image('poo', 'img/poo.png');
+		game.load.image('platform', 'img/platform.png');
+		game.load.image('star', 'img/star.png');
+		game.load.image('enemy', 'img/enemy.png');
+		game.load.image('turd', 'img/turd.png');
+		game.load.image('porter', 'img/porter.png');
+		game.load.image('heller', 'img/HellerDr.png');
+		game.load.image('bcar', 'img/blackCar.png');
+		game.load.image('ycar', 'img/yellowCar.png');
+		game.load.image('poosplat', 'img/shit.png');
+		game.load.image('bloodsplat', 'img/blood.png');
+		game.load.image('bus', 'img/bus.png');
+		game.load.image('busObs', 'img/busObs.png');
+		game.load.image('carObs', 'img/carObs.png');
+		game.load.image('rcar', 'img/redCar.png');
+		game.load.image('sign', 'img/sign.png');
+		game.load.image('wreckC', 'img/wreckedcar.png');
+		game.load.image('wreckB', 'img/wreckedbus.png');
+
+		//sounds
+		game.load.audio('fart', 'audio/fart.mp3');
+		game.load.audio('rasp', 'audio/Rasp.mp3');
+		game.load.audio('turkey', 'audio/turkey.mp3');
+		game.load.audio('menumusic', 'audio/blocks.wav');
 	},
 	create: function() {
-		if (localStorage.getItem('gochiData') != null) {
-			gochiData = JSON.parse(localStorage.getItem('gochiData'));
-			console.log("Retrieving prev data");
-			console.log(gochiData);
-		}
-		else {
-			console.log("No previous data found. Creating new data.");
-			let curr = new Date();
-			gochiData = {
-				lv: 0,
-				growth: 0,
-				health: 100,
-				color: 0xffffff,
-				init_time: curr.getTime(),
-				hunger: 100,
-				love: 100,
-				env: 0,
-				temp: 20,
-				evo_gene: []
-			}
-			localStorage.setItem('gochiData', JSON.stringify(gochiData));
-		}
-
-		critterInit();
-		
 		game.state.start('menu');
 	}
 }
