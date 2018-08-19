@@ -103,7 +103,7 @@ play.prototype = {
 		this.enemy.enableBody = true;
 		this.enemy.physicsBodyType = Phaser.Physics.P2JS;
 		
-		for(var i = 0; i < 30; ++i){
+		for(var i = 0; i < 10; ++i){
 			let en = new Enemy(game, game.rnd.integerInRange(600,4900),
 				game.rnd.integerInRange(200,1000), 'enemy');
 			game.add.existing(en);
@@ -116,7 +116,7 @@ play.prototype = {
 		// this.enemy.add(en);
 
 		//test for flying enemy
-		for(var i = 0; i < 10; ++i){
+		for(var i = 0; i < 5; ++i){
 			en = new Enemy(game, game.rnd.integerInRange(1000,4800),
 			 400, 'enemy');
 			game.add.existing(en);
