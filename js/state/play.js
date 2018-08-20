@@ -162,12 +162,12 @@ play.prototype = {
 		//bullets.gravity = 300;
 
 		//enemies bullets
-		this.bulletE = game.add.group();
-		this.bulletE.enableBody = true;
-		this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
-		this.bulletE.createMultiple(200, 'star');
-		this.bulletE.checkWorldBounds = true;
-		this.bulletE.outOfBoundsKill = true;
+		// this.bulletE = game.add.group();
+		// this.bulletE.enableBody = true;
+		// this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
+		// this.bulletE.createMultiple(200, 'star');
+		// this.bulletE.checkWorldBounds = true;
+		// this.bulletE.outOfBoundsKill = true;
 
 		//sign for end of level
 		let sign = this.platform.create(4800, 900, 'sign');
