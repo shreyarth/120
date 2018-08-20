@@ -5,6 +5,8 @@ var play = function() {
 	this.obstacle;
 	this.heller = null;
 	this.ui;
+
+	this.collidePlayer, this.collideEmeny, this.collidePlat;
 }
 
 play.prototype = {
@@ -12,29 +14,32 @@ play.prototype = {
 		
 	},
 	create: function() {
-		// Asset implementaion
-		game.world.setBounds( 0, 0, 5000, 1200);
-		console.log("play state to check implementation");
+		// Setting up game world
+		game.world.setBounds(0, 0, 5000, 1200);
 		game.physics.startSystem(Phaser.Physics.P2JS);
 		
+		// Asset implementaion
 		var background = game.add.sprite(0, 0, 'porter');
-		//background.scale.setTo(5,2);
 		background.width = game.world.width;
 		background.height = game.world.height -32;
-		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
-		// this.heller.height = 800;
+		
+		// Setting up collision groups
+		this.collidePlayer = game.physics.p2.createCollisionGroup();
+		this.collideEnemy = game.physics.p2.createCollisionGroup();
+		this.collidePlat = game.physics.p2.createCollisionGroup();
 
 		//ground
 		this.platform = game.add.group();
 		this.platform.physicsBodyType = Phaser.Physics.P2JS;
 		this.platform.enableBody = true;
-		this.platform.debug = true;
+
 		let ground = this.platform.create(0, game.world.height -32, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
 		ground.body.clearShapes();
 		ground.body.addRectangle(game.world.width, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
 		
 		//platforms in order, left to right
 		
@@ -98,17 +103,22 @@ play.prototype = {
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 
+		this.platform.forEach(function(plat) {
+			plat.body.setCollisionGroup(this.collidePlat);
+			plat.body.collides([this.collidePlayer, this.collideEnemy]);
+		}, this);
+
 		// the background wrap 
 		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
 		// wrapGround.scale.setTo(2,0.8);
 		// wrapGround.width = game.width;
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
 
-		game.physics.startSystem(Phaser.Physics.P2JS);
-
 		// player
 		player = new P2layer(game, 'player', null, 'poo');
 		game.add.existing(player);
+		player.body.setCollisionGroup(this.collidePlayer);
+		player.body.collides([this.collidePlat, this.collideEnemy]);
 
 		// enemy
 		this.enemy = game.add.group();
@@ -120,6 +130,8 @@ play.prototype = {
 				game.rnd.integerInRange(200,1000), 'enemy');
 			game.add.existing(en);
 			this.enemy.add(en);
+			en.body.setCollisionGroup(this.collideEnemy);
+			en.body.collides([this.collidePlat, this.collidePlayer]);
 		}
 
 		//test for 2nd enemy on screen
