@@ -27,6 +27,7 @@ play.prototype = {
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
 		this.collideEnemy = game.physics.p2.createCollisionGroup();
 		this.collidePlat = game.physics.p2.createCollisionGroup();
+		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat]);
 
 		//ground
 		this.platform = game.add.group();
