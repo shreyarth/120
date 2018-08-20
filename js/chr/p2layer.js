@@ -4,7 +4,6 @@ function P2layer(game, key, frame, bulletKey) {
 	Phaser.Sprite.call(this, game, 30, 1100, key);
 	// Animation settings
 	this.animations.add('jump', [1, 2, 3, 4, 3, 2, 0], 15);
-	// this.animations.add('walk', [0], 15);
 
 	game.physics.p2.enable(this, true);
 
@@ -14,6 +13,9 @@ function P2layer(game, key, frame, bulletKey) {
 	this.scale.y = 0.2;
 	this.game.physics.p2.gravity.y = 500;
 	this.body.setRectangle(this.width, this.height);
+	this.direction = 'right';
+	this.isInvincible = false;
+
 	// Character info
 	this.pooCount = 50;
 
@@ -35,9 +37,11 @@ P2layer.prototype.constructor = P2layer;
 P2layer.prototype.update = function() {
 	if(move.left.isDown){
 		this.body.velocity.x = -150;
+		this.direction = 'left';
 	}
 	else if(move.right.isDown){
 		this.body.velocity.x = 150;
+		this.direction = 'right';
 	}
 	else {
 		// Decceleration
@@ -56,7 +60,7 @@ P2layer.prototype.update = function() {
     {
     	this.body.velocity.y = -150;
 		this.jump();
-		this.fire();
+		this.fire(true);
     	//this.body.moveUp(5000);
     }
     else{
@@ -64,6 +68,9 @@ P2layer.prototype.update = function() {
     	//this.body.data.gravityScale = 5;
 		
     }
+    // Attack move
+	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
+		this.fire(false);
 
 }
 
@@ -80,21 +87,24 @@ P2layer.prototype.fire = function() {
 	if(star){
 			star.scale.setTo(0.1,0.1);
 		game.physics.p2.enable(star);
-		if (this.alive) {
+		if (this.jump) {
+			// star.body.restitution.y = 0.2;
 			star.body.gravity.y = 90;
 			star.reset(player.x + 5, player.y + 20);
 			star.body.velocity.y = 150;
 			star.angle = 90;
 			star.scale.x = 0.15;
+			// game.camera.shake(0.005, 500);
 		}
 		else {
 
+			//star.body.bounce.y = 1;
 			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
 			// Need to tweak numbers for starting point for shooting
 			if (this.direction == 'right') {
 				star.reset(player.x + 10, player.y - 10);
-				star.body.velocity.x = 250;
+				star.body.velocity.x = 2500;
 				//recoil to player from shooting
 				this.body.velocity.x = -70;
 			}
