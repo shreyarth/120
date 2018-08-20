@@ -40,13 +40,15 @@ play.prototype = {
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 		platforms.scale.setTo(1,1);
-		platforms.body.setRectangle(this.width, this.height);
+		// platforms.body.setRectangle(this.width, this.height);
 
 		platforms = this.platform.create(1000, 1040, 'rcar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.scale.setTo(0.5,0.5);
-		platforms.body.setRectangle(this.width, this.height);
+		// platforms.scale.setTo(0.5,0.5); 
+		// platforms.body.setRectangle(this.width + 64, this.height + 32);
+		platforms.body.clearShapes();
+		platforms.body.loadPolygon('yellocar', 'yellowCar');
 
 		platforms = this.platform.create(2900, 700, 'bus');
 		platforms.body.kinematic = true;
@@ -59,19 +61,25 @@ play.prototype = {
 		platforms = this.platform.create(2400, 1040, 'ycar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.scale.setTo(0.5,0.5);
+		// platforms.scale.setTo(0.5,0.5);
+		platforms.body.clearShapes();
+		platforms.body.loadPolygon('yellocar', 'yellowCar');
 
 		platforms = this.platform.create(2960, 1040, 'rcar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.scale.setTo(0.5,0.5);
-		platforms.body.setRectangle(this.width, this.height);
+		// platforms.scale.setTo(0.5,0.5);
+		platforms.body.clearShapes();
+		// platforms.body.setRectangle(this.width, this.height);
+		platforms.body.loadPolygon('yellocar', 'yellowCar');
 
 		platforms = this.platform.create(1600, 1040, 'ycar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.scale.setTo(0.5,0.5);
-		platforms.body.setRectangle(this.width, this.height);
+		// platforms.scale.setTo(0.5,0.5);
+		platforms.body.clearShapes();
+		// platforms.body.setRectangle(this.width, this.height);
+		platforms.body.loadPolygon('yellocar', 'yellowCar');
 
 		//double verticle bus
 		platforms = this.platform.create(1850, 630, 'busObs');

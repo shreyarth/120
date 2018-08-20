@@ -1,0 +1,11 @@
+{ 
+    
+    "yellowCar": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   260, 68  ,  254, 102  ,  20, 108  ,  1, 78  ,  119, 1  ,  204, -1  ]
+        }
+    ]
+}
