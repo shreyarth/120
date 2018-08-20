@@ -31,6 +31,8 @@ play.prototype = {
 		this.platform.debug = true;
 		let ground = this.platform.create(0, game.world.height -32, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
+		ground.body.clearShapes();
+		ground.body.addRectangle(game.world.width, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		
@@ -164,18 +166,6 @@ play.prototype = {
 	},
 	update: function() {
 		// Update function
-		// player and enemies collision with platforms
-		// game.physics.arcade.collide(player, this.platform);
-		// game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
-		// player.body.collides(player, this.platform);
-
-		// if(player.body.velocity.x == 0){
-		// 	this.heller.tilePosition.x = this.heller.tilePosition.x;
-		// }else if(player.body.velocity.x > 0){
-		// 	this.heller.tilePosition.x -= 4;
-		// }else{
-		// 	this.heller.tilePosition.x += 4;
-		// }
 		
 		// enemy movement towards player
 		// if(game.physics.arcade.collide(enemy, platform)){
@@ -199,13 +189,6 @@ play.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
-	},
-
-	// render : function() {
-	// 	// game.debug.physicsGroup(this.platform);
-	// 	this.platform.forEachAlive(this.renderGroup, this);
-	// },
-	// renderGroup: function() {    game.debug.body(this.platforms);}
-	
+	}
 	// Char control is implemented in player.js
 }
