@@ -81,14 +81,17 @@ P2layer.prototype.fire = function() {
 			star.scale.setTo(0.1,0.1);
 		game.physics.p2.enable(star);
 		if (this.alive) {
+			// star.body.bounce.y = 0.2;
 			star.body.gravity.y = 90;
 			star.reset(player.x + 5, player.y + 20);
 			star.body.velocity.y = 150;
 			star.angle = 90;
 			star.scale.x = 0.15;
+			// game.camera.shake(0.005, 500);
 		}
 		else {
 
+			//star.body.bounce.y = 1;
 			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
 			// Need to tweak numbers for starting point for shooting
