@@ -29,6 +29,8 @@ play.prototype = {
 		// Collision Group
 		this.collsionPlayer = game.physics.p2.createCollisionGroup();
 		this.collsionEnemy = game.physics.p2.createCollisionGroup();
+		// reconfigure
+		game.physics.p2.updateBoundsCollisionGroup();
 
 		//ground
 		this.platform = game.add.group();
@@ -126,11 +128,6 @@ play.prototype = {
 		player = new P2layer(game, 'player', null, 'poo');
 		game.add.existing(player);
 
-		//camera
-		// game.camera.follow(player);
-		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER);
-
-
 		// enemy
 		this.enemy = game.add.group();
 		this.enemy.enableBody = true;
@@ -140,6 +137,8 @@ play.prototype = {
 			let en = new Enemy(game, game.rnd.integerInRange(600,4900),
 				game.rnd.integerInRange(200,1000), 'enemy');
 			game.add.existing(en);
+			// Collision group setting
+			en.body.setCollisionGroup(this.collisionPlayer);
 			this.enemy.add(en);
 		}
 
@@ -156,34 +155,14 @@ play.prototype = {
 			this.enemy.add(en);
 		}
 
-		// this.bullets = game.add.group();
-		// this.bullets.enableBody = true;
-		// this.bullets.physicsBodyType = Phaser.Physics.p2;
-		// //this.bullets.createMultiple(200, 'star');
-		// //bullets.setAll('checkWorldBounds', true);
-		// //bullets.callAll('events.onOutOfBounds.add', 'events.outOfBounds', resetstar);
-		// this.bullets.checkWorldBounds = true;
-		// this.bullets.outOfBoundsKill = true;
-		//bullets.gravity = 300;
-
-		//enemies bullets
-		this.bulletE = game.add.group();
-		this.bulletE.enableBody = true;
-		this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
-		this.bulletE.createMultiple(200, 'star');
-		this.bulletE.checkWorldBounds = true;
-		this.bulletE.outOfBoundsKill = true;
-
 		//sign for end of level
 		let sign = this.platform.create(4800, 900, 'sign');
 		sign.body.immovable = true;
 		sign.scale.setTo(1,1);
 
-		//pooCount = 100;
-
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
-		// game.camera.follow('player', FOLLOW_PLATFORMER, 0.25, 0.25);
+		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
 		this.ui = this.pooMeter(player.pooCount);
