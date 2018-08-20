@@ -32,6 +32,8 @@ play.prototype = {
 		this.platform.debug = true;
 		let ground = this.platform.create(0, game.world.height -32, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
+		ground.body.clearShapes();
+		ground.body.addRectangle(game.world.width, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		
@@ -139,34 +141,10 @@ play.prototype = {
 			this.enemy.add(en);
 		}
 
-		// this.bullets = game.add.group();
-		// this.bullets.enableBody = true;
-		// this.bullets.physicsBodyType = Phaser.Physics.p2;
-		// //this.bullets.createMultiple(200, 'star');
-		// //bullets.setAll('checkWorldBounds', true);
-		// //bullets.callAll('events.onOutOfBounds.add', 'events.outOfBounds', resetstar);
-		// this.bullets.checkWorldBounds = true;
-		// this.bullets.outOfBoundsKill = true;
-		//bullets.gravity = 300;
-
-		//enemies bullets
-		// this.bulletE = game.add.group();
-		// this.bulletE.enableBody = true;
-		// this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
-		// this.bulletE.createMultiple(200, 'star');
-		// this.bulletE.checkWorldBounds = true;
-		// this.bulletE.outOfBoundsKill = true;
-
 		//sign for end of level
 		let sign = this.platform.create(4800, 900, 'sign');
 		sign.body.immovable = true;
 		sign.scale.setTo(1,1);
-
-		//pooCount = 100;
-
-		// Set camera to platformer follow up
-		// lerp set for smooth camera movement
-		// game.camera.follow('player', FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
 		this.ui = this.pooMeter(player.pooCount);
@@ -190,18 +168,6 @@ play.prototype = {
 	},
 	update: function() {
 		// Update function
-		// player and enemies collision with platforms
-		// game.physics.arcade.collide(player, this.platform);
-		// game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
-		// player.body.collides(player, this.platform);
-
-		// if(player.body.velocity.x == 0){
-		// 	this.heller.tilePosition.x = this.heller.tilePosition.x;
-		// }else if(player.body.velocity.x > 0){
-		// 	this.heller.tilePosition.x -= 4;
-		// }else{
-		// 	this.heller.tilePosition.x += 4;
-		// }
 		
 		// enemy movement towards player
 		// if(game.physics.arcade.collide(enemy, platform)){
@@ -225,13 +191,6 @@ play.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
-	},
-
-	// render : function() {
-	// 	// game.debug.physicsGroup(this.platform);
-	// 	this.platform.forEachAlive(this.renderGroup, this);
-	// },
-	// renderGroup: function() {    game.debug.body(this.platforms);}
-	
+	}
 	// Char control is implemented in player.js
 }

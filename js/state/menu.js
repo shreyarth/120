@@ -12,13 +12,14 @@ menu.prototype = {
 	},
 	create: function() {
 		// Asset implementaion
+		console.log('In Menu create');
 		game.stage.backgroundColor = bgcolor;
 		if (!this.music || this.music.isPlaying === false) {
 			this.music = game.add.audio('menumusic', 0.5);
 			this.music.play();
 		}
 		
-		let style = {font: 'Helvetica', fontSize: '24px', fill: '#fff'};
+		style = {font: 'Helvetica', fontSize: '24px', fill: '#fff'};
 		let playText = game.add.text(game.world.centerX, game.height*.3,
 		'				To shit or not to shit...\nPush spacebar to continue', style);
 		playText.anchor.setTo(0.5);
@@ -74,7 +75,6 @@ menu.prototype = {
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 			switch (this.mCount%3) {
 				case 0:
-					//game.state.start('boss');
 					game.state.start('play');
 					this.music.stop();
 					break;
