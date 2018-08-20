@@ -1,0 +1,58 @@
+{ 
+    
+    "yellowCar": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   260, 68  ,  254, 102  ,  20, 108  ,  1, 78  ,  119, 1  ,  204, -1  ]
+        }
+    ]
+    , 
+    "wreckedcar": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   101, 5  ,  121, 26  ,  27, 138  ,  0, 112  ,  6, 53  ,  39, 10  ]
+        }
+    ]
+    , 
+    "busObs": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   456, 510  ,  292, 546  ,  239, 484  ,  19, 40  ,  421, 12  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   19, 40  ,  239, 484  ,  239, 519  ,  35, 544  ]
+        }
+    ]
+    , 
+    "carObs": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   661, 210  ,  573, 484  ,  543, 484  ,  87, 448  ,  1, 260  ,  338, 23  ,  586, 11  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   85, 18  ,  338, 23  ,  1, 260  ,  0, 99  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   573, 484  ,  661, 210  ,  661, 396  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   87, 448  ,  400, 475  ,  201, 480  ]
+        }
+    ]
+}

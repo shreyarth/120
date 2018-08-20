@@ -21,8 +21,12 @@ load.prototype = {
 		game.load.image('heller', 'img/HellerDr.png');
 		game.load.image('bcar', 'img/blackCar.png');
 		game.load.image('ycar', 'img/yellowCar.png');
+<<<<<<< HEAD
 		game.load.physics('yellocar', 'img/yellowCar.json', 
 			null, Phaser.Physics.LIME_CORONA_JSON);
+=======
+		game.load.physics('physicsbox', 'img/physicsbox.json', null, Phaser.Physics.LIME_CORONA_JSON);
+>>>>>>> f7909718537d7d1a73783ee222f6e8d475070ab3
 		game.load.image('poosplat', 'img/shit.png');
 		game.load.image('bloodsplat', 'img/blood.png');
 		game.load.image('bus', 'img/bus.png');
