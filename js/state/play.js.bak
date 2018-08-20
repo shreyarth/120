@@ -138,7 +138,7 @@ play.prototype = {
 				game.rnd.integerInRange(200,1000), 'enemy');
 			game.add.existing(en);
 			// Collision group setting
-			en.body.setCollisionGroup(collisionPlayer);
+			en.body.setCollisionGroup(this.collisionPlayer);
 			this.enemy.add(en);
 		}
 

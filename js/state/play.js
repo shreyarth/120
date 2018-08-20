@@ -5,8 +5,6 @@ var play = function() {
 	this.obstacle;
 	this.heller = null;
 	this.ui;
-
-	this.collisionPlayer, this.collisionEnemy;
 }
 
 play.prototype = {
@@ -25,12 +23,6 @@ play.prototype = {
 		background.height = game.world.height -32;
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
 		// this.heller.height = 800;
-		
-		// Collision Group
-		this.collsionPlayer = game.physics.p2.createCollisionGroup();
-		this.collsionEnemy = game.physics.p2.createCollisionGroup();
-		// reconfigure
-		game.physics.p2.updateBoundsCollisionGroup();
 
 		//ground
 		this.platform = game.add.group();
@@ -137,8 +129,6 @@ play.prototype = {
 			let en = new Enemy(game, game.rnd.integerInRange(600,4900),
 				game.rnd.integerInRange(200,1000), 'enemy');
 			game.add.existing(en);
-			// Collision group setting
-			en.body.setCollisionGroup(this.collisionPlayer);
 			this.enemy.add(en);
 		}
 

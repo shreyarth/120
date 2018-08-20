@@ -30,7 +30,7 @@ function Enemy(game, x, y, key, frame) {
 	timer.start();
 
 	// Collision
-	//this.body.collides(player, this.collideBody, this);
+	this.body.collides(player, this.collideBody, this);
 	//this.bulletE.collides(player, this.collideBody, this);
 }
 
