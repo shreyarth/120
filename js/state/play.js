@@ -32,83 +32,71 @@ play.prototype = {
 		let ground = this.platform.create(0, game.world.height -32, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
 		ground.body.kinematic = true;
+		ground.body.debug = true;
 		
 		//platforms in order, left to right
 		
 		let platforms = this.platform.create(400, 890, 'bus');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.scale.setTo(1,1);
-		// platforms.body.setRectangle(this.width, this.height);
 
 		platforms = this.platform.create(1000, 1040, 'rcar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		// platforms.scale.setTo(0.5,0.5); 
-		// platforms.body.setRectangle(this.width + 64, this.height + 32);
 		platforms.body.clearShapes();
-		platforms.body.loadPolygon('yellocar', 'yellowCar');
+		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(2900, 700, 'bus');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.anchor.setTo(0.5, 0.5);
 		platforms.angle = 180;
-		platforms.scale.setTo(1,1);
-		platforms.body.setRectangle(this.width, this.height);
 
 		platforms = this.platform.create(2400, 1040, 'ycar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		// platforms.scale.setTo(0.5,0.5);
 		platforms.body.clearShapes();
-		platforms.body.loadPolygon('yellocar', 'yellowCar');
+		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(2960, 1040, 'rcar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		// platforms.scale.setTo(0.5,0.5);
 		platforms.body.clearShapes();
-		// platforms.body.setRectangle(this.width, this.height);
-		platforms.body.loadPolygon('yellocar', 'yellowCar');
+		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(1600, 1040, 'ycar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		// platforms.scale.setTo(0.5,0.5);
 		platforms.body.clearShapes();
-		// platforms.body.setRectangle(this.width, this.height);
-		platforms.body.loadPolygon('yellocar', 'yellowCar');
+		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		//double verticle bus
 		platforms = this.platform.create(1850, 630, 'busObs');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.scale.setTo(0.35,0.35);
-		platforms.body.setRectangle(this.width, this.height);
+		platforms.body.clearShapes();
+		platforms.body.loadPolygon('physicsbox', 'busObs');
 
 
 		//stack of car and bus
 		platforms = this.platform.create(3300, 670, 'carObs');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.scale.setTo(0.4,0.4);
-		platforms.body.setRectangle(this.width, this.height);
+		platforms.body.clearShapes();
+		platforms.body.loadPolygon('physicsbox', 'carObs');
 
 		//crashed cars and bus in buildings
 		platforms = this.platform.create(1680, 420, 'wreckC');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.scale.setTo(0.6,0.6); 
-		platforms.body.setRectangle(this.width, this.height);
+		platforms.body.clearShapes();
+		platforms.body.loadPolygon('physicsbox', 'wreckedcar');
+
 
 		platforms = this.platform.create(2530, 300, 'wreckB');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
-		platforms.scale.setTo(1,1);
-		platforms.body.setRectangle(this.width, this.height);
 
-		// the background wrap
+		// the background wrap 
 		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
 		// wrapGround.scale.setTo(2,0.8);
 		// wrapGround.width = game.width;
