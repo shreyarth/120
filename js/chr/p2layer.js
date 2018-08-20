@@ -85,7 +85,7 @@ P2layer.prototype.fire = function() {
 			star.body.gravity.y = 90;
 			star.reset(player.x + 5, player.y + 20);
 			star.body.velocity.y = 150;
-			star.angle = 90;
+			star.angle = 180;
 			star.scale.x = 0.15;
 		}
 		else {
