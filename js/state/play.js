@@ -5,6 +5,8 @@ var play = function() {
 	this.obstacle;
 	this.heller = null;
 	this.ui;
+
+	this.collidePlayer, this.collideEnemy;
 }
 
 play.prototype = {
@@ -23,6 +25,10 @@ play.prototype = {
 		background.height = game.world.height -32;
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
 		// this.heller.height = 800;
+
+		// Collision group
+		this.collidePlayer = game.physics.p2.createCollisionGroup();
+		this.collideEnemy = game.physics.p2.createCollisionGroup();
 
 		//ground
 		this.platform = game.add.group();
