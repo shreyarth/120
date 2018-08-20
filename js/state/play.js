@@ -97,7 +97,7 @@ play.prototype = {
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 
-		// the background wrap
+		// the background wrap 
 		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
 		// wrapGround.scale.setTo(2,0.8);
 		// wrapGround.width = game.width;
