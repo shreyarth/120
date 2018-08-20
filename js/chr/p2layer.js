@@ -91,7 +91,7 @@ P2layer.prototype.fire = function() {
 		}
 		else {
 
-			star.body.bounce.y = 1;
+			//star.body.bounce.y = 1;
 			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
 			// Need to tweak numbers for starting point for shooting
