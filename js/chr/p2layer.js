@@ -25,7 +25,6 @@ function P2layer(game, key, frame, bulletKey) {
 	this.bullets.createMultiple(300, bulletKey);
 	this.bullets.checkWorldBounds = true;
 	this.bullets.outOfBoundsKill = true;
-
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor

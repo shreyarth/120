@@ -21,13 +21,17 @@ function Enemy(game, x, y, key, frame) {
 	this.bulletE.enableBody = true;
 	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
 	this.bulletE.createMultiple(200, 'star');
-	this.bulletE.checkWorldBounds = true;
+	//this.bulletE.checkWorldBounds = true;
 	this.bulletE.outOfBoundsKill = true;
 
 	//timer
 	timer = game.time.create(false);
 	timer.loop(1300, this.fire, this);
 	timer.start();
+
+	// Collision
+	//this.body.collides(player, this.collideBody, this);
+	//this.bulletE.collides(player, this.collideBody, this);
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -40,7 +44,7 @@ Enemy.prototype.update = function() {
 		//game.physics.p2.collide(this, player, this.collideBody, null, this);
 		//game.physics.p2.collide(this.bulletE, player, this.collideBullet, null, this);
 	}
-	game.physics.arcade.collide(this, player.bullets, this.death, null, this);
+	//game.physics.arcade.collide(this, player.bullets, this.death, null, this);
 	// trying to get enemy to move towards player when its on a platform
 	// not working, its floating around like a ghost
 	/*
