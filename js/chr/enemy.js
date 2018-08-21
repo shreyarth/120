@@ -77,7 +77,7 @@ Enemy.prototype.fire = function() {
 	let star = this.bulletE.getFirstExists(false);
 	
 	if(star){
-		star.scale.setTo(1,1);
+		star.scale.setTo(0.1,0.1);
 		game.physics.enable(this, Phaser.Physics.ARCADE);
 		if(this.body.x > player.x){
 			if(this.body.x < player.x+300){
