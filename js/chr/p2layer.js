@@ -40,13 +40,13 @@ P2layer.prototype.update = function() {
 		this.body.velocity.x = -150;
 		// Flip sprite
 		if (this.direction == 'right')
-			this.scale.x = 1;
+			this.scale.x = -1;
 		this.direction = 'left';
 	}
 	else if(move.right.isDown){
 		this.body.velocity.x = 150;
 		if (this.direction == 'left')
-			this.scale.x = -1;
+			this.scale.x = 1;
 		this.direction = 'right';
 	}
 	else {
