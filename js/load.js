@@ -21,6 +21,7 @@ load.prototype = {
 		game.load.image('heller', 'img/HellerDr.png');
 		game.load.image('bcar', 'img/blackCar.png');
 		game.load.image('ycar', 'img/yellowCar.png');
+		game.load.image('wcar', 'img/whitecar.png')
 		game.load.physics('physicsbox', 'img/physicsbox.json', null, Phaser.Physics.LIME_CORONA_JSON);
 
 		game.load.image('poosplat', 'img/shit.png');
