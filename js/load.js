@@ -17,11 +17,12 @@ load.prototype = {
 		game.load.image('star', 'img/star.png');
 		game.load.image('enemy', 'img/enemy.png');
 		game.load.image('turd', 'img/turd.png');
-		game.load.image('porter', 'img/porter.png');
+		game.load.image('porter', 'img/newPorter.png');
 		game.load.image('heller', 'img/HellerDr.png');
 		game.load.image('bcar', 'img/blackCar.png');
 		game.load.image('ycar', 'img/yellowCar.png');
-		game.load.image('wcar', 'img/whitecar.png')
+		game.load.image('wcar', 'img/whitecar.png');
+		game.load.image('pepto', 'img/pepto.png');
 		game.load.physics('physicsbox', 'img/physicsbox.json', null, Phaser.Physics.LIME_CORONA_JSON);
 
 		game.load.image('poosplat', 'img/shit.png');

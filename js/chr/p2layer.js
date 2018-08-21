@@ -4,7 +4,7 @@ function P2layer(game, key, frame, bulletKey) {
 	Phaser.Sprite.call(this, game, 30, 500, key);
 	// Animation settings
 	this.animations.add('idle', [0,1], 2);
-	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2], 15);
+	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2, 0], 15);
 	// Play animation
 	this.animations.play('idle');
 
@@ -65,7 +65,7 @@ P2layer.prototype.update = function() {
 			if (this.body.velocity.x > 0)
 				this.body.velocity.x = 0;
 		}
-		this.animations.play('idle');
+		//this.animations.play('idle');
 	}
 	if (move.up.justDown)
     {
@@ -87,7 +87,7 @@ P2layer.prototype.update = function() {
 P2layer.prototype.jump = function() {
 	this.animations.play('jump');
 	if (this.body.velocity.y > 0){
-			this.animations.stop(null, true);
+		this.animations.stop(null, true);
 	}
 }
 

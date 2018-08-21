@@ -183,7 +183,7 @@ play.prototype = {
 		
 		for(var i = 0; i < 20; ++i){
 			let en = new Enemy(game, game.rnd.integerInRange(600,7700),
-				game.rnd.integerInRange(200,600), 'enemy', null, 'star');
+				game.rnd.integerInRange(200,600), 'enemy', null, 'pepto');
 			game.add.existing(en);
 			this.enemy.add(en);
 			en.body.setCollisionGroup(this.collideEnemy);
