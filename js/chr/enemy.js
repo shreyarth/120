@@ -73,11 +73,12 @@ Enemy.prototype.collideBody = function() {
 }
 
 Enemy.prototype.collideBullet = function(bull, player) {
-	bull.klil();
+	bull.destroy();
 	this.pooModifier();
 }
 
 Enemy.prototype.pooModifier = function() {
+	if (!player.isInvincible){
 		let rando = game.rnd.integerInRange(1, 1000);
 		if (rando % 4 == 0) {
 			if(player.pooCount > 50)
@@ -92,6 +93,7 @@ Enemy.prototype.pooModifier = function() {
 		console.log(player.pooCount);
 		player.death();
 		player.hit();
+	}
 }
 Enemy.prototype.fire = function() {
 	let star = this.bulletE.getFirstExists(false);
