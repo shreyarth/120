@@ -90,9 +90,9 @@ P2layer.prototype.fire = function(isJump) {
 		if (isJump) {
 			// star.body.restitution.y = 0.2;
 			star.body.gravity.y = 90;
-			star.reset(player.x + 5, player.y + 20);
+			star.reset(player.x + 2, player.y + 20);
 			star.body.velocity.y = 150;
-			star.angle = 90;
+			star.body.angle = 90;
 			star.scale.x = 0.15;
 			// game.camera.shake(0.005, 500);
 			console.log("jumping");
@@ -104,15 +104,15 @@ P2layer.prototype.fire = function(isJump) {
 			star.body.collideWorldBounds = false;
 			// Need to tweak numbers for starting point for shooting
 			if (this.direction == 'right') {
-				star.reset(player.x + 10, player.y - 10);
-				star.body.velocity.x = 250;
+				star.reset(player.x + 10, player.y);
+				star.body.velocity.x = 350;
 				//recoil to player from shooting
 				this.body.velocity.x = -70;
 				console.log("shooting right");
 			}
 			else {
-				star.reset(player.x - 10, player.y - 10);
-				star.body.velocity.x = -2500;
+				star.reset(player.x - 10, player.y);
+				star.body.velocity.x = -350;
 				//recoil 
 				this.body.velocity.x = 70;
 				console.log("shooting left");
