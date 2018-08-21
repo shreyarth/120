@@ -17,7 +17,7 @@ function P2layer(game, key, frame, bulletKey) {
 	this.isInvincible = false;
 
 	// Character info
-	this.pooCount = 50;
+	this.pooCount = 15;
 
 	// Bullets
 	this.bullets = game.add.group();
@@ -58,7 +58,7 @@ P2layer.prototype.update = function() {
 	}
 	if (move.up.justDown)
     {
-    	this.body.velocity.y = -150;
+    	this.body.velocity.y = -300;
 		this.jump();
 		this.fire(true);
     	//this.body.moveUp(5000);
@@ -91,7 +91,7 @@ P2layer.prototype.fire = function(isJump) {
 			// star.body.restitution.y = 0.2;
 			star.body.gravity.y = 90;
 			star.reset(player.x + 2, player.y + 20);
-			star.body.velocity.y = 150;
+			star.body.velocity.y = 250;
 			star.body.angle = 90;
 			star.scale.x = 0.15;
 			// game.camera.shake(0.005, 500);
@@ -122,7 +122,7 @@ P2layer.prototype.fire = function(isJump) {
 		this.pooCount--;
 		star.body.collideWorldBounds = false;
 		var fart = game.add.audio('fart', 0.5);
-		if(this.pooCount < 100 && this.pooCount > -1){
+		if(this.pooCount < 30 && this.pooCount > -1){
 			fart.play();
 		}
 
@@ -139,7 +139,7 @@ P2layer.prototype.death = function() {
 		deathSprite = game.add.sprite(this.x, this.y, 'bloodsplat');
 		overflow = false;
 	}
-	else if(this.pooCount > 100){
+	else if(this.pooCount > 30){
 		console.log("death from too much poo");
 		deathSprite = game.add.sprite(this.x, this.y, 'poosplat');
 		overflow = true;
