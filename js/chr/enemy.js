@@ -21,6 +21,8 @@ function Enemy(game, x, y, key, frame, bFrame) {
 	this.bulletE.enableBody = true;
 	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
 	this.bulletE.createMultiple(200, bFrame);
+	this.bulletE.forEach(function(bull) {bull.body.clearShapes(), bull.body.addCircle(5);});
+	// this.bulletE.
 	//this.bulletE.checkWorldBounds = false;
 	//this.bulletE.outOfBoundsKill = true;
 
@@ -75,8 +77,7 @@ Enemy.prototype.fire = function() {
 	let star = this.bulletE.getFirstExists(false);
 	
 	if(star){
-		star.scale.setTo(1,1);
-		console.log("enemy shooting");
+		star.scale.setTo(0.05,0.05);
 		game.physics.enable(this, Phaser.Physics.ARCADE);
 		if(this.body.x > player.x){
 			if(this.body.x < player.x+300){
