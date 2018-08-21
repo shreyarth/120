@@ -124,6 +124,10 @@ play.prototype = {
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
 		player.body.collides([this.collidePlat, this.collideEnemy]);
+		player.bullets.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collidePlayer);
+			bull.body.collides([this.collidePlat, this.collideEnemy]);
+		}, this);
 
 		// enemy
 		this.enemy = game.add.group();
