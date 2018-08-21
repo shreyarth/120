@@ -134,9 +134,9 @@ play.prototype = {
 		this.enemy.enableBody = true;
 		this.enemy.physicsBodyType = Phaser.Physics.P2JS;
 		
-		for(var i = 0; i < 10; ++i){
-			let en = new Enemy(game, game.rnd.integerInRange(600,4900),
-				game.rnd.integerInRange(200,1000), 'enemy', null, 'star');
+		for(var i = 0; i < 20; ++i){
+			let en = new Enemy(game, game.rnd.integerInRange(600,7700),
+				game.rnd.integerInRange(200,600), 'enemy', null, 'star');
 			game.add.existing(en);
 			this.enemy.add(en);
 			en.body.setCollisionGroup(this.collideEnemy);
