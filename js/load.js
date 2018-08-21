@@ -41,6 +41,7 @@ load.prototype = {
 		game.load.audio('rasp', 'audio/Rasp.mp3');
 		game.load.audio('turkey', 'audio/turkey.mp3');
 		game.load.audio('menumusic', 'audio/blocks.wav');
+		game.load.audio('stage1bgm', 'audio/actionMusic.wav');
 	},
 	create: function() {
 		game.state.start('menu');

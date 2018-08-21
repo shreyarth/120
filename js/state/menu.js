@@ -12,10 +12,9 @@ menu.prototype = {
 	},
 	create: function() {
 		// Asset implementaion
-		console.log('In Menu create');
 		game.stage.backgroundColor = bgcolor;
 		if (!this.music || this.music.isPlaying === false) {
-			this.music = game.add.audio('menumusic', 0.5);
+			this.music = game.add.audio('menumusic', 0.5, true);
 			this.music.play();
 		}
 		

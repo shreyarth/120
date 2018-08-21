@@ -21,7 +21,7 @@ function Enemy(game, x, y, key, frame, bFrame) {
 	this.bulletE.enableBody = true;
 	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
 	this.bulletE.createMultiple(200, bFrame);
-	this.bulletE.forEach(function(bull) {bull.body.clearShapes();});
+	this.bulletE.forEach(function(bull) {bull.body.clearShapes(), bull.body.addCircle(5);});
 	// this.bulletE.
 	//this.bulletE.checkWorldBounds = false;
 	//this.bulletE.outOfBoundsKill = true;
