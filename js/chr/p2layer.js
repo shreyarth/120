@@ -19,10 +19,14 @@ function P2layer(game, key, frame, bulletKey) {
 
 	// Character info
 	this.pooCount = 15;
+	game.timer = game.time.create(true);
+		game.timer.loop(4500, function() {
+			this.pooCount++;
+		}, this);
+	game.timer.start();
 
 	// Bullets
 	this.bullets = game.add.group();
-	//this.bullets.scale.setTo(0.1);
 	this.bullets.enableBody = true;
 	this.bullets.physicsBodyType = Phaser.Physics.P2JS;
 	this.bullets.createMultiple(300, bulletKey);
@@ -91,7 +95,6 @@ P2layer.prototype.jump = function() {
 P2layer.prototype.fire = function(isJump) {
 	let star = this.bullets.getFirstExists(false);
 	if(star){
-			star.scale.setTo(0.1,0.1);
 		game.physics.p2.enable(star);
 		if (isJump) {
 			// star.body.restitution.y = 0.2;
@@ -99,7 +102,6 @@ P2layer.prototype.fire = function(isJump) {
 			star.reset(player.x + 2, player.y + 20);
 			star.body.velocity.y = 250;
 			star.body.angle = 90;
-			star.scale.x = 0.15;
 			// game.camera.shake(0.005, 500);
 			console.log("jumping");
 		}
