@@ -198,16 +198,12 @@ play.prototype = {
 		// UI update
 		this.ui.destroy();
 		this.ui = this.pooMeter(player.pooCount);
-
-		//shooting
-		/*
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
-			player.fire();
-		}*/
+		
 		//for end of level
 		if(player.x +30 > game.world.width){
 			game.state.start('end');
 		}
+
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
