@@ -4,7 +4,7 @@ var play = function() {
 	this.platform; this.en3;
 	this.obstacle;
 	this.heller = null;
-	this.ui;
+	this.ui, this.music;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;
@@ -15,6 +15,10 @@ play.prototype = {
 		
 	},
 	create: function() {
+		if (!this.music || this.music.isPlaying === false) {
+			this.music = game.add.audio('stage1bgm', 0.5, true);
+			this.music.play();
+		}
 		// Setting up game world
 		game.world.setBounds(0, 0, 8000, 800);
 		game.physics.startSystem(Phaser.Physics.P2JS);
