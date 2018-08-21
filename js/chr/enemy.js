@@ -80,13 +80,13 @@ Enemy.prototype.collideBullet = function(player, bull) {
 Enemy.prototype.pooModifier = function() {
 		let rando = game.rnd.integerInRange(1, 1000);
 		if (rando % 4 == 0) {
-			if(player.pooCount > 50)
-				player.pooCount += 10;
+			if(player.pooCount > 15)
+				player.pooCount += 1;
 			else
-				player.pooCount -= 10;
+				player.pooCount -= 1;
 		}
 		else {
-			player.pooCount += 10;
+			player.pooCount += 1;
 		}
 
 		console.log(player.pooCount);
