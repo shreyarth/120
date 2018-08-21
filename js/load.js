@@ -11,7 +11,7 @@ load.prototype = {
 		// Load all the assets
 		// Graphic
 		game.load.path = 'assets/';
-		game.load.spritesheet('player', 'img/player_spritesheet.png', 315, 405);
+		game.load.spritesheet('player', 'img/player_spritesheet.png', 63, 81);
 		game.load.image('poo', 'img/poo.png');
 		game.load.image('platform', 'img/platform.png');
 		game.load.image('star', 'img/star.png');

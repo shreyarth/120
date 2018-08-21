@@ -3,14 +3,15 @@ function P2layer(game, key, frame, bulletKey) {
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	Phaser.Sprite.call(this, game, 30, 500, key);
 	// Animation settings
-	this.animations.add('jump', [1, 2, 3, 4, 3, 2, 0], 15);
+	this.animations.add('idle', [0,1], 2);
+	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2], 15);
+	// Play animation
+	this.animations.play('idle');
 
 	game.physics.p2.enable(this, true);
 
 	this.body.fixedRotation = true;
 	move = game.input.keyboard.createCursorKeys();
-	this.scale.x = 0.2;
-	this.scale.y = 0.2;
 	this.game.physics.p2.gravity.y = 500;
 	this.body.setRectangle(this.width, this.height);
 	this.direction = 'right';
@@ -37,10 +38,15 @@ P2layer.prototype.constructor = P2layer;
 P2layer.prototype.update = function() {
 	if(move.left.isDown){
 		this.body.velocity.x = -150;
+		// Flip sprite
+		if (this.direction == 'right')
+			this.scale.x = 1;
 		this.direction = 'left';
 	}
 	else if(move.right.isDown){
 		this.body.velocity.x = 150;
+		if (this.direction == 'left')
+			this.scale.x = -1;
 		this.direction = 'right';
 	}
 	else {
@@ -55,13 +61,13 @@ P2layer.prototype.update = function() {
 			if (this.body.velocity.x > 0)
 				this.body.velocity.x = 0;
 		}
+		this.animations.play('idle');
 	}
 	if (move.up.justDown)
     {
     	this.body.velocity.y = -300;
 		this.jump();
 		this.fire(true);
-    	//this.body.moveUp(5000);
     }
     else{
     	//game.physics.p2.gravity.y = 1000;
