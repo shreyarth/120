@@ -7,6 +7,7 @@ var play = function() {
 	this.ui;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
+	this.collidePB, this.collideEB;
 }
 
 play.prototype = {
@@ -28,7 +29,10 @@ play.prototype = {
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
 		this.collideEnemy = game.physics.p2.createCollisionGroup();
 		this.collidePlat = game.physics.p2.createCollisionGroup();
-		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat]);
+		this.collidePB = game.physics.p2.createCollisionGroup();
+		this.collideEB = game.physics.p2.createCollisionGroup();
+		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat, 
+			this.collidePB, this.collideEB]);
 
 		//ground
 		this.platform = game.add.group();
@@ -152,7 +156,7 @@ play.prototype = {
 
 		this.platform.forEach(function(plat) {
 			plat.body.setCollisionGroup(this.collidePlat);
-			plat.body.collides([this.collidePlayer, this.collideEnemy]);
+			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
 
 		// the background wrap 
@@ -165,9 +169,9 @@ play.prototype = {
 		player = new P2layer(game, 'player', null, 'poo');
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
-		player.body.collides([this.collidePlat, this.collideEnemy]);
+		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB]);
 		player.bullets.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collidePlayer);
+			bull.body.setCollisionGroup(this.collidePB);
 			bull.body.collides([this.collidePlat, this.collideEnemy]);
 			bull.body.debug = true;
 		}, this);
@@ -183,10 +187,10 @@ play.prototype = {
 			game.add.existing(en);
 			this.enemy.add(en);
 			en.body.setCollisionGroup(this.collideEnemy);
-			en.body.collides([this.collidePlat, this.collidePlayer]);
+			en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 			en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEnemy);
-			bull.body.collides([this.collidePlayer, this.collidePlat]);
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 		}
 

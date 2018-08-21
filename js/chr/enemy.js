@@ -21,8 +21,8 @@ function Enemy(game, x, y, key, frame, bFrame) {
 	this.bulletE.enableBody = true;
 	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
 	this.bulletE.createMultiple(200, bFrame);
-	//this.bulletE.checkWorldBounds = true;
-	this.bulletE.outOfBoundsKill = true;
+	//this.bulletE.checkWorldBounds = false;
+	//this.bulletE.outOfBoundsKill = true;
 
 	//timer
 	timer = game.time.create(false);
@@ -31,7 +31,7 @@ function Enemy(game, x, y, key, frame, bFrame) {
 
 	// Collision
 	this.body.createBodyCallback(player, this.collideBody, this);
-	this.bulletE.forEach(function(bull) {bull.body.createBodyCallback(player, function(){bull.kill(); this.pooModifier();}, this);}, this);
+	this.bulletE.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -40,27 +40,12 @@ Enemy.prototype.constructor = Enemy;
 
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
-	//game.physics.arcade.collide(this, player.bullets, this.death, null, this);
-	// trying to get enemy to move towards player when its on a platform
-	// not working, its floating around like a ghost
-	/*
-	if(game.physics.arcade.collide(this, platform)){
-			game.physics.arcade.moveToObject(enemy, player);
-			console.log("moving towards player");
-		}
-		game.physics.arcade.moveToObject(enemy, player);
-*/
 	if(this.body.velocity.x > 0){
 		this.scale.setTo(-0.1, 0.1);
 	}
 	if(this.body.velocity.x < 0){
 		this.scale.setTo(0.1, 0.1);
 	}
-
-	//shooting
-	
-	//this.fire();
-	
 }
 
 Enemy.prototype.collideBody = function() {
@@ -70,16 +55,7 @@ Enemy.prototype.collideBody = function() {
 	}
 }
 
-Enemy.prototype.collideBullet = function(bull, player) {
-	if (bull.alive) {
-		console.log("huh");
-	}
-	//bull.destroy();
-	this.pooModifier();
-}
-
 Enemy.prototype.pooModifier = function() {
-	if (!player.isInvincible){
 		let rando = game.rnd.integerInRange(1, 1000);
 		if (rando % 4 == 0) {
 			if(player.pooCount > 15)
@@ -94,7 +70,6 @@ Enemy.prototype.pooModifier = function() {
 		console.log(player.pooCount);
 		player.death();
 		player.hit();
-	}
 }
 Enemy.prototype.fire = function() {
 	let star = this.bulletE.getFirstExists(false);
