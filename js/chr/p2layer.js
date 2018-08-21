@@ -95,6 +95,7 @@ P2layer.prototype.fire = function() {
 			star.angle = 90;
 			star.scale.x = 0.15;
 			// game.camera.shake(0.005, 500);
+			console.log("jumping");
 		}
 		else {
 
@@ -107,12 +108,14 @@ P2layer.prototype.fire = function() {
 				star.body.velocity.x = 2500;
 				//recoil to player from shooting
 				this.body.velocity.x = -70;
+				console.log("shooting right");
 			}
 			else {
 				star.reset(player.x - 10, player.y - 10);
-				star.body.velocity.x = -250;
+				star.body.velocity.x = -2500;
 				//recoil 
 				this.body.velocity.x = 70;
+				console.log("shooting left");
 			}
 		}
 		console.log(this.pooCount);
