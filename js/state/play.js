@@ -17,6 +17,7 @@ play.prototype = {
 		// Setting up game world
 		game.world.setBounds(0, 0, 5000, 1200);
 		game.physics.startSystem(Phaser.Physics.P2JS);
+		game.physics.p2.setImpactEvents(true);
 		
 		// Asset implementaion
 		var background = game.add.sprite(0, 0, 'porter');
@@ -155,6 +156,7 @@ play.prototype = {
 		let sign = this.platform.create(4800, 900, 'sign');
 		sign.body.immovable = true;
 		sign.scale.setTo(1,1);
+		// Need to fix sign in the air (no collision) <- can we just make it as a part of bg?
 
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
