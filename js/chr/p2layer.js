@@ -82,12 +82,12 @@ P2layer.prototype.jump = function() {
 }
 
 // isJump: set to true if its not attack
-P2layer.prototype.fire = function() {
+P2layer.prototype.fire = function(isJump) {
 	let star = this.bullets.getFirstExists(false);
 	if(star){
 			star.scale.setTo(0.1,0.1);
 		game.physics.p2.enable(star);
-		if (this.jump) {
+		if (isJump) {
 			// star.body.restitution.y = 0.2;
 			star.body.gravity.y = 90;
 			star.reset(player.x + 5, player.y + 20);
@@ -105,7 +105,7 @@ P2layer.prototype.fire = function() {
 			// Need to tweak numbers for starting point for shooting
 			if (this.direction == 'right') {
 				star.reset(player.x + 10, player.y - 10);
-				star.body.velocity.x = 2500;
+				star.body.velocity.x = 250;
 				//recoil to player from shooting
 				this.body.velocity.x = -70;
 				console.log("shooting right");
