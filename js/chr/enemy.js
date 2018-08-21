@@ -31,7 +31,7 @@ function Enemy(game, x, y, key, frame, bFrame) {
 
 	// Collision
 	this.body.createBodyCallback(player, this.collideBody, this);
-	this.bulletE.forEach(function(bull) {bull.body.createBodyCallback(player, this.collideBullet, this);}, this);
+	this.bulletE.forEach(function(bull) {bull.body.createBodyCallback(player, function(){bull.kill(); this.pooModifier();}, this);}, this);
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -40,10 +40,6 @@ Enemy.prototype.constructor = Enemy;
 
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
-	if (!player.isInvincible) {
-		//game.physics.p2.collide(this, player, this.collideBody, null, this);
-		//game.physics.p2.collide(this.bulletE, player, this.collideBullet, null, this);
-	}
 	//game.physics.arcade.collide(this, player.bullets, this.death, null, this);
 	// trying to get enemy to move towards player when its on a platform
 	// not working, its floating around like a ghost
@@ -68,12 +64,17 @@ Enemy.prototype.update = function() {
 }
 
 Enemy.prototype.collideBody = function() {
+	if (!player.isInvincible) {
 	this.turkey();
 	this.pooModifier();
+	}
 }
 
 Enemy.prototype.collideBullet = function(bull, player) {
-	bull.destroy();
+	if (bull.alive) {
+		console.log("huh");
+	}
+	//bull.destroy();
 	this.pooModifier();
 }
 
