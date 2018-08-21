@@ -44,63 +44,66 @@ play.prototype = {
 		
 		//platforms in order, left to right
 		
-		let platforms = this.platform.create(400, 890, 'bus');
+		let platforms = this.platform.create(800, 1013, 'bus');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 
-		platforms = this.platform.create(1000, 1040, 'rcar');
+		platforms = this.platform.create(1240, 1090, 'rcar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
-		platforms = this.platform.create(2900, 700, 'bus');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
-		platforms.angle = 180;
-
-		platforms = this.platform.create(2400, 1040, 'ycar');
+		platforms = this.platform.create(1940, 1040, 'wcar');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 		platforms.body.clearShapes();
-		platforms.body.loadPolygon('physicsbox', 'yellowCar');
-
-		platforms = this.platform.create(2960, 1040, 'rcar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
-		platforms.body.clearShapes();
-		platforms.body.loadPolygon('physicsbox', 'yellowCar');
-
-		platforms = this.platform.create(1600, 1040, 'ycar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
-		platforms.body.clearShapes();
+		platforms.body.angle = 30;
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		//double verticle bus
-		platforms = this.platform.create(1850, 630, 'busObs');
+		platforms = this.platform.create(2250, 880, 'busObs');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'busObs');
 
+		platforms = this.platform.create(2580, 1070, 'ycar');
+		platforms.body.kinematic = true;
+		platforms.body.debug = true;
+		platforms.body.clearShapes();
+		platforms.body.angle = -20;
+		platforms.body.loadPolygon('physicsbox', 'yellowCar');
+
+		platforms = this.platform.create(3260, 1070, 'rcar');
+		platforms.body.kinematic = true;
+		platforms.body.debug = true;
+		platforms.body.clearShapes();
+		platforms.body.angle = 12;
+		platforms.body.loadPolygon('physicsbox', 'yellowCar');
+
+		platforms = this.platform.create(3520, 970, 'bus');
+		platforms.body.kinematic = true;
+		platforms.body.debug = true;
+		platforms.body.angle = 16;
+		platforms.angle = 180;
 
 		//stack of car and bus
-		platforms = this.platform.create(3300, 670, 'carObs');
+		platforms = this.platform.create(4600, 900, 'carObs');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'carObs');
 
 		//crashed cars and bus in buildings
-		platforms = this.platform.create(1680, 420, 'wreckC');
+		platforms = this.platform.create(1700, 420, 'wreckC');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'wreckedcar');
 
 
-		platforms = this.platform.create(2530, 300, 'wreckB');
+		platforms = this.platform.create(2530, 400, 'wreckB');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 
