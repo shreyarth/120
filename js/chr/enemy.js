@@ -1,5 +1,5 @@
 // Constructor
-function Enemy(game, x, y, key, frame) {
+function Enemy(game, x, y, key, frame, bFrame) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	Phaser.Sprite.call(this, game, x, y, 'enemy', frame);
@@ -20,7 +20,7 @@ function Enemy(game, x, y, key, frame) {
 	this.bulletE = game.add.group();
 	this.bulletE.enableBody = true;
 	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
-	this.bulletE.createMultiple(200, 'star');
+	this.bulletE.createMultiple(200, bFrame);
 	//this.bulletE.checkWorldBounds = true;
 	this.bulletE.outOfBoundsKill = true;
 
@@ -31,7 +31,7 @@ function Enemy(game, x, y, key, frame) {
 
 	// Collision
 	this.body.createBodyCallback(player, this.collideBody, this);
-	//this.bulletE.body.createBodyCallback(player, this.collideBullet, this);
+	this.bulletE.forEach(function(bull) {bull.body.createBodyCallback(player, this.collideBullet, this);}, this);
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -72,8 +72,8 @@ Enemy.prototype.collideBody = function() {
 	this.pooModifier();
 }
 
-Enemy.prototype.collideBullet = function(player, bull) {
-	bull.kill();
+Enemy.prototype.collideBullet = function(bull, player) {
+	bull.klil();
 	this.pooModifier();
 }
 

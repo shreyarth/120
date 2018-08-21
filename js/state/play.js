@@ -129,11 +129,15 @@ play.prototype = {
 		
 		for(var i = 0; i < 10; ++i){
 			let en = new Enemy(game, game.rnd.integerInRange(600,4900),
-				game.rnd.integerInRange(200,1000), 'enemy');
+				game.rnd.integerInRange(200,1000), 'enemy', null, 'star');
 			game.add.existing(en);
 			this.enemy.add(en);
 			en.body.setCollisionGroup(this.collideEnemy);
 			en.body.collides([this.collidePlat, this.collidePlayer]);
+			en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEnemy);
+			bull.body.collides([this.collidePlayer, this.collidePlat]);
+		}, this);
 		}
 
 		//test for 2nd enemy on screen
