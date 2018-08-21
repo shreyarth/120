@@ -1,5 +1,5 @@
 // Constructor
-function Enemy(game, x, y, key, frame, bFrame) {
+function Enemy(game, x, y, key, frame, bFrame, type) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	Phaser.Sprite.call(this, game, x, y, 'enemy', frame);
@@ -15,6 +15,7 @@ function Enemy(game, x, y, key, frame, bFrame) {
 	this.game.physics.p2.gravity.y = 300;
 	this.body.collideWorldBounds = true;
 	// needs enemy type
+	this.type = type;
 
 	//enemy bullets
 	this.bulletE = game.add.group();
