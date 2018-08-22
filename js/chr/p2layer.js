@@ -105,6 +105,8 @@ P2layer.prototype.fire = function(isJump) {
 			star.body.angle = 90;
 			// game.camera.shake(0.005, 500);
 			console.log("jumping");
+			//var grunt = game.add.audio('grunt', 1);
+			//grunt.play();
 		}
 		else {
 
@@ -130,7 +132,7 @@ P2layer.prototype.fire = function(isJump) {
 		console.log(this.pooCount);
 		this.pooCount--;
 		star.body.collideWorldBounds = false;
-		var fart = game.add.audio('fart', 0.5);
+		var fart = game.add.audio('fart', 0.3);
 		if(this.pooCount < MAXPOO && this.pooCount > -1){
 			fart.play();
 		}

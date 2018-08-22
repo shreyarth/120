@@ -2,7 +2,7 @@
 function Enemy(game, x, y, key, frame, bFrame, type) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, x, y, 'enemy', frame);
+	Phaser.Sprite.call(this, game, x, y, key, frame);
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
@@ -118,7 +118,7 @@ Enemy.prototype.chasePlayer = function() {
 }
 
 Enemy.prototype.turkey = function(){
-	let turk = game.add.audio('turkey', 1);
+	let turk = game.add.audio('turkey', 0.3);
 	turk.allowMultiple = false;
 	turk.play();
 }

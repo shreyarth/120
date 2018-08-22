@@ -35,6 +35,7 @@ load.prototype = {
 		game.load.image('sign', 'img/sign.png');
 		game.load.image('wreckC', 'img/wreckedcar.png');
 		game.load.image('wreckB', 'img/wreckedbus.png');
+		game.load.image('deer', 'img/deer1.png');
 
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');
@@ -42,6 +43,8 @@ load.prototype = {
 		game.load.audio('turkey', 'audio/turkey.mp3');
 		game.load.audio('menumusic', 'audio/blocks.wav');
 		game.load.audio('stage1bgm', 'audio/actionMusic.wav');
+		game.load.audio('grunt', 'audio/longGrunt.wav');
+		game.load.audio('splat', 'audio/splat.wav');
 	},
 	create: function() {
 		game.state.start('menu');
