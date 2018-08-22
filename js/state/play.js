@@ -204,11 +204,13 @@ play.prototype = {
 		// this.enemy.add(en);
 
 		//test for flying enemy
-		for(var i = 0; i < 5; ++i){
-			en = new Enemy(game, game.rnd.integerInRange(1000,4800),
-			 400, 'enemy');
-			game.add.existing(en);
-			this.enemy.add(en);
+		for(var i = 0; i < 7; ++i){
+			enfl = new Enemy(game, game.rnd.integerInRange(100,600),
+			 100, 'enemy', null, null, 'kamikaze_turkey');
+			game.add.existing(enfl);
+			this.enemy.add(enfl);
+			enfl.body.setCollisionGroup(this.collideEnemy);
+			enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		}
 
 		//sign for end of level
