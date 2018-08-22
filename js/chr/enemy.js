@@ -49,6 +49,9 @@ Enemy.prototype.update = function() {
 	if(this.body.velocity.x < 0){
 		this.scale.setTo(0.1, 0.1);
 	}
+	if(this.type == 'kamikaze_turkey'){
+		this.boom();
+	}
 }
 
 Enemy.prototype.collideBody = function() {
@@ -118,4 +121,14 @@ Enemy.prototype.turkey = function(){
 	let turk = game.add.audio('turkey', 1);
 	turk.allowMultiple = false;
 	turk.play();
+}
+
+Enemy.prototype.boom = function(){
+	this.body.velocity.y = 1000;
+	this.body.createBodyCallback(player, this.collideGround, this);
+}
+
+Enemy.prototype.collideGround = function(){
+	this.turkey();
+	this.kill();
 }
