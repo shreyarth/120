@@ -8,8 +8,7 @@ var noset = true;
 //var platform;
 // Main char
 var player;
-// Enemy group
-//var enemy;
+const MAXPOO = 30;
 
 // State management
 game.state.add('boot', boot);

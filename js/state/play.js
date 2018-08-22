@@ -26,9 +26,10 @@ play.prototype = {
 		
 		// Asset implementaion
 		var background = game.add.sprite(0, 0, 'porter');
-		background.width = game.world.width;
-		background.height = game.world.height -32;
-		
+		//background.width = game.world.width;
+		//background.height = game.world.height -32;
+		game.add.tileSprite(2000, 0, game.world.width-2000, game.height, 'heller');
+
 		// Setting up collision groups
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
 		this.collideEnemy = game.physics.p2.createCollisionGroup();
@@ -222,14 +223,15 @@ play.prototype = {
 		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
-		this.ui = this.pooMeter(player.pooCount);
+		this.pooMeter(MAXPOO, 0x000000);
+		this.ui = this.pooMeter(player.pooCount, 0x492008);
 	},
-	pooMeter: function(pooNum) {
+	pooMeter: function(pooNum, color) {
 		let obj = null;
 
 		// create primitive
 		let g = game.add.graphics();
-		g.beginFill(0x492008);
+		g.beginFill(color);
 		g.drawRect(32, 32, pooNum * 5, 32);	// Starting point, width, height
 		g.endFill();
 
@@ -252,7 +254,7 @@ play.prototype = {
 
 		// UI update
 		this.ui.destroy();
-		this.ui = this.pooMeter(player.pooCount);
+		this.ui = this.pooMeter(player.pooCount, 0x492008);
 		
 		//for end of level
 		if(player.x +30 > game.world.width){

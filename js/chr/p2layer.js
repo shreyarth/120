@@ -19,7 +19,7 @@ function P2layer(game, key, frame, bulletKey) {
 	this.isInvincible = false;
 
 	// Character info
-	this.pooCount = 15;
+	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
 		game.timer.loop(4500, function() {
 			this.pooCount++;
@@ -131,7 +131,7 @@ P2layer.prototype.fire = function(isJump) {
 		this.pooCount--;
 		star.body.collideWorldBounds = false;
 		var fart = game.add.audio('fart', 0.5);
-		if(this.pooCount < 30 && this.pooCount > -1){
+		if(this.pooCount < MAXPOO && this.pooCount > -1){
 			fart.play();
 		}
 
@@ -148,7 +148,7 @@ P2layer.prototype.death = function() {
 		deathSprite = game.add.sprite(this.x, this.y, 'bloodsplat');
 		overflow = false;
 	}
-	else if(this.pooCount > 30){
+	else if(this.pooCount > MAXPOO){
 		console.log("death from too much poo");
 		deathSprite = game.add.sprite(this.x, this.y, 'poosplat');
 		overflow = true;
