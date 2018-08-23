@@ -79,21 +79,23 @@ Enemy.prototype.pooModifier = function() {
 }
 
 Enemy.prototype.fire = function() {
-	let star = this.bulletE.getFirstExists(false);
-	
-	if(star){
-		star.scale.setTo(0.05,0.05);
-		game.physics.enable(this, Phaser.Physics.ARCADE);
-		if(this.body.x > player.x){
-			if(this.body.x < player.x+300){
-				star.reset(this.x + 10, this.y - 10);
-				star.body.velocity.x = -150;
+	if (this.alive){
+		let star = this.bulletE.getFirstExists(false);
+		
+		if(star){
+			star.scale.setTo(0.05,0.05);
+			game.physics.enable(this, Phaser.Physics.ARCADE);
+			if(this.body.x > player.x){
+				if(this.body.x < player.x+300){
+					star.reset(this.x + 10, this.y - 10);
+					star.body.velocity.x = -150;
+				}
 			}
-		}
-		else {
-			if(this.body.x > player.x-300){
-				star.reset(this.x - 10, this.y - 10);
-				star.body.velocity.x = 150;				
+			else {
+				if(this.body.x > player.x-300){
+					star.reset(this.x - 10, this.y - 10);
+					star.body.velocity.x = 150;				
+				}
 			}
 		}
 	}

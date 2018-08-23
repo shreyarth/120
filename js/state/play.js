@@ -192,8 +192,10 @@ play.prototype = {
 			this.enemy.add(en);
 			en.body.setCollisionGroup(this.collideEnemy);
 			en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-			// NEED TO FIX PLAYER BULLET AND ENEMY BODY COLLSION CALLBACK EVENT
-			//en.body.createGroupCallback(this.collidePB, function(), en);
+			en.body.createGroupCallback(this.collidePB, function(en, bull) {
+				en.sprite.kill();
+				bull.sprite.kill();
+			}, en);
 			en.bulletE.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collideEB);
 			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
