@@ -3,7 +3,6 @@ var play2 = function() {
 	this.bullets, this.enemy;
 	this.platform; this.en3;
 	this.obstacle;
-	this.bg;
 	this.ui, this.music;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
@@ -64,6 +63,8 @@ play2.prototype = {
 		let ground = this.platform.create(0, 300, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
 		ground.body.angle = 30;
+		ground.body.damping = 0;
+		ground.body.angularDamping = 0;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1000, 25);
 		ground.body.kinematic = true;
@@ -72,7 +73,7 @@ play2.prototype = {
 
 		ground = this.platform.create(1150, 963, 'platform');
 		ground.scale.setTo(100, 1 );
-		ground.body.damping.x = 0;
+		ground.body.damping = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1000, 25);
@@ -297,12 +298,6 @@ play2.prototype = {
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
 
-		// the background wrap 
-		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
-		// wrapGround.scale.setTo(2,0.8);
-		// wrapGround.width = game.width;
-		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
-
 		// player
 		player = new P2layer(game, 'player', null, 'poo');
 		game.add.existing(player);
@@ -377,7 +372,6 @@ play2.prototype = {
 	},
 	update: function() {
 		// Update function
-		
 		
 		// enemy movement towards player
 		// if(game.physics.arcade.collide(enemy, platform)){
