@@ -267,6 +267,11 @@ play.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
+	},
+
+	ded: function() {
+		// enfl.kill();
+
 	}
 	// Char control is implemented in player.js
 }
