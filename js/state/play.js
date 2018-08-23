@@ -243,7 +243,7 @@ play.prototype = {
 		// create primitive
 		let g = game.add.graphics();
 		g.beginFill(color);
-		g.drawRect(32, 32, pooNum * 5, 32);	// Starting point, width, height
+		g.drawRect(32, 32, pooNum * 15, 32);	// Starting point, width, height
 		g.endFill();
 
 		// transform primitive into sprite and destroy primitive
@@ -278,11 +278,6 @@ play.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
-	},
-
-	ded: function() {
-		// enfl.kill();
-
 	}
 	// Char control is implemented in player.js
 }
