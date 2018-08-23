@@ -212,6 +212,7 @@ play.prototype = {
 			this.enemy.add(enfl);
 			enfl.body.setCollisionGroup(this.collideEnemy);
 			enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+			enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
 		}
 
 		//sign for end of level
