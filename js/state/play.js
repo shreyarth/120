@@ -26,9 +26,7 @@ play.prototype = {
 		
 		// Asset implementaion
 		var background = game.add.sprite(0, 0, 'porter');
-		//background.width = game.world.width;
-		//background.height = game.world.height -32;
-		game.add.tileSprite(2000, 0, game.world.width-2000, game.height, 'heller');
+		game.add.tileSprite(1800, 0, 6200, 800, 'heller');
 
 		// Setting up collision groups
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
@@ -54,7 +52,7 @@ play.prototype = {
 		
 		//platforms in order, left to right
 		
-		let platforms = this.platform.create(800, 613, 'bus');
+		let platforms = this.platform.create(800, 650, 'bus');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 
@@ -148,15 +146,16 @@ play.prototype = {
 		platforms.body.loadPolygon('physicsbox', 'busObs');
 
 		//crashed cars and bus in buildings
-		platforms = this.platform.create(1700, 320, 'wreckC');
+		platforms = this.platform.create(1450, 320, 'wreckC');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'wreckedcar');
 
 
-		platforms = this.platform.create(5530, 300, 'wreckB');
+		platforms = this.platform.create(6630, 400, 'wreckB');
 		platforms.body.kinematic = true;
+		platforms.body.angle = 75;
 		platforms.body.debug = true;
 
 		this.platform.forEach(function(plat) {
@@ -216,9 +215,9 @@ play.prototype = {
 		}
 
 		//sign for end of level
-		let sign = this.platform.create(4800, 900, 'sign');
+		let sign = this.platform.create(7400, 300, 'sign');
 		sign.body.immovable = true;
-		sign.scale.setTo(1,1);
+		//sign.scale.setTo(1,1);
 		// Need to fix sign in the air (no collision) <- can we just make it as a part of bg?
 
 		// Set camera to platformer follow up
