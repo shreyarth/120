@@ -65,16 +65,101 @@ play2.prototype = {
 		ground.scale.setTo(game.world.width, 1 );
 		ground.body.angle = 30;
 		ground.body.clearShapes();
-		ground.body.addRectangle(game.world.width, 25);
+		ground.body.addRectangle(1000, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(1150, 963, 'platform');
+		ground.scale.setTo(100, 1 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(1000, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(1980, 1443, 'platform');
+		ground.scale.setTo(100, 1 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(300, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(2680, 1847, 'platform');
+		ground.scale.setTo(100, 1 );
+		ground.body.damping.x = 0;
+		ground.body.angularForce = 100;
+		ground.body.angularVelocity = 1
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(90, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(3480, 2310, 'platform');
+		ground.scale.setTo(100, 1 );
+		ground.body.angularForce = 100;
+		ground.body.angularVelocity = 1
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(900, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(4600, 2957, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
+		ground.body.damping.x = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
-		ground.body.addRectangle(game.world.width, 25);
+		ground.body.addRectangle(1000, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(5580, 3522, 'platform');
+		ground.scale.setTo(100, 1 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(300, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(6000, 3765, 'platform');
+		ground.scale.setTo(100, 1 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(90, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(6880, 4273, 'platform');
+		ground.scale.setTo(100, 1 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(40, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(8480, 5195, 'platform');
+		ground.scale.setTo(100, 1 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(2000, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
@@ -91,6 +176,7 @@ play2.prototype = {
 
 		ground = this.platform.create(8900, 5450, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
+		ground.body.damping.x = 0;
 		ground.body.clearShapes();
 		ground.body.addRectangle(2300, 25);
 		ground.body.kinematic = true;
@@ -289,6 +375,7 @@ play2.prototype = {
 	},
 	update: function() {
 		// Update function
+		
 		
 		// enemy movement towards player
 		// if(game.physics.arcade.collide(enemy, platform)){
