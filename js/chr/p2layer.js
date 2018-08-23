@@ -6,6 +6,7 @@ function P2layer(game, key, frame, bulletKey) {
 	// Animation settings
 	this.animations.add('idle', [0,1], 2);
 	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2, 0], 15);
+	this.animations.add('walk', [7, 8, 9, 10, 11, 10, 9, 8], 15);
 	// Play animation
 	this.animations.play('idle');
 
