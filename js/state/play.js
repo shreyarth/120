@@ -233,27 +233,8 @@ play.prototype = {
 		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
-		this.pooMeter(MAXPOO, 0x000000);
-		this.ui = this.pooMeter(player.pooCount, 0x492008);
-	},
-	pooMeter: function(pooNum, color) {
-		let obj = null;
-
-		if (pooNum >= 0){
-		// create primitive
-		let g = game.add.graphics();
-		g.beginFill(color);
-		g.drawRect(32, 32, pooNum * 15, 32);	// Starting point, width, height
-		g.endFill();
-
-		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(32, 32, g.generateTexture());
-		obj.fixedToCamera = true;
-		obj.cameraOffset.setTo(32, 16);
-		g.destroy();
-		}
-
-		return obj;
+		pooMeter(MAXPOO, 0x000000);
+		this.ui = pooMeter(player.pooCount, 0x492008);
 	},
 	update: function() {
 		// Update function
@@ -267,7 +248,7 @@ play.prototype = {
 		// UI update
 		if (this.ui)
 			this.ui.destroy();
-		this.ui = this.pooMeter(player.pooCount, 0x492008);
+		this.ui = pooMeter(player.pooCount, 0x492008);
 		
 		//for end of level
 		if(player.x +50 > game.world.width){
