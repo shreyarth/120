@@ -30,6 +30,7 @@ function P2layer(game, key, frame, bulletKey) {
 	game.timer = game.time.create(true);
 		game.timer.loop(4500, function() {
 			this.pooCount++;
+			this.death();
 		}, this);
 	game.timer.start();
 
