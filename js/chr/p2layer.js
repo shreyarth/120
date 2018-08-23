@@ -135,7 +135,6 @@ P2layer.prototype.fire = function(isJump) {
 			star.reset(player.x + 2, player.y + 20);
 			star.body.velocity.y = 250;
 			star.body.angle = 90;
-			// game.camera.shake(0.005, 500);
 			console.log("jumping");
 			var grunt = game.add.audio('grunt', 0.1);
 			grunt.play();
@@ -232,6 +231,8 @@ P2layer.prototype.death = function() {
 		deathSprite.anchor.set(0.5);
 		deathSprite.scale.x = 2;
 		deathSprite.scale.y = 5;
+		deathSprite.fixedToCamera = true;
+		deathSprite.cameraOffset.setTo(game.width/2, game.height/2+150);
 		game.time.events.add(Phaser.Timer.SECOND * 2, this.changeState, this);
 	}
 }
