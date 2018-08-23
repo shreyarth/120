@@ -7,6 +7,8 @@ var play2 = function() {
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;
+	// inPlay2 = true;
+	
 }
 
 play2.prototype = {
@@ -303,6 +305,7 @@ play2.prototype = {
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
 		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB]);
+		player.friction = false;
 		player.bullets.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collidePB);
 			bull.body.collides([this.collidePlat, this.collideEnemy]);

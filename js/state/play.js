@@ -212,6 +212,8 @@ play.prototype = {
 			this.enemy.add(enfl);
 			enfl.body.setCollisionGroup(this.collideEnemy);
 			enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+			enfl.body.createGroupCallback(this.platform, function() {enfl.kill();}, enfl);
+			// enfl.body.collides([this.collidePlat], this.ded);
 		}
 
 		//sign for end of level
@@ -266,6 +268,11 @@ play.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
+	},
+
+	ded: function() {
+		// enfl.kill();
+
 	}
 	// Char control is implemented in player.js
 }
