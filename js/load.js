@@ -45,7 +45,7 @@ load.prototype = {
 		game.load.audio('turkey', 'audio/turkey.mp3');
 		game.load.audio('menumusic', 'audio/blocks.wav');
 		game.load.audio('stage1bgm', 'audio/actionMusic.wav');
-		game.load.audio('grunt', 'audio/longGrunt.wav');
+		game.load.audio('grunt', 'audio/grunt2.wav');
 		game.load.audio('splat', 'audio/splat.wav');
 	},
 	create: function() {
