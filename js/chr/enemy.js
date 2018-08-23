@@ -126,7 +126,7 @@ Enemy.prototype.turkey = function(){
 
 Enemy.prototype.boom = function(){
 	this.body.velocity.y = 1000;
-	this.body.createBodyCallback(player, this.collideGround, this);
+	// this.body.createBodyCallback(player, this.collideGround, this);
 }
 
 Enemy.prototype.collideGround = function(){

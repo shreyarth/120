@@ -9,6 +9,7 @@ var noset = true;
 // Main char
 var player;
 const MAXPOO = 30;
+var inPlay2 = false;
 
 // State management
 game.state.add('boot', boot);

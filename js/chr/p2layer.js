@@ -24,6 +24,7 @@ function P2layer(game, key, frame, bulletKey) {
 	this.state = 'idle';
 	this.direction = 'right';
 	this.isInvincible = false;
+	this.friction = true;
 
 	// Character info
 	this.pooCount = MAXPOO/2;
@@ -74,8 +75,9 @@ P2layer.prototype.update = function() {
 		this.direction = 'right';
 		this.animations.play('walk');
 	}
-	else {
+	else if(this.friction == true) {
 		// Decceleration
+		console.log('friction on');
 		if (this.body.velocity.x > 0) {
 			this.body.velocity.x -= 3;
 			if (this.body.velocity.x < 0)
@@ -92,6 +94,9 @@ P2layer.prototype.update = function() {
 		}
 		else
 			this.animations.play(this.animations.currentAnim);
+	}
+	else{
+		console.log('friction off');
 	}
 	if (move.up.justDown)
     {
