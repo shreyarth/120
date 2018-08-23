@@ -168,19 +168,19 @@ P2layer.prototype.fire = function(isJump) {
 			star.body.collideWorldBounds = false;
 			// Need to tweak numbers for starting point for shooting
 			if (this.direction == 'right') {
-				star.reset(player.x + 10, player.y);
+				star.reset(this.x + 10, this.y);
 				star.body.velocity.x = 350;
 				//recoil to player from shooting
 				this.body.velocity.x = -70;
 				console.log("shooting right");
 				if(this.pooCount > 8){
-					emitter = game.add.emitter(player.x +25, player.y, 5);
+					emitter = game.add.emitter(this.x + 25, this.y, 5);
 					emitter.makeParticles('turd1');
 					emitter.start(false, 0,0);
 					emitter.setXSpeed(100,400);
 					emitter.setYSpeed(100,200);
 				}else{
-					emitter = game.add.emitter(player.x +25, player.y, 5);
+					emitter = game.add.emitter(this.x + 25, this.y, 5);
 					emitter.makeParticles('turdB');
 					emitter.start(false, 0,0);
 					emitter.setXSpeed(100,400);
@@ -194,13 +194,13 @@ P2layer.prototype.fire = function(isJump) {
 				this.body.velocity.x = 70;
 				console.log("shooting left");
 				if(this.pooCount > 8){
-					emitter = game.add.emitter(player.x -25, player.y, 5);
+					emitter = game.add.emitter(this.x - 25, this.y, 5);
 					emitter.makeParticles('turd1');
 					emitter.start(false, 0,0);
 					emitter.setXSpeed(-100,-400);
 					emitter.setYSpeed(100,200);
 				}else{
-					emitter = game.add.emitter(player.x -25, player.y, 5);
+					emitter = game.add.emitter(this.x - 25, this.y, 5);
 					emitter.makeParticles('turdB');
 					emitter.start(false, 0,0);
 					emitter.setXSpeed(-100,-400);

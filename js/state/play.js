@@ -179,9 +179,8 @@ play.prototype = {
 			bull.body.setCollisionGroup(this.collidePB);
 			bull.body.collides([this.collidePlat, this.collideEnemy]);
 			bull.body.createGroupCallback(this.collidePlat, function(bull, plat){
-				if (bull.velocity != 0) {
-					player.groundSplat(bull.x, bull.y)
-				}
+				if (bull.velocity != 0)
+					player.groundSplat(bull.x, bull.y);
 			});
 		}, this);
 
@@ -240,6 +239,7 @@ play.prototype = {
 	pooMeter: function(pooNum, color) {
 		let obj = null;
 
+		if (pooNum >= 0){
 		// create primitive
 		let g = game.add.graphics();
 		g.beginFill(color);
@@ -251,6 +251,7 @@ play.prototype = {
 		obj.fixedToCamera = true;
 		obj.cameraOffset.setTo(32, 16);
 		g.destroy();
+		}
 
 		return obj;
 	},
@@ -264,7 +265,8 @@ play.prototype = {
 		//game.physics.arcade.moveToObject(this.en3, player);
 
 		// UI update
-		this.ui.destroy();
+		if (this.ui)
+			this.ui.destroy();
 		this.ui = this.pooMeter(player.pooCount, 0x492008);
 		
 		//for end of level
