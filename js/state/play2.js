@@ -18,7 +18,7 @@ play2.prototype = {
 	create: function() {
 		if (!this.music || this.music.isPlaying === false) {
 			this.music = game.add.audio('stage1bgm', 0.5, true);
-			this.music.play();
+			//this.music.play();
 		}
 		// Setting up game world
 		game.world.setBounds(0, 0, 10000, 6000);

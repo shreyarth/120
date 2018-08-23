@@ -261,8 +261,9 @@ play.prototype = {
 		this.ui = this.pooMeter(player.pooCount, 0x492008);
 		
 		//for end of level
-		if(player.x +30 > game.world.width){
-			game.state.start('end');
+		if(player.x +50 > game.world.width){
+			game.state.start('play2');
+			this.music.stop();
 		}
 
 	},
