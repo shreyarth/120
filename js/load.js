@@ -18,7 +18,7 @@ load.prototype = {
 		game.load.image('pepto', 'img/bismol.png');
 		game.load.image('enemy', 'img/enemy.png');
 		game.load.image('turd', 'img/turd.png');
-		game.load.image('porter', 'img/newPorter.png');
+		game.load.image('porter', 'img/finalPorter.png');
 		game.load.image('heller', 'img/HellerDr.png');
 		game.load.image('bcar', 'img/blackCar.png');
 		game.load.image('ycar', 'img/yellowCar.png');
