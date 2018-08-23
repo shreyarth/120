@@ -119,7 +119,7 @@ Enemy.prototype.chasePlayer = function() {
 }
 
 Enemy.prototype.turkey = function(){
-	let turk = game.add.audio('turkey', 0.3);
+	let turk = game.add.audio('turkey', 0.1);
 	turk.allowMultiple = false;
 	turk.play();
 }
