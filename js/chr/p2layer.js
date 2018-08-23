@@ -6,6 +6,8 @@ function P2layer(game, key, frame, bulletKey) {
 	// Animation settings
 	this.animations.add('idle', [0,1], 2);
 	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2, 0], 15);
+	this.animations.add('off', [6, 1], 1);
+	this.animations.add('on', [1, 6], 1);
 	this.animations.add('walk', [7, 8, 9, 10, 11, 10, 9, 8], 15);
 	// Play animation
 	this.animations.play('idle');
@@ -16,6 +18,8 @@ function P2layer(game, key, frame, bulletKey) {
 	move = game.input.keyboard.createCursorKeys();
 	this.game.physics.p2.gravity.y = 500;
 	this.body.setRectangle(this.width, this.height);
+	this.pDown = true;
+	this.state = 'idle';
 	this.direction = 'right';
 	this.isInvincible = false;
 
@@ -43,17 +47,29 @@ P2layer.prototype.constructor = P2layer;
 // override Phaser.Sprite update
 P2layer.prototype.update = function() {
 	if(move.left.isDown){
+		if (this.pDown) {
+			this.animations.play('on');
+			this.pDown = false;
+			this.animations.currentAnim.onComplete.add(function(){console.log('aye');}, this);
+		}
 		this.body.velocity.x = -150;
 		// Flip sprite
 		if (this.direction == 'right')
 			this.scale.x = -1;
 		this.direction = 'left';
+		this.animations.play('walk');
 	}
 	else if(move.right.isDown){
+		if (this.pDown) {
+			this.animations.play('on');
+			this.pDown = false;
+			this.animations.stop(null, true);
+		}
 		this.body.velocity.x = 150;
 		if (this.direction == 'left')
 			this.scale.x = 1;
 		this.direction = 'right';
+		this.animations.play('walk');
 	}
 	else {
 		// Decceleration
@@ -67,7 +83,12 @@ P2layer.prototype.update = function() {
 			if (this.body.velocity.x > 0)
 				this.body.velocity.x = 0;
 		}
-		//this.animations.play('idle');
+		if (this.body.velocity.x == 0 && this.state != 'jump') {
+			this.animations.play('idle');
+			this.status = 'idle';
+		}
+		else
+			this.animations.play(this.animations.currentAnim);
 	}
 	if (move.up.justDown)
     {
@@ -88,6 +109,7 @@ P2layer.prototype.update = function() {
 
 P2layer.prototype.jump = function() {
 	this.animations.play('jump');
+	this.state = 'jump';
 	if (this.body.velocity.y > 0){
 		this.animations.stop(null, true);
 	}
