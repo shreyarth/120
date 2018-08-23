@@ -178,6 +178,7 @@ play.prototype = {
 		player.bullets.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collidePB);
 			bull.body.collides([this.collidePlat, this.collideEnemy]);
+			//bull.body.createGroupCallback(this.collideEnemy, function() {this.}
 		}, this);
 
 		// enemy
