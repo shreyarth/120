@@ -91,7 +91,7 @@ play2.prototype = {
 		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(2680, 1847, 'platform');
-		ground.scale.setTo(100, 1 );
+		ground.scale.setTo(0.3, 1 );
 		ground.body.damping.x = 0;
 		ground.body.angularForce = 100;
 		ground.body.angularVelocity = 1
@@ -104,8 +104,6 @@ play2.prototype = {
 
 		ground = this.platform.create(3480, 2310, 'platform');
 		ground.scale.setTo(100, 1 );
-		ground.body.angularForce = 100;
-		ground.body.angularVelocity = 1
 		ground.body.damping.x = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
@@ -125,7 +123,9 @@ play2.prototype = {
 		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(5580, 3522, 'platform');
-		ground.scale.setTo(100, 1 );
+		ground.scale.setTo(0.4, 1 );
+		ground.body.angularForce = 100;
+		ground.body.angularVelocity = 1
 		ground.body.damping.x = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
@@ -145,7 +145,9 @@ play2.prototype = {
 		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(6880, 4273, 'platform');
-		ground.scale.setTo(100, 1 );
+		ground.scale.setTo(0.1, 1 );
+		ground.body.angularForce = 100;
+		ground.body.angularVelocity = 1
 		ground.body.damping.x = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
