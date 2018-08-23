@@ -1,3 +1,6 @@
+// Global var for player prefab
+var PIXBIT = 8;
+
 function P2layer(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
@@ -42,6 +45,9 @@ function P2layer(game, key, frame, bulletKey) {
 	this.bullets.createMultiple(300, bulletKey);
 	this.bullets.checkWorldBounds = true;
 	this.bullets.outOfBoundsKill = true;
+
+	// Poo splats
+	this.pooSplat = game.add.gropu();
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -255,4 +261,24 @@ P2layer.prototype.hit = function() {
 
 P2layer.prototype.changeState = function(){
 	game.state.start('end');
+}
+
+// This is function for poo remainder on the ground
+P2layer.prototype.groundSplat = function(x, y) {
+	this.getPixbit(x, y);
+}
+
+P2layer.prototype.getPixbit = function(x, y) {
+	let obj = null;
+
+	// create primitive
+	let g = game.add.graphics();
+	g.beginFill(0x492008);
+	g.drawRect(x, y, PIXBIT, PIXBIT);	// Starting point, width, height
+	g.endFill();
+	// transform primitive into sprite and destroy primitive
+	obj = game.add.sprite(x, y, g.generateTexture());
+	g.destroy();
+
+	return obj;
 }
