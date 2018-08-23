@@ -3,7 +3,7 @@ var play2 = function() {
 	this.bullets, this.enemy;
 	this.platform; this.en3;
 	this.obstacle;
-	this.heller = null;
+	this.bg;
 	this.ui, this.music;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
@@ -28,9 +28,24 @@ play2.prototype = {
 		// p2layer.body.reset(30, 100);
 		
 		// Asset implementaion
-		var background = game.add.sprite(0, 0, 'porter');
-		background.width = game.world.width;
-		background.height = game.world.height -32;
+		game.stage.backgroundColor = "#48cd25";
+
+		var background = game.add.sprite(-400, -645, 'heller2');
+		background = game.add.sprite(800, 47, 'heller2');
+		background = game.add.sprite(2000, 739, 'heller2');
+		background = game.add.sprite(3200, 1431, 'heller2');
+		background = game.add.sprite(4400, 2123, 'heller2');
+		background = game.add.sprite(5600, 2815, 'heller2');
+
+		//bg to put in for reaching bookstore
+		background = game.add.sprite(8000, 4640, 'porter');
+
+		//last heller crap
+		background = game.add.sprite(6800, 3507, 'heller2');
+		
+
+		//game.add.tileSprite(0, -300, 8000, 800, 'heller2');
+		
 		
 		// Setting up collision groups
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
@@ -55,11 +70,29 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(1100, 0, 'platform');
+		ground = this.platform.create(4600, 2957, 'platform');
 		ground.scale.setTo(game.world.width, 1 );
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(game.world.width, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		//the ones not calling a sprite are the ceilings
+		ground = this.platform.create(4600, 1950, '');
+		ground.scale.setTo(game.world.width, 1 );
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(game.world.width, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(8900, 5450, 'platform');
+		ground.scale.setTo(game.world.width, 1 );
+		ground.body.clearShapes();
+		ground.body.addRectangle(2300, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
