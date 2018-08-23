@@ -123,6 +123,7 @@ P2layer.prototype.fire = function(isJump) {
 	let star = this.bullets.getFirstExists(false);
 	if(star){
 		game.physics.p2.enable(star);
+
 		if (isJump) {
 			// star.body.restitution.y = 0.2;
 			star.body.gravity.y = 90;
@@ -133,6 +134,11 @@ P2layer.prototype.fire = function(isJump) {
 			console.log("jumping");
 			//var grunt = game.add.audio('grunt', 1);
 			//grunt.play();
+
+			emitter = game.add.emitter(player.x +2, player.y, 5);
+			emitter.makeParticles('turd1');
+			emitter.start(false, 0,0);
+			emitter.setYSpeed(100,400);
 		}
 		else {
 
@@ -146,6 +152,11 @@ P2layer.prototype.fire = function(isJump) {
 				//recoil to player from shooting
 				this.body.velocity.x = -70;
 				console.log("shooting right");
+				emitter = game.add.emitter(player.x +25, player.y, 5);
+				emitter.makeParticles('turd1');
+				emitter.start(false, 0,0);
+				emitter.setXSpeed(100,400);
+				emitter.setYSpeed(100,200);
 			}
 			else {
 				star.reset(player.x - 10, player.y);
@@ -153,6 +164,11 @@ P2layer.prototype.fire = function(isJump) {
 				//recoil 
 				this.body.velocity.x = 70;
 				console.log("shooting left");
+				emitter = game.add.emitter(player.x -25, player.y, 5);
+				emitter.makeParticles('turd1');
+				emitter.start(false, 0,0);
+				emitter.setXSpeed(-100,-400);
+				emitter.setYSpeed(100,200);
 			}
 		}
 		console.log(this.pooCount);
