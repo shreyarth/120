@@ -32,10 +32,15 @@ function P2layer(game, key, frame, bulletKey) {
 	// Character info
 	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
-		game.timer.loop(4500, function() {
-			this.pooCount++;
-			this.death();
-		}, this);
+	game.timer.loop(4500, function() {
+		this.pooCount++;
+		this.death();
+		this.pooSplat.forEach(function(poot) {
+			poot.alpha -= 0.1;
+			if (poot.alpha == 0)
+				poot.destroy();
+		});
+	}, this);
 	game.timer.start();
 
 	// Bullets
@@ -47,7 +52,7 @@ function P2layer(game, key, frame, bulletKey) {
 	this.bullets.outOfBoundsKill = true;
 
 	// Poo splats
-	this.pooSplat = game.add.gropu();
+	this.pooSplat = game.add.group();
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -265,7 +270,7 @@ P2layer.prototype.changeState = function(){
 
 // This is function for poo remainder on the ground
 P2layer.prototype.groundSplat = function(x, y) {
-	this.getPixbit(x, y);
+	let ps = this.pooSplat.create(this.getPixbit(x, y));
 }
 
 P2layer.prototype.getPixbit = function(x, y) {
