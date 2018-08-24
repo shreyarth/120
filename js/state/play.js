@@ -5,18 +5,11 @@ var play = function() {
 	this.obstacle;
 	this.heller = null;
 	this.ui, this.music;
-	this.toilet; this.toiletCount;
+	this.toil; this.toiletCount;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;
 }
-function toiletmeter(){
-	emitter = game.add.emitter(this.x - 25, this.y, 5);
-	emitter.makeParticles('turd1');
-	emitter.start(false, 0,0);
-	emitter.setYSpeed(-100,-500);
-	console.log("toilet not working");
-	};
 
 play.prototype = {
 	preload: function() {
@@ -173,11 +166,13 @@ play.prototype = {
 		}, this);
 
 		//toilets, player must collide with all before moving on
-		this.toilet = game.add.group();
-		this.toilet.physicsBodyType = Phaser.Physics.P2JS;
-		this.toilet.enableBody = true;
+		this.toil = game.add.group();
+		this.toil.physicsBodyType = Phaser.Physics.P2JS;
+		this.toil.enableBody = true;
 
-		let toilets = this.toilet.create(297, 746, 'toilet');
+		let toilets = new Toilet(game, 297, 746, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
@@ -576,14 +571,6 @@ play.prototype = {
 		// 	game.physics.arcade.moveToObject(enemy, player);
 		// }
 		//game.physics.arcade.moveToObject(this.en3, player);
-
-		//toilets
-		if(player.x > this.toilet.x - 20) 
-			//&&
-			//(this.toilet.y < player.y - 5 || this.toilet.y > player.y + 5))
-			{
-			toiletmeter();
-		}
 
 		// UI update
 		if (this.ui)
