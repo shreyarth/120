@@ -147,7 +147,7 @@ P2layer.prototype.fire = function(isJump) {
 			star.body.velocity.y = 250;
 			star.body.angle = 90;
 			console.log("jumping");
-			var grunt = game.add.audio('grunt', 0.1);
+			var grunt = game.add.audio('grunt', 0.5);
 			grunt.play();
 			if(this.pooCount > 8){
 				emitter = game.add.emitter(player.x +2, player.y, 5);

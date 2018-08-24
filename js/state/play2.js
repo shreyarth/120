@@ -16,37 +16,29 @@ play2.prototype = {
 		
 	},
 	create: function() {
-		if (!this.music || this.music.isPlaying === false) {
+		if (!this.music) {
 			this.music = game.add.audio('stage1bgm', 0.5, true);
-			//this.music.play();
+			if (this.music.isPlaying === false)
+				this.music.play();
 		}
 		// Setting up game world
 		game.world.setBounds(0, 0, 10000, 6000);
 		game.physics.startSystem(Phaser.Physics.P2JS);
 		game.physics.p2.setImpactEvents(true);
-
-		//
-		// p2layer.body.reset(30, 100);
 		
 		// Asset implementaion
 		game.stage.backgroundColor = "#48cd25";
 
+		//bg to put in for reaching bookstore
 		var background = game.add.sprite(-400, -645, 'heller2');
 		background = game.add.sprite(800, 47, 'heller2');
 		background = game.add.sprite(2000, 739, 'heller2');
 		background = game.add.sprite(3200, 1431, 'heller2');
 		background = game.add.sprite(4400, 2123, 'heller2');
 		background = game.add.sprite(5600, 2815, 'heller2');
-
-		//bg to put in for reaching bookstore
 		background = game.add.sprite(8000, 4640, 'porter');
-
 		//last heller crap
 		background = game.add.sprite(6800, 3507, 'heller2');
-		
-
-		//game.add.tileSprite(0, -300, 8000, 800, 'heller2');
-		
 		
 		// Setting up collision groups
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
@@ -329,11 +321,6 @@ play2.prototype = {
 			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 		}
-
-		//test for 2nd enemy on screen
-		// en = new Enemy(game, 30, 1000, 'enemy');
-		// game.add.existing(en);
-		// this.enemy.add(en);
 
 		//test for flying enemy
 		for(var i = 0; i < 5; ++i){

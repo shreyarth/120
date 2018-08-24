@@ -164,12 +164,6 @@ play.prototype = {
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
 
-		// the background wrap 
-		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
-		// wrapGround.scale.setTo(2,0.8);
-		// wrapGround.width = game.width;
-		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
-
 		// player
 		player = new P2layer(game, 'player', null, 'poo');
 		game.add.existing(player);
