@@ -5,11 +5,18 @@ var play = function() {
 	this.obstacle;
 	this.heller = null;
 	this.ui, this.music;
-	this.toilet;
+	this.toilet; this.toiletCount;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;
 }
+function toiletmeter(){
+	emitter = game.add.emitter(this.x - 25, this.y, 5);
+	emitter.makeParticles('turd1');
+	emitter.start(false, 0,0);
+	emitter.setYSpeed(-100,-500);
+	console.log("toilet not working");
+	};
 
 play.prototype = {
 	preload: function() {
@@ -170,10 +177,9 @@ play.prototype = {
 		this.toilet.physicsBodyType = Phaser.Physics.P2JS;
 		this.toilet.enableBody = true;
 
-		let toilets = this.toilet.create(1000, 400, 'toilet');
-		toilets.scale.setTo(0.2,0.2);
+		let toilets = this.toilet.create(297, 746, 'toilet');
 		toilets.body.kinematic = true;
-
+		toilets.body.debug = true;
 
 		// player
 		player = new P2layer(game, 'player', null, 'poo');
@@ -570,6 +576,14 @@ play.prototype = {
 		// 	game.physics.arcade.moveToObject(enemy, player);
 		// }
 		//game.physics.arcade.moveToObject(this.en3, player);
+
+		//toilets
+		if(player.x > this.toilet.x - 20) 
+			//&&
+			//(this.toilet.y < player.y - 5 || this.toilet.y > player.y + 5))
+			{
+			toiletmeter();
+		}
 
 		// UI update
 		if (this.ui)
