@@ -100,17 +100,17 @@ Enemy.prototype.fire = function() {
 			star.scale.setTo(0.05,0.05);
 			game.physics.enable(this, Phaser.Physics.ARCADE);
 			if(this.body.x > player.x){
-				if(this.body.x < player.x+500){
+				if(this.body.x < player.x+400){
 					star.reset(this.x + 10, this.y - 10);
-					star.body.velocity.x = -200;
+					star.body.velocity.x = -150;
 					star.body.velocity.y = -200
 					throwing.play();
 				}
 			}
 			else {
-				if(this.body.x > player.x-500){
+				if(this.body.x > player.x-400){
 					star.reset(this.x - 10, this.y - 10);
-					star.body.velocity.x = 200;
+					star.body.velocity.x = 150;
 					star.body.velocity.y = -200;	
 					throwing.play();			
 				}
