@@ -180,7 +180,7 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 		
-		//platforms for enemies in order, left to right
+		//platforms and enemies in order, left to right
 
 		let ePlat = this.platform.create(700, 250, 'star');
 		ePlat.scale.setTo(1, 1);
@@ -408,24 +408,143 @@ play2.prototype = {
 			bull.body.debug = true;
 		}, this);
 
-		// enemy
+		//enemy
 		this.enemy = game.add.group();
 		this.enemy.enableBody = true;
 		this.enemy.physicsBodyType = Phaser.Physics.P2JS;
 		
-		for(var i = 0; i < 20; ++i){
-			let en = new Enemy(game, game.rnd.integerInRange(600,7700),
-				game.rnd.integerInRange(200,600), 'enemy', null, 'pepto');
-			game.add.existing(en);
-			this.enemy.add(en);
-			en.body.setCollisionGroup(this.collideEnemy);
-			en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-			en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
-			en.bulletE.forEach(function(bull) {
+		//enemies on platforms, left to right
+		let en = new Enemy(game, 710, 220, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collideEB);
 			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
-		}
+
+		en = new Enemy(game, 1535, 410, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 1810, 922, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 2532, 1140, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 3090, 1520, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+		
+		en = new Enemy(game, 3490, 1620, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 4030, 1965, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 4270, 2430, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 5460, 2920, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 6010, 3120, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 6710, 3720, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 7315, 4090, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
 
 		//test for flying enemy
 		for(var i = 0; i < 5; ++i){
