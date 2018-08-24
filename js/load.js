@@ -39,6 +39,7 @@ load.prototype = {
 		game.load.image('wreckC', 'img/wreckedcar.png');
 		game.load.image('wreckB', 'img/wreckedbus.png');
 		game.load.image('deer', 'img/deer1.png');
+		game.load.image('toilet', "img/toilet.png");
 
 		//sounds
 		game.load.audio('fart', 'audio/fart.mp3');

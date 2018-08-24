@@ -5,6 +5,7 @@ var play = function() {
 	this.obstacle;
 	this.heller = null;
 	this.ui, this.music;
+	this.toilet;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;
@@ -163,6 +164,16 @@ play.prototype = {
 			plat.body.setCollisionGroup(this.collidePlat);
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
+
+		//toilets, player must collide with all before moving on
+		this.toilet = game.add.group();
+		this.toilet.physicsBodyType = Phaser.Physics.P2JS;
+		this.toilet.enableBody = true;
+
+		let toilets = this.toilet.create(1000, 400, 'toilet');
+		toilets.scale.setTo(0.2,0.2);
+		toilets.body.kinematic = true;
+
 
 		// player
 		player = new P2layer(game, 'player', null, 'poo');
