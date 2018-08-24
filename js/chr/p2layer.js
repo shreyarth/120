@@ -260,6 +260,7 @@ P2layer.prototype.hit = function() {
 	if (this.isInvincible) return;
 	// Else, run this code
 	this.isInvincible = true;
+	game.camera.shake(0.003, 100);
 	var inviTime = game.time.create(true);
 	// Blinking sprite while invincible
 	// timer.repeat(delay time, num repeat, function(pls don't touch this), ref(also, don't touch this))

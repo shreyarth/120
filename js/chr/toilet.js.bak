@@ -34,7 +34,8 @@ Toilet.prototype.toiletmeter = function(){
 };
 // override Phaser.Sprite update
 Toilet.prototype.update = function() {
-	if(Math.abs(this.x - player.x) < 5 && Math.abs(this.y - player.y) < 5){
+	if(this.x > player.x -5 && this.x < player.x +5
+		&& this.y > player.y -5 && this.y < player.y +5){
 		this.toiletmeter();
 	}
 }
