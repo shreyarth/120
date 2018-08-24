@@ -123,6 +123,9 @@ P2layer.prototype.update = function() {
     	//this.body.data.gravityScale = 5;
 		
     }
+    if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
+    	console.log(player.x, player.y);
+    }
     // Attack move
 	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
 		this.fire(false);
