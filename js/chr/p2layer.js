@@ -113,11 +113,12 @@ P2layer.prototype.update = function() {
 	}
 	if (move.up.justDown)
     {
-    	this.body.velocity.y = -370;
+    	this.body.velocity.y = -600;
 		this.jump();
 		this.fire(true);
     }
     else{
+		this.body.velocity.y += 10;
     	//game.physics.p2.gravity.y = 1000;
     	//this.body.data.gravityScale = 5;
 		
