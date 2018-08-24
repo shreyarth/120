@@ -94,6 +94,8 @@ Enemy.prototype.pooModifier = function() {
 Enemy.prototype.fire = function() {
 	if (this.alive){
 		let star = this.bulletE.getFirstExists(false);
+		var throwing = game.add.audio("throw", 0.2);
+		throwing.play();
 		
 		if(star){
 			star.scale.setTo(0.05,0.05);

@@ -48,6 +48,7 @@ load.prototype = {
 		game.load.audio('stage1bgm', 'audio/actionMusic.wav');
 		game.load.audio('grunt', 'audio/grunt2.wav');
 		game.load.audio('splat', 'audio/splat.wav');
+		game.load.audio('throw', 'audio/eThrow.mp3');
 	},
 	create: function() {
 		game.state.start('menu');
