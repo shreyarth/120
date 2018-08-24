@@ -20,6 +20,7 @@ game.state.add('play', play);
 game.state.add('play2', play2);
 game.state.add('boss', boss);
 game.state.add('end', end);
+game.state.add('tutorial', tutorial);
 
 // Start from menu screen
 // Might need separate loading screen in case asset loading takes time

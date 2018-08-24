@@ -53,6 +53,6 @@ load.prototype = {
 		game.load.audio('throw', 'audio/eThrow.mp3');
 	},
 	create: function() {
-		game.state.start('menu');
+		game.state.start('tutorial');
 	}
 }
