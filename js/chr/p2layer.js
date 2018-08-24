@@ -7,7 +7,7 @@ function P2layer(game, key, frame, bulletKey) {
 	//Phaser.Sprite.call(this, game, 30, 500, key);
 	//Phaser.Sprite.call(this, game, 30, 100, key);
 	//for level 2 testing
-	Phaser.Sprite.call(this, game, 30, 50, key);
+	Phaser.Sprite.call(this, game, 6600, 100, key);
 	// Animation settings
 	this.animations.add('idle', [0,1], 2);
 	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2, 0], 15);

@@ -9,7 +9,7 @@ function Toilet(game, x, y, key) {
 
 	// physics crap
 	game.physics.p2.enable(this);
-	this.body.fixedRotation = true;
+	
 	//this.game.physics.p2.gravity.y = 300;
 	this.body.collideWorldBounds = true;
 	
@@ -36,7 +36,7 @@ Toilet.prototype.toiletmeter = function(){
 Toilet.prototype.update = function() {
 
 	if(this.x > player.x -5 && this.x < player.x +5
-		&& this.y > player.y -5 && this.y < player.y +5){
+		&& this.y > player.y -10 && this.y < player.y +10){
 		this.toiletmeter();
 	}
 }
