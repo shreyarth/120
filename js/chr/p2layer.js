@@ -21,7 +21,9 @@ function P2layer(game, key, frame, bulletKey) {
 
 	this.body.fixedRotation = true;
 	move = game.input.keyboard.createCursorKeys();
-	this.game.physics.p2.gravity.y = 500;
+	this.game.physics.p2.gravity.y = 100;
+	this.body.data.gravityScale = 2;
+	//this.body.mass = 200;
 	this.body.setRectangle(this.width, this.height);
 	this.pDown = true;
 	this.state = 'idle';
@@ -111,7 +113,7 @@ P2layer.prototype.update = function() {
 	}
 	if (move.up.justDown)
     {
-    	this.body.velocity.y = -300;
+    	this.body.velocity.y = -370;
 		this.jump();
 		this.fire(true);
     }
