@@ -16,6 +16,7 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	this.body.collideWorldBounds = true;
 	// needs enemy type
 	this.type = type;
+	this.friction = false;
 
 	//enemy bullets
 	this.bulletE = game.add.group();
@@ -52,6 +53,18 @@ Enemy.prototype.update = function() {
 	if(this.type == 'kamikaze_turkey'){
 		this.boom();
 	}
+	if(this.friction == true){
+		if (this.body.velocity.x > 0) {
+			this.body.velocity.x -= 300;
+			if (this.body.velocity.x < 0)
+				this.body.velocity.x = 0;
+		}
+		else if (this.body.velocity.x > 0) {
+			this.body.velocity.x += 300;
+			if (this.body.velocity.x > 0)
+				this.body.velocity.x = 0;
+		}
+	}else{}
 }
 
 Enemy.prototype.collideBody = function() {

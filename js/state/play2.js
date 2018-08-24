@@ -316,6 +316,7 @@ play2.prototype = {
 			this.enemy.add(en);
 			en.body.setCollisionGroup(this.collideEnemy);
 			en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+			en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
 			en.bulletE.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collideEB);
 			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
