@@ -2,6 +2,7 @@ var play2 = function() {
 	// Global state variables
 	this.bullets, this.enemy;
 	this.platform; this.en3;
+	this.enemyplat;
 	this.obstacle;
 	this.ui, this.music;
 
@@ -180,7 +181,115 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 		
-		//platforms in order, left to right
+		//platforms for enemies in order, left to right
+
+		this.enemyplat = game.add.group();
+		this.enemyplat.physicsBodyType = Phaser.Physics.P2JS;
+		this.enemyplat.enableBody = true;
+
+		let ePlat = this.enemyplat.create(700, 250, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(1525, 440, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(1800, 952, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(2522, 1170, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(3080, 1550, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(3480, 1650, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(4020, 1995, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(4260, 2460, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(5450, 2950, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(6000, 3150, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(6700, 3750, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(7305, 4120, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		ePlat = this.enemyplat.create(7870, 4450, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
 		
 		// let platforms = this.platform.create(800, 613, 'bus');
 		// platforms.body.kinematic = true;
