@@ -56,6 +56,8 @@ play.prototype = {
 		let platforms = this.platform.create(800, 682, 'bus');
 		platforms.body.kinematic = true;
 		platforms.body.debug = true;
+		platforms.body.clearShapes();
+		platforms.body.addRectangle(394, 176);
 
 		platforms = this.platform.create(1240, 722, 'rcar');
 		platforms.body.kinematic = true;
@@ -93,6 +95,8 @@ play.prototype = {
 
 		platforms = this.platform.create(3520, 622, 'bus');
 		platforms.body.kinematic = true;
+		platforms.body.clearShapes();
+		platforms.body.addRectangle(394, 176);
 		platforms.body.debug = true;
 		platforms.body.angle = 16;
 		platforms.angle = 180;
@@ -157,7 +161,9 @@ play.prototype = {
 
 		platforms = this.platform.create(6730, 400, 'wreckB');
 		platforms.body.kinematic = true;
-		platforms.body.angle = 90;
+		platforms.body.clearShapes();
+		platforms.body.addRectangle(160, 276);
+		platforms.body.angle = 80;
 		platforms.body.debug = true;
 
 		this.platform.forEach(function(plat) {
@@ -170,10 +176,35 @@ play.prototype = {
 		this.toil.physicsBodyType = Phaser.Physics.P2JS;
 		this.toil.enableBody = true;
 
-		let toilets = new Toilet(game, 297, 746, 'toilet');
+		let toilets = new Toilet(game, 815, 559, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 1472, 224, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 3087, 756, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 6129, 680, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 6767, 275, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.angle = -10;
 		toilets.body.debug = true;
 
 		// player

@@ -9,7 +9,7 @@ function Toilet(game, x, y, key) {
 
 	// physics crap
 	game.physics.p2.enable(this);
-	this.body.fixedRotation = true;
+	
 	//this.game.physics.p2.gravity.y = 300;
 	this.body.collideWorldBounds = true;
 	
@@ -25,9 +25,9 @@ Toilet.prototype = Object.create(Phaser.Sprite.prototype);
 Toilet.prototype.constructor = Toilet;
 
 Toilet.prototype.toiletmeter = function(){
-	emitter = game.add.emitter(this.x - 10, this.y, 80);
-	emitter.makeParticles('turd1');
-	emitter.start(false, 0,2);
+	emitter = game.add.emitter(this.x - 10, this.y, 40);
+	emitter.makeParticles('twater');
+	emitter.start(false, 0,0);
 	emitter.setYSpeed(-50,-150);
 	console.log("toilet not working");
 
