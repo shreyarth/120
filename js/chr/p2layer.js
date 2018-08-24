@@ -92,12 +92,12 @@ P2layer.prototype.update = function() {
 		// Decceleration
 		console.log('friction on');
 		if (this.body.velocity.x > 0) {
-			this.body.velocity.x -= 3;
+			this.body.velocity.x -= 9;
 			if (this.body.velocity.x < 0)
 				this.body.velocity.x = 0;
 		}
 		else if (this.body.velocity.x > 0) {
-			this.body.velocity.x += 3;
+			this.body.velocity.x += 9;
 			if (this.body.velocity.x > 0)
 				this.body.velocity.x = 0;
 		}
