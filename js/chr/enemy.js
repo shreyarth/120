@@ -75,16 +75,16 @@ Enemy.prototype.collideBody = function() {
 }
 
 Enemy.prototype.pooModifier = function() {
-		let rando = game.rnd.integerInRange(1, 1000);
-		if (rando % 4 == 0) {
-			if(player.pooCount > 15)
-				player.pooCount += 1;
-			else
+		//let rando = game.rnd.integerInRange(1, 1000);
+		//if (rando % 4 == 0) {
+			//if(player.pooCount > 15)
+				//player.pooCount += 1;
+			//else
 				player.pooCount -= 1;
-		}
-		else {
-			player.pooCount += 1;
-		}
+		//}
+		//else {
+			//player.pooCount += 1;
+		//}
 
 		console.log(player.pooCount);
 		player.death();
@@ -100,18 +100,18 @@ Enemy.prototype.fire = function() {
 			star.scale.setTo(0.05,0.05);
 			game.physics.enable(this, Phaser.Physics.ARCADE);
 			if(this.body.x > player.x){
-				if(this.body.x < player.x+400){
+				if(this.body.x < player.x + game.rnd.integerInRange(250,400)){
 					star.reset(this.x + 10, this.y - 10);
-					star.body.velocity.x = -150;
-					star.body.velocity.y = -200
+					star.body.velocity.x = game.rnd.integerInRange(-200, -100);
+					star.body.velocity.y = game.rnd.integerInRange(-250, -100);	
 					throwing.play();
 				}
 			}
 			else {
-				if(this.body.x > player.x-400){
+				if(this.body.x > player.x - game.rnd.integerInRange(250, 400)){
 					star.reset(this.x - 10, this.y - 10);
-					star.body.velocity.x = 150;
-					star.body.velocity.y = -200;	
+					star.body.velocity.x = game.rnd.integerInRange(100, 200);
+					star.body.velocity.y = game.rnd.integerInRange(-250, -100);	
 					throwing.play();			
 				}
 			}

@@ -35,7 +35,7 @@ function P2layer(game, key, frame, bulletKey) {
 	// Character info
 	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
-	game.timer.loop(2000, function() {
+	game.timer.loop(1800, function() {
 		this.pooCount++;
 		this.death();
 		}, this);
