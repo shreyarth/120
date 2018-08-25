@@ -646,6 +646,9 @@ play.prototype = {
 		// this.enemy.add(en);
 
 		//test for flying enemy
+		// for(var i = 0; i < 20; ++i){
+		// 	game.time.events.add(Phaser.Timer.SECOND * 3, this.kamikaze, this);
+		// }
 		for(var i = 0; i < 7; ++i){
 			enfl = new Enemy(game, game.rnd.integerInRange(100,5000),
 			 100, 'enemy', null, null, 'kamikaze_turkey');
@@ -653,7 +656,8 @@ play.prototype = {
 			this.enemy.add(enfl);
 			enfl.body.setCollisionGroup(this.collideEnemy);
 			enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-			enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+		 	enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+		 	enfl.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, enfl);
 		}
 
 		//sign for end of level
@@ -708,6 +712,17 @@ play.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
+	},
+
+	kamikaze: function() {
+		enfl = new Enemy(game, game.rnd.integerInRange(100,500),
+			 100, 'enemy', null, null, 'kamikaze_turkey');
+		game.add.existing(enfl);
+		this.enemy.add(enfl);
+		enfl.body.setCollisionGroup(this.collideEnemy);
+		enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+		enfl.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, enfl);
 	}
 	// Char control is implemented in player.js
 }
