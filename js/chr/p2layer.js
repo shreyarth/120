@@ -9,11 +9,12 @@ function P2layer(game, key, frame, bulletKey) {
 	//for level 2 testing
 	//Phaser.Sprite.call(this, game, 5940, 3610, key);
 	// Animation settings
-	this.animations.add('idle', [0,1], 2);
-	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2, 0], 15);
+	this.animations.add('idle', [7], 2);
+	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2], 15);
 	this.animations.add('off', [6, 1], 1);
 	this.animations.add('on', [1, 6], 1);
 	this.animations.add('walk', [7, 8, 9, 10, 11, 10, 9, 8], 15);
+	this.animations.add('shoot', [6, 1, 1, 6], 15);
 	// Play animation
 	this.animations.play('idle');
 
@@ -58,31 +59,27 @@ P2layer.prototype.constructor = P2layer;
 
 // override Phaser.Sprite update
 P2layer.prototype.update = function() {
+	// this.animations.play('idle');
 	if (this.alive) {
 		if(move.left.isDown){
-			if (this.pDown) {
-				this.animations.play('on');
-				this.pDown = false;
-				this.animations.currentAnim.onComplete.add(function(){console.log('aye');}, this);
-			}
 			this.body.velocity.x = -150;
 			// Flip sprite
 			if (this.direction == 'right')
 				this.scale.x = -1;
 			this.direction = 'left';
 			this.animations.play('walk');
+			this.state = 'walk';
+			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
+
 		}
 		else if(move.right.isDown){
-			if (this.pDown) {
-				this.animations.play('on');
-				this.pDown = false;
-				this.animations.stop(null, true);
-			}
 			this.body.velocity.x = 150;
 			if (this.direction == 'left')
 				this.scale.x = 1;
 			this.direction = 'right';
 			this.animations.play('walk');
+			this.state = 'walk';
+			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
 		}
 		else if(this.friction == true) {
 			// Decceleration
@@ -109,9 +106,14 @@ P2layer.prototype.update = function() {
 		}
 		if (move.up.justDown)
 		{
+			if(this.state == 'walk'){
+				this.animations.stop(null, true);	
+			}
 			this.body.velocity.y = -600;
-			this.jump();
+			this.animations.play('jump');
+			this.state = 'jump';
 			this.fire(true);
+			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
 		}
 		else{
 			this.body.velocity.y += 10;
@@ -132,13 +134,6 @@ P2layer.prototype.update = function() {
 	}
 }
 
-P2layer.prototype.jump = function() {
-	this.animations.play('jump');
-	this.state = 'jump';
-	if (this.body.velocity.y > 0){
-		this.animations.stop(null, true);
-	}
-}
 
 // isJump: set to true if its not attack
 P2layer.prototype.fire = function(isJump) {
@@ -169,6 +164,7 @@ P2layer.prototype.fire = function(isJump) {
 			star.body.collideWorldBounds = false;
 			// Need to tweak numbers for starting point for shooting
 			if (this.direction == 'right') {
+				this.animations.play('shoot');
 				star.reset(this.x + 10, this.y);
 				star.body.velocity.x = 350;
 				//recoil to player from shooting
@@ -182,6 +178,8 @@ P2layer.prototype.fire = function(isJump) {
 				emitter.setXSpeed(100,400);
 			}
 			else {
+				this.scale.x = -1;
+				this.animations.play('shoot');
 				star.reset(player.x - 10, player.y);
 				star.body.velocity.x = -350;
 				//recoil 
