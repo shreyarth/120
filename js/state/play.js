@@ -172,6 +172,9 @@ play.prototype = {
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
 
+		//sign for end of level
+		game.add.sprite(7000, 500, 'sign');
+
 		//toilets, player must collide with all before moving on
 		this.toil = game.add.group();
 		this.toil.physicsBodyType = Phaser.Physics.P2JS;
@@ -646,18 +649,36 @@ play.prototype = {
 		// this.enemy.add(en);
 
 		//test for flying enemy
-		for(var i = 0; i < 7; ++i){
-			enfl = new Enemy(game, game.rnd.integerInRange(100,600),
-			 100, 'enemy', null, null, 'kamikaze_turkey');
+		// for(var i = 0; i < 20; ++i){
+		// 	game.time.events.add(Phaser.Timer.SECOND * 3, this.kamikaze, this);
+		// }
+		for(var i = 0; i < 15; ++i){
+			enfl = new Enemy(game, game.rnd.integerInRange(1800,8000),
+			 game.rnd.integerInRange(80, 250), 'enemy', null, null, 'kamikaze_turkey');
+
 			game.add.existing(enfl);
 			this.enemy.add(enfl);
 			enfl.body.setCollisionGroup(this.collideEnemy);
 			enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-			enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+		 	enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+		 	enfl.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, enfl);
 		}
 
-		//sign for end of level
-		game.add.sprite(7000, 500, 'sign');
+		enfl = new Enemy(game, 700, 250, 'enemy', null, null, 'kamikaze_turkey');
+		game.add.existing(enfl);
+		this.enemy.add(enfl);
+		enfl.body.setCollisionGroup(this.collideEnemy);
+		enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+
+		enfl = new Enemy(game, 600, 250, 'enemy', null, null, 'kamikaze_turkey');
+		game.add.existing(enfl);
+		this.enemy.add(enfl);
+		enfl.body.velocity.x = -1;
+		enfl.body.setCollisionGroup(this.collideEnemy);
+		enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+
 		//sign.body.immovable = true;
 		//sign.scale.setTo(1,1);
 		// Need to fix sign in the air (no collision) <- can we just make it as a part of bg?
@@ -708,6 +729,17 @@ play.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
+	},
+
+	kamikaze: function() {
+		enfl = new Enemy(game, game.rnd.integerInRange(100,500),
+			 100, 'enemy', null, null, 'kamikaze_turkey');
+		game.add.existing(enfl);
+		this.enemy.add(enfl);
+		enfl.body.setCollisionGroup(this.collideEnemy);
+		enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+		enfl.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, enfl);
 	}
 	// Char control is implemented in player.js
 }

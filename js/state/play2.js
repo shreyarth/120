@@ -305,18 +305,36 @@ play2.prototype = {
 		toilets.body.angle = 30;
 		toilets.body.debug = true;
 
+		toilets = new Toilet(game, 1530, 390, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
 		toilets = new Toilet(game, 2530, 1120, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
-		//toilets.body.angle = 30;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 3468, 2242, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.angle = 30;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 4034, 1945, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
-		//toilets.body.angle = 30;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 5020, 3145, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.angle = 30;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 6040, 3727, 'toilet');
@@ -330,21 +348,18 @@ play2.prototype = {
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
-		//toilets.body.angle = 30;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 7700, 4900, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
-		//toilets.body.angle = 30;
 		toilets.body.debug = true;
 
-		toilets = new Toilet(game, 9145, 4930, 'toilet');
+		toilets = new Toilet(game, 9570, 5015, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
-		//toilets.body.angle = 30;
 		toilets.body.debug = true;
 
 		this.platform.forEach(function(plat) {
@@ -542,6 +557,50 @@ play2.prototype = {
 		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
+		en = new Enemy(game, 8951, 5360, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 9231, 5360, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 9451, 5360, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 9751, 5360, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.bulletE.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideEB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
 		//test for flying enemy
 		for(var i = 0; i < 5; ++i){
 			en = new Enemy(game, game.rnd.integerInRange(1000,4800),
@@ -551,9 +610,14 @@ play2.prototype = {
 		}
 
 		//sign for end of level
-		let sign = this.platform.create(4800, 900, 'sign');
+		let sign = this.platform.create(9570, 5100, 'sign');
+		sign.scale.setTo(1, 1);
+		sign.body.clearShapes();
+		sign.body.addRectangle(150, 100);
+		sign.body.kinematic = true;
+		sign.body.debug = true;
+		sign.body.setCollisionGroup(this.collidePlat);
 		sign.body.immovable = true;
-		sign.scale.setTo(1,1);
 		// Need to fix sign in the air (no collision) <- can we just make it as a part of bg?
 
 		// Set camera to platformer follow up
