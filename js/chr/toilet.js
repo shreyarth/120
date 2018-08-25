@@ -24,6 +24,13 @@ function Toilet(game, x, y, key) {
 Toilet.prototype = Object.create(Phaser.Sprite.prototype);
 Toilet.prototype.constructor = Toilet;
 
+// override Phaser.Sprite update
+Toilet.prototype.update = function() {
+	if(Math.abs(this.x - player.x) < 5 && Math.abs(this.y - player.y) < 10){
+		this.toiletmeter();
+	}
+}
+
 Toilet.prototype.toiletmeter = function(){
 	emitter = game.add.emitter(this.x - 10, this.y, 10);
 	emitter.makeParticles('twater');
@@ -32,11 +39,4 @@ Toilet.prototype.toiletmeter = function(){
 	console.log("toilet not working");
 	game.time.events.add(2600, function() {this.destroy();}, emitter);
 	game.time.events.add(500, function() {this.destroy();}, this);
-};
-// override Phaser.Sprite update
-Toilet.prototype.update = function() {
-	if(Math.abs(this.x - player.x) < 5 && Math.abs(this.y - player.y) < 10){
-		this.toiletmeter();
-	}
 }
-
