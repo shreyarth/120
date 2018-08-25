@@ -150,6 +150,5 @@ Enemy.prototype.boom = function(){
 
 	if(Math.abs(this.x - player.x) < 100){
 		this.body.velocity.y = 1000;
-
 	}
 }
