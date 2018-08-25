@@ -26,6 +26,8 @@ load.prototype = {
 		game.load.image('bcar', 'img/blackCar.png');
 		game.load.image('ycar', 'img/yellowCar.png');
 		game.load.image('wcar', 'img/whitecar.png');
+		game.load.image('nerdhill', 'img/nerdhill.png');
+		game.load.image('slopehill', 'img/slopednhill.png');
 		
 		game.load.physics('physicsbox', 'img/physicsbox.json', null, Phaser.Physics.LIME_CORONA_JSON);
 
@@ -51,6 +53,7 @@ load.prototype = {
 		game.load.audio('grunt', 'audio/grunt2.wav');
 		game.load.audio('splat', 'audio/splat.wav');
 		game.load.audio('throw', 'audio/eThrow.mp3');
+		game.load.audio('bosslevel', 'audio/finalBossMusic.wav');
 	},
 	create: function() {
 		game.state.start('tutorial');
