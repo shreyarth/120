@@ -37,12 +37,7 @@ function P2layer(game, key, frame, bulletKey) {
 	game.timer.loop(4500, function() {
 		this.pooCount++;
 		this.death();
-		this.pooSplat.forEach(function(poot) {
-			poot.alpha -= 0.1;
-			if (poot.alpha == 0)
-				poot.destroy();
-		});
-	}, this);
+		}, this);
 	game.timer.start();
 
 	// Bullets

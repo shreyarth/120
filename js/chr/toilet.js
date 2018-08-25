@@ -31,7 +31,7 @@ Toilet.prototype.toiletmeter = function(){
 	emitter.setYSpeed(-50,-150);
 	console.log("toilet not working");
 	game.time.events.add(2600, function() {this.destroy();}, emitter);
-
+	game.time.events.add(500, function() {this.destroy();}, this);
 };
 // override Phaser.Sprite update
 Toilet.prototype.update = function() {
