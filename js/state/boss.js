@@ -13,6 +13,10 @@ boss.prototype = {
 	},
 	create: function() {
 		// Asset implementaion
+		if (!this.music || this.music.isPlaying === false) {
+			this.music = game.add.audio('bosslevel', 0.5, true);
+			this.music.play();
+		}
 		game.world.setBounds( 0, 0, 1000, 800);
 		console.log("play state to check implementation");
 		game.physics.startSystem(Phaser.Physics.P2jS);

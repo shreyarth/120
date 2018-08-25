@@ -27,7 +27,8 @@ play.prototype = {
 		
 		// Asset implementaion
 		var background = game.add.sprite(0, 0, 'porter');
-		game.add.tileSprite(1800, 0, 6200, 800, 'heller');
+		game.add.tileSprite(1800, 0, 7000, 800, 'heller');
+		var background2 = game.add.sprite(7000, 0, 'nerdhill');
 
 		// Setting up collision groups
 		this.collidePlayer = game.physics.p2.createCollisionGroup();

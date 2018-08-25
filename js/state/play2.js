@@ -30,9 +30,9 @@ play2.prototype = {
 		game.stage.backgroundColor = "#48cd25";
 
 		//bg to put in for reaching bookstore
-		var background = game.add.sprite(-400, -645, 'heller2');
-		background = game.add.sprite(800, 47, 'heller2');
-		background = game.add.sprite(2000, 739, 'heller2');
+		var background = game.add.sprite(-400, -645, 'slopehill');
+		background = game.add.sprite(1040, 185, 'slopehill');
+		background = game.add.sprite(2200, 854, 'heller2');
 		background = game.add.sprite(3200, 1431, 'heller2');
 		background = game.add.sprite(4400, 2123, 'heller2');
 		background = game.add.sprite(5600, 2815, 'heller2');
