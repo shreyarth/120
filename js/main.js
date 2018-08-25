@@ -8,7 +8,7 @@ var noset = true;
 //var platform;
 // Main char
 var player;
-const MAXPOO = 30;
+const MAXPOO = 20;
 var inPlay2 = false;
 
 // State management

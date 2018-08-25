@@ -34,7 +34,7 @@ function P2layer(game, key, frame, bulletKey) {
 	// Character info
 	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
-	game.timer.loop(4500, function() {
+	game.timer.loop(2000, function() {
 		this.pooCount++;
 		this.death();
 		this.pooSplat.forEach(function(poot) {
@@ -70,12 +70,14 @@ P2layer.prototype.update = function() {
 				this.pDown = false;
 				this.animations.currentAnim.onComplete.add(function(){console.log('aye');}, this);
 			}
-			this.body.velocity.x = -150;
+			this.body.velocity.x = -200;
 			// Flip sprite
-			if (this.direction == 'right')
+			if (this.direction == 'right' && this.body.velocity.y < 0){
 				this.scale.x = -1;
-			this.direction = 'left';
-			this.animations.play('walk');
+			
+				this.direction = 'left';
+				this.animations.play('walk');
+			}
 		}
 		else if(move.right.isDown){
 			if (this.pDown) {
@@ -83,11 +85,13 @@ P2layer.prototype.update = function() {
 				this.pDown = false;
 				this.animations.stop(null, true);
 			}
-			this.body.velocity.x = 150;
-			if (this.direction == 'left')
+			this.body.velocity.x = 200;
+			if (this.direction == 'left' && this.body.velocity.y < 0){
 				this.scale.x = 1;
-			this.direction = 'right';
-			this.animations.play('walk');
+			
+				this.direction = 'right';
+				this.animations.play('walk');
+			}
 		}
 		else if(this.friction == true) {
 			// Decceleration
@@ -117,6 +121,10 @@ P2layer.prototype.update = function() {
 			this.body.velocity.y = -600;
 			this.jump();
 			this.fire(true);
+			this.animations.play('jump');
+			this.state = 'jump';
+			if (this.body.velocity.y > 0)
+				this.animations.stop(null, true);
 		}
 		else{
 			this.body.velocity.y += 10;
@@ -193,7 +201,7 @@ P2layer.prototype.fire = function(isJump) {
 				this.body.velocity.x = 70;
 				console.log("shooting left");
 				emitter = game.add.emitter(this.x - 25, this.y, 5);
-				if(this.pooCount > 8)
+				if(this.pooCount > 5)
 					emitter.makeParticles('turd1');
 				else
 					emitter.makeParticles('turdB');
