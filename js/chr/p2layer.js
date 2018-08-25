@@ -281,7 +281,7 @@ P2layer.prototype.getPixbit = function(x, y) {
 	// create primitive
 	let g = game.add.graphics();
 	g.beginFill(0x492008);
-	g.drawRect(x, y, PIXBIT, PIXBIT);	// Starting point, width, height
+	g.drawRect(x, y, PIXBIT * 2, PIXBIT);	// Starting point, width, height
 	g.endFill();
 	// transform primitive into sprite and destroy primitive
 	obj = game.add.sprite(x, y, g.generateTexture());
