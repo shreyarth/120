@@ -19,7 +19,7 @@ boss.prototype = {
 		}
 		game.world.setBounds( 0, 0, 1000, 800);
 		console.log("play state to check implementation");
-		game.physics.startSystem(Phaser.Physics.P2jS);
+		game.physics.startSystem(Phaser.Physics.P2JS);
 		
 		var background = game.add.sprite(0, 0, 'porter');
 		//background.scale.setTo(5,2);
@@ -53,15 +53,26 @@ boss.prototype = {
 		game.camera.follow(player);
 
 		//boss
-		let bosseye = game.add.sprite(400, 570, 'star');
-		bosseye.anchor.setTo(0.5,0.5);
+		this.bossbody = game.add.group();
+		this.bossbody.enableBody = true;
+		this.bossbody.physicsBodyType = Phaser.Physics.P2JS;
 
-		let bosseye2 = game.add.sprite(420, 610, 'star');
+		let bosseye = this.bossbody.create(400, 570, 'star');
+		bosseye.body.data.gravityScale = 0;
+
+
+
+		let bosseye2 = this.bossbody.create(420, 610, 'star');
 		bosseye2.anchor.setTo(0.5,0.5);
+		bosseye2.body.data.gravityScale = 0;
 
-		let bossmouth = game.add.sprite(410, 690, 'star');
+		let bossmouth = this.bossbody.create(410, 690, 'star');
 		bossmouth.scale.setTo(2,2);
-		bossmouth.anchor.setTo(0.5, 0.5);
+		bossmouth.body.data.gravityScale = 0;
+
+		game.physics.p2.createLockConstraint(bosseye, bosseye2, [20, 0]);
+		game.physics.p2.createLockConstraint(bosseye, bossmouth, [10, 110]);
+		game.physics.p2.createLockConstraint(bosseye2, bossmouth, [-10, 80]);
 
 
 		// enemy
