@@ -148,7 +148,7 @@ Enemy.prototype.boom = function(){
 	this.body.data.gravityScale = 0;
 	this.body.velocity.x = -25;
 
-	if(Math.abs(this.x - player.x) < 100 && Math.abs(player.y - this.y) > 50){
+	if(Math.abs(this.x - player.x) < 100 && Math.abs(player.y - this.y) > 75){
 		this.body.velocity.y += 70;
 
 	}
