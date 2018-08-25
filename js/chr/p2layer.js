@@ -35,7 +35,7 @@ function P2layer(game, key, frame, bulletKey) {
 	// Character info
 	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
-	game.timer.loop(1800, function() {
+	game.timer.loop(1300, function() {
 		this.pooCount++;
 		this.death();
 		}, this);
@@ -158,6 +158,8 @@ P2layer.prototype.fire = function(isJump) {
 			// star.body.restitution.y = 0.2;
 			star.body.gravity.y = 90;
 			star.reset(player.x + 2, player.y + 20);
+			star.scale.setTo(game.rnd.integerInRange(7,14)/10,
+				game.rnd.integerInRange(7,14)/10);
 			star.body.velocity.y = 250;
 			star.body.angle = 90;
 			console.log("jumping");
@@ -179,9 +181,12 @@ P2layer.prototype.fire = function(isJump) {
 			if (this.direction == 'right') {
 				this.animations.play('shoot');
 				star.reset(this.x + 10, this.y);
-				star.body.velocity.x = 350;
+				star.scale.setTo(game.rnd.integerInRange(7,14)/10,
+				game.rnd.integerInRange(7,14)/10);
+				star.body.velocity.x = game.rnd.integerInRange(250,400);
+				star.body.velocity.y = game.rnd.integerInRange(-60,0);
 				//recoil to player from shooting
-				this.body.velocity.x = -70;
+				this.body.velocity.x = -100;
 				console.log("shooting right");
 				emitter = game.add.emitter(this.x + 25, this.y, 5);
 				if(this.pooCount > 8)
@@ -194,9 +199,12 @@ P2layer.prototype.fire = function(isJump) {
 				this.scale.x = -1;
 				this.animations.play('shoot');
 				star.reset(player.x - 10, player.y);
-				star.body.velocity.x = -350;
+				star.scale.setTo(game.rnd.integerInRange(7,14)/10,
+				game.rnd.integerInRange(7,14)/10);
+				star.body.velocity.x = game.rnd.integerInRange(-400, -200);
+				star.body.velocity.y = game.rnd.integerInRange(-150, 30);
 				//recoil 
-				this.body.velocity.x = 70;
+				this.body.velocity.x = 100;
 				console.log("shooting left");
 				emitter = game.add.emitter(this.x - 25, this.y, 5);
 				if(this.pooCount > 5)
