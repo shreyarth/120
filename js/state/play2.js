@@ -609,8 +609,9 @@ play2.prototype = {
 		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level
-		if(player.x +30 > game.world.width){
-			game.state.start('end');
+		if(player.x +50 > game.world.width && this.toil.total == 0){
+			game.state.start('boss');
+			this.music.stop();
 		}
 
 	},

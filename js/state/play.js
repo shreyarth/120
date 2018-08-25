@@ -700,7 +700,7 @@ play.prototype = {
 		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level
-		if(player.x +50 > game.world.width){
+		if(player.x +50 > game.world.width && this.toil.total == 0){
 			game.state.start('play2');
 			this.music.stop();
 		}
