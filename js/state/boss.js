@@ -137,10 +137,10 @@ boss.prototype = {
 	// },
 	update: function() {
 		// Update function
-		// if(this.boss.bossmouth.x > 800){
-		// 	bossmouth.body.velocity.x -= 500;
-		// 	console.log(bossmouth.body.velocity.x);
-		// }
+		if(this.boss.x > 800){
+			bossmouth.body.velocity.x -= 500;
+			console.log(bossmouth.body.velocity.x);
+		}
 
 		// UI update
 		if (this.ui)
