@@ -42,10 +42,14 @@ function P2layer(game, key, frame, bulletKey) {
 	game.timer.loop(500, function() {
 		this.pooSplat.forEach(function(splat) {
 			splat.alpha -= 0.1;
-			if (splat.alpha <= 0){
+			if (splat.alpha <= 0)
 				splat.destroy();
-			}
-		});
+		}, this.pooSplat);
+		this.bullets.forEachAlive(function(bull) {
+			bull.alpha -= 0.05;
+			if (bull.alpha <= 0)
+				bull.klil();
+		}, this.bullets);
 	}, this);
 	game.timer.start();
 
@@ -54,7 +58,6 @@ function P2layer(game, key, frame, bulletKey) {
 	this.bullets.enableBody = true;
 	this.bullets.physicsBodyType = Phaser.Physics.P2JS;
 	this.bullets.createMultiple(300, bulletKey);
-	this.bullets.checkWorldBounds = true;
 	this.bullets.outOfBoundsKill = true;
 
 	// Poo splats
@@ -151,6 +154,7 @@ P2layer.prototype.update = function() {
 // isJump: set to true if its not attack
 P2layer.prototype.fire = function(isJump) {
 	let star = this.bullets.getFirstExists(false);
+	star.alpha = 1;
 	if(star){
 		game.physics.p2.enable(star);
 		let emitter;
