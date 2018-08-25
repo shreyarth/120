@@ -122,11 +122,25 @@ P2layer.prototype.update = function() {
 		}
 		if (move.up.justDown)
 		{
-			this.body.velocity.y = -600;
-			this.fire(true);
-			this.animations.play('jump');
-			this.state = 'jump';
-			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle'), this.state = 'idle';}, this);
+			if(this.pooCount > MAXPOO/2){
+				this.body.velocity.y = game.rnd.integerInRange(-700,-550);
+				this.fire(true);
+				this.animations.play('jump');
+				this.state = 'jump';
+				this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle'), this.state = 'idle';}, this);
+			}else if(this.pooCount < MAXPOO/3){
+				this.body.velocity.y = game.rnd.integerInRange(-600,-470);
+				this.fire(true);
+				this.animations.play('jump');
+				this.state = 'jump';
+				this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle'), this.state = 'idle';}, this);
+			}
+			else
+				this.body.velocity.y = game.rnd.integerInRange(-650,-580);;
+				this.fire(true);
+				this.animations.play('jump');
+				this.state = 'jump';
+				this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle'), this.state = 'idle';}, this);
 		}
 		else{
 			this.body.velocity.y += 10;
@@ -166,10 +180,17 @@ P2layer.prototype.fire = function(isJump) {
 			var grunt = game.add.audio('grunt', 0.5);
 			grunt.play();
 			emitter = game.add.emitter(player.x +2, player.y, 5);
-			if(this.pooCount > 8)
+			if(this.pooCount > 8){
 				emitter.makeParticles('turd1');
-			else
+				emitter.start(false, 1000, 0, 5);
+				emitter.setYSpeed(100,400);}
+			
+			else if(this.pooCount > MAXPOO *0.7){
 				emitter.makeParticles('turdB');
+				emitter.start(false, 1000, 0, 10);
+				emitter.setYSpeed(100,400);}
+			else
+			emitter.makeParticles('turdB');
 			emitter.start(false, 1000, 0, 5);
 			emitter.setYSpeed(100,400);
 		}
@@ -189,7 +210,7 @@ P2layer.prototype.fire = function(isJump) {
 				this.body.velocity.x = -100;
 				console.log("shooting right");
 				emitter = game.add.emitter(this.x + 25, this.y, 5);
-				if(this.pooCount > 8)
+				if(this.pooCount > 5)
 					emitter.makeParticles('turd1');
 				else
 					emitter.makeParticles('turdB');
