@@ -35,7 +35,7 @@ function P2layer(game, key, frame, bulletKey) {
 	// Character info
 	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
-	game.timer.loop(4500, function() {
+	game.timer.loop(2000, function() {
 		this.pooCount++;
 		this.death();
 		}, this);
@@ -59,26 +59,34 @@ P2layer.prototype.constructor = P2layer;
 
 // override Phaser.Sprite update
 P2layer.prototype.update = function() {
-	// this.animations.play('idle');
 	if (this.alive) {
 		if(move.left.isDown){
-			this.body.velocity.x = -150;
+			this.body.velocity.x = -200;
 			// Flip sprite
 			if (this.direction == 'right')
 				this.scale.x = -1;
+			
 			this.direction = 'left';
-			this.animations.play('walk');
-			this.state = 'walk';
-			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
+			if(this.state == 'jump')
+				this.animations.play('jump');
+			else
+				this.animations.play('walk');
 
+			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
 		}
 		else if(move.right.isDown){
-			this.body.velocity.x = 150;
+			this.state == 'walk';
+			this.body.velocity.x = 200;
 			if (this.direction == 'left')
-				this.scale.x = 1;
+					this.scale.x = 1;
+			
 			this.direction = 'right';
-			this.animations.play('walk');
-			this.state = 'walk';
+			if(this.state == 'jump')
+				this.animations.play('jump');
+			else
+				this.animations.play('walk');
+			
+			
 			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
 		}
 		else if(this.friction == true) {
@@ -106,14 +114,11 @@ P2layer.prototype.update = function() {
 		}
 		if (move.up.justDown)
 		{
-			if(this.state == 'walk'){
-				this.animations.stop(null, true);	
-			}
 			this.body.velocity.y = -600;
+			this.fire(true);
 			this.animations.play('jump');
 			this.state = 'jump';
-			this.fire(true);
-			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
+			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle'), this.state = 'idle';}, this);
 		}
 		else{
 			this.body.velocity.y += 10;
@@ -186,7 +191,7 @@ P2layer.prototype.fire = function(isJump) {
 				this.body.velocity.x = 70;
 				console.log("shooting left");
 				emitter = game.add.emitter(this.x - 25, this.y, 5);
-				if(this.pooCount > 8)
+				if(this.pooCount > 5)
 					emitter.makeParticles('turd1');
 				else
 					emitter.makeParticles('turdB');

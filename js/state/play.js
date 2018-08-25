@@ -582,8 +582,8 @@ play.prototype = {
 		}
 
 		//sign for end of level
-		let sign = this.platform.create(7400, 300, 'sign');
-		sign.body.immovable = true;
+		game.add.sprite(7000, 500, 'sign');
+		//sign.body.immovable = true;
 		//sign.scale.setTo(1,1);
 		// Need to fix sign in the air (no collision) <- can we just make it as a part of bg?
 
