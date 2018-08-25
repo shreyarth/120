@@ -7,7 +7,7 @@ function P2layer(game, key, frame, bulletKey) {
 	//Phaser.Sprite.call(this, game, 30, 500, key);
 	//Phaser.Sprite.call(this, game, 30, 100, key);
 	//for level 2 testing
-	Phaser.Sprite.call(this, game, 30, 50, key);
+	Phaser.Sprite.call(this, game, 6600, 100, key);
 	// Animation settings
 	this.animations.add('idle', [0,1], 2);
 	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2, 0], 15);
@@ -143,10 +143,9 @@ P2layer.prototype.jump = function() {
 // isJump: set to true if its not attack
 P2layer.prototype.fire = function(isJump) {
 	let star = this.bullets.getFirstExists(false);
-	game.camera.shake(0.001, 100);
 	if(star){
 		game.physics.p2.enable(star);
-
+		let emitter;
 		if (isJump) {
 			// star.body.restitution.y = 0.2;
 			star.body.gravity.y = 90;
@@ -156,20 +155,15 @@ P2layer.prototype.fire = function(isJump) {
 			console.log("jumping");
 			var grunt = game.add.audio('grunt', 0.5);
 			grunt.play();
-			if(this.pooCount > 8){
-				emitter = game.add.emitter(player.x +2, player.y, 5);
+			emitter = game.add.emitter(player.x +2, player.y, 5);
+			if(this.pooCount > 8)
 				emitter.makeParticles('turd1');
-				emitter.start(false, 0,0);
-				emitter.setYSpeed(100,400);
-			}else{
-				emitter = game.add.emitter(player.x +2, player.y, 5);
+			else
 				emitter.makeParticles('turdB');
-				emitter.start(false, 0,0);
-				emitter.setYSpeed(100,400);
-			}
+			emitter.start(false, 1000, 0, 5);
+			emitter.setYSpeed(100,400);
 		}
 		else {
-
 			//star.body.bounce.y = 1;
 			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
@@ -180,19 +174,12 @@ P2layer.prototype.fire = function(isJump) {
 				//recoil to player from shooting
 				this.body.velocity.x = -70;
 				console.log("shooting right");
-				if(this.pooCount > 8){
-					emitter = game.add.emitter(this.x + 25, this.y, 5);
+				emitter = game.add.emitter(this.x + 25, this.y, 5);
+				if(this.pooCount > 8)
 					emitter.makeParticles('turd1');
-					emitter.start(false, 0,0);
-					emitter.setXSpeed(100,400);
-					emitter.setYSpeed(100,200);
-				}else{
-					emitter = game.add.emitter(this.x + 25, this.y, 5);
+				else
 					emitter.makeParticles('turdB');
-					emitter.start(false, 0,0);
-					emitter.setXSpeed(100,400);
-					emitter.setYSpeed(100,200);
-				}
+				emitter.setXSpeed(100,400);
 			}
 			else {
 				star.reset(player.x - 10, player.y);
@@ -200,20 +187,16 @@ P2layer.prototype.fire = function(isJump) {
 				//recoil 
 				this.body.velocity.x = 70;
 				console.log("shooting left");
-				if(this.pooCount > 8){
-					emitter = game.add.emitter(this.x - 25, this.y, 5);
+				emitter = game.add.emitter(this.x - 25, this.y, 5);
+				if(this.pooCount > 8)
 					emitter.makeParticles('turd1');
-					emitter.start(false, 0,0);
-					emitter.setXSpeed(-100,-400);
-					emitter.setYSpeed(100,200);
-				}else{
-					emitter = game.add.emitter(this.x - 25, this.y, 5);
+				else
 					emitter.makeParticles('turdB');
-					emitter.start(false, 0,0);
-					emitter.setXSpeed(-100,-400);
-					emitter.setYSpeed(100,200);
+				emitter.setXSpeed(-100,-400);
 				}
 			}
+			emitter.start(false, 1000, 0, 5);
+			emitter.setYSpeed(100,200);
 		}
 		console.log(this.pooCount);
 		this.pooCount--;
@@ -261,7 +244,7 @@ P2layer.prototype.hit = function() {
 	if (this.isInvincible) return;
 	// Else, run this code
 	this.isInvincible = true;
-	//game.camera.shake(0.003, 100);
+	game.camera.shake(0.003, 100);
 	var inviTime = game.time.create(true);
 	// Blinking sprite while invincible
 	// timer.repeat(delay time, num repeat, function(pls don't touch this), ref(also, don't touch this))
