@@ -265,7 +265,7 @@ P2layer.prototype.changeState = function(){
 
 // This is function for poo remainder on the ground
 P2layer.prototype.groundSplat = function(x, y) {
-	let ps = this.pooSplat.create(this.getPixbit(x, y));
+	let ps = this.pooSplat.add(this.getPixbit(x, y));
 }
 
 P2layer.prototype.getPixbit = function(x, y) {
