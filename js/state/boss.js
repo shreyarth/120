@@ -5,6 +5,10 @@ var boss = function() {
 	this.obstacle;
 	this.heller = null;
 	this.ui;
+	this.toil; this.toiletCount;
+
+	this.collidePlayer, this.collideEmeny, this.collidePlat;
+	this.collidePB, this.collideEB;
 }
 
 boss.prototype = {
@@ -75,11 +79,6 @@ boss.prototype = {
 		// 	this.enemy.add(en);
 		// }
 
-		//test for 2nd enemy on screen
-		// en = new Enemy(game, 30, 1000, 'enemy');
-		// game.add.existing(en);
-		// this.enemy.add(en);
-
 		//test for flying enemy
 		// for(var i = 0; i < 10; ++i){
 		// 	en = new Enemy(game, game.rnd.integerInRange(1000,4800),
@@ -106,32 +105,26 @@ boss.prototype = {
 		this.bullets.checkWorldBounds = true;
 		this.bullets.outOfBoundsKill = true;
 
-		//pooCount = 100;
-
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
 		// game.camera.follow('player', FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
-		this.ui = this.pooMeter(player.pooCount);
-		//this.ui = this.bossHealth(boss.hpCount);
-	},
-	pooMeter: function(pooNum) {
-		let obj = null;
-
-		// create primitive
-		let g = game.add.graphics();
-		g.beginFill(0x492008);
-		g.drawRect(32, 32, pooNum * 5, 32);	// Starting point, width, height
-		g.endFill();
-
-		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(32, 32, g.generateTexture());
-		obj.fixedToCamera = true;
-		obj.cameraOffset.setTo(32, 16);
-		g.destroy();
-
-		return obj;
+		pooMeter(MAXPOO, 0x000000);
+		this.ui = pooMeter(player.pooCount, 0x492008);
+		let t_ui = game.add.sprite(game.width - 128, 8, 'toilet');
+		t_ui.scale.setTo(0.75);
+		t_ui.fixedToCamera = true;
+		t_ui.cameraOffset.setTo(game.width - 128, 8);
+		let style = {
+			font: 'Press Start 2P',
+			fill: '#fff',
+			fontSize: 32,
+			strokeThickness: 5
+		};
+		// this.toiletCounter = game.add.text(game.width - 78, 16, this.toil.total, style);
+		// this.toiletCounter.fixedToCamera = true;
+		// this.toiletCounter.cameraOffset.setTo(game.width - 78, 16);
 	},
 	// bossHealth: funtion(bosshp){
 	// 	let obje = null;
@@ -155,8 +148,10 @@ boss.prototype = {
 		game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
 
 		// UI update
-		this.ui.destroy();
-		this.ui = this.pooMeter(player.pooCount);
+		if (this.ui)
+			this.ui.destroy();
+		this.ui = pooMeter(player.pooCount, 0x492008);
+		//this.toiletCounter.text = this.toil.total;
 
 		
 	},
