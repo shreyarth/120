@@ -39,19 +39,6 @@ function P2layer(game, key, frame, bulletKey) {
 		this.pooCount++;
 		this.death();
 		}, this);
-	game.timer.loop(500, function() {
-		this.pooSplat.forEach(function(splat) {
-			splat.alpha -= 0.1;
-			if (splat.alpha <= 0)
-				splat.destroy();
-		}, this.pooSplat);
-		this.bullets.forEachAlive(function(bull) {
-			bull.alpha -= 0.05;
-			if (bull.alpha <= 0)
-				bull.klil();
-		}, this.bullets);
-	}, this);
-	game.timer.start();
 
 	// Bullets
 	this.bullets = game.add.group();
@@ -62,6 +49,24 @@ function P2layer(game, key, frame, bulletKey) {
 
 	// Poo splats
 	this.pooSplat = game.add.group();
+	
+	// Timer events for groups
+	game.timer.loop(500, function() {
+		console.log(this.bullets);
+		if (this.alive) {
+			this.pooSplat.forEach(function(splat) {
+				splat.alpha -= 0.1;
+				if (splat.alpha <= 0)
+					splat.destroy();
+			}, this.pooSplat);
+		}
+		this.bullets.forEachAlive(function(bull) {
+			bull.alpha -= 0.05;
+			if (bull.alpha <= 0)
+				bull.alive = false;
+		}, this.bullets);
+	}, this);
+	game.timer.start();
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -153,13 +158,14 @@ P2layer.prototype.update = function() {
 
 // isJump: set to true if its not attack
 P2layer.prototype.fire = function(isJump) {
-	let star = this.bullets.getFirstExists(false);
+	let star = this.bullets.getFirstDead(false);
 	star.alpha = 1;
 	if(star){
 		game.physics.p2.enable(star);
 		let emitter;
 		if (isJump) {
 			// star.body.restitution.y = 0.2;
+			star.outOfBoundsKill = true;
 			star.body.gravity.y = 90;
 			star.reset(player.x + 2, player.y + 20);
 			star.scale.setTo(game.rnd.integerInRange(7,14)/10,
