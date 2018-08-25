@@ -30,7 +30,7 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 
 	//timer
 	timer = game.time.create(false);
-	timer.loop(1300, this.fire, this);
+	timer.loop(game.rnd.integerInRange(700,1300), this.fire, this);
 	timer.start();
 
 	// Collision

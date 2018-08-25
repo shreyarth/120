@@ -189,7 +189,25 @@ play.prototype = {
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
+		toilets = new Toilet(game, 1886, 756, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
 		toilets = new Toilet(game, 3087, 756, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 4317, 756, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 4927, 756, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
@@ -206,6 +224,19 @@ play.prototype = {
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.angle = -10;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 7322, 510, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.angle = -10;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 7847, 756, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
 		// player
@@ -360,6 +391,36 @@ play.prototype = {
 		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
+		en = new Enemy(game, 3110, 746, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
+		en.bulletE.forEach(function(bull) {
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+		en.body.immovable = true;
+
+		en = new Enemy(game, 4020, 746, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
+		en.bulletE.forEach(function(bull) {
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+		en.body.immovable = true;
+
 		en = new Enemy(game, 3263, 608, 'deer', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
@@ -420,6 +481,20 @@ play.prototype = {
 		en.body.immovable = true;
 
 		en = new Enemy(game, 4944, 746, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
+		en.bulletE.forEach(function(bull) {
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 5200, 746, 'deer', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
