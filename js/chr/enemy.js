@@ -147,8 +147,15 @@ Enemy.prototype.turkey = function(){
 Enemy.prototype.boom = function(){
 	this.body.data.gravityScale = 0;
 	this.body.velocity.x = -100;
+	this.body.velocity.x = -25;
 
+<<<<<<< HEAD
 	if(Math.abs(this.x - player.x) < 100){
 		this.body.velocity.y = 1000;
+=======
+	if(Math.abs(this.x - player.x) < 100 && Math.abs(player.y - this.y) > 75){
+		this.body.velocity.y += 70;
+
+>>>>>>> caa14e467a90124acf267dd90a05e31ce19232c3
 	}
 }
