@@ -8,7 +8,7 @@ var play2 = function() {
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;
 	// inPlay2 = true;
-	
+	// 7 toilets
 }
 
 play2.prototype = {
@@ -270,6 +270,14 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
+		ePlat = this.platform.create(7040, 3550, 'star');
+		ePlat.scale.setTo(1, 1);
+		ePlat.body.clearShapes();
+		ePlat.body.addRectangle(100, 25);
+		ePlat.body.kinematic = true;
+		ePlat.body.debug = true;
+		ePlat.body.setCollisionGroup(this.collidePlat);
+
 		ePlat = this.platform.create(7305, 4120, 'star');
 		ePlat.scale.setTo(1, 1);
 		ePlat.body.clearShapes();
@@ -285,6 +293,59 @@ play2.prototype = {
 		ePlat.body.kinematic = true;
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
+
+		this.toil = game.add.group();
+		this.toil.physicsBodyType = Phaser.Physics.P2JS;
+		this.toil.enableBody = true;
+
+		let toilets = new Toilet(game, 900, 754, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.angle = 30;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 2530, 1120, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		//toilets.body.angle = 30;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 4034, 1945, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		//toilets.body.angle = 30;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 6040, 3727, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.angle = 30;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 7050, 3500, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		//toilets.body.angle = 30;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 7700, 4900, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		//toilets.body.angle = 30;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 9145, 4930, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		//toilets.body.angle = 30;
+		toilets.body.debug = true;
 		
 		// let platforms = this.platform.create(800, 613, 'bus');
 		// platforms.body.kinematic = true;
@@ -401,11 +462,13 @@ play2.prototype = {
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
 		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB]);
-		// player.friction = false;
 		player.bullets.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collidePB);
 			bull.body.collides([this.collidePlat, this.collideEnemy]);
-			bull.body.debug = true;
+			bull.body.createGroupCallback(this.collidePlat, function(bull, plat){
+				if (bull.velocity != 0)
+					player.groundSplat(bull.x, bull.y);
+			});
 		}, this);
 
 		//enemy
@@ -463,10 +526,13 @@ play2.prototype = {
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
 		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 		
 		en = new Enemy(game, 3490, 1620, 'deer', null, 'pepto');
@@ -474,10 +540,13 @@ play2.prototype = {
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
 		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
 		en = new Enemy(game, 4030, 1965, 'deer', null, 'pepto');
@@ -485,10 +554,13 @@ play2.prototype = {
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
 		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
 		en = new Enemy(game, 4270, 2430, 'deer', null, 'pepto');
@@ -496,10 +568,13 @@ play2.prototype = {
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
 		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
 		en = new Enemy(game, 5460, 2920, 'deer', null, 'pepto');
@@ -507,10 +582,13 @@ play2.prototype = {
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
 		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
 		en = new Enemy(game, 6010, 3120, 'deer', null, 'pepto');
@@ -518,10 +596,13 @@ play2.prototype = {
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
 		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
 		en = new Enemy(game, 6710, 3720, 'deer', null, 'pepto');
@@ -529,10 +610,13 @@ play2.prototype = {
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
 		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
 		en = new Enemy(game, 7315, 4090, 'deer', null, 'pepto');
@@ -540,10 +624,27 @@ play2.prototype = {
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
 		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 7865, 4380, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
+		en.bulletE.forEach(function(bull) {
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
 		//test for flying enemy
@@ -565,7 +666,8 @@ play2.prototype = {
 		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
-		this.ui = this.pooMeter(player.pooCount);
+		pooMeter(MAXPOO, 0x000000);
+		this.ui = pooMeter(player.pooCount, 0x492008);
 	},
 	pooMeter: function(pooNum) {
 		let obj = null;
@@ -594,8 +696,9 @@ play2.prototype = {
 		//game.physics.arcade.moveToObject(this.en3, player);
 
 		// UI update
-		this.ui.destroy();
-		this.ui = this.pooMeter(player.pooCount);
+		if (this.ui)
+			this.ui.destroy();
+		this.ui = pooMeter(player.pooCount, 0x492008);
 		
 		//for end of level
 		if(player.x +30 > game.world.width){
