@@ -560,9 +560,21 @@ play2.prototype = {
 		// lerp set for smooth camera movement
 		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER, 0.25, 0.25);
 
-		// Fix UI to the camera
 		pooMeter(MAXPOO, 0x000000);
 		this.ui = pooMeter(player.pooCount, 0x492008);
+		let t_ui = game.add.sprite(game.width - 128, 8, 'toilet');
+		t_ui.scale.setTo(0.75);
+		t_ui.fixedToCamera = true;
+		t_ui.cameraOffset.setTo(game.width - 128, 8);
+		let style = {
+			font: 'Press Start 2P',
+			fill: '#fff',
+			fontSize: 32,
+			strokeThickness: 5
+		};
+		this.toiletCounter = game.add.text(game.width - 78, 16, this.toil.total, style);
+		this.toiletCounter.fixedToCamera = true;
+		this.toiletCounter.cameraOffset.setTo(game.width - 78, 16);
 	},
 	pooMeter: function(pooNum) {
 		let obj = null;
@@ -594,6 +606,7 @@ play2.prototype = {
 		if (this.ui)
 			this.ui.destroy();
 		this.ui = pooMeter(player.pooCount, 0x492008);
+		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level
 		if(player.x +30 > game.world.width){
