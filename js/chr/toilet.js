@@ -27,9 +27,10 @@ Toilet.prototype.constructor = Toilet;
 Toilet.prototype.toiletmeter = function(){
 	emitter = game.add.emitter(this.x - 10, this.y, 10);
 	emitter.makeParticles('twater');
-	emitter.start(false, 2500,0);
+	emitter.start(false, 2500,0, 10);
 	emitter.setYSpeed(-50,-150);
 	console.log("toilet not working");
+	game.time.events.add(2600, function() {this.destroy();}, emitter);
 
 };
 // override Phaser.Sprite update

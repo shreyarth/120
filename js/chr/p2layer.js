@@ -201,6 +201,7 @@ P2layer.prototype.fire = function(isJump) {
 			emitter.start(false, 1000, 0, 5);
 			emitter.setYSpeed(100,200);
 		}
+		game.time.events.add(1100, function() {this.destroy();}, emitter);
 		console.log(this.pooCount);
 		this.pooCount--;
 		star.body.collideWorldBounds = false;
