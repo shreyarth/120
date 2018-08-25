@@ -63,77 +63,78 @@ P2layer.prototype.constructor = P2layer;
 
 // override Phaser.Sprite update
 P2layer.prototype.update = function() {
-	if(move.left.isDown){
-		if (this.pDown) {
-			this.animations.play('on');
-			this.pDown = false;
-			this.animations.currentAnim.onComplete.add(function(){console.log('aye');}, this);
+	if (this.alive) {
+		if(move.left.isDown){
+			if (this.pDown) {
+				this.animations.play('on');
+				this.pDown = false;
+				this.animations.currentAnim.onComplete.add(function(){console.log('aye');}, this);
+			}
+			this.body.velocity.x = -150;
+			// Flip sprite
+			if (this.direction == 'right')
+				this.scale.x = -1;
+			this.direction = 'left';
+			this.animations.play('walk');
 		}
-		this.body.velocity.x = -150;
-		// Flip sprite
-		if (this.direction == 'right')
-			this.scale.x = -1;
-		this.direction = 'left';
-		this.animations.play('walk');
+		else if(move.right.isDown){
+			if (this.pDown) {
+				this.animations.play('on');
+				this.pDown = false;
+				this.animations.stop(null, true);
+			}
+			this.body.velocity.x = 150;
+			if (this.direction == 'left')
+				this.scale.x = 1;
+			this.direction = 'right';
+			this.animations.play('walk');
+		}
+		else if(this.friction == true) {
+			// Decceleration
+			console.log('friction on');
+			if (this.body.velocity.x > 0) {
+				this.body.velocity.x -= 9;
+				if (this.body.velocity.x < 0)
+					this.body.velocity.x = 0;
+			}
+			else if (this.body.velocity.x > 0) {
+				this.body.velocity.x += 9;
+				if (this.body.velocity.x > 0)
+					this.body.velocity.x = 0;
+			}
+			if (this.body.velocity.x == 0 && this.state != 'jump') {
+				this.animations.play('idle');
+				this.status = 'idle';
+			}
+			else
+				this.animations.play(this.animations.currentAnim);
+		}
+		else{
+			console.log('friction off');
+		}
+		if (move.up.justDown)
+		{
+			this.body.velocity.y = -600;
+			this.jump();
+			this.fire(true);
+		}
+		else{
+			this.body.velocity.y += 10;
+			//game.physics.p2.gravity.y = 1000;
+			//this.body.data.gravityScale = 5;
+			
+		}
+		if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
+			console.log(player.x, player.y);
+		}
+		//cheatmode
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.P)){
+			this.pooCount = 15;
+		}
+		// Attack move
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
+			this.fire(false);
 	}
-	else if(move.right.isDown){
-		if (this.pDown) {
-			this.animations.play('on');
-			this.pDown = false;
-			this.animations.stop(null, true);
-		}
-		this.body.velocity.x = 150;
-		if (this.direction == 'left')
-			this.scale.x = 1;
-		this.direction = 'right';
-		this.animations.play('walk');
-	}
-	else if(this.friction == true) {
-		// Decceleration
-		console.log('friction on');
-		if (this.body.velocity.x > 0) {
-			this.body.velocity.x -= 9;
-			if (this.body.velocity.x < 0)
-				this.body.velocity.x = 0;
-		}
-		else if (this.body.velocity.x > 0) {
-			this.body.velocity.x += 9;
-			if (this.body.velocity.x > 0)
-				this.body.velocity.x = 0;
-		}
-		if (this.body.velocity.x == 0 && this.state != 'jump') {
-			this.animations.play('idle');
-			this.status = 'idle';
-		}
-		else
-			this.animations.play(this.animations.currentAnim);
-	}
-	else{
-		console.log('friction off');
-	}
-	if (move.up.justDown)
-    {
-    	this.body.velocity.y = -600;
-		this.jump();
-		this.fire(true);
-    }
-    else{
-		this.body.velocity.y += 10;
-    	//game.physics.p2.gravity.y = 1000;
-    	//this.body.data.gravityScale = 5;
-		
-    }
-    if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
-    	console.log(player.x, player.y);
-    }
-    //cheatmode
-    if(game.input.keyboard.justPressed(Phaser.Keyboard.P)){
-    	this.pooCount = 15;
-    }
-    // Attack move
-	if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
-		this.fire(false);
-
 }
 
 P2layer.prototype.jump = function() {
