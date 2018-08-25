@@ -145,11 +145,11 @@ Enemy.prototype.turkey = function(){
 }
 
 Enemy.prototype.boom = function(){
-	this.body.velocity.y = 1000;
-	// this.body.createBodyCallback(player, this.collideGround, this);
-}
+	this.body.data.gravityScale = 0;
+	this.body.velocity.x = -100;
 
-Enemy.prototype.collideGround = function(){
-	this.turkey();
-	this.kill();
+	if(Math.abs(this.x - player.x) < 100){
+		this.body.velocity.y = 1000;
+
+	}
 }

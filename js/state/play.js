@@ -647,7 +647,7 @@ play.prototype = {
 
 		//test for flying enemy
 		for(var i = 0; i < 7; ++i){
-			enfl = new Enemy(game, game.rnd.integerInRange(100,600),
+			enfl = new Enemy(game, game.rnd.integerInRange(100,5000),
 			 100, 'enemy', null, null, 'kamikaze_turkey');
 			game.add.existing(enfl);
 			this.enemy.add(enfl);
