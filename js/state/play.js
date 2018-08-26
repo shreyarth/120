@@ -16,6 +16,7 @@ play.prototype = {
 		
 	},
 	create: function() {
+		game.time.advancedTiming = true;
 		if (!BGM[1].isPlaying)
 			BGM[1].play();
 
@@ -134,7 +135,7 @@ play.prototype = {
 
 		this.platform.forEach(function(plat) {
 			plat.body.kinematic = true;
-			platforms.body.debug = true;
+			plat.body.debug = true;
 			plat.body.setCollisionGroup(this.collidePlat);
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
@@ -705,6 +706,9 @@ play.prototype = {
 		enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
 		enfl.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, enfl);
+	},
+	render: function() {
+		game.debug.text('fps: ' + game.time.fps, 32, 32, 'yellow');
 	}
 	// Char control is implemented in player.js
 }
