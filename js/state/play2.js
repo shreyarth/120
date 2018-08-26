@@ -54,8 +54,8 @@ play2.prototype = {
 		this.platform.physicsBodyType = Phaser.Physics.P2JS;
 		this.platform.enableBody = true;
 
-		let ground = this.platform.create(0, 300, 'platform');
-		ground.scale.setTo(game.world.width, 1 );
+		let ground = this.platform.create(0, 300, 'bush');
+		ground.scale.setTo(3.2, 0.6 );
 		ground.body.angle = 30;
 		ground.body.damping = 0;
 		ground.body.angularDamping = 0;
@@ -65,8 +65,8 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(1150, 963, 'platform');
-		ground.scale.setTo(100, 1 );
+		ground = this.platform.create(1150, 963, 'bush');
+		ground.scale.setTo(3.15, 0.6 );
 		ground.body.damping = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
@@ -75,8 +75,8 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(1980, 1443, 'platform');
-		ground.scale.setTo(100, 1 );
+		ground = this.platform.create(1980, 1443, 'bush');
+		ground.scale.setTo(0.95, 0.6 );
 		ground.body.damping.x = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
@@ -85,8 +85,8 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(2680, 1847, 'platform');
-		ground.scale.setTo(0.3, 1 );
+		ground = this.platform.create(2680, 1847, 'bush');
+		ground.scale.setTo(0.3, 0.6 );
 		ground.body.damping.x = 0;
 		ground.body.angularForce = 100;
 		ground.body.angularVelocity = 1
@@ -97,8 +97,8 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(3480, 2310, 'platform');
-		ground.scale.setTo(100, 1 );
+		ground = this.platform.create(3480, 2310, 'bush');
+		ground.scale.setTo(2.85, 0.6 );
 		ground.body.damping.x = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
@@ -107,8 +107,8 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(4600, 2957, 'platform');
-		ground.scale.setTo(game.world.width, 1 );
+		ground = this.platform.create(4600, 2957, 'bush');
+		ground.scale.setTo(3.15, 0.6 );
 		ground.body.damping.x = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
@@ -117,8 +117,8 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(5580, 3522, 'platform');
-		ground.scale.setTo(0.4, 1 );
+		ground = this.platform.create(5580, 3522, 'bush');
+		ground.scale.setTo(0.95, 0.6 );
 		ground.body.angularForce = 100;
 		ground.body.angularVelocity = 1
 		ground.body.damping.x = 0;
@@ -129,8 +129,8 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(6000, 3765, 'platform');
-		ground.scale.setTo(100, 1 );
+		ground = this.platform.create(6000, 3765, 'bush');
+		ground.scale.setTo(0.3, 0.6 );
 		ground.body.damping.x = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
@@ -139,8 +139,8 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(6880, 4273, 'platform');
-		ground.scale.setTo(0.1, 1 );
+		ground = this.platform.create(6880, 4273, 'bush');
+		ground.scale.setTo(0.15, 0.6 );
 		ground.body.angularForce = 100;
 		ground.body.angularVelocity = 1
 		ground.body.damping.x = 0;
@@ -151,12 +151,12 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(8480, 5195, 'platform');
-		ground.scale.setTo(100, 1 );
+		ground = this.platform.create(8200, 5038, 'bush');
+		ground.scale.setTo(5.7, 0.6);
 		ground.body.damping.x = 0;
 		ground.body.angle = 30;
 		ground.body.clearShapes();
-		ground.body.addRectangle(2000, 25);
+		ground.body.addRectangle(1800, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
@@ -171,67 +171,67 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(8900, 5450, 'platform');
-		ground.scale.setTo(game.world.width, 1 );
+		ground = this.platform.create(9500, 5450, 'bush');
+		ground.scale.setTo(4.3, 0.6 );
 		ground.body.damping.x = 0;
 		ground.body.clearShapes();
-		ground.body.addRectangle(2300, 25);
+		ground.body.addRectangle(1800, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 		
 		//platforms and enemies in order, left to right
 
-		let ePlat = this.platform.create(700, 250, 'star');
-		ePlat.scale.setTo(1, 1);
+		let ePlat = this.platform.create(700, 250, 'branch');
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(1525, 440, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat = this.platform.create(1525, 440, 'branch');
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(1800, 952, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat = this.platform.create(1800, 952, 'branch');
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(2522, 1170, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat = this.platform.create(2522, 1170, 'branch');
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(3080, 1550, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat = this.platform.create(3080, 1550, 'branch');
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(3480, 1650, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat = this.platform.create(3480, 1650, 'branch');
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(4020, 1995, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat = this.platform.create(4020, 1995, 'branch');
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
@@ -239,7 +239,7 @@ play2.prototype = {
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
 		ePlat = this.platform.create(4260, 2460, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
@@ -247,7 +247,7 @@ play2.prototype = {
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
 		ePlat = this.platform.create(5450, 2950, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
@@ -255,7 +255,7 @@ play2.prototype = {
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
 		ePlat = this.platform.create(6000, 3150, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
@@ -263,7 +263,7 @@ play2.prototype = {
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
 		ePlat = this.platform.create(6700, 3750, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
@@ -271,7 +271,7 @@ play2.prototype = {
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
 		ePlat = this.platform.create(7040, 3550, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
@@ -279,7 +279,7 @@ play2.prototype = {
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
 		ePlat = this.platform.create(7305, 4120, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
@@ -287,7 +287,7 @@ play2.prototype = {
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
 		ePlat = this.platform.create(7870, 4450, 'star');
-		ePlat.scale.setTo(1, 1);
+		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
 		ePlat.body.kinematic = true;
@@ -350,7 +350,7 @@ play2.prototype = {
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
-		toilets = new Toilet(game, 7700, 4900, 'toilet');
+		toilets = new Toilet(game, 7500, 4800, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;

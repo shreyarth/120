@@ -5,7 +5,7 @@ function P2layer(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	Phaser.Sprite.call(this, game, 30, 200, key);
-	//Phaser.Sprite.call(this, game, 9200, 5000, key);
+	//Phaser.Sprite.call(this, game, 9000, 5200, key);
 	//for level 2 testing
 	//Phaser.Sprite.call(this, game, 5940, 3610, key);
 	// Animation settings
