@@ -6,8 +6,12 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
-	this.scale.setTo(0.1);
+	//this.scale.setTo(0.1);
 	this.anchor.set(0.5);
+	// Animation depending on key
+	if (key == 'deer') {
+		this.animations.add('walk', [0, 1], 2);
+	}
 
 	// physics crap
 	game.physics.p2.enable(this);
@@ -22,15 +26,23 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	this.bulletE = game.add.group();
 	this.bulletE.enableBody = true;
 	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
-	this.bulletE.createMultiple(200, bFrame);
+	this.bulletE.createMultiple(50, bFrame);
 	this.bulletE.forEach(function(bull) {bull.body.clearShapes(), bull.body.addCircle(5);});
 	// this.bulletE.
 	//this.bulletE.checkWorldBounds = false;
 	//this.bulletE.outOfBoundsKill = true;
 
-	//timer
+	// Timer events for groups
 	timer = game.time.create(false);
 	timer.loop(game.rnd.integerInRange(700,1300), this.fire, this);
+	game.timer.loop(500, function() {
+		console.log(this.bullets);
+		this.bulletE.forEachAlive(function(bull) {
+			bull.alpha -= 0.05;
+			if (bull.alpha <= 0)
+				bull.alive = false;
+		}, this.bullets);
+	}, this);
 	timer.start();
 
 	// Collision
@@ -44,12 +56,21 @@ Enemy.prototype.constructor = Enemy;
 
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
+	if (this.body.velocity,x != 0) {
+		this.animations.play('walk');
+		if (this.body.velocity,x < 0 && this.scale.x < 0)
+			this.scale.x = 1;
+		if (this.body.velocity,x > 0 && this.scale.x > 0)
+			this.scale.x = -1;
+	}
+	/*
 	if(this.body.velocity.x > 0){
 		this.scale.setTo(-0.1, 0.1);
 	}
 	if(this.body.velocity.x < 0){
 		this.scale.setTo(0.1, 0.1);
 	}
+	*/
 	if(this.type == 'kamikaze_turkey'){
 		this.boom();
 	}
@@ -93,7 +114,8 @@ Enemy.prototype.pooModifier = function() {
 
 Enemy.prototype.fire = function() {
 	if (this.alive){
-		let star = this.bulletE.getFirstExists(false);
+		let star = this.bulletE.getFirstDead(false);
+		star.alpha = 1;
 		var throwing = game.add.audio("throw", 0.3);
 		
 		if(star){
@@ -102,6 +124,7 @@ Enemy.prototype.fire = function() {
 			if(this.body.x > player.x){
 				if(this.body.x < player.x + game.rnd.integerInRange(250,400)){
 					star.reset(this.x + 10, this.y - 10);
+					star.alpha = 1;
 					star.body.velocity.x = game.rnd.integerInRange(-200, -100);
 					star.body.velocity.y = game.rnd.integerInRange(-250, -100);	
 					throwing.play();
