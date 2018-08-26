@@ -16,11 +16,8 @@ play2.prototype = {
 		
 	},
 	create: function() {
-		if (!this.music) {
-			this.music = game.add.audio('stage1bgm', 0.5, true);
-			if (this.music.isPlaying === false)
-				this.music.play();
-		}
+		// Music play setting depreceated since it continues to play music even after the state change
+
 		// Setting up game world
 		game.world.setBounds(0, 0, 10000, 6000);
 		game.physics.startSystem(Phaser.Physics.P2JS);
@@ -675,8 +672,8 @@ play2.prototype = {
 		
 		//for end of level
 		if(player.x +50 > game.world.width && this.toil.total == 0){
+			BGM[1].stop();
 			game.state.start('boss');
-			this.music.stop();
 		}
 
 	},

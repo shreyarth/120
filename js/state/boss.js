@@ -17,10 +17,14 @@ boss.prototype = {
 	},
 	create: function() {
 		// Asset implementaion
-		if (!this.music || this.music.isPlaying === false) {
-			this.music = game.add.audio('bosslevel', 0.5, true);
-			this.music.play();
-		}
+        if (!this.music || this.music.isPlaying === false) {
+            this.music = game.add.audio('bosslevel', 0.5, true);
+            this.music.play();
+       }
+
+		if (!BGM[2].isPlaying) BGM[2].play();
+		
+		// Game world setting
 		game.world.setBounds( 0, 0, 1000, 800);
 		console.log("play state to check implementation");
 		game.physics.startSystem(Phaser.Physics.P2JS);
@@ -34,9 +38,9 @@ boss.prototype = {
 		this.collideBoss = game.physics.p2.createCollisionGroup();
 		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat, 
 			this.collidePB, this.collideEB]);
+		game.physics.startSystem(Phaser.Physics.P2jS);
 		
 		var background = game.add.sprite(0, 0, 'porter');
-		//background.scale.setTo(5,2);
 		background.width = game.world.width;
 		background.height = game.world.height -32;
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
@@ -134,16 +138,7 @@ boss.prototype = {
 		// Fix UI to the camera
 		pooMeter(MAXPOO, 0x000000);
 		this.ui = pooMeter(player.pooCount, 0x492008);
-		let t_ui = game.add.sprite(game.width - 128, 8, 'toilet');
-		t_ui.scale.setTo(0.75);
-		t_ui.fixedToCamera = true;
-		t_ui.cameraOffset.setTo(game.width - 128, 8);
-		let style = {
-			font: 'Press Start 2P',
-			fill: '#fff',
-			fontSize: 32,
-			strokeThickness: 5
-		};
+
 		// this.toiletCounter = game.add.text(game.width - 78, 16, this.toil.total, style);
 		// this.toiletCounter.fixedToCamera = true;
 		// this.toiletCounter.cameraOffset.setTo(game.width - 78, 16);

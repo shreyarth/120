@@ -5,7 +5,7 @@ function P2layer(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
 	//Phaser.Sprite.call(this, game, 30, 200, key);
-	Phaser.Sprite.call(this, game, 7000, 200, key);
+	Phaser.Sprite.call(this, game, 64, game.height - 64, key);
 	//for level 2 testing
 	//Phaser.Sprite.call(this, game, 5940, 3610, key);
 	// Animation settings
@@ -17,6 +17,13 @@ function P2layer(game, key, frame, bulletKey) {
 	this.animations.add('shoot', [6, 1, 1, 6], 15);
 	// Play animation
 	this.animations.play('idle');
+
+	// Player SFX
+	this.sfx = [];
+	this.sfx[0] = game.add.audio('fart');
+	this.sfx[1] = game.add.audio('rasp');
+	this.sfx[3] = game.add.audio('grunt');
+	this.sfx[4] = game.add.audio('splat');
 
 	game.physics.p2.enable(this, true);
 
@@ -44,7 +51,7 @@ function P2layer(game, key, frame, bulletKey) {
 	this.bullets = game.add.group();
 	this.bullets.enableBody = true;
 	this.bullets.physicsBodyType = Phaser.Physics.P2JS;
-	this.bullets.createMultiple(300, bulletKey);
+	this.bullets.createMultiple(50, bulletKey);
 	this.bullets.outOfBoundsKill = true;
 
 	// Poo splats
@@ -189,8 +196,7 @@ P2layer.prototype.fire = function(isJump) {
 			star.body.velocity.y = 250;
 			star.body.angle = 90;
 			console.log("jumping");
-			var grunt = game.add.audio('grunt', 0.5);
-			grunt.play();
+			this.sfx[3].play();
 			emitter = game.add.emitter(player.x +2, player.y, 5);
 			if(this.pooCount > 8){
 				emitter.makeParticles('turd1');
@@ -253,9 +259,8 @@ P2layer.prototype.fire = function(isJump) {
 		console.log(this.pooCount);
 		this.pooCount--;
 		star.body.collideWorldBounds = false;
-		var fart = game.add.audio('fart', 0.3);
 		if(this.pooCount < MAXPOO && this.pooCount > -1){
-			fart.play();
+			this.sfx[0].play();
 		}
 
 		// Check pooCount after action
@@ -277,9 +282,8 @@ P2layer.prototype.death = function() {
 		overflow = true;
 	}
 	if (deathSprite){
-		var rasp = game.add.audio('rasp', 0.5);
 		this.kill();
-		rasp.play();
+		this.sfx[1].play();
 		game.camera.shake(0.005, 400);
 		deathSprite.anchor.set(0.5);
 		deathSprite.scale.x = 2;
