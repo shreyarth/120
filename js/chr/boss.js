@@ -15,7 +15,7 @@ Boss.prototype.update = function() {
 	this.changeDir();
 }
 
-Boss.prototype.changeDir = function() {
+Boss.prototype.charge = function() {
 	if(this.body.x >= 800){
 		console.log('inifififiifififio');
 		this.body.velocity.x = -200;
@@ -25,5 +25,11 @@ Boss.prototype.changeDir = function() {
 		console.log('inifififiifififio');
 		this.body.velocity.x = 200;
 		console.log(this.body.velocity.x);
+	}
+}
+
+Boss.prototype.spawnKami = function() {
+	if(Math.abs(player.x - this.x) < 100){
+		kami = new Enemy(game, this.x, 100, 'enemy', null, null, 'kaimkaze_turkey');
 	}
 }
