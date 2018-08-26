@@ -3,7 +3,6 @@ var menu = function() {
 	this.menu = ['start', 'settings', 'exit'];
 	this.mCount = 0;
 	this.select;
-	this.music;
 }
 
 menu.prototype = {
@@ -13,10 +12,10 @@ menu.prototype = {
 	create: function() {
 		// Asset implementaion
 		game.stage.backgroundColor = bgcolor;
-		if (!this.music || this.music.isPlaying === false) {
-			this.music = game.add.audio('menumusic', 0.5, true);
-			this.music.play();
-		}
+		// Takes care of music in case player transitions from game state
+		if (BGM[1].isPlaying) BGM[1].stop();
+		if (BGM[2].isPlaying) BGM[2].stop();
+		if (!BGM[0].isPlaying) BGM[0].play();
 		
 		style = {font: 'Helvetica', fontSize: '24px', fill: '#fff'};
 		let playText = game.add.text(game.world.centerX, game.height*.3,
@@ -75,7 +74,7 @@ menu.prototype = {
 			switch (this.mCount%3) {
 				case 0:
 					game.state.start('play');
-					this.music.stop();
+					BGM[0].stop();
 					break;
 				case 1:
 					if (noset)

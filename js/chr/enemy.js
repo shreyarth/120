@@ -28,9 +28,8 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
 	this.bulletE.createMultiple(50, bFrame);
 	this.bulletE.forEach(function(bull) {bull.body.clearShapes(), bull.body.addCircle(5);});
-	// this.bulletE.
-	//this.bulletE.checkWorldBounds = false;
-	//this.bulletE.outOfBoundsKill = true;
+	this.bulletE.checkWorldBounds = false;
+	this.bulletE.outOfBoundsKill = true;
 
 	// Timer events for groups
 	timer = game.time.create(false);
@@ -90,7 +89,8 @@ Enemy.prototype.update = function() {
 
 Enemy.prototype.collideBody = function() {
 	if (!player.isInvincible) {
-	this.turkey();
+	//this.turkey();
+	SFX[2].play();
 	this.pooModifier();
 	}
 }
@@ -116,18 +116,15 @@ Enemy.prototype.fire = function() {
 	if (this.alive){
 		let star = this.bulletE.getFirstDead(false);
 		star.alpha = 1;
-		var throwing = game.add.audio("throw", 0.3);
 		
 		if(star){
-			star.scale.setTo(0.05,0.05);
-			game.physics.enable(this, Phaser.Physics.ARCADE);
 			if(this.body.x > player.x){
 				if(this.body.x < player.x + game.rnd.integerInRange(250,400)){
 					star.reset(this.x + 10, this.y - 10);
 					star.alpha = 1;
 					star.body.velocity.x = game.rnd.integerInRange(-200, -100);
 					star.body.velocity.y = game.rnd.integerInRange(-250, -100);	
-					throwing.play();
+					SFX[5].play();
 				}
 			}
 			else {
@@ -135,7 +132,7 @@ Enemy.prototype.fire = function() {
 					star.reset(this.x - 10, this.y - 10);
 					star.body.velocity.x = game.rnd.integerInRange(100, 200);
 					star.body.velocity.y = game.rnd.integerInRange(-250, -100);	
-					throwing.play();			
+					SFX[5].play();			
 				}
 			}
 		}
@@ -143,7 +140,8 @@ Enemy.prototype.fire = function() {
 }
 
 Enemy.prototype.death = function(player, bullet) {
-	this.turkey();
+	//this.turkey();
+	SFX[2].play();
 	// game.camera.shake(0.005, 400);
 	this.kill();
 	//this.reset(game.rnd.integerInRange(2500,5000),
