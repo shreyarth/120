@@ -6,8 +6,12 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
-	this.scale.setTo(0.1);
+	//this.scale.setTo(0.1);
 	this.anchor.set(0.5);
+	// Animation depending on key
+	if (key == 'deer') {
+		this.animations.add('walk', [0, 1], 2);
+	}
 
 	// physics crap
 	game.physics.p2.enable(this);
@@ -22,15 +26,22 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	this.bulletE = game.add.group();
 	this.bulletE.enableBody = true;
 	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
-	this.bulletE.createMultiple(200, bFrame);
+	this.bulletE.createMultiple(50, bFrame);
 	this.bulletE.forEach(function(bull) {bull.body.clearShapes(), bull.body.addCircle(5);});
 	// this.bulletE.
 	//this.bulletE.checkWorldBounds = false;
 	//this.bulletE.outOfBoundsKill = true;
 
-	//timer
+	// Timer events for groups
 	timer = game.time.create(false);
-	timer.loop(1300, this.fire, this);
+	timer.loop(game.rnd.integerInRange(700,1300), this.fire, this);
+	game.timer.loop(500, function() {
+		this.bulletE.forEachAlive(function(bull) {
+			bull.alpha -= 0.05;
+			if (bull.alpha <= 0)
+				bull.alive = false;
+		}, this.bullets);
+	}, this);
 	timer.start();
 
 	// Collision
@@ -44,12 +55,22 @@ Enemy.prototype.constructor = Enemy;
 
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
+	if (this.body.velocity.x != 0) {
+		if (this.type == null)
+			this.animations.play('walk');
+		if (this.body.velocity.x < 0 && this.scale.x < 0)
+			this.scale.x = 1;
+		if (this.body.velocity.x > 0 && this.scale.x > 0)
+			this.scale.x = -1;
+	}
+	/*
 	if(this.body.velocity.x > 0){
 		this.scale.setTo(-0.1, 0.1);
 	}
 	if(this.body.velocity.x < 0){
 		this.scale.setTo(0.1, 0.1);
 	}
+	*/
 	if(this.type == 'kamikaze_turkey'){
 		this.boom();
 	}
@@ -75,16 +96,16 @@ Enemy.prototype.collideBody = function() {
 }
 
 Enemy.prototype.pooModifier = function() {
-		let rando = game.rnd.integerInRange(1, 1000);
-		if (rando % 4 == 0) {
-			if(player.pooCount > 15)
-				player.pooCount += 1;
-			else
+		//let rando = game.rnd.integerInRange(1, 1000);
+		//if (rando % 4 == 0) {
+			//if(player.pooCount > 15)
+				//player.pooCount += 1;
+			//else
 				player.pooCount -= 1;
-		}
-		else {
-			player.pooCount += 1;
-		}
+		//}
+		//else {
+			//player.pooCount += 1;
+		//}
 
 		console.log(player.pooCount);
 		player.death();
@@ -93,25 +114,27 @@ Enemy.prototype.pooModifier = function() {
 
 Enemy.prototype.fire = function() {
 	if (this.alive){
-		let star = this.bulletE.getFirstExists(false);
+		let star = this.bulletE.getFirstDead(false);
+		star.alpha = 1;
 		var throwing = game.add.audio("throw", 0.3);
 		
 		if(star){
 			star.scale.setTo(0.05,0.05);
 			game.physics.enable(this, Phaser.Physics.ARCADE);
 			if(this.body.x > player.x){
-				if(this.body.x < player.x+400){
+				if(this.body.x < player.x + game.rnd.integerInRange(250,400)){
 					star.reset(this.x + 10, this.y - 10);
-					star.body.velocity.x = -150;
-					star.body.velocity.y = -200
+					star.alpha = 1;
+					star.body.velocity.x = game.rnd.integerInRange(-200, -100);
+					star.body.velocity.y = game.rnd.integerInRange(-250, -100);	
 					throwing.play();
 				}
 			}
 			else {
-				if(this.body.x > player.x-400){
+				if(this.body.x > player.x - game.rnd.integerInRange(250, 400)){
 					star.reset(this.x - 10, this.y - 10);
-					star.body.velocity.x = 150;
-					star.body.velocity.y = -200;	
+					star.body.velocity.x = game.rnd.integerInRange(100, 200);
+					star.body.velocity.y = game.rnd.integerInRange(-250, -100);	
 					throwing.play();			
 				}
 			}
@@ -145,11 +168,13 @@ Enemy.prototype.turkey = function(){
 }
 
 Enemy.prototype.boom = function(){
-	this.body.velocity.y = 1000;
-	// this.body.createBodyCallback(player, this.collideGround, this);
-}
+	this.body.data.gravityScale = 0;
+	this.body.velocity.x = -25;
 
-Enemy.prototype.collideGround = function(){
-	this.turkey();
-	this.kill();
+	if(Math.abs(this.x - player.x) < 100){
+		this.body.velocity.y = 1000;
+		if(Math.abs(this.x - player.x) < 100 && Math.abs(player.y - this.y) > 75){
+			this.body.velocity.y += 70;
+		}
+	}
 }

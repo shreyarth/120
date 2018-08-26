@@ -172,6 +172,9 @@ play.prototype = {
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
 
+		//sign for end of level
+		game.add.sprite(7000, 500, 'sign');
+
 		//toilets, player must collide with all before moving on
 		this.toil = game.add.group();
 		this.toil.physicsBodyType = Phaser.Physics.P2JS;
@@ -189,7 +192,25 @@ play.prototype = {
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
+		toilets = new Toilet(game, 1886, 756, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
 		toilets = new Toilet(game, 3087, 756, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 4317, 756, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 4927, 756, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
@@ -206,6 +227,19 @@ play.prototype = {
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.angle = -10;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 7322, 510, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
+		toilets.body.angle = -10;
+		toilets.body.debug = true;
+
+		toilets = new Toilet(game, 7847, 756, 'toilet');
+		game.add.existing(toilets);
+		this.toil.add(toilets);
+		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
 		// player
@@ -360,6 +394,36 @@ play.prototype = {
 		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
+		en = new Enemy(game, 3110, 746, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
+		en.bulletE.forEach(function(bull) {
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+		en.body.immovable = true;
+
+		en = new Enemy(game, 4020, 746, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
+		en.bulletE.forEach(function(bull) {
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+		en.body.immovable = true;
+
 		en = new Enemy(game, 3263, 608, 'deer', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
@@ -420,6 +484,20 @@ play.prototype = {
 		en.body.immovable = true;
 
 		en = new Enemy(game, 4944, 746, 'deer', null, 'pepto');
+		game.add.existing(en);
+		this.enemy.add(en);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
+		en.bulletE.forEach(function(bull) {
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
+
+		en = new Enemy(game, 5200, 746, 'deer', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
@@ -571,19 +649,37 @@ play.prototype = {
 		// this.enemy.add(en);
 
 		//test for flying enemy
-		for(var i = 0; i < 7; ++i){
-			enfl = new Enemy(game, game.rnd.integerInRange(100,600),
-			 100, 'enemy', null, null, 'kamikaze_turkey');
+		// for(var i = 0; i < 20; ++i){
+		// 	game.time.events.add(Phaser.Timer.SECOND * 3, this.kamikaze, this);
+		// }
+		for(var i = 0; i < 15; ++i){
+			enfl = new Enemy(game, game.rnd.integerInRange(1800,8000),
+			 game.rnd.integerInRange(80, 250), 'enemy', null, null, 'kamikaze_turkey');
+
 			game.add.existing(enfl);
 			this.enemy.add(enfl);
 			enfl.body.setCollisionGroup(this.collideEnemy);
 			enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-			enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+		 	enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+		 	enfl.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, enfl);
 		}
 
-		//sign for end of level
-		let sign = this.platform.create(7400, 300, 'sign');
-		sign.body.immovable = true;
+		enfl = new Enemy(game, 700, 250, 'enemy', null, null, 'kamikaze_turkey');
+		game.add.existing(enfl);
+		this.enemy.add(enfl);
+		enfl.body.setCollisionGroup(this.collideEnemy);
+		enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+
+		enfl = new Enemy(game, 600, 250, 'enemy', null, null, 'kamikaze_turkey');
+		game.add.existing(enfl);
+		this.enemy.add(enfl);
+		enfl.body.velocity.x = -1;
+		enfl.body.setCollisionGroup(this.collideEnemy);
+		enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+
+		//sign.body.immovable = true;
 		//sign.scale.setTo(1,1);
 		// Need to fix sign in the air (no collision) <- can we just make it as a part of bg?
 
@@ -594,6 +690,20 @@ play.prototype = {
 		// Fix UI to the camera
 		pooMeter(MAXPOO, 0x000000);
 		this.ui = pooMeter(player.pooCount, 0x492008);
+		let t_ui = game.add.sprite(game.width - 128, 8, 'toilet');
+		t_ui.scale.setTo(0.75);
+		t_ui.fixedToCamera = true;
+		t_ui.cameraOffset.setTo(game.width - 128, 8);
+		let style = {
+			font: 'Press Start 2P',
+			fill: '#fff',
+			fontSize: 32,
+			strokeThickness: 5
+		};
+		this.toiletCounter = game.add.text(game.width - 78, 16, this.toil.total, style);
+		this.toiletCounter.fixedToCamera = true;
+		this.toiletCounter.cameraOffset.setTo(game.width - 78, 16);
+		
 	},
 	update: function() {
 		// Update function
@@ -608,9 +718,10 @@ play.prototype = {
 		if (this.ui)
 			this.ui.destroy();
 		this.ui = pooMeter(player.pooCount, 0x492008);
+		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level
-		if(player.x +50 > game.world.width){
+		if(player.x +50 > game.world.width && this.toil.total == 0){
 			game.state.start('play2');
 			this.music.stop();
 		}
@@ -618,6 +729,17 @@ play.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
+	},
+
+	kamikaze: function() {
+		enfl = new Enemy(game, game.rnd.integerInRange(100,500),
+			 100, 'enemy', null, null, 'kamikaze_turkey');
+		game.add.existing(enfl);
+		this.enemy.add(enfl);
+		enfl.body.setCollisionGroup(this.collideEnemy);
+		enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
+		enfl.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, enfl);
 	}
 	// Char control is implemented in player.js
 }

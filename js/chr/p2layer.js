@@ -4,8 +4,8 @@ var PIXBIT = 8;
 function P2layer(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, 30, 100, key);
-	//Phaser.Sprite.call(this, game, 1970, 1360, key);
+	Phaser.Sprite.call(this, game, 30, 200, key);
+	//Phaser.Sprite.call(this, game, 9000, 5200, key);
 	//for level 2 testing
 	//Phaser.Sprite.call(this, game, 5940, 3610, key);
 	// Animation settings
@@ -35,27 +35,38 @@ function P2layer(game, key, frame, bulletKey) {
 	// Character info
 	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
-	game.timer.loop(4500, function() {
+	game.timer.loop(1000, function() {
 		this.pooCount++;
 		this.death();
-		this.pooSplat.forEach(function(poot) {
-			poot.alpha -= 0.1;
-			if (poot.alpha == 0)
-				poot.destroy();
-		});
-	}, this);
-	game.timer.start();
+		}, this);
 
 	// Bullets
 	this.bullets = game.add.group();
 	this.bullets.enableBody = true;
 	this.bullets.physicsBodyType = Phaser.Physics.P2JS;
 	this.bullets.createMultiple(300, bulletKey);
-	this.bullets.checkWorldBounds = true;
 	this.bullets.outOfBoundsKill = true;
 
 	// Poo splats
 	this.pooSplat = game.add.group();
+	
+	// Timer events for groups
+	game.timer.loop(500, function() {
+		console.log(this.bullets);
+		if (this.alive) {
+			this.pooSplat.forEach(function(splat) {
+				splat.alpha -= 0.1;
+				if (splat.alpha <= 0)
+					splat.destroy();
+			}, this.pooSplat);
+		}
+		this.bullets.forEachAlive(function(bull) {
+			bull.alpha -= 0.05;
+			if (bull.alpha <= 0)
+				bull.alive = false;
+		}, this.bullets);
+	}, this);
+	game.timer.start();
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -64,26 +75,34 @@ P2layer.prototype.constructor = P2layer;
 
 // override Phaser.Sprite update
 P2layer.prototype.update = function() {
-	// this.animations.play('idle');
 	if (this.alive) {
 		if(move.left.isDown){
-			this.body.velocity.x = -150;
+			this.body.velocity.x = -200;
 			// Flip sprite
 			if (this.direction == 'right')
 				this.scale.x = -1;
+			
 			this.direction = 'left';
-			this.animations.play('walk');
-			this.state = 'walk';
-			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
+			if(this.state == 'jump')
+				this.animations.play('jump');
+			else
+				this.animations.play('walk');
 
+			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
 		}
 		else if(move.right.isDown){
-			this.body.velocity.x = 150;
+			this.state == 'walk';
+			this.body.velocity.x = 200;
 			if (this.direction == 'left')
-				this.scale.x = 1;
+					this.scale.x = 1;
+			
 			this.direction = 'right';
-			this.animations.play('walk');
-			this.state = 'walk';
+			if(this.state == 'jump')
+				this.animations.play('jump');
+			else
+				this.animations.play('walk');
+			
+			
 			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
 		}
 		else if(this.friction == true) {
@@ -108,17 +127,30 @@ P2layer.prototype.update = function() {
 		}
 		else{
 			console.log('friction off');
+			this.angle = 30;
+			this.body.angle = 30;
 		}
 		if (move.up.justDown)
 		{
-			if(this.state == 'walk'){
-				this.animations.stop(null, true);	
+			if(this.pooCount > MAXPOO/2){
+				this.body.velocity.y = game.rnd.integerInRange(-700,-550);
+				this.fire(true);
+				this.animations.play('jump');
+				this.state = 'jump';
+				this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle'), this.state = 'idle';}, this);
+			}else if(this.pooCount < MAXPOO/3){
+				this.body.velocity.y = game.rnd.integerInRange(-600,-470);
+				this.fire(true);
+				this.animations.play('jump');
+				this.state = 'jump';
+				this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle'), this.state = 'idle';}, this);
 			}
-			this.body.velocity.y = -600;
-			this.animations.play('jump');
-			this.state = 'jump';
-			this.fire(true);
-			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
+			else
+				this.body.velocity.y = game.rnd.integerInRange(-650,-580);;
+				this.fire(true);
+				this.animations.play('jump');
+				this.state = 'jump';
+				this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle'), this.state = 'idle';}, this);
 		}
 		else{
 			this.body.velocity.y += 10;
@@ -142,24 +174,35 @@ P2layer.prototype.update = function() {
 
 // isJump: set to true if its not attack
 P2layer.prototype.fire = function(isJump) {
-	let star = this.bullets.getFirstExists(false);
+	let star = this.bullets.getFirstDead(false);
+	star.alpha = 1;
 	if(star){
 		game.physics.p2.enable(star);
 		let emitter;
 		if (isJump) {
 			// star.body.restitution.y = 0.2;
+			star.outOfBoundsKill = true;
 			star.body.gravity.y = 90;
 			star.reset(player.x + 2, player.y + 20);
+			star.scale.setTo(game.rnd.integerInRange(7,14)/10,
+				game.rnd.integerInRange(7,14)/10);
 			star.body.velocity.y = 250;
 			star.body.angle = 90;
 			console.log("jumping");
 			var grunt = game.add.audio('grunt', 0.5);
 			grunt.play();
 			emitter = game.add.emitter(player.x +2, player.y, 5);
-			if(this.pooCount > 8)
+			if(this.pooCount > 8){
 				emitter.makeParticles('turd1');
-			else
+				emitter.start(false, 1000, 0, 5);
+				emitter.setYSpeed(100,400);}
+			
+			else if(this.pooCount > MAXPOO *0.7){
 				emitter.makeParticles('turdB');
+				emitter.start(false, 1000, 0, 10);
+				emitter.setYSpeed(100,400);}
+			else
+			emitter.makeParticles('turdB');
 			emitter.start(false, 1000, 0, 5);
 			emitter.setYSpeed(100,400);
 		}
@@ -171,12 +214,15 @@ P2layer.prototype.fire = function(isJump) {
 			if (this.direction == 'right') {
 				this.animations.play('shoot');
 				star.reset(this.x + 10, this.y);
-				star.body.velocity.x = 350;
+				star.scale.setTo(game.rnd.integerInRange(7,14)/10,
+				game.rnd.integerInRange(7,14)/10);
+				star.body.velocity.x = game.rnd.integerInRange(250,400);
+				star.body.velocity.y = game.rnd.integerInRange(-60,0);
 				//recoil to player from shooting
-				this.body.velocity.x = -70;
+				this.body.velocity.x = -100;
 				console.log("shooting right");
 				emitter = game.add.emitter(this.x + 25, this.y, 5);
-				if(this.pooCount > 8)
+				if(this.pooCount > 5)
 					emitter.makeParticles('turd1');
 				else
 					emitter.makeParticles('turdB');
@@ -186,12 +232,15 @@ P2layer.prototype.fire = function(isJump) {
 				this.scale.x = -1;
 				this.animations.play('shoot');
 				star.reset(player.x - 10, player.y);
-				star.body.velocity.x = -350;
+				star.scale.setTo(game.rnd.integerInRange(7,14)/10,
+				game.rnd.integerInRange(7,14)/10);
+				star.body.velocity.x = game.rnd.integerInRange(-400, -200);
+				star.body.velocity.y = game.rnd.integerInRange(-150, 30);
 				//recoil 
-				this.body.velocity.x = 70;
+				this.body.velocity.x = 100;
 				console.log("shooting left");
 				emitter = game.add.emitter(this.x - 25, this.y, 5);
-				if(this.pooCount > 8)
+				if(this.pooCount > 5)
 					emitter.makeParticles('turd1');
 				else
 					emitter.makeParticles('turdB');
@@ -273,7 +322,7 @@ P2layer.prototype.getPixbit = function(x, y) {
 	// create primitive
 	let g = game.add.graphics();
 	g.beginFill(0x492008);
-	g.drawRect(x, y, PIXBIT, PIXBIT);	// Starting point, width, height
+	g.drawRect(x, y, PIXBIT * 2, PIXBIT);	// Starting point, width, height
 	g.endFill();
 	// transform primitive into sprite and destroy primitive
 	obj = game.add.sprite(x, y, g.generateTexture());

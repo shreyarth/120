@@ -8,7 +8,7 @@ This is a repository for the final project for 120 classes. The game is using ph
 ## Synopsis: 
 The game's protagonist needs to take a shit due to eating bad food. He goes from places to places finding bathroom to relieve himself.
 But beware! The player needs to keep a balance of pressure via a visible poop-o-meter. If you hold too long, you'll poop your pants. If
-you use too much, your internals will explode. This is a mish-mash of frustration and hilariality.
+you use too much, your internals will explode. This is a mish-mash of frustration and hilarity.
 
 ## Contributors:
   **Artist**: Anthony Medina  

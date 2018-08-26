@@ -1,5 +1,6 @@
 var tutorial = function() {
 	// state global var
+	this.tplayer;
 }
 
 tutorial.prototype = {
@@ -14,12 +15,13 @@ tutorial.prototype = {
 		// 	{font: 'Helvetica', fontSize: '24px', fill: '#fff'});
 		// playText.anchor.set(0.5);
 
-		tplayer = game.add.sprite(300, game.world.height - 150, 'deer');
-		game.physics.arcade.enable(tplayer);
-		tplayer.scale.setTo(0.3,0.3);
-		tplayer.body.bounce.y = 0.1;
-		tplayer.body.gravity.y = 700;
-		tplayer.body.collideWorldBounds = true;
+		this.tplayer = game.add.sprite(300, game.world.height - 150, 'deer');
+		this.tplayer.animations.add('walk', [0, 1], 4);
+		this.tplayer.anchor.set(0.5);
+		game.physics.arcade.enable(this.tplayer);
+		this.tplayer.body.bounce.y = 0.1;
+		this.tplayer.body.gravity.y = 700;
+		this.tplayer.body.collideWorldBounds = true;
 
 		var stext = game.add.text(70,100, "    Hi, I'm D and I'm here to teach you how to play the game\nFirst use the RIGHT and LEFT arrow keys to move me around\n        You can also use the UP arrow to make me JUMP!\n      Please walk to the right side of the screen to continue.",
 			{font: 'Helvetica', fontSize: '24px', fill: '#ffffff'});
@@ -33,18 +35,23 @@ tutorial.prototype = {
 			game.state.start('menu');
 		}
 		if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-			tplayer.body.velocity.x = -100;
+			this.tplayer.body.velocity.x = -100;
+			this.tplayer.animations.play('walk');
+			this.tplayer.scale.x = 1;
 		}else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-			tplayer.body.velocity.x = 100;
+			this.tplayer.body.velocity.x = 100;
+			this.tplayer.animations.play('walk');
+			this.tplayer.scale.x = -1;
 		}else{
-			tplayer.body.velocity.x = 0;
+			this.tplayer.body.velocity.x = 0;
+			this.tplayer.animations.stop();
 		}
 
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.UP)){
-			tplayer.body.velocity.y = -400;
+			this.tplayer.body.velocity.y = -400;
 		}
 
-		if(tplayer.x +100 > game.world.width){
+		if(this.tplayer.x +100 > game.world.width){
 			next();
 		}
 

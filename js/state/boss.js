@@ -5,6 +5,10 @@ var boss = function() {
 	this.obstacle;
 	this.heller = null;
 	this.ui;
+	this.toil; this.toiletCount;
+
+	this.collidePlayer, this.collideEmeny, this.collidePlat;
+	this.collidePB, this.collideEB, this.collideBoss;
 }
 
 boss.prototype = {
@@ -20,6 +24,19 @@ boss.prototype = {
 		game.world.setBounds( 0, 0, 1000, 800);
 		console.log("play state to check implementation");
 		game.physics.startSystem(Phaser.Physics.P2JS);
+<<<<<<< HEAD
+=======
+
+		// Setting up collision groups
+		this.collidePlayer = game.physics.p2.createCollisionGroup();
+		this.collideEnemy = game.physics.p2.createCollisionGroup();
+		this.collidePlat = game.physics.p2.createCollisionGroup();
+		this.collidePB = game.physics.p2.createCollisionGroup();
+		this.collideEB = game.physics.p2.createCollisionGroup();
+		this.collideBoss = game.physics.p2.createCollisionGroup();
+		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat, 
+			this.collidePB, this.collideEB]);
+>>>>>>> master
 		
 		var background = game.add.sprite(0, 0, 'porter');
 		//background.scale.setTo(5,2);
@@ -36,6 +53,7 @@ boss.prototype = {
 		ground.body.immovable = true;
 		
 		
+
 		
 		// the background wrap
 		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
@@ -48,56 +66,52 @@ boss.prototype = {
 		// player
 		player = new P2layer(game, 'player', null, 'poo');
 		game.add.existing(player);
+		player.body.setCollisionGroup(this.collidePlayer);
+		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB, this.collideBoss]);
 
 		//camera
 		game.camera.follow(player);
 
 		//boss
 		this.bossbody = game.add.group();
-		this.bossbody.enableBody = true;
 		this.bossbody.physicsBodyType = Phaser.Physics.P2JS;
+		this.bossbody.enableBody = true;
 
-		let bosseye = this.bossbody.create(400, 570, 'star');
-		bosseye.body.data.gravityScale = 0;
-
-
-
-		let bosseye2 = this.bossbody.create(420, 610, 'star');
-		bosseye2.anchor.setTo(0.5,0.5);
-		bosseye2.body.data.gravityScale = 0;
-
-		let bossmouth = this.bossbody.create(410, 690, 'star');
-		bossmouth.scale.setTo(2,2);
-		bossmouth.body.data.gravityScale = 0;
-
-		game.physics.p2.createLockConstraint(bosseye, bosseye2, [20, 0]);
-		game.physics.p2.createLockConstraint(bosseye, bossmouth, [10, 110]);
-		game.physics.p2.createLockConstraint(bosseye2, bossmouth, [-10, 80]);
-
-
-		// enemy
-		// this.enemy = game.add.group();
-		// this.enemy.enableBody = true;
+		let bosseye = new Boss(game, 400, 570, 'star');
+		game.add.existing(bosseye);
+		this.bossbody.add(bosseye);
+		bosseye.body.setCollisionGroup(this.collideBoss);
+		bosseye.body.collides([this.collidePlat, this.collidePlayer]);
 		
-		// for(var i = 0; i < 30; ++i){
-		// 	let en = new Enemy(game, game.rnd.integerInRange(600,4900),
-		// 		game.rnd.integerInRange(200,1000), 'enemy');
-		// 	game.add.existing(en);
-		// 	this.enemy.add(en);
-		// }
 
-		//test for 2nd enemy on screen
-		// en = new Enemy(game, 30, 1000, 'enemy');
-		// game.add.existing(en);
-		// this.enemy.add(en);
 
-		//test for flying enemy
-		// for(var i = 0; i < 10; ++i){
-		// 	en = new Enemy(game, game.rnd.integerInRange(1000,4800),
-		// 	 400, 'enemy');
-		// 	game.add.existing(en);
-		// 	this.enemy.add(en);
-		// }
+		let bosseye2 = new Boss(game, 420, 610, 'star');
+		bosseye2.anchor.setTo(0.5,0.5);
+		game.add.existing(bosseye2);
+		this.bossbody.add(bosseye2);
+		bosseye2.body.setCollisionGroup(this.collideBoss);
+		bosseye2.body.collides([this.collidePlat, this.collidePlayer]);
+
+		let bossmouth = new Boss(game, 410, 690, 'star');
+		bossmouth.scale.setTo(2,2);
+		bossmouth.anchor.setTo(0.5, 0.5);
+		game.add.existing(bossmouth);
+		this.bossbody.add(bossmouth);
+		bossmouth.body.setCollisionGroup(this.collideBoss);
+		bossmouth.body.collides([this.collidePlat, this.collidePlayer]);
+		if(bossmouth.alive){
+			if(Math.abs(bossmouth.x - player.x) < 100){
+				spawn = new Enemy(game, game.rnd.integerInRange(bossmouth.x, bossmouth.x + 500),
+			 	100, null, null, 'kamikaze_turkey');
+			 	game.add.existing(spawn);
+			}
+		}
+>>>>>>> master
+
+		game.physics.p2.createLockConstraint(bosseye, bosseye2, [50, 40]);
+		game.physics.p2.createLockConstraint(bosseye, bossmouth, [40, 110]);
+		game.physics.p2.createLockConstraint(bosseye2, bossmouth, [-40, 80]);
+
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
@@ -117,32 +131,26 @@ boss.prototype = {
 		this.bullets.checkWorldBounds = true;
 		this.bullets.outOfBoundsKill = true;
 
-		//pooCount = 100;
-
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
 		// game.camera.follow('player', FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
-		this.ui = this.pooMeter(player.pooCount);
-		//this.ui = this.bossHealth(boss.hpCount);
-	},
-	pooMeter: function(pooNum) {
-		let obj = null;
-
-		// create primitive
-		let g = game.add.graphics();
-		g.beginFill(0x492008);
-		g.drawRect(32, 32, pooNum * 5, 32);	// Starting point, width, height
-		g.endFill();
-
-		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(32, 32, g.generateTexture());
-		obj.fixedToCamera = true;
-		obj.cameraOffset.setTo(32, 16);
-		g.destroy();
-
-		return obj;
+		pooMeter(MAXPOO, 0x000000);
+		this.ui = pooMeter(player.pooCount, 0x492008);
+		let t_ui = game.add.sprite(game.width - 128, 8, 'toilet');
+		t_ui.scale.setTo(0.75);
+		t_ui.fixedToCamera = true;
+		t_ui.cameraOffset.setTo(game.width - 128, 8);
+		let style = {
+			font: 'Press Start 2P',
+			fill: '#fff',
+			fontSize: 32,
+			strokeThickness: 5
+		};
+		// this.toiletCounter = game.add.text(game.width - 78, 16, this.toil.total, style);
+		// this.toiletCounter.fixedToCamera = true;
+		// this.toiletCounter.cameraOffset.setTo(game.width - 78, 16);
 	},
 	// bossHealth: funtion(bosshp){
 	// 	let obje = null;
@@ -161,18 +169,26 @@ boss.prototype = {
 	// },
 	update: function() {
 		// Update function
-		// player and enemies collision with platforms
-		game.physics.arcade.collide(player, this.platform);
-		game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
+		// if(this.boss.x > 800){
+		// 	bossmouth.body.velocity.x -= 500;
+		// 	console.log(bossmouth.body.velocity.x);
+		// }
 
 		// UI update
-		this.ui.destroy();
-		this.ui = this.pooMeter(player.pooCount);
+		if (this.ui)
+			this.ui.destroy();
+		this.ui = pooMeter(player.pooCount, 0x492008);
+		//this.toiletCounter.text = this.toil.total;
 
 		
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
+	},
+
+	turke: function(){
+		console.log('in turke?');
+		
 	}
 	// Char control is implemented in player.js
 }

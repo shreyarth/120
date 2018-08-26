@@ -10,50 +10,72 @@ load.prototype = {
 
 		// Load all the assets
 		// Graphic
-		game.load.path = 'assets/';
-		game.load.spritesheet('player', 'img/player_spritesheet.png', 63, 81);
-		game.load.image('poo', 'img/poo.png');
-		game.load.image('platform', 'img/platform.png');
-		game.load.image('star', 'img/star.png');
-		game.load.image('pepto', 'img/bismol.png');
-		game.load.image('enemy', 'img/enemy.png');
-		game.load.image('turd', 'img/turd.png');
-		game.load.image('turd1', 'img/turd1.png');
-		game.load.image('turdB', 'img/turdblood.png')
-		game.load.image('porter', 'img/finalPorter.png');
-		game.load.image('heller', 'img/HellerDr.png');
-		game.load.image('heller2', 'img/HellerDr2.png');
-		game.load.image('bcar', 'img/blackCar.png');
-		game.load.image('ycar', 'img/yellowCar.png');
-		game.load.image('wcar', 'img/whitecar.png');
-		game.load.image('nerdhill', 'img/nerdhill.png');
-		game.load.image('slopehill', 'img/slopednhill.png');
+		game.load.path = 'assets/img/';
+		game.load.image('platform', 'platform.png');	// This is temp asset
+		game.load.image('star', 'star.png');	// This is temp asset
+		game.load.image('branch', 'branchPlatform.png');
+		game.load.image('bush', 'bushPlatform.png');
+
+		// Chr sprites
+		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
+		game.load.image('enemy', 'enemy.png');
+		game.load.spritesheet('deer', 'deer_spritesheet.png', 44, 49);
+		// game.load.image('deer', 'img/deer1.png');
 		
-		game.load.physics('physicsbox', 'img/physicsbox.json', null, Phaser.Physics.LIME_CORONA_JSON);
+		// Bullets, particles, effects etc
+		game.load.image('poo', 'poo.png');
+		game.load.image('pepto', 'bismol.png');
+		game.load.image('turd', 'turd.png');
+		game.load.image('turd1', 'turd1.png');
+		game.load.image('turdB', 'turdblood.png');
+		game.load.image('poosplat', 'shit.png');
+		game.load.image('bloodsplat', 'blood.png');
+		game.load.image('twater', "toiletwater.png");
 
-		game.load.image('poosplat', 'img/shit.png');
-		game.load.image('bloodsplat', 'img/blood.png');
-		game.load.image('bus', 'img/bus.png');
-		game.load.image('busObs', 'img/busObs.png');
-		game.load.image('carObs', 'img/carObs.png');
-		game.load.image('rcar', 'img/redCar.png');
-		game.load.image('sign', 'img/sign.png');
-		game.load.image('wreckC', 'img/wreckedcar.png');
-		game.load.image('wreckB', 'img/wreckedbus.png');
-		game.load.image('deer', 'img/deer1.png');
-		game.load.image('toilet', "img/toilet.png");
-		game.load.image('twater', "img/toiletwater.png");
+		// Backgrounds
+		game.load.image('porter', 'finalPorter.png');
+		game.load.image('heller', 'HellerDr.png');
+		game.load.image('heller2', 'HellerDr2.png');
+		game.load.image('nerdhill', 'nerdhill.png');
+		game.load.image('slopehill', 'slopednhill.png');
 
-		//sounds
-		game.load.audio('fart', 'audio/fart.mp3');
-		game.load.audio('rasp', 'audio/Rasp.mp3');
-		game.load.audio('turkey', 'audio/turkey.mp3');
-		game.load.audio('menumusic', 'audio/blocks.wav');
-		game.load.audio('stage1bgm', 'audio/actionMusic.wav');
-		game.load.audio('grunt', 'audio/grunt2.wav');
-		game.load.audio('splat', 'audio/splat.wav');
-		game.load.audio('throw', 'audio/eThrow.mp3');
-		game.load.audio('bosslevel', 'audio/finalBossMusic.wav');
+		// Objects
+		game.load.image('sign', 'sign.png');
+		game.load.image('toilet', 'toilet.png');
+
+		// Obstacles
+		game.load.image('bcar', 'blackCar.png');
+		game.load.image('ycar', 'yellowCar.png');
+		game.load.image('wcar', 'whitecar.png');
+		game.load.image('bus', 'bus.png');
+		game.load.image('busObs', 'busObs.png');
+		game.load.image('carObs', 'carObs.png');
+		game.load.image('rcar', 'redCar.png');
+		game.load.image('wreckC', 'wreckedcar.png');
+		game.load.image('wreckB', 'wreckedbus.png');
+
+		// Ethan Mars: "JASON!"
+		// (Heavy Rain 2010)
+		game.load.physics('physicsbox', 'physicsbox.json', null, Phaser.Physics.LIME_CORONA_JSON);
+
+		// Sounds
+		// Load all sounds into corresponding array
+		game.load.path = 'assets/audio/';
+		// BG
+		game.load.audio('menumusic', 'blocks.wav');
+		BGM[0] = game.add.audio('menumusic', BGVOL, true);
+		game.load.audio('stage1bgm', 'actionMusic.wav');
+		BGM[1] = game.add.audio('stagebgm', BGVOL, true);
+		game.load.audio('bosslevel', 'finalBossMusic.wav');
+		BGM[2] = game.add.audio('bosslevel', BGVOL, true);
+
+		// SFX
+		game.load.audio('fart', 'fart.mp3');
+		game.load.audio('rasp', 'Rasp.mp3');
+		game.load.audio('turkey', 'turkey.mp3');
+		game.load.audio('grunt', 'grunt2.wav');
+		game.load.audio('splat', 'splat.wav');
+		game.load.audio('throw', 'eThrow.mp3');
 	},
 	create: function() {
 		game.state.start('tutorial');
