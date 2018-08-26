@@ -13,6 +13,8 @@ load.prototype = {
 		game.load.path = 'assets/img/';
 		game.load.image('platform', 'platform.png');	// This is temp asset
 		game.load.image('star', 'star.png');	// This is temp asset
+		game.load.image('branch', 'branchPlatform.png');
+		game.load.image('bush', 'bushPlatform.png');
 
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
