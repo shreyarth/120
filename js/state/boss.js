@@ -77,6 +77,7 @@ boss.prototype = {
 		let bosseye = new Boss(game, 400, 570, 'star');
 		game.add.existing(bosseye);
 		this.bossbody.add(bosseye);
+		bosseye.body.setCollisionGroup(this.collideBoss);
 		bosseye.body.collides([this.collidePlat, this.collidePlayer]);
 		
 
@@ -85,6 +86,7 @@ boss.prototype = {
 		bosseye2.anchor.setTo(0.5,0.5);
 		game.add.existing(bosseye2);
 		this.bossbody.add(bosseye2);
+		bosseye2.body.setCollisionGroup(this.collideBoss);
 		bosseye2.body.collides([this.collidePlat, this.collidePlayer]);
 
 		let bossmouth = new Boss(game, 410, 690, 'star');
@@ -92,9 +94,14 @@ boss.prototype = {
 		bossmouth.anchor.setTo(0.5, 0.5);
 		game.add.existing(bossmouth);
 		this.bossbody.add(bossmouth);
+		bossmouth.body.setCollisionGroup(this.collideBoss);
 		bossmouth.body.collides([this.collidePlat, this.collidePlayer]);
 		if(bossmouth.alive){
-			this.turke();
+			if(Math.abs(bossmouth.x - player.x) < 100){
+				spawn = new Enemy(game, game.rnd.integerInRange(bossmouth.x, bossmouth.x + 500),
+			 	100, null, null, 'kamikaze_turkey');
+			 	game.add.existing(spawn);
+			}
 		}
 
 		game.physics.p2.createLockConstraint(bosseye, bosseye2, [50, 40]);
@@ -177,10 +184,7 @@ boss.prototype = {
 
 	turke: function(){
 		console.log('in turke?');
-		// if(Math.abs(this.bossbody.bossmouth.x - player.x) < 100){
-		// 	spawn = new Enemy(game, game.rnd.integerInRange(bossmouth.x, bossmouth.x + 500),
-		// 	 100, null, null, 'kamikaze_turkey');
-		// }
+		
 	}
 	// Char control is implemented in player.js
 }

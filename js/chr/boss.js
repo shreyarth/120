@@ -11,13 +11,5 @@ Boss.prototype = Object.create(Phaser.Sprite.prototype);
 Boss.prototype.constructor = Boss;
 
 Boss.prototype.update = function() {
-	// if(this.alive){
-	// 	if(this.body.x >= 800){
-	// 		this.body.velocity.x = -200;
-	// 	}else if(this.body.x <= 200){
-	// 		this.body.velocity.x = 100;
-	// 	}else{
-	// 		this.body.velocity.x = 100;
-	// 	}
-	// }
+	//Wut?
 }
