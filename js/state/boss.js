@@ -24,8 +24,6 @@ boss.prototype = {
 		game.world.setBounds( 0, 0, 1000, 800);
 		console.log("play state to check implementation");
 		game.physics.startSystem(Phaser.Physics.P2JS);
-<<<<<<< HEAD
-=======
 
 		// Setting up collision groups
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
@@ -36,7 +34,6 @@ boss.prototype = {
 		this.collideBoss = game.physics.p2.createCollisionGroup();
 		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat, 
 			this.collidePB, this.collideEB]);
->>>>>>> master
 		
 		var background = game.add.sprite(0, 0, 'porter');
 		//background.scale.setTo(5,2);
@@ -83,8 +80,6 @@ boss.prototype = {
 		bosseye.body.setCollisionGroup(this.collideBoss);
 		bosseye.body.collides([this.collidePlat, this.collidePlayer]);
 		
-
-
 		let bosseye2 = new Boss(game, 420, 610, 'star');
 		bosseye2.anchor.setTo(0.5,0.5);
 		game.add.existing(bosseye2);
@@ -106,7 +101,6 @@ boss.prototype = {
 			 	game.add.existing(spawn);
 			}
 		}
->>>>>>> master
 
 		game.physics.p2.createLockConstraint(bosseye, bosseye2, [50, 40]);
 		game.physics.p2.createLockConstraint(bosseye, bossmouth, [40, 110]);
