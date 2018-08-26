@@ -83,6 +83,7 @@ load.prototype = {
 		SFX[0] = game.add.audio('fart');
 		SFX[1] = game.add.audio('rasp');
 		SFX[2] = game.add.audio('turkey');
+		SFX[2].allowMultiple = false;
 		SFX[3] = game.add.audio('grunt');
 		SFX[4] = game.add.audio('splat');
 		SFX[5] = game.add.audio('throw');
