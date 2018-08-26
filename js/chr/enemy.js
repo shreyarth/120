@@ -36,7 +36,6 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	timer = game.time.create(false);
 	timer.loop(game.rnd.integerInRange(700,1300), this.fire, this);
 	game.timer.loop(500, function() {
-		console.log(this.bullets);
 		this.bulletE.forEachAlive(function(bull) {
 			bull.alpha -= 0.05;
 			if (bull.alpha <= 0)
@@ -56,11 +55,12 @@ Enemy.prototype.constructor = Enemy;
 
 // override Phaser.Sprite update
 Enemy.prototype.update = function() {
-	if (this.body.velocity,x != 0) {
-		this.animations.play('walk');
-		if (this.body.velocity,x < 0 && this.scale.x < 0)
+	if (this.body.velocity.x != 0) {
+		if (this.type == null)
+			this.animations.play('walk');
+		if (this.body.velocity.x < 0 && this.scale.x < 0)
 			this.scale.x = 1;
-		if (this.body.velocity,x > 0 && this.scale.x > 0)
+		if (this.body.velocity.x > 0 && this.scale.x > 0)
 			this.scale.x = -1;
 	}
 	/*
