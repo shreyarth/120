@@ -57,35 +57,29 @@ boss.prototype = {
 		game.camera.follow(player);
 
 		//boss
-		let bosseye = game.add.sprite(400, 570, 'star');
+		this.boss = game.add.group();
+		this.boss.physicsBodyType = Phaser.Physics.P2JS;
+		this.boss.enableBody = true;
+		let bosseye = this.boss.create(400, 570, 'star');
 		bosseye.anchor.setTo(0.5,0.5);
+		bosseye.body.data.gravityScale = 0;
 
-		let bosseye2 = game.add.sprite(420, 610, 'star');
+		let bosseye2 = this.boss.create(420, 610, 'star');
 		bosseye2.anchor.setTo(0.5,0.5);
+		bosseye2.body.data.gravityScale = 0;
 
-		let bossmouth = game.add.sprite(410, 690, 'star');
+		let bossmouth = this.boss.create(410, 690, 'star');
 		bossmouth.scale.setTo(2,2);
 		bossmouth.anchor.setTo(0.5, 0.5);
-
-
-		// enemy
-		// this.enemy = game.add.group();
-		// this.enemy.enableBody = true;
+		bossmouth.body.data.gravityScale = 0;
+		bossmouth.body.velocity.x = 500;
+		console.log(bossmouth.body.velocity.x);
 		
-		// for(var i = 0; i < 30; ++i){
-		// 	let en = new Enemy(game, game.rnd.integerInRange(600,4900),
-		// 		game.rnd.integerInRange(200,1000), 'enemy');
-		// 	game.add.existing(en);
-		// 	this.enemy.add(en);
-		// }
 
-		//test for flying enemy
-		// for(var i = 0; i < 10; ++i){
-		// 	en = new Enemy(game, game.rnd.integerInRange(1000,4800),
-		// 	 400, 'enemy');
-		// 	game.add.existing(en);
-		// 	this.enemy.add(en);
-		// }
+		game.physics.p2.createLockConstraint(bosseye, bosseye2, [50, 40]);
+		game.physics.p2.createLockConstraint(bosseye, bossmouth, [40, 110]);
+		game.physics.p2.createLockConstraint(bosseye2, bossmouth, [-40, 80]);
+
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
@@ -143,9 +137,10 @@ boss.prototype = {
 	// },
 	update: function() {
 		// Update function
-		// player and enemies collision with platforms
-		game.physics.arcade.collide(player, this.platform);
-		game.physics.arcade.collide(this.enemy, this.platform, this.movToPl, null, this);
+		if(this.boss.x > 800){
+			bossmouth.body.velocity.x -= 500;
+			console.log(bossmouth.body.velocity.x);
+		}
 
 		// UI update
 		if (this.ui)
