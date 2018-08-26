@@ -16,19 +16,18 @@ play.prototype = {
 		
 	},
 	create: function() {
-		if (!this.music || this.music.isPlaying === false) {
-			this.music = game.add.audio('stage1bgm', 0.5, true);
-			this.music.play();
-		}
+		if (!BGM[1].isPlaying)
+			BGM[1].play();
+
 		// Setting up game world
 		game.world.setBounds(0, 0, 8000, 800);
 		game.physics.startSystem(Phaser.Physics.P2JS);
 		game.physics.p2.setImpactEvents(true);
 		
 		// Asset implementaion
-		var background = game.add.sprite(0, 0, 'porter');
-		game.add.tileSprite(1800, 0, 7000, 800, 'heller');
-		var background2 = game.add.sprite(7000, 0, 'nerdhill');
+		game.add.sprite(0, 0, 'porter');
+		game.add.tileSprite(1800, 0, 5200, 800, 'heller');
+		game.add.sprite(7000, 0, 'nerdhill');
 
 		// Setting up collision groups
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
@@ -37,137 +36,101 @@ play.prototype = {
 		this.collidePB = game.physics.p2.createCollisionGroup();
 		this.collideEB = game.physics.p2.createCollisionGroup();
 		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat, 
-			this.collidePB, this.collideEB]);
+			this.collidePB, this.collideEB]);	// Reconfigure bounds for collision groups
 
 		//ground
 		this.platform = game.add.group();
 		this.platform.physicsBodyType = Phaser.Physics.P2JS;
 		this.platform.enableBody = true;
 
-		let ground = this.platform.create(4000, game.world.height, 'platform');
-		ground.scale.setTo(game.world.width, 1 );
+		let ground = this.platform.add(game.add.tileSprite(0, game.world.height, 8000, 25,'platform'));
 		ground.body.clearShapes();
-		ground.body.addRectangle(10000, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
+		ground.body.addRectangle(8000, 25);
 		
 		//platforms in order, left to right
-		
 		let platforms = this.platform.create(800, 682, 'bus');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.addRectangle(394, 176);
 
 		platforms = this.platform.create(1240, 722, 'rcar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(1940, 682, 'wcar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.angle = 30;
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
-		//double verticle bus
 		platforms = this.platform.create(2250, 512, 'busObs');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'busObs');
 
 		platforms = this.platform.create(2580, 702, 'ycar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.angle = -20;
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(3260, 712, 'rcar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.angle = 12;
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(3520, 622, 'bus');
-		platforms.body.kinematic = true;
 		platforms.body.clearShapes();
 		platforms.body.addRectangle(394, 176);
-		platforms.body.debug = true;
 		platforms.body.angle = 16;
 		platforms.angle = 180;
 
 		//stack of car and bus
 		platforms = this.platform.create(4600, 537, 'carObs');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'carObs');
 
 		//more cars and buses
 		platforms = this.platform.create(5440, 728, 'wcar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.angle = 180;
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(5990, 713, 'rcar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.angle = 15;
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(6240, 722, 'ycar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.angle = -10;
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(6740, 722, 'wcar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.angle = 5;
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		platforms = this.platform.create(7340, 668, 'rcar');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.angle = 90;
 		platforms.body.loadPolygon('physicsbox', 'yellowCar');
 
 		//double verticle bus
 		platforms = this.platform.create(7600, 512, 'busObs');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'busObs');
 
 		//crashed cars and bus in buildings
 		platforms = this.platform.create(1450, 320, 'wreckC');
-		platforms.body.kinematic = true;
-		platforms.body.debug = true;
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'wreckedcar');
 
 
 		platforms = this.platform.create(6730, 400, 'wreckB');
-		platforms.body.kinematic = true;
 		platforms.body.clearShapes();
 		platforms.body.addRectangle(160, 276);
 		platforms.body.angle = 80;
-		platforms.body.debug = true;
 
 		this.platform.forEach(function(plat) {
+			plat.body.kinematic = true;
+			platforms.body.debug = true;
 			plat.body.setCollisionGroup(this.collidePlat);
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
@@ -721,10 +684,8 @@ play.prototype = {
 		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level
-		if(player.x +50 > game.world.width && this.toil.total == 0){
+		if(player.x +50 > game.world.width && this.toil.total == 0)
 			game.state.start('play2');
-			this.music.stop();
-		}
 
 	},
 	movToPl: function(en, platform) {

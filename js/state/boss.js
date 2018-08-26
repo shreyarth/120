@@ -16,17 +16,13 @@ boss.prototype = {
 		
 	},
 	create: function() {
-		// Asset implementaion
-		if (!this.music || this.music.isPlaying === false) {
-			this.music = game.add.audio('bosslevel', 0.5, true);
-			this.music.play();
-		}
+		if (!BGM[2].isPlaying) BGM[2].play();
+		
+		// Game world setting
 		game.world.setBounds( 0, 0, 1000, 800);
-		console.log("play state to check implementation");
 		game.physics.startSystem(Phaser.Physics.P2jS);
 		
 		var background = game.add.sprite(0, 0, 'porter');
-		//background.scale.setTo(5,2);
 		background.width = game.world.width;
 		background.height = game.world.height -32;
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
