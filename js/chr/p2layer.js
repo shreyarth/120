@@ -51,7 +51,7 @@ function P2layer(game, key, frame, bulletKey) {
 	this.bullets = game.add.group();
 	this.bullets.enableBody = true;
 	this.bullets.physicsBodyType = Phaser.Physics.P2JS;
-	this.bullets.createMultiple(300, bulletKey);
+	this.bullets.createMultiple(50, bulletKey);
 	this.bullets.outOfBoundsKill = true;
 
 	// Poo splats
