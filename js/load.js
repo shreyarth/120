@@ -69,11 +69,17 @@ load.prototype = {
 
 		// SFX
 		game.load.audio('fart', 'fart.mp3');
+		SFX[0] = game.add.audio('fart');
 		game.load.audio('rasp', 'Rasp.mp3');
+		SFX[1] = game.add.audio('rasp');
 		game.load.audio('turkey', 'turkey.mp3');
+		SFX[2] = game.add.audio('turkey');
 		game.load.audio('grunt', 'grunt2.wav');
+		SFX[3] = game.add.audio('grunt');
 		game.load.audio('splat', 'splat.wav');
+		SFX[4] = game.add.audio('splat');
 		game.load.audio('throw', 'eThrow.mp3');
+		SFX[5] = game.add.audio('throw');
 	},
 	create: function() {
 		game.state.start('tutorial');
