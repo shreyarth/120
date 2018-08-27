@@ -42,6 +42,7 @@ load.prototype = {
 		game.load.image('c9-10', 'C9-C10.png');
 		game.load.image('c9-10v2', 'c9-10v2.png');
 		game.load.image('bookstore', 'BTBS.png');
+		game.load.image('lvl2', 'level2bg.png');
 
 		// Objects
 		game.load.image('sign', 'sign.png');

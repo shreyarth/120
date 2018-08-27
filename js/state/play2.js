@@ -24,18 +24,19 @@ play2.prototype = {
 		game.physics.p2.setImpactEvents(true);
 		
 		// Asset implementaion
-		game.stage.backgroundColor = "#48cd25";
+		game.stage.backgroundColor = "#cb741c";
 
 		//bg to put in for reaching bookstore
-		var background = game.add.sprite(-400, -645, 'slopehill');
-		background = game.add.sprite(1040, 185, 'slopehill');
-		background = game.add.sprite(2200, 854, 'heller2');
-		background = game.add.sprite(3200, 1431, 'c9-10v2');
-		background = game.add.sprite(4400, 2123, 'c9-10v2');
-		background = game.add.sprite(5600, 2815, 'heller2');
-		background = game.add.sprite(8000, 4640, 'porter');
-		//last heller crap
-		background = game.add.sprite(6800, 3507, 'heller2');
+		// var background = game.add.sprite(-400, -645, 'slopehill');
+		// background = game.add.sprite(1040, 185, 'slopehill');
+		// background = game.add.sprite(2200, 854, 'heller2');
+		// background = game.add.sprite(3200, 1431, 'c9-10v2');
+		// background = game.add.sprite(4400, 2123, 'c9-10v2');
+		// background = game.add.sprite(5600, 2815, 'heller2');
+		// background = game.add.sprite(8000, 4640, 'porter');
+		// //last heller crap
+		// background = game.add.sprite(6800, 3507, 'heller2');
+		var background = game.add.sprite(0, -335, 'lvl2');
 		
 		// Setting up collision groups
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
@@ -72,6 +73,15 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
+		ground = this.platform.create(1360, 960, 'bus');
+		ground.scale.setTo(1, 1);
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(394, 176);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
 		ground = this.platform.create(1980, 1443, 'bush');
 		ground.scale.setTo(0.95, 0.6 );
 		ground.body.damping.x = 0;
@@ -90,6 +100,15 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(90, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		ground = this.platform.create(3450, 2160, 'bus');
+		ground.scale.setTo(1, 1);
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(394, 176);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
@@ -148,7 +167,7 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(8200, 5038, 'bush');
+		ground = this.platform.create(8200, 5035, 'bush');
 		ground.scale.setTo(5.7, 0.6);
 		ground.body.damping.x = 0;
 		ground.body.angle = 30;
@@ -168,13 +187,22 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		ground = this.platform.create(9500, 5450, 'bush');
-		ground.scale.setTo(4.3, 0.6 );
+		//flat surface at end
+		ground = this.platform.create(9500, 5450, 'sidewalk');
+		ground.scale.setTo(1, 0.6 );
 		ground.body.damping.x = 0;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1800, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
+		ground.body.setCollisionGroup(this.collidePlat);
+
+		// wrecked cars to cover flaws in background
+		ground = this.platform.create(9100, 5200, 'carObs');
+		ground.body.angle = -30;
+		ground.body.clearShapes();
+		ground.body.loadPolygon('physicsbox', 'carObs');
+		ground.body.kinematic = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 		
 		//platforms and enemies in order, left to right
@@ -314,7 +342,7 @@ play2.prototype = {
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
-		toilets = new Toilet(game, 3468, 2242, 'toilet');
+		toilets = new Toilet(game, 3620, 2332, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
@@ -555,7 +583,7 @@ play2.prototype = {
 		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
-		en = new Enemy(game, 8951, 5360, 'deer', null, 'pepto');
+		en = new Enemy(game, 9351, 5360, 'deer', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
