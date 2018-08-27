@@ -75,8 +75,6 @@ boss.prototype = {
 
 		//boss
 		let bossmouth = new Boss(game, 410, 690, 'star', 'mouth', 'toilet');
-		bossmouth.scale.setTo(2,2);
-		bossmouth.anchor.setTo(0.5, 0.5);
 		game.add.existing(bossmouth);
 		bossmouth.body.setCollisionGroup(this.collideBoss);
 		bossmouth.body.collides([this.collidePlat, this.collidePlayer]);
