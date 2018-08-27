@@ -48,9 +48,9 @@ play.prototype = {
 		this.platform.physicsBodyType = Phaser.Physics.P2JS;
 		this.platform.enableBody = true;
 
-		let ground = this.platform.add(game.add.tileSprite(0, game.world.height, 8000, 25,'platform'));
+		let ground = this.platform.add(game.add.tileSprite(3000, game.world.height, 10000, 25,'sidewalk'));
 		ground.body.clearShapes();
-		ground.body.addRectangle(8000, 25);
+		ground.body.addRectangle(20000, 25);
 		
 		//platforms in order, left to right
 		let platforms = this.platform.create(800, 682, 'bus');

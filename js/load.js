@@ -40,6 +40,8 @@ load.prototype = {
 		game.load.image('nerdhill', 'nerdhill.png');
 		game.load.image('slopehill', 'slopednhill.png');
 		game.load.image('c9-10', 'C9-C10.png');
+		game.load.image('c9-10v2', 'c9-10v2.png');
+		game.load.image('bookstore', 'BTBS.png');
 
 		// Objects
 		game.load.image('sign', 'sign.png');
@@ -47,6 +49,7 @@ load.prototype = {
 		game.load.image('branch', 'branchPlatform.png');
 		game.load.image('bush', 'bushPlatform.png');
 		game.load.image('platform', 'platform.png');
+		game.load.image('sidewalk', 'sidewalk.png');
 
 		// Obstacles
 		game.load.image('bcar', 'blackCar.png');
@@ -93,6 +96,6 @@ load.prototype = {
 		SFX[4] = game.add.audio('splat');
 		SFX[5] = game.add.audio('throw');
 
-		game.state.start('tutorial');
+		game.state.start('play2');
 	}
 }

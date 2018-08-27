@@ -30,8 +30,8 @@ play2.prototype = {
 		var background = game.add.sprite(-400, -645, 'slopehill');
 		background = game.add.sprite(1040, 185, 'slopehill');
 		background = game.add.sprite(2200, 854, 'heller2');
-		background = game.add.sprite(3200, 1431, 'heller2');
-		background = game.add.sprite(4400, 2123, 'heller2');
+		background = game.add.sprite(3200, 1431, 'c9-10v2');
+		background = game.add.sprite(4400, 2123, 'c9-10v2');
 		background = game.add.sprite(5600, 2815, 'heller2');
 		background = game.add.sprite(8000, 4640, 'porter');
 		//last heller crap

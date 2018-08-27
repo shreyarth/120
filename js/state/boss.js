@@ -40,19 +40,20 @@ boss.prototype = {
 			this.collidePB, this.collideEB]);
 		game.physics.startSystem(Phaser.Physics.P2jS);
 		
-		var background = game.add.sprite(0, 0, 'porter');
-		background.width = game.world.width;
-		background.height = game.world.height -32;
+		var background = game.add.sprite(-500, 0, 'bookstore');
+		
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
 		// this.heller.height = 800;
 
 		//ground
+		//ground
 		this.platform = game.add.group();
+		this.platform.physicsBodyType = Phaser.Physics.P2JS;
 		this.platform.enableBody = true;
-		let ground = this.platform.create(0, game.world.height -32, 'platform');
-		ground.scale.setTo(game.world.width, 1 );
-		ground.body.immovable = true;
-		
+
+		let ground = this.platform.add(game.add.tileSprite(3000, game.world.height, 10000, 25,'sidewalk'));
+		ground.body.clearShapes();
+		ground.body.addRectangle(20000, 25);
 		
 
 		
