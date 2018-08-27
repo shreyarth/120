@@ -263,7 +263,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(4260, 2460, 'star');
+		ePlat = this.platform.create(4260, 2460, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -271,7 +271,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(5450, 2950, 'star');
+		ePlat = this.platform.create(5450, 2950, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -279,7 +279,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(6000, 3150, 'star');
+		ePlat = this.platform.create(6000, 3150, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -287,7 +287,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(6700, 3750, 'star');
+		ePlat = this.platform.create(6700, 3750, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -295,7 +295,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(7040, 3550, 'star');
+		ePlat = this.platform.create(7040, 3550, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -303,7 +303,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(7305, 4120, 'star');
+		ePlat = this.platform.create(7305, 4120, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -311,7 +311,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(7870, 4450, 'star');
+		ePlat = this.platform.create(7870, 4450, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -381,7 +381,7 @@ play2.prototype = {
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
-		toilets = new Toilet(game, 9570, 5015, 'toilet');
+		toilets = new Toilet(game, 9300, 5400, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
@@ -392,6 +392,9 @@ play2.prototype = {
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
 
+		//sign for end of level
+		game.add.sprite(9570, 5100, 'sign2');
+		
 		// player
 		player = new P2layer(game, 'player', null, 'poo');
 		game.add.existing(player);
@@ -634,16 +637,7 @@ play2.prototype = {
 			game.add.existing(en);
 			this.enemy.add(en);
 		}
-
-		//sign for end of level
-		let sign = this.platform.create(9570, 5100, 'sign');
-		sign.scale.setTo(1, 1);
-		sign.body.clearShapes();
-		sign.body.addRectangle(150, 100);
-		sign.body.kinematic = true;
-		sign.body.debug = true;
-		sign.body.setCollisionGroup(this.collidePlat);
-		sign.body.immovable = true;
+		
 		// Need to fix sign in the air (no collision) <- can we just make it as a part of bg?
 
 		// Set camera to platformer follow up
