@@ -134,6 +134,8 @@ P2layer.prototype.update = function() {
 		}
 		else{
 			console.log('friction off');
+			this.angle = 30;
+			this.body.angle = 30;
 		}
 		if (move.up.justDown)
 		{
