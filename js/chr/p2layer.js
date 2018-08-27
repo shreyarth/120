@@ -4,7 +4,7 @@ var PIXBIT = 8;
 function P2layer(game, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, 30, 200, key);
+	Phaser.Sprite.call(this, game, 8000, 4000, key);
 	//Phaser.Sprite.call(this, game, 7000, 200, key);
 	//for level 2 testing
 	//Phaser.Sprite.call(this, game, 5940, 3610, key);
@@ -43,9 +43,10 @@ function P2layer(game, key, frame, bulletKey) {
 	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
 	game.timer.loop(600, function() {
+		if (this.alive) {
 		this.pooCount++;
 		this.death();
-		}, this);
+		}}, this);
 
 	// Bullets
 	this.bullets = game.add.group();
