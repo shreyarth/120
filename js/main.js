@@ -1,9 +1,9 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
 
 // Global vars
 //var star;
 var keys = [];
-var bgcolor = "#895f2b"
+var bgcolor = "#000"
 var noset = true;
 var BGM = [];	// Array to sava all loaded BG's
 var SFX = [];	// Array to save all loaded SFX's

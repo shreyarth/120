@@ -11,8 +11,10 @@ load.prototype = {
 		// Load all the assets
 		// Graphic
 		game.load.path = 'assets/img/';
-		game.load.image('platform', 'platform.png');	// This is temp asset
 		game.load.image('star', 'star.png');	// This is temp asset
+		
+		// UI
+		game.load.image('title', 'title.png');
 
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
@@ -36,12 +38,14 @@ load.prototype = {
 		game.load.image('heller2', 'HellerDr2.png');
 		game.load.image('nerdhill', 'nerdhill.png');
 		game.load.image('slopehill', 'slopednhill.png');
+		game.load.image('c9-10', 'C9-C10.png');
 
 		// Objects
 		game.load.image('sign', 'sign.png');
 		game.load.image('toilet', 'toilet.png');
 		game.load.image('branch', 'branchPlatform.png');
 		game.load.image('bush', 'bushPlatform.png');
+		game.load.image('platform', 'platform.png');
 
 		// Obstacles
 		game.load.image('bcar', 'blackCar.png');

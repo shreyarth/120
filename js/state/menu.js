@@ -17,12 +17,15 @@ menu.prototype = {
 		if (BGM[2].isPlaying) BGM[2].stop();
 		if (!BGM[0].isPlaying) BGM[0].play();
 		
-		style = {font: 'Helvetica', fontSize: '24px', fill: '#fff'};
-		let playText = game.add.text(game.world.centerX, game.height*.3,
-		'				To shit or not to shit...\nPush spacebar to continue', style);
-		playText.anchor.setTo(0.5);
+		let tt = game.add.sprite(570, 500, 'poosplat');
+		tt.anchor.set(0.5);
 
-		playText = game.add.text(game.world.centerX, game.height*.6, 'Start', style);
+		tt = game.add.sprite(game.width/2, 200, 'title');
+		tt.anchor.set(0.5);
+
+		style = {font: 'Press Start 2P', fontSize: '20px', fill: '#fff'};
+
+		let playText = game.add.text(game.world.centerX, game.height*.6, 'Start', style);
 		playText.anchor.setTo(0.5);
 
 		let str;
