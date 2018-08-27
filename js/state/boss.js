@@ -74,43 +74,12 @@ boss.prototype = {
 		game.camera.follow(player);
 
 		//boss
-		this.bossbody = game.add.group();
-		this.bossbody.physicsBodyType = Phaser.Physics.P2JS;
-		this.bossbody.enableBody = true;
-
-		let bosseye = new Boss(game, 400, 570, 'star');
-		game.add.existing(bosseye);
-		this.bossbody.add(bosseye);
-		bosseye.body.setCollisionGroup(this.collideBoss);
-		bosseye.body.collides([this.collidePlat, this.collidePlayer]);
-		
-
-
-		let bosseye2 = new Boss(game, 420, 610, 'star');
-		bosseye2.anchor.setTo(0.5,0.5);
-		game.add.existing(bosseye2);
-		this.bossbody.add(bosseye2);
-		bosseye2.body.setCollisionGroup(this.collideBoss);
-		bosseye2.body.collides([this.collidePlat, this.collidePlayer]);
-
-		let bossmouth = new Boss(game, 410, 690, 'star');
+		let bossmouth = new Boss(game, 410, 690, 'star', 'mouth', 'toilet');
 		bossmouth.scale.setTo(2,2);
 		bossmouth.anchor.setTo(0.5, 0.5);
 		game.add.existing(bossmouth);
-		this.bossbody.add(bossmouth);
 		bossmouth.body.setCollisionGroup(this.collideBoss);
 		bossmouth.body.collides([this.collidePlat, this.collidePlayer]);
-		if(bossmouth.alive){
-			if(Math.abs(bossmouth.x - player.x) < 100){
-				spawn = new Enemy(game, game.rnd.integerInRange(bossmouth.x, bossmouth.x + 500),
-			 	100, null, null, 'kamikaze_turkey');
-			 	game.add.existing(spawn);
-			}
-		}
-
-		game.physics.p2.createLockConstraint(bosseye, bosseye2, [50, 40]);
-		game.physics.p2.createLockConstraint(bosseye, bossmouth, [40, 110]);
-		game.physics.p2.createLockConstraint(bosseye2, bossmouth, [-40, 80]);
 
 
 		this.bullets = game.add.group();
@@ -164,7 +133,7 @@ boss.prototype = {
 		// 	bossmouth.body.velocity.x -= 500;
 		// 	console.log(bossmouth.body.velocity.x);
 		// }
-
+		
 		// UI update
 		if (this.ui)
 			this.ui.destroy();
@@ -175,11 +144,7 @@ boss.prototype = {
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
-	},
-
-	turke: function(){
-		console.log('in turke?');
-		
 	}
+
 	// Char control is implemented in player.js
 }
