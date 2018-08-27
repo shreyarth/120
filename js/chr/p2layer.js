@@ -42,7 +42,7 @@ function P2layer(game, key, frame, bulletKey) {
 	// Character info
 	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
-	game.timer.loop(1000, function() {
+	game.timer.loop(600, function() {
 		this.pooCount++;
 		this.death();
 		}, this);
@@ -170,7 +170,7 @@ P2layer.prototype.update = function() {
 		}
 		//cheatmode
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.P)){
-			this.pooCount = 15;
+			this.pooCount = 5;
 		}
 		// Attack move
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))

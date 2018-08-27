@@ -10,7 +10,7 @@ var SFX = [];	// Array to save all loaded SFX's
 const BGVOL = 0.5;
 // Main char
 var player;
-const MAXPOO = 20;
+const MAXPOO = 10;
 var inPlay2 = false;
 
 // State management
