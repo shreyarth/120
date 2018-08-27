@@ -29,19 +29,29 @@ game.state.add('tutorial', tutorial);
 game.state.start('boot');
 
 // Global function for UI
+function barUI() {
+	let t_ui = game.add.sprite(32, 32, 'poo_ico');
+	t_ui.animations.add('idle', [0, 1], 2, true);
+	t_ui.animations.play('idle');
+	t_ui.fixedToCamera = true;
+	t_ui.cameraOffset.setTo(16, 8);
+	pooMeter(MAXPOO, 0x000000);
+	return pooMeter(player.pooCount, 0x492008);
+}
+
 function pooMeter(pooNum, color) {
 	let obj = null;
 	if (pooNum >= 0){
 		// create primitive
 		let g = game.add.graphics();
 		g.beginFill(color);
-		g.drawRect(32, 32, pooNum * 15, 32);	// Starting point, width, height
+		g.drawRect(82, 24, pooNum * 15, 32);	// Starting point, width, height
 		g.endFill();
 
 		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(32, 32, g.generateTexture());
+		obj = game.add.sprite(82, 24, g.generateTexture());
 		obj.fixedToCamera = true;
-		obj.cameraOffset.setTo(32, 16);
+		obj.cameraOffset.setTo(82, 24);
 		g.destroy();
 	}
 	return obj;

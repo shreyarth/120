@@ -15,6 +15,7 @@ load.prototype = {
 		
 		// UI
 		game.load.image('title', 'title.png');
+		game.load.spritesheet('poo_ico', 'ui_ico.png', 66, 63);
 
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
