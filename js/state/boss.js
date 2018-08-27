@@ -70,29 +70,12 @@ boss.prototype = {
 		game.camera.follow(player);
 
 		//boss
-		let bosseye = new Boss(game, 400, 570, 'star');
-		game.add.existing(bosseye);
-		bosseye.body.setCollisionGroup(this.collideBoss);
-		bosseye.body.collides([this.collidePlat, this.collidePlayer]);
-		
-		let bosseye2 = new Boss(game, 420, 610, 'star');
-		bosseye2.anchor.setTo(0.5,0.5);
-		game.add.existing(bosseye2);
-		bosseye2.body.setCollisionGroup(this.collideBoss);
-		bosseye2.body.collides([this.collidePlat, this.collidePlayer]);
-
-		let bossmouth = new Boss(game, 410, 690, 'star');
+		let bossmouth = new Boss(game, 410, 690, 'star', 'mouth', 'toilet');
 		bossmouth.scale.setTo(2,2);
 		bossmouth.anchor.setTo(0.5, 0.5);
 		game.add.existing(bossmouth);
 		bossmouth.body.setCollisionGroup(this.collideBoss);
 		bossmouth.body.collides([this.collidePlat, this.collidePlayer]);
-		bossmouth.spawnKami();
-		
-
-		game.physics.p2.createLockConstraint(bosseye, bosseye2, [50, 40]);
-		game.physics.p2.createLockConstraint(bosseye, bossmouth, [40, 110]);
-		game.physics.p2.createLockConstraint(bosseye2, bossmouth, [-40, 80]);
 
 
 		this.bullets = game.add.group();

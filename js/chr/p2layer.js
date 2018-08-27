@@ -278,7 +278,7 @@ P2layer.prototype.death = function() {
 	}
 	if (deathSprite){
 		var rasp = game.add.audio('rasp', 0.5);
-		this.destroy();
+		this.kill();
 		rasp.play();
 		game.camera.shake(0.005, 400);
 		deathSprite.anchor.set(0.5);
