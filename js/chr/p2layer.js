@@ -32,7 +32,7 @@ function P2layer(game, key, frame, bulletKey) {
 	this.game.physics.p2.gravity.y = 100;
 	this.body.data.gravityScale = 2;
 	//this.body.mass = 200;
-	this.body.setRectangle(this.width -25, this.height);
+	this.body.setRectangle(30, 70);
 	this.pDown = true;
 	this.state = 'idle';
 	this.direction = 'right';
