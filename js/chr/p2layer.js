@@ -177,6 +177,12 @@ P2layer.prototype.update = function() {
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
 			this.fire(false);
 	}
+
+	// If player poo meter is too high, tirgger jittering behavior
+	if (this.pooCount > MAXPOO * .8) {
+		this.body.x += game.rnd.integerInRange(-5, 5);
+		this.body.y += game.rnd.integerInRange(-5, 5);
+	}
 }
 
 
