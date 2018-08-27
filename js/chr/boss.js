@@ -61,7 +61,7 @@ Boss.prototype.fire = function() {
 		var throwing = game.add.audio("throw", 0.3);
 		
 		if(star){
-			star.scale.setTo(0.05,0.05);
+			// star.scale.setTo(0.05,0.05);
 			game.physics.enable(this, Phaser.Physics.ARCADE);
 			if(this.body.x > player.x){
 				if(this.body.x < player.x + game.rnd.integerInRange(250,400)){
