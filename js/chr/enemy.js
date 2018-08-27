@@ -18,6 +18,7 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	this.body.fixedRotation = true;
 	this.game.physics.p2.gravity.y = 300;
 	this.body.collideWorldBounds = true;
+	this.body.dynamic = true;
 	// needs enemy type
 	this.type = type;
 	this.friction = false;
