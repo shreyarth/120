@@ -17,12 +17,15 @@ menu.prototype = {
 		if (BGM[2].isPlaying) BGM[2].stop();
 		if (!BGM[0].isPlaying) BGM[0].play();
 		
-		style = {font: 'Helvetica', fontSize: '24px', fill: '#fff'};
-		let playText = game.add.text(game.world.centerX, game.height*.3,
-		'				To shit or not to shit...\nPush spacebar to continue', style);
-		playText.anchor.setTo(0.5);
+		let tt = game.add.sprite(570, 500, 'poosplat');
+		tt.anchor.set(0.5);
 
-		playText = game.add.text(game.world.centerX, game.height*.6, 'Start', style);
+		tt = game.add.sprite(game.width/2, 200, 'title');
+		tt.anchor.set(0.5);
+
+		style = {font: 'Press Start 2P', fontSize: '20px', fill: '#fff'};
+
+		let playText = game.add.text(game.world.centerX, game.height*.76, 'Start', style);
 		playText.anchor.setTo(0.5);
 
 		let str;
@@ -30,9 +33,9 @@ menu.prototype = {
 			str = 'Settings (there is no settings)';
 		else
 			str = 'NADA';
-		playText = game.add.text(game.world.centerX, game.height*.65, str, style);
+		playText = game.add.text(game.world.centerX, game.height*.82, str, style);
 		playText.anchor.setTo(0.5);
-		playText = game.add.text(game.world.centerX, game.height*.71, 'Exit (Alt + F4)', style);
+		playText = game.add.text(game.world.centerX, game.height*.88, 'Exit (Alt + F4)', style);
 		playText.anchor.setTo(0.5);
 
 		this.select = this.drawMark(game.world.centerX-50, game.height*.6-5);
@@ -90,16 +93,16 @@ menu.prototype = {
 		this.select.destroy();
 		switch (this.mCount%3) {
 				case 0:
-					this.select = this.drawMark(game.world.centerX-50, game.height*.6);
+					this.select = this.drawMark(game.world.centerX-75, game.height*.75);
 					break;
 				case 1:
 					if (noset)
-						this.select = this.drawMark(game.world.centerX-180, game.height*.65);
+						this.select = this.drawMark(game.world.centerX-330, game.height*.81);
 					else
-						this.select = this.drawMark(game.world.centerX-55, game.height*.65);
+						this.select = this.drawMark(game.world.centerX-85, game.height*.81);
 					break;
 				case 2:
-					this.select = this.drawMark(game.world.centerX-90, game.height*.71);
+					this.select = this.drawMark(game.world.centerX-175, game.height*.87);
 					break;
 		}
 	},
