@@ -38,23 +38,21 @@ boss.prototype = {
 		this.collideBoss = game.physics.p2.createCollisionGroup();
 		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat, 
 			this.collidePB, this.collideEB]);
-		game.physics.startSystem(Phaser.Physics.P2jS);
+		game.physics.startSystem(Phaser.Physics.P2JS);
 		
 		var background = game.add.sprite(-500, 0, 'bookstore');
 		
-		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
-		// this.heller.height = 800;
-
 		//ground
-		//ground
-		this.platform = game.add.group();
-		this.platform.physicsBodyType = Phaser.Physics.P2JS;
-		this.platform.enableBody = true;
+		// this.platform = game.add.group();
+		// this.platform.physicsBodyType = Phaser.Physics.P2JS;
+		// this.platform.enableBody = true;
+		// this.platform.collideWorldBounds = true;
 
-		let ground = this.platform.add(game.add.tileSprite(3000, game.world.height, 10000, 25,'sidewalk'));
-		ground.body.clearShapes();
-		ground.body.addRectangle(20000, 25);
-		
+		// let ground = this.platform.create(0, game.world.height, 'sidewalk');
+		// ground.body.clearShapes();
+		// ground.body.addRectangle(ground.width, ground.height);
+		// ground.body.setCollisionGroup(this.collidePlat);
+		// ground.scale.y = 0.5;	
 
 		
 		// the background wrap
@@ -72,14 +70,14 @@ boss.prototype = {
 		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB, this.collideBoss]);
 
 		//camera
-		game.camera.follow(player);
+		// game.camera.follow(player);
 
 		//boss
 		let bossmouth = new Boss(game, 410, 690, 'star', 'mouth', 'toilet');
 		game.add.existing(bossmouth);
 		bossmouth.body.setCollisionGroup(this.collideBoss);
 		bossmouth.body.collides([this.collidePlat, this.collidePlayer]);
-
+		game.camera.follow(bossmouth);
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;

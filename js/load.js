@@ -36,11 +36,11 @@ load.prototype = {
 		// Backgrounds
 		game.load.image('porter', 'finalPorter.png');
 		game.load.image('heller', 'HellerDr.png');
-		game.load.image('heller2', 'HellerDr2.png');
+		// game.load.image('heller2', 'HellerDr2.png');
 		game.load.image('nerdhill', 'nerdhill.png');
-		game.load.image('slopehill', 'slopednhill.png');
+		// game.load.image('slopehill', 'slopednhill.png');
 		game.load.image('c9-10', 'C9-C10.png');
-		game.load.image('c9-10v2', 'c9-10v2.png');
+		// game.load.image('c9-10v2', 'c9-10v2.png');
 		game.load.image('bookstore', 'BTBS.png');
 		game.load.image('lvl2', 'level2bg.png');
 
@@ -97,6 +97,6 @@ load.prototype = {
 		SFX[4] = game.add.audio('splat');
 		SFX[5] = game.add.audio('throw');
 
-		game.state.start('play2');
+		game.state.start('menu');
 	}
 }
