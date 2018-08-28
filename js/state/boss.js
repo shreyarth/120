@@ -73,7 +73,7 @@ boss.prototype = {
 		// game.camera.follow(player);
 
 		//boss
-		let bossmouth = new Boss(game, 410, 690, 'star', 'mouth', 'toilet');
+		let bossmouth = new Boss(game, 410, 600, 'boss', 'mouth', 'toilet');
 		game.add.existing(bossmouth);
 		bossmouth.body.setCollisionGroup(this.collideBoss);
 		bossmouth.body.collides([this.collidePlat, this.collidePlayer]);

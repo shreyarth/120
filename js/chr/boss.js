@@ -6,11 +6,11 @@ function Boss(game, x, y, key, type, bFrame){
 	this.body.velocity.x = 150;
 	this.body.data.gravityScale = 0;
 	this.type = type;
-	this.scale.setTo(2,2);
+	this.scale.setTo(0.3,0.3);
 	this.anchor.setTo(0.5, 0.5);
 	this.health = 10;
-	this.body.setRectangle(this.width, this.height);
-	game.time.events.add(Phaser.Timer.SECOND * 3, this.hp, this);
+	this.body.setRectangle(0, 0);
+	// game.time.events.add(Phaser.Timer.SECOND * 3, this.hp, this);
 	this.body.collideWorldBounds = true;
 	this.shapeCount = 2;
 

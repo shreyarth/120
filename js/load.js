@@ -20,6 +20,7 @@ load.prototype = {
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
 		game.load.image('enemy', 'enemy.png');
+		game.load.image('boss', 'boss.png');
 		game.load.spritesheet('deer', 'deer_spritesheet.png', 44, 49);
 		// game.load.image('deer', 'img/deer1.png');
 		
