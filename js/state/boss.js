@@ -149,7 +149,7 @@ boss.prototype = {
 
 	changeBoss: function(){
 		console.log('asfad');
-		boss1 = new Boss(game, 410, 600, 'boss', 'mouth', 'toilet');
+		boss1 = new Boss(game, boss.x, boss.y, 'boss', 'mouth', 'toilet');
 		game.add.existing(boss1);
 		boss1.body.setCollisionGroup(this.collideBoss);
 		boss1.body.collides([this.collidePlat, this.collidePlayer]);
