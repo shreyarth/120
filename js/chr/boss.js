@@ -6,11 +6,14 @@ function Boss(game, x, y, key, type, bFrame){
 	this.body.velocity.x = 150;
 	this.body.data.gravityScale = 0;
 	this.type = type;
-	this.scale.setTo(2,2);
 	this.anchor.setTo(0.5, 0.5);
+	this.alpha = 0.5
 	this.health = 10;
-	this.body.setRectangle(this.width, this.height);
+	this.body.setRectangle(72, 36, -29, -100);
+	
 	game.time.events.add(Phaser.Timer.SECOND * 3, this.hp, this);
+	this.body.collideWorldBounds = true;
+	this.shapeCount = 2;
 
 	this.bulletE = game.add.group();
 	this.bulletE.enableBody = true;
@@ -46,12 +49,12 @@ Boss.prototype.update = function() {
 	if(this.body.x >= 800){
 		this.charge();
 	}
-	if(Math.abs((game.world.width - 990) - this.body.x) < 7){
+	if(Math.abs((game.world.width - 990) - this.body.x) < 100){
 		this.spawn();
 	}
 	if(this.health < 7){
-		this.body.clearShapes();
-		this.body.setRectangle(this.width, this.height, this.width + 25, this.height + 25);
+		this.changeshape();
+		this.health = 10;
 	}
 }
 
@@ -94,5 +97,17 @@ Boss.prototype.fire = function() {
 }
 
 Boss.prototype.hp = function() {
-	this.health = 5;
+	if(this.shapeCount == 2){
+		this.health = 5;
+		console.log(this.health);
+		this.shapeCount = 1;
+	}
+	else{}
+}
+
+Boss.prototype.changeshape = function() {
+	this.body.clearShapes();
+	this.body.addRectangle(72, 75, -20, 0);
+	this.body.collideWorldBounds = true;
+	console.log('cahnged shaped?');
 }

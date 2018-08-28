@@ -4,7 +4,7 @@ var play = function() {
 	this.platform; this.en3;
 	this.obstacle;
 	this.heller = null;
-	this.ui, this.music;
+	this.ui, this.full_width, this.cropRect;
 	this.toil; this.toiletCount;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
@@ -657,7 +657,10 @@ play.prototype = {
 
 		// Fix UI to the camera
 		this.ui = barUI();
-		
+		this.full_width = this.ui.width;
+		this.cropRect = new Phaser.Rectangle(0, 0, player.pooCount/MAXPOO * this.ui.width, this.ui.height);
+		this.ui.crop(this.cropRect);
+
 		t_ui = game.add.sprite(game.width - 128, 8, 'toilet');
 		t_ui.scale.setTo(0.75);
 		t_ui.fixedToCamera = true;
@@ -683,9 +686,8 @@ play.prototype = {
 		//game.physics.arcade.moveToObject(this.en3, player);
 
 		// UI update
-		if (this.ui)
-			this.ui.destroy();
-		this.ui = pooMeter(player.pooCount, 0x492008);
+		this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
+		this.ui.updateCrop();
 		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level

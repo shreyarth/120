@@ -16,11 +16,14 @@ load.prototype = {
 		// UI
 		game.load.image('title', 'title.png');
 		game.load.spritesheet('poo_ico', 'ui_ico.png', 66, 63);
+		game.load.spritesheet('boo_ico', 'ui_ico0.png', 66, 63);
 		game.load.image('poo_gauge', 'ui_gauge.png');
+		game.load.image('poo_fill', 'ui_fill.png');
 
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
 		game.load.image('enemy', 'enemy.png');
+		game.load.image('boss', 'boss.png');
 		game.load.spritesheet('deer', 'deer_spritesheet.png', 44, 49);
 		// game.load.image('deer', 'img/deer1.png');
 		
@@ -37,16 +40,14 @@ load.prototype = {
 		// Backgrounds
 		game.load.image('porter', 'finalPorter.png');
 		game.load.image('heller', 'HellerDr.png');
-		game.load.image('heller2', 'HellerDr2.png');
 		game.load.image('nerdhill', 'nerdhill.png');
-		game.load.image('slopehill', 'slopednhill.png');
 		game.load.image('c9-10', 'C9-C10.png');
-		game.load.image('c9-10v2', 'c9-10v2.png');
 		game.load.image('bookstore', 'BTBS.png');
 		game.load.image('lvl2', 'level2bg.png');
 
 		// Objects
 		game.load.image('sign', 'sign.png');
+		game.load.image('sign2', 'sign2.png');
 		game.load.image('toilet', 'toilet.png');
 		game.load.image('branch', 'branchPlatform.png');
 		game.load.image('bush', 'bushPlatform.png');
@@ -98,6 +99,6 @@ load.prototype = {
 		SFX[4] = game.add.audio('splat');
 		SFX[5] = game.add.audio('throw');
 
-		game.state.start('menu');
+		game.state.start('tutorial');
 	}
 }

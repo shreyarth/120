@@ -3,7 +3,7 @@ var play2 = function() {
 	this.bullets, this.enemy;
 	this.platform; this.en3;
 	this.obstacle;
-	this.ui, this.music;
+	this.ui, this.full_width, this.cropRect;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;
@@ -263,7 +263,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(4260, 2460, 'star');
+		ePlat = this.platform.create(4260, 2460, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -271,7 +271,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(5450, 2950, 'star');
+		ePlat = this.platform.create(5450, 2950, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -279,7 +279,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(6000, 3150, 'star');
+		ePlat = this.platform.create(6000, 3150, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -287,7 +287,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(6700, 3750, 'star');
+		ePlat = this.platform.create(6700, 3750, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -295,7 +295,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(7040, 3550, 'star');
+		ePlat = this.platform.create(7040, 3550, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -303,7 +303,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(7305, 4120, 'star');
+		ePlat = this.platform.create(7305, 4120, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -311,7 +311,7 @@ play2.prototype = {
 		ePlat.body.debug = true;
 		ePlat.body.setCollisionGroup(this.collidePlat);
 
-		ePlat = this.platform.create(7870, 4450, 'star');
+		ePlat = this.platform.create(7870, 4450, 'branch');
 		ePlat.scale.setTo(0.35, 0.5);
 		ePlat.body.clearShapes();
 		ePlat.body.addRectangle(100, 25);
@@ -381,7 +381,7 @@ play2.prototype = {
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
-		toilets = new Toilet(game, 9570, 5015, 'toilet');
+		toilets = new Toilet(game, 9300, 5400, 'toilet');
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
@@ -392,6 +392,9 @@ play2.prototype = {
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
 
+		//sign for end of level
+		game.add.sprite(9570, 5100, 'sign2');
+		
 		// player
 		if (player == null || player == undefined)
 			player = new P2layer(game, 64, 250, 'player', null, 'poo');
@@ -641,23 +644,16 @@ play2.prototype = {
 			this.enemy.add(en);
 		}
 
-		//sign for end of level
-		let sign = this.platform.create(9570, 5100, 'sign');
-		sign.scale.setTo(1, 1);
-		sign.body.clearShapes();
-		sign.body.addRectangle(150, 100);
-		sign.body.kinematic = true;
-		sign.body.debug = true;
-		sign.body.setCollisionGroup(this.collidePlat);
-		sign.body.immovable = true;
-		// Need to fix sign in the air (no collision) <- can we just make it as a part of bg?
-
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
 		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER, 0.25, 0.25);
+		
+		// UI
+		this.ui = barUI();
+		this.full_width = this.ui.width;
+		this.cropRect = new Phaser.Rectangle(0, 0, player.pooCount/MAXPOO * this.ui.width, this.ui.height);
+		this.ui.crop(this.cropRect);
 
-		pooMeter(MAXPOO, 0x000000);
-		this.ui = pooMeter(player.pooCount, 0x492008);
 		let t_ui = game.add.sprite(game.width - 128, 8, 'toilet');
 		t_ui.scale.setTo(0.75);
 		t_ui.fixedToCamera = true;
@@ -672,23 +668,6 @@ play2.prototype = {
 		this.toiletCounter.fixedToCamera = true;
 		this.toiletCounter.cameraOffset.setTo(game.width - 78, 16);
 	},
-	pooMeter: function(pooNum) {
-		let obj = null;
-
-		// create primitive
-		let g = game.add.graphics();
-		g.beginFill(0x492008);
-		g.drawRect(32, 32, pooNum * 5, 32);	// Starting point, width, height
-		g.endFill();
-
-		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(32, 32, g.generateTexture());
-		obj.fixedToCamera = true;
-		obj.cameraOffset.setTo(32, 16);
-		g.destroy();
-
-		return obj;
-	},
 	update: function() {
 		// Update function
 		
@@ -699,9 +678,8 @@ play2.prototype = {
 		//game.physics.arcade.moveToObject(this.en3, player);
 
 		// UI update
-		if (this.ui)
-			this.ui.destroy();
-		this.ui = pooMeter(player.pooCount, 0x492008);
+		this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
+		this.ui.updateCrop();
 		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level

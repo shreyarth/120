@@ -4,8 +4,8 @@ var boss = function() {
 	this.platform; this.en3;
 	this.obstacle;
 	this.heller = null;
-	this.ui;
-	this.toil; this.toiletCount;
+	this.ui, this.full_width, this.cropRect;
+	this.toil, this.toiletCount;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB, this.collideBoss;
@@ -38,23 +38,21 @@ boss.prototype = {
 		this.collideBoss = game.physics.p2.createCollisionGroup();
 		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat, 
 			this.collidePB, this.collideEB]);
-		game.physics.startSystem(Phaser.Physics.P2jS);
+		game.physics.startSystem(Phaser.Physics.P2JS);
 		
 		var background = game.add.sprite(-500, 0, 'bookstore');
 		
-		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, 1000, 'heller');
-		// this.heller.height = 800;
-
 		//ground
-		//ground
-		this.platform = game.add.group();
-		this.platform.physicsBodyType = Phaser.Physics.P2JS;
-		this.platform.enableBody = true;
+		// this.platform = game.add.group();
+		// this.platform.physicsBodyType = Phaser.Physics.P2JS;
+		// this.platform.enableBody = true;
+		// this.platform.collideWorldBounds = true;
 
-		let ground = this.platform.add(game.add.tileSprite(3000, game.world.height, 10000, 25,'sidewalk'));
-		ground.body.clearShapes();
-		ground.body.addRectangle(20000, 25);
-		
+		// let ground = this.platform.create(0, game.world.height, 'sidewalk');
+		// ground.body.clearShapes();
+		// ground.body.addRectangle(ground.width, ground.height);
+		// ground.body.setCollisionGroup(this.collidePlat);
+		// ground.scale.y = 0.5;	
 
 		
 		// the background wrap
@@ -66,20 +64,20 @@ boss.prototype = {
 		game.physics.startSystem(Phaser.Physics.P2JS);
 
 		// player
-		player = new P2layer(game, 'player', null, 'poo');
+		player = new P2layer(game, 100, 100, 'player', null, 'poo');
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
 		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB, this.collideBoss]);
 
 		//camera
-		game.camera.follow(player);
+		// game.camera.follow(player);
 
 		//boss
-		let bossmouth = new Boss(game, 410, 690, 'star', 'mouth', 'toilet');
+		let bossmouth = new Boss(game, 410, 600, 'boss', 'mouth', 'toilet');
 		game.add.existing(bossmouth);
 		bossmouth.body.setCollisionGroup(this.collideBoss);
 		bossmouth.body.collides([this.collidePlat, this.collidePlayer]);
-
+		game.camera.follow(bossmouth);
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
@@ -104,12 +102,10 @@ boss.prototype = {
 		// game.camera.follow('player', FOLLOW_PLATFORMER, 0.25, 0.25);
 
 		// Fix UI to the camera
-		pooMeter(MAXPOO, 0x000000);
-		this.ui = pooMeter(player.pooCount, 0x492008);
-
-		// this.toiletCounter = game.add.text(game.width - 78, 16, this.toil.total, style);
-		// this.toiletCounter.fixedToCamera = true;
-		// this.toiletCounter.cameraOffset.setTo(game.width - 78, 16);
+		this.ui = barUI();
+		this.full_width = this.ui.width;
+		this.cropRect = new Phaser.Rectangle(0, 0, player.pooCount/MAXPOO * this.ui.width, this.ui.height);
+		this.ui.crop(this.cropRect);
 	},
 	// bossHealth: funtion(bosshp){
 	// 	let obje = null;
@@ -134,12 +130,8 @@ boss.prototype = {
 		// }
 		
 		// UI update
-		if (this.ui)
-			this.ui.destroy();
-		this.ui = pooMeter(player.pooCount, 0x492008);
-		//this.toiletCounter.text = this.toil.total;
-
-		
+		this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
+		this.ui.updateCrop();
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);

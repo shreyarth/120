@@ -30,32 +30,28 @@ game.state.start('boot');
 
 // Global function for UI
 function barUI() {
-	let t_ui = game.add.sprite(16, 8, 'poo_ico');
+	// Gauge sprite
+	let t_ui = game.add.sprite(79, 10, 'poo_gauge');
+	t_ui.fixedToCamera = true;
+	t_ui.cameraOffset.setTo(79, 10);
+	
+	// Icons
+	t_ui = game.add.sprite(16, 8, 'boo_ico');
 	t_ui.animations.add('idle', [0, 1], 2, true);
 	t_ui.animations.play('idle');
 	t_ui.fixedToCamera = true;
 	t_ui.cameraOffset.setTo(16, 8);
-	t_ui = game.add.sprite(96, 8, 'poo_gauge');
+	t_ui = game.add.sprite(390, 8, 'poo_ico');
+	t_ui.animations.add('idle', [0, 1], 2, true);
+	t_ui.animations.play('idle');
 	t_ui.fixedToCamera = true;
-	t_ui.cameraOffset.setTo(81, 10);
-	pooMeter(MAXPOO, 0x000000);
-	return pooMeter(player.pooCount, 0x492008);
-}
+	t_ui.cameraOffset.setTo(375, 8);
 
-function pooMeter(pooNum, color) {
-	let obj = null;
-	if (pooNum >= 0){
-		// create primitive
-		let g = game.add.graphics();
-		g.beginFill(color);
-		g.drawRect(82, 24, pooNum * 15, 32);	// Starting point, width, height
-		g.endFill();
-
-		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(82, 24, g.generateTexture());
-		obj.fixedToCamera = true;
-		obj.cameraOffset.setTo(82, 24);
-		g.destroy();
-	}
-	return obj;
+	// Gauge fill
+	//pooMeter(MAXPOO, 0x000000);
+	//return pooMeter(player.pooCount, 0x492008);
+	t_ui = game.add.sprite(83, 19, 'poo_fill');
+	t_ui.fixedToCamera = true;
+	t_ui.cameraOffset.setTo(83, 19);
+	return t_ui;
 }

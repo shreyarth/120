@@ -67,7 +67,7 @@ menu.prototype = {
 		// Highlight the selected section (or any other indicator to show selected)
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN))
 			this.mCount++;
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP))
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)) 
 			this.mCount--;
 
 		if (this.mCount < 0)
