@@ -24,6 +24,8 @@ function P2layer(game, x, y, key, frame, bulletKey) {
 	this.sfx[1] = game.add.audio('rasp');
 	this.sfx[3] = game.add.audio('grunt');
 	this.sfx[4] = game.add.audio('splat');
+	this.sfx[6] = game.add.audio('bgrunt');
+	this.sfx[10] = game.add.audio('bDeath')
 
 	game.physics.p2.enable(this, true);
 
@@ -60,7 +62,7 @@ function P2layer(game, x, y, key, frame, bulletKey) {
 	
 	// Timer events for groups
 	game.timer.loop(500, function() {
-		console.log(this.bullets);
+		// console.log(this.bullets);
 		if (this.alive) {
 			this.pooSplat.forEach(function(splat) {
 				splat.alpha -= 0.1;
@@ -203,14 +205,15 @@ P2layer.prototype.fire = function(isJump) {
 			star.body.velocity.y = 250;
 			star.body.angle = 90;
 			console.log("jumping");
-			this.sfx[3].play();
 			emitter = game.add.emitter(player.x +2, player.y, 5);
 			if(this.pooCount < MAXPOO * 0.41){
+				this.sfx[6].play();
 				emitter.makeParticles('turdB');
 				emitter.start(false, 1000, 0, 5);
 				emitter.setYSpeed(100,400);
 			}
 			else{
+				this.sfx[3].play();
 				emitter.makeParticles('turd1');
 				emitter.start(false, 1000, 0, 5);
 				emitter.setYSpeed(100,400);
@@ -286,8 +289,14 @@ P2layer.prototype.death = function() {
 		overflow = true;
 	}
 	if (deathSprite){
+		if(this.pooCount < 0){
+			this.sfx[10].play();
+		}
+		else{
+			this.sfx[1].play();
+		}
 		this.kill();
-		this.sfx[1].play();
+			
 		game.camera.shake(0.005, 400);
 		deathSprite.anchor.set(0.5);
 		deathSprite.scale.x = 2;

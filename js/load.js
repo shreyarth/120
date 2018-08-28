@@ -75,7 +75,7 @@ load.prototype = {
 		// BG
 		game.load.audio('menumusic', 'blocks.wav');
 		game.load.audio('stage1bgm', 'actionMusic.wav');
-		game.load.audio('bosslevel', 'finalBossMusic.wav');
+		game.load.audio('bosslevel', 'finalMusic.wav');
 
 		// SFX
 		game.load.audio('fart', 'fart.mp3');
@@ -84,6 +84,13 @@ load.prototype = {
 		game.load.audio('grunt', 'grunt2.wav');
 		game.load.audio('splat', 'splat.wav');
 		game.load.audio('throw', 'eThrow.mp3');
+		game.load.audio('bgrunt', 'bleedingGrunt.wav');
+		game.load.audio('bossdeath', 'bossDeathSound.wav');
+		game.load.audio('bossyell', 'bossYell.wav');
+		game.load.audio('deerSound', 'deerSound.wav');
+		game.load.audio('bDeath', 'deathBloodSplat.wav');
+		game.load.audio('pooSplat', 'shitSplatter.wav');
+
 	},
 	create: function() {
 		// Preload audios into corresponding audio arrays
@@ -98,6 +105,12 @@ load.prototype = {
 		SFX[3] = game.add.audio('grunt');
 		SFX[4] = game.add.audio('splat');
 		SFX[5] = game.add.audio('throw');
+		SFX[6] = game.add.audio('bgrunt');
+		SFX[7] = game.add.audio('bossdeath');
+		SFX[8] = game.add.audio('bossyell');
+		SFX[9] = game.add.audio('deerSound');
+		SFX[10] = game.add.audio('bDeath');
+		SFX[11] = game.add.audio('pooSplat');
 
 		game.state.start('tutorial');
 	}

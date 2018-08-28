@@ -73,11 +73,12 @@ boss.prototype = {
 		// game.camera.follow(player);
 
 		//boss
-		let bossmouth = new Boss(game, 410, 600, 'boss', 'mouth', 'toilet');
-		game.add.existing(bossmouth);
-		bossmouth.body.setCollisionGroup(this.collideBoss);
-		bossmouth.body.collides([this.collidePlat, this.collidePlayer]);
-		game.camera.follow(bossmouth);
+		boss = new Boss(game, 410, 600, 'boss', 'eyes', 'toilet');
+		game.add.existing(boss);
+		boss.body.setCollisionGroup(this.collideBoss);
+		boss.body.collides([this.collidePlat, this.collidePlayer]);
+		game.camera.follow(boss);
+		
 
 		this.bullets = game.add.group();
 		this.bullets.enableBody = true;
@@ -128,13 +129,26 @@ boss.prototype = {
 		// 	bossmouth.body.velocity.x -= 500;
 		// 	console.log(bossmouth.body.velocity.x);
 		// }
-		
+		if(boss.health <= 6 && boss.type == 'eyes'){
+			this.changeBoss();
+			boss.health = 100;
+		}
 		// UI update
 		this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
 		this.ui.updateCrop();
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
+	},
+
+	changeBoss: function(){
+		console.log('asfad');
+		boss1 = new Boss(game, boss.x, boss.y, 'boss', 'mouth', 'toilet');
+		game.add.existing(boss1);
+		boss1.body.setCollisionGroup(this.collideBoss);
+		boss1.body.collides([this.collidePlat, this.collidePlayer]);
+		game.camera.follow(boss1);
+		boss.destroy();
 	}
 
 	// Char control is implemented in player.js

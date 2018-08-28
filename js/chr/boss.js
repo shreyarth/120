@@ -9,7 +9,20 @@ function Boss(game, x, y, key, type, bFrame){
 	this.anchor.setTo(0.5, 0.5);
 	this.alpha = 0.5
 	this.health = 10;
-	this.body.setRectangle(72, 36, -29, -100);
+	
+	// sound effects for boss
+	this.sfx = [];
+	this.sfx[7] = game.add.audio('bossdeath');
+	this.sfx[8] = game.add.audio('bossyell');
+
+	// this.typecheck();
+	if(this.type == 'eyes')
+		this.body.setRectangle(72, 36, -29, -100);
+		this.body.addRectangle(190, 90 , -20, 90);
+	
+	if(this.type == 'mouth')
+		this.body.setRectangle(72, 75, -20, 0);
+		this.body.addRectangle(190, 90 , -20, 90);	
 	
 	game.time.events.add(Phaser.Timer.SECOND * 3, this.hp, this);
 	this.body.collideWorldBounds = true;
@@ -52,10 +65,6 @@ Boss.prototype.update = function() {
 	if(Math.abs((game.world.width - 990) - this.body.x) < 100){
 		this.spawn();
 	}
-	if(this.health < 7){
-		this.changeshape();
-		this.health = 10;
-	}
 }
 
 Boss.prototype.charge = function() {
@@ -97,17 +106,12 @@ Boss.prototype.fire = function() {
 }
 
 Boss.prototype.hp = function() {
-	if(this.shapeCount == 2){
-		this.health = 5;
-		console.log(this.health);
-		this.shapeCount = 1;
-	}
-	else{}
+	console.log('in hp fn');
+	this.health = 5;
+	console.log('hheaaaallllllttthhhhh: ' + this.health);
+	this.shapeCount = 1;
 }
 
-Boss.prototype.changeshape = function() {
-	this.body.clearShapes();
-	this.body.addRectangle(72, 75, -20, 0);
-	this.body.collideWorldBounds = true;
-	console.log('cahnged shaped?');
+Boss.prototype.typecheck = function() {
+	
 }
