@@ -9,7 +9,12 @@ function Boss(game, x, y, key, type, bFrame){
 	this.anchor.setTo(0.5, 0.5);
 	this.alpha = 0.5
 	this.health = 10;
-	// this.typecheck();
+
+	// sound effects for boss
+	this.sfx = [];
+	this.sfx[7] = game.add.audio('bossdeath');
+	this.sfx[8] = game.add.audio('bossyell');
+
 	if(this.type == 'eyes')
 		this.body.setRectangle(72, 36, -29, -100);
 	
