@@ -6,11 +6,12 @@ function Boss(game, x, y, key, type, bFrame){
 	this.body.velocity.x = 150;
 	this.body.data.gravityScale = 0;
 	this.type = type;
-	this.scale.setTo(0.3,0.3);
 	this.anchor.setTo(0.5, 0.5);
+	this.alpha = 0.5
 	this.health = 10;
-	this.body.setRectangle(0, 0);
-	// game.time.events.add(Phaser.Timer.SECOND * 3, this.hp, this);
+	this.body.setRectangle(72, 36, -29, -100);
+	
+	game.time.events.add(Phaser.Timer.SECOND * 3, this.hp, this);
 	this.body.collideWorldBounds = true;
 	this.shapeCount = 2;
 
@@ -48,7 +49,7 @@ Boss.prototype.update = function() {
 	if(this.body.x >= 800){
 		this.charge();
 	}
-	if(Math.abs((game.world.width - 990) - this.body.x) < 7){
+	if(Math.abs((game.world.width - 990) - this.body.x) < 100){
 		this.spawn();
 	}
 	if(this.health < 7){
@@ -106,7 +107,7 @@ Boss.prototype.hp = function() {
 
 Boss.prototype.changeshape = function() {
 	this.body.clearShapes();
-	this.body.addRectangle(this.width, this.height, this.width + 25, this.height + 25);
+	this.body.addRectangle(72, 75, -20, 0);
 	this.body.collideWorldBounds = true;
 	console.log('cahnged shaped?');
 }
