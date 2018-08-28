@@ -30,11 +30,14 @@ game.state.start('boot');
 
 // Global function for UI
 function barUI() {
-	let t_ui = game.add.sprite(32, 32, 'poo_ico');
+	let t_ui = game.add.sprite(16, 8, 'poo_ico');
 	t_ui.animations.add('idle', [0, 1], 2, true);
 	t_ui.animations.play('idle');
 	t_ui.fixedToCamera = true;
 	t_ui.cameraOffset.setTo(16, 8);
+	t_ui = game.add.sprite(96, 8, 'poo_gauge');
+	t_ui.fixedToCamera = true;
+	t_ui.cameraOffset.setTo(81, 10);
 	pooMeter(MAXPOO, 0x000000);
 	return pooMeter(player.pooCount, 0x492008);
 }

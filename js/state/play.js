@@ -211,7 +211,7 @@ play.prototype = {
 		toilets.body.debug = true;
 
 		// player
-		player = new P2layer(game, 'player', null, 'poo');
+		player = new P2layer(game, 64, game.world.height - 100, 'player', null, 'poo');
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
 		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB]);

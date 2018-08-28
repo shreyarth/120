@@ -16,6 +16,7 @@ load.prototype = {
 		// UI
 		game.load.image('title', 'title.png');
 		game.load.spritesheet('poo_ico', 'ui_ico.png', 66, 63);
+		game.load.image('poo_gauge', 'ui_gauge.png');
 
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
@@ -97,6 +98,6 @@ load.prototype = {
 		SFX[4] = game.add.audio('splat');
 		SFX[5] = game.add.audio('throw');
 
-		game.state.start('play2');
+		game.state.start('menu');
 	}
 }

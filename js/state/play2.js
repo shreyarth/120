@@ -393,7 +393,13 @@ play2.prototype = {
 		}, this);
 
 		// player
-		player = new P2layer(game, 'player', null, 'poo');
+		if (player == null || player == undefined)
+			player = new P2layer(game, 64, 250, 'player', null, 'poo');
+		if (!player.alive) {
+			player.alive = true;
+			player.x = 64;
+			player.y = 250;
+		}
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
 		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB]);
