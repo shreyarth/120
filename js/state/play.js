@@ -28,7 +28,6 @@ play.prototype = {
 		// Asset implementaion
 		game.add.sprite(0, 0, 'porter');
 		background = game.add.sprite(0, 0, 'porter');
-		//game.add.tileSprite(1800, 0, 5200, 800, 'heller');
 		game.add.sprite(2000, 0, 'heller');
 		game.add.sprite(3850, 0, 'heller');
 		game.add.sprite(5680, 0, 'heller');
@@ -127,7 +126,6 @@ play.prototype = {
 		platforms.body.clearShapes();
 		platforms.body.loadPolygon('physicsbox', 'wreckedcar');
 
-
 		platforms = this.platform.create(6730, 400, 'wreckB');
 		platforms.body.clearShapes();
 		platforms.body.addRectangle(160, 276);
@@ -135,7 +133,7 @@ play.prototype = {
 
 		this.platform.forEach(function(plat) {
 			plat.body.kinematic = true;
-			plat.body.debug = true;
+			plat.body.debug = devMode;
 			plat.body.setCollisionGroup(this.collidePlat);
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
@@ -149,66 +147,41 @@ play.prototype = {
 		this.toil.enableBody = true;
 
 		let toilets = new Toilet(game, 815, 559, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 1472, 224, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 1886, 756, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 3087, 756, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 4317, 756, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 4927, 756, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 6129, 680, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 6767, 275, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
 		toilets.body.angle = -10;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 7322, 510, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
 		toilets.body.angle = -10;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 7847, 756, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
+
+		this.toil.forEach(function(tt) {
+			tt.body.kinematic = true;
+			tt.body.debug = devMode;
+		});
 
 		// player
 		player = new P2layer(game, 64, game.world.height - 100, 'player', null, 'poo');
@@ -219,8 +192,9 @@ play.prototype = {
 			bull.body.setCollisionGroup(this.collidePB);
 			bull.body.collides([this.collidePlat, this.collideEnemy]);
 			bull.body.createGroupCallback(this.collidePlat, function(bull, plat){
-				if (bull.velocity != 0)
+				if (bull.velocity != 0){
 					player.groundSplat(bull.x, bull.y);
+				}
 			});
 		}, this);
 
@@ -647,10 +621,6 @@ play.prototype = {
 		enfl.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		enfl.body.createGroupCallback(this.collidePlat, function() {this.kill();}, enfl);
 
-		//sign.body.immovable = true;
-		//sign.scale.setTo(1,1);
-		// Need to fix sign in the air (no collision) <- can we just make it as a part of bg?
-
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
 		game.camera.follow(player, Phaser.Camera.FOLLOW_PLATFORMER, 0.25, 0.25);
@@ -677,14 +647,6 @@ play.prototype = {
 		
 	},
 	update: function() {
-		// Update function
-		
-		// enemy movement towards player
-		// if(game.physics.arcade.collide(enemy, platform)){
-		// 	game.physics.arcade.moveToObject(enemy, player);
-		// }
-		//game.physics.arcade.moveToObject(this.en3, player);
-
 		// UI update
 		this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
 		this.ui.updateCrop();
@@ -710,7 +672,6 @@ play.prototype = {
 		enfl.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, enfl);
 	},
 	render: function() {
-		game.debug.text('fps: ' + game.time.fps, 32, 32, 'yellow');
+		//game.debug.text('fps: ' + game.time.fps, 32, 32, 'yellow');
 	}
-	// Char control is implemented in player.js
 }

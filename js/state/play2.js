@@ -396,13 +396,10 @@ play2.prototype = {
 		game.add.sprite(9570, 5100, 'sign2');
 		
 		// player
-		if (player == null || player == undefined)
-			player = new P2layer(game, 64, 250, 'player', null, 'poo');
-		if (!player.alive) {
-			player.alive = true;
-			player.x = 64;
-			player.y = 250;
-		}
+		let temp_poo = 0;
+		if (player) temp_poo = player.pooCount;
+		player = new P2layer(game, 64, 250, 'player', null, 'poo');
+		if (temp_poo != 0) player.pooCount = temp_poo;
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
 		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB]);

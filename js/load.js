@@ -99,18 +99,29 @@ load.prototype = {
 		BGM[2] = game.add.audio('bosslevel', BGVOL, true);	// Boss BGM
 
 		SFX[0] = game.add.audio('fart');
+		SFX[0].allowMultiple = true;
 		SFX[1] = game.add.audio('rasp');
+		SFX[1].allowMultiple = false;
 		SFX[2] = game.add.audio('turkey');
-		SFX[2].allowMultiple = false;
+		SFX[2].allowMultiple = true;
 		SFX[3] = game.add.audio('grunt');
+		SFX[3].allowMultiple = true;
 		SFX[4] = game.add.audio('splat');
+		SFX[4].allowMultiple = true;
 		SFX[5] = game.add.audio('throw');
+		SFX[5].allowMultiple = true;
 		SFX[6] = game.add.audio('bgrunt');
+		SFX[6].allowMultiple = true;
 		SFX[7] = game.add.audio('bossdeath');
+		SFX[7].allowMultiple = false;
 		SFX[8] = game.add.audio('bossyell');
+		SFX[8].allowMultiple = false;
 		SFX[9] = game.add.audio('deerSound');
+		SFX[9].allowMultiple = true;
 		SFX[10] = game.add.audio('bDeath');
-		SFX[11] = game.add.audio('pooSplat');
+		SFX[10].allowMultiple = false;
+		SFX[11] = game.add.audio('pooSplat', 0.2);
+		SFX[11].allowMultiple = true;
 
 		game.state.start('tutorial');
 	}

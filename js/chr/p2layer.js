@@ -21,11 +21,15 @@ function P2layer(game, x, y, key, frame, bulletKey) {
 	// Player SFX
 	this.sfx = [];
 	this.sfx[0] = game.add.audio('fart');
+	this.sfx[0].allowMultiple = true;
 	this.sfx[1] = game.add.audio('rasp');
-	this.sfx[3] = game.add.audio('grunt');
-	this.sfx[4] = game.add.audio('splat');
-	this.sfx[6] = game.add.audio('bgrunt');
-	this.sfx[10] = game.add.audio('bDeath')
+	this.sfx[2] = game.add.audio('grunt');
+	this.sfx[2].allowMultiple = true;
+	this.sfx[3] = game.add.audio('splat');
+	this.sfx[3].allowMultiple = true;
+	this.sfx[4] = game.add.audio('bgrunt');
+	this.sfx[4].allowMultiple = true;
+	this.sfx[5] = game.add.audio('bDeath');
 
 	game.physics.p2.enable(this, true);
 
@@ -112,12 +116,11 @@ P2layer.prototype.update = function() {
 			else
 				this.animations.play('walk');
 			
-			
 			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
 		}
-		else if(this.friction == true) {
+		else if(this.friction) {
 			// Decceleration
-			console.log('friction on');
+			// Non stage 2
 			if (this.body.velocity.x > 0) {
 				this.body.velocity.x -= 9;
 				if (this.body.velocity.x < 0)
@@ -136,7 +139,7 @@ P2layer.prototype.update = function() {
 				this.animations.play(this.animations.currentAnim);
 		}
 		else{
-			console.log('friction off');
+			// For stage 2
 			this.angle = 30;
 			this.body.angle = 30;
 		}
@@ -163,12 +166,9 @@ P2layer.prototype.update = function() {
 				this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle'), this.state = 'idle';}, this);
 		}
 		else{
-			this.body.velocity.y += 10;
-			//game.physics.p2.gravity.y = 1000;
-			//this.body.data.gravityScale = 5;
-			
+			this.body.velocity.y += 10;			
 		}
-		if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
+		if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && devMode){
 			console.log(player.x, player.y);
 		}
 		//cheatmode
@@ -195,35 +195,30 @@ P2layer.prototype.fire = function(isJump) {
 	if(star){
 		game.physics.p2.enable(star);
 		let emitter;
-		if (isJump) {
-			// star.body.restitution.y = 0.2;
+		if (isJump) {	// Jump fire
+			star.reset(player.x + 2, player.y + 20);
+			star.body.collideWorldBounds = false;
 			star.outOfBoundsKill = true;
 			star.body.gravity.y = 90;
-			star.reset(player.x + 2, player.y + 20);
 			star.scale.setTo(game.rnd.integerInRange(7,14)/10,
 				game.rnd.integerInRange(7,14)/10);
 			star.body.velocity.y = 250;
 			star.body.angle = 90;
-			console.log("jumping");
 			emitter = game.add.emitter(player.x +2, player.y, 5);
-			if(this.pooCount < MAXPOO * 0.41){
-				this.sfx[6].play();
+			if(this.pooCount < MAXPOO * 0.41){	// When pooCount low, spray diff particle
+				this.sfx[4].play();
 				emitter.makeParticles('turdB');
-				emitter.start(false, 1000, 0, 5);
-				emitter.setYSpeed(100,400);
 			}
 			else{
-				this.sfx[3].play();
+				this.sfx[2].play();
 				emitter.makeParticles('turd1');
-				emitter.start(false, 1000, 0, 5);
-				emitter.setYSpeed(100,400);
 			}
+			emitter.start(false, 1000, 0, 5);
+			emitter.setYSpeed(100,400);
 		}
-		else {
-			//star.body.bounce.y = 1;
+		else {	// Actual shooting
 			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
-			// Need to tweak numbers for starting point for shooting
 			if (this.direction == 'right') {
 				this.animations.play('shoot');
 				star.reset(this.x + 10, this.y);
@@ -233,12 +228,11 @@ P2layer.prototype.fire = function(isJump) {
 				star.body.velocity.y = game.rnd.integerInRange(-60,0);
 				//recoil to player from shooting
 				this.body.velocity.x = -100;
-				console.log("shooting right");
 				emitter = game.add.emitter(this.x + 25, this.y, 5);
 				if(this.pooCount > MAXPOO * 0.41)
 					emitter.makeParticles('turd1');
 				else
-					emitter.makeParticles('turdB');
+					emitter.makeParticles('turdB');	// When pooCount low, spray diff particle
 				emitter.setXSpeed(100,400);
 			}
 			else {
@@ -251,24 +245,24 @@ P2layer.prototype.fire = function(isJump) {
 				star.body.velocity.y = game.rnd.integerInRange(-150, 30);
 				//recoil 
 				this.body.velocity.x = 100;
-				console.log("shooting left");
 				emitter = game.add.emitter(this.x - 25, this.y, 5);
 				if(this.pooCount > MAXPOO * 0.41)
 					emitter.makeParticles('turd1');
 				else
-					emitter.makeParticles('turdB');
+					emitter.makeParticles('turdB');	// When pooCount low, spray diff particle
 				emitter.setXSpeed(-100,-400);
 			}
 			emitter.start(false, 1000, 0, 5);
 			emitter.setYSpeed(100,200);
 		}
+		// Kill ye emitter
 		game.time.events.add(1100, function() {this.destroy();}, emitter);
-		console.log(this.pooCount);
+		if (devMode) console.log(this.pooCount);
+
 		this.pooCount--;
 		star.body.collideWorldBounds = false;
-		if(this.pooCount < MAXPOO && this.pooCount > -1){
+		if(this.pooCount < MAXPOO && this.pooCount > -1)
 			this.sfx[0].play();
-		}
 
 		// Check pooCount after action
 		this.death();
@@ -276,25 +270,20 @@ P2layer.prototype.fire = function(isJump) {
 }
 
 P2layer.prototype.death = function() {
-	let deathSprite, overflow;
-
-	if(this.pooCount < 0){
-		console.log("death from no poo");
+	// Apply diff sprite for death cases
+	let deathSprite;
+	if(this.pooCount < 0)
 		deathSprite = game.add.sprite(this.x, this.y, 'bloodsplat');
-		overflow = false;
-	}
-	else if(this.pooCount > MAXPOO){
-		console.log("death from too much poo");
+
+	else if(this.pooCount > MAXPOO)
 		deathSprite = game.add.sprite(this.x, this.y, 'poosplat');
-		overflow = true;
-	}
+
 	if (deathSprite){
-		if(this.pooCount < 0){
-			this.sfx[10].play();
-		}
-		else{
+		if(this.pooCount < 0)
+			this.sfx[5].play();
+		else
 			this.sfx[1].play();
-		}
+
 		this.kill();
 			
 		game.camera.shake(0.005, 400);
@@ -303,7 +292,7 @@ P2layer.prototype.death = function() {
 		deathSprite.scale.y = 5;
 		deathSprite.fixedToCamera = true;
 		deathSprite.cameraOffset.setTo(game.width/2, game.height/2+150);
-		game.time.events.add(Phaser.Timer.SECOND * 2, this.changeState, this);
+		game.time.events.add(Phaser.Timer.SECOND * 2, this.changeState, this);	// Display death animation(?) and move on
 	}
 }
 
@@ -331,6 +320,7 @@ P2layer.prototype.changeState = function(){
 // This is function for poo remainder on the ground
 P2layer.prototype.groundSplat = function(x, y) {
 	let ps = this.pooSplat.add(this.getPixbit(x, y));
+	this.sfx[3].play();
 }
 
 P2layer.prototype.getPixbit = function(x, y) {

@@ -1,16 +1,20 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
 
 // Global vars
-//var star;
+// Defaults
 var keys = [];
-var bgcolor = "#000"
-var noset = true;
 var BGM = [];	// Array to sava all loaded BG's
 var SFX = [];	// Array to save all loaded SFX's
 const BGVOL = 0.5;
+
+// Settings
+var bgcolor = "#000"
+var noset = true;
+const MAXPOO = 10;
+var devMode = true;
+
 // Main char
 var player;
-const MAXPOO = 10;
 var inPlay2 = false;
 
 // State management
