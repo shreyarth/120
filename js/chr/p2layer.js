@@ -62,7 +62,7 @@ function P2layer(game, key, frame, bulletKey) {
 	
 	// Timer events for groups
 	game.timer.loop(500, function() {
-		console.log(this.bullets);
+		// console.log(this.bullets);
 		if (this.alive) {
 			this.pooSplat.forEach(function(splat) {
 				splat.alpha -= 0.1;
