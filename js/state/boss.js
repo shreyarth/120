@@ -154,7 +154,7 @@ boss.prototype = {
 		boss1.body.setCollisionGroup(this.collideBoss);
 		boss1.body.collides([this.collidePlat, this.collidePlayer]);
 		game.camera.follow(boss1);
-		boss.kill();
+		boss.destroy();
 	}
 
 	// Char control is implemented in player.js

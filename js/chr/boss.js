@@ -9,12 +9,15 @@ function Boss(game, x, y, key, type, bFrame){
 	this.anchor.setTo(0.5, 0.5);
 	this.alpha = 0.5
 	this.health = 10;
+	
 	// this.typecheck();
 	if(this.type == 'eyes')
 		this.body.setRectangle(72, 36, -29, -100);
+		this.body.addRectangle(190, 90 , -20, 90);
 	
 	if(this.type == 'mouth')
 		this.body.setRectangle(72, 75, -20, 0);
+		this.body.addRectangle(190, 90 , -20, 90);	
 	
 	game.time.events.add(Phaser.Timer.SECOND * 3, this.hp, this);
 	this.body.collideWorldBounds = true;
