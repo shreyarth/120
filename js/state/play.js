@@ -1,11 +1,8 @@
 var play = function() {
-	// Global state variables
-	this.bullets, this.enemy;
-	this.platform; this.en3;
-	this.obstacle;
-	this.heller = null;
-	this.ui, this.full_width, this.cropRect;
-	this.toil; this.toiletCount;
+	this.enemy;
+	this.platform, this.toil;
+
+	this.ui, this.full_width, this.cropRect, this.toiletCounter;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;

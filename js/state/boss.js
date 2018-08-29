@@ -1,11 +1,10 @@
 var boss = function() {
 	// Global state variables
-	this.bullets, this.enemy;
-	this.platform; this.en3;
-	this.obstacle;
-	this.heller = null;
+	this.bullets, this.boss;
+	this.platform;
+
 	this.ui, this.full_width, this.cropRect;
-	this.toil, this.toiletCount;
+	this.bossHealthUI, this.full_widthBH, this.cropRect_BH;
 
 	this.collidePlayer, this.collidePlat, this.collideBoss;
 	this.collidePB, this.collideBB;
@@ -37,7 +36,6 @@ boss.prototype = {
 		this.collideBoss = game.physics.p2.createCollisionGroup();
 		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collidePlat, this.collideBoss,
 			this.collidePB, this.collideBB]);
-		game.physics.startSystem(Phaser.Physics.P2JS);
 		
 		var background = game.add.sprite(-500, 0, 'bookstore');
 		
@@ -61,8 +59,6 @@ boss.prototype = {
 		// wrapGround.scale.setTo(2,0.8);
 		// wrapGround.width = game.width;
 		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
-
-		game.physics.startSystem(Phaser.Physics.P2JS);
 
 		// player
 		player = new P2layer(game, 100, 100, 'player', null, 'poo');
@@ -89,12 +85,13 @@ boss.prototype = {
 		boss.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		game.camera.follow(boss);
 		boss.body.createGroupCallback(this.collidePB, function(boss, bull) {
-			boss.sprite.kill();
+			boss.health--;
+			console.log(boss.health);
 			bull.sprite.kill();
 			}, boss);
 		boss.bulletB.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collideBB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {console.log('this bullete ded?'), bull.kill();},this);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {console.log('this bullete ded?'), bull.kill();},this);
 			}, this);
 		
 		
@@ -153,8 +150,10 @@ boss.prototype = {
 			boss.health = 100;
 		}
 		// UI update
-		this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
-		this.ui.updateCrop();
+		if (player.pooCount >= 0) {
+			this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
+			this.ui.updateCrop();
+		}
 	},
 
 	changeBoss: function(){
