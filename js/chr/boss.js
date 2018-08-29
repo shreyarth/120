@@ -19,14 +19,15 @@ function Boss(game, x, y, key, type, bFrame){
 	this.sfx[8] = game.add.audio('bossyell');
 
 	// this.typecheck();
-	if(this.type == 'eyes')
+	if(this.type == 'eyes') {
 		this.body.setRectangle(72, 36, -29, -100);
 		this.body.addRectangle(190, 90 , -20, 90);
+	}
 	
-	if(this.type == 'mouth')
+	if(this.type == 'mouth') {
 		this.body.setRectangle(72, 75, -20, 0);
 		this.body.addRectangle(190, 90 , -20, 90);	
-	
+	}
 	
 	this.body.collideWorldBounds = true;
 	// this.shapeCount = 2;
@@ -50,9 +51,12 @@ function Boss(game, x, y, key, type, bFrame){
 	timer.start();
 
 	// Collision
-	this.body.createBodyCallback(player, this.collideBody, this);
+	//this.body.createBodyCallback(player, this.collideBody, this);
 	// this.body.createBodyCallback(player, this.healthDec, this);
-	this.bulletB.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
+	//this.bulletB.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
+
+	// Devmode
+	this.body.debug = devMode;
 }
 
 Boss.prototype = Object.create(Phaser.Sprite.prototype);
@@ -60,7 +64,7 @@ Boss.prototype.constructor = Boss;
 
 Boss.prototype.update = function() {
 	//Wut?
-	console.log(this.health);
+	//console.log(this.health);
 	if(Math.abs((game.world.width - 990) - this.body.x) < 100){
 		this.spawn();
 	}
