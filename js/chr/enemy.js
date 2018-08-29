@@ -138,8 +138,9 @@ Enemy.prototype.fire = function() {
 Enemy.prototype.death = function(player, bullet) {
 	SFX[2].play();
 	// game.camera.shake(0.005, 400);
-	this.kill();
+	// this.kill();
 	bullet.kill();
+	this.destroy();
 }
 
 Enemy.prototype.chasePlayer = function() {
