@@ -41,6 +41,7 @@ boss.prototype = {
 		
 		var background = game.add.sprite(-500, 0, 'bookstore');
 		
+
 		// ground
 		// this.platform = game.add.group();
 		// this.platform.physicsBodyType = Phaser.Physics.P2JS;

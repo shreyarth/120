@@ -25,7 +25,10 @@ load.prototype = {
 		game.load.image('enemy', 'enemy.png');
 		game.load.image('boss', 'boss.png');
 		game.load.spritesheet('deer', 'deer_spritesheet.png', 44, 49);
-		game.load.image('deer', 'img/deer1.png');
+		game.load.image('bad1', 'enemy0Throw3.png');
+		game.load.image('bad2', 'enemy5Idle.png');
+	
+
 		
 		// Bullets, particles, effects etc
 		game.load.image('poo', 'poo.png');

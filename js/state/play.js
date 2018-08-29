@@ -204,14 +204,30 @@ play.prototype = {
 		this.enemy.enableBody = true;
 		
 		//hardcoding enemy placement from left to right
-		// DEERS
-		let en = new Enemy(game, 696, 540, 'deer', null, 'pepto');
+		let en = new Enemy(game, 696, 540, 'bad1', null, 'pepto');
+		game.add.existing(en);
 		this.enemy.add(en);
-		this.assignCollisionGroup_Enemy(en, false);
+		en.scale.setTo(0.2,0.2);
+		en.body.clearShapes();
+		en.body.addRectangle(30, 70);
+		en.body.setCollisionGroup(this.collideEnemy);
+		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		en.body.createGroupCallback(this.collidePB, function(en, bull) {
+		en.sprite.kill();
+		bull.sprite.kill();
+		}, en);
+		en.bulletE.forEach(function(bull) {
+		bull.body.setCollisionGroup(this.collideEB);
+		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
+		}, this);
 		en.body.immovable = true;
 		
-		en = new Enemy(game, 960, 540, 'deer', null, 'pepto');
+		en = new Enemy(game, 960, 540, 'bad2', null, 'pepto');
+		game.add.existing(en);
 		this.enemy.add(en);
+		en.scale.setTo(0.2,0.2);
+		en.body.clearShapes();
+		en.body.addRectangle(30, 70);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
