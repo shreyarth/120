@@ -4,7 +4,7 @@ var play2 = function() {
 
 	this.ui, this.full_width, this.cropRect, this.toiletCounter;
 
-	this.collidePlayer, this.collideEmeny, this.collidePlat;
+	this.collidePlayer, this.collideEmeny, this.collidePlat, this.collideFPlat;
 	this.collidePB, this.collideEB;
 }
 
@@ -28,10 +28,11 @@ play2.prototype = {
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
 		this.collideEnemy = game.physics.p2.createCollisionGroup();
 		this.collidePlat = game.physics.p2.createCollisionGroup();
+		this.collideFPlat = game.physics.p2.createCollisionGroup();
 		this.collidePB = game.physics.p2.createCollisionGroup();
 		this.collideEB = game.physics.p2.createCollisionGroup();
 		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat, 
-			this.collidePB, this.collideEB]);
+			this.collideFPlat, this.collidePB, this.collideEB]);
 
 		//ground
 		this.platform = game.add.group();
@@ -45,6 +46,13 @@ play2.prototype = {
 		ground.body.angularDamping = 0;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1000, 25);
+
+		ground = this.platform.create(3800, 3900, 'bush');
+		ground.scale.setTo(30, 0.6 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(9000, 25);
 		
 
 		ground = this.platform.create(1150, 963, 'bush');
@@ -148,7 +156,7 @@ play2.prototype = {
 		ground.body.addRectangle(game.world.width, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
+		ground.body.setCollisionGroup(this.collideFPlat);
 
 		//flat surface at end
 		ground = this.fPlatform.create(9500, 5450, 'sidewalk');
@@ -238,7 +246,7 @@ play2.prototype = {
 		this.fPlatform.forEach(function(plat) {
 			plat.body.kinematic = true;
 			plat.body.debug = devMode;
-			plat.body.setCollisionGroup(this.collidePlat);
+			plat.body.setCollisionGroup(this.collideFPlat);
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
 
@@ -289,12 +297,21 @@ play2.prototype = {
 		
 		// player
 		let temp_poo = 0;
-		if (player) temp_poo = player.pooCount;
+		if (player) {
+			if(player.pooCount < 5){
+				temp_poo = player.pooCount;
+			}
+			else{
+				temp_poo = player.pooCount - 3;
+			}
+		}
 		player = new P2layer(game, 64, 250, 'player', null, 'poo');
 		if (temp_poo != 0) player.pooCount = temp_poo;	// Rollover from prev stage
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
-		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB]);
+		player.body.collides([this.collidePlat, this.collideFPlat, this.collideEnemy, this.collideEB]);
+		player.body.createGroupCallback(this.collideFPlat, function(){ player.angle = 0, player.body.angle = 0;}, player);
+		player.body.createGroupCallback(this.collidePlat, function(){ player.angle = 30, player.body.angle = 30;}, player);
 		player.friction = false;
 		player.bullets.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collidePB);
