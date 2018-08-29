@@ -4,8 +4,8 @@ var PIXBIT = 8;
 function P2layer(game, x, y, key, frame, bulletKey) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	//Phaser.Sprite.call(this, game, 100, 100, key);
-	Phaser.Sprite.call(this, game, 9500, 4500, key);
+	Phaser.Sprite.call(this, game, 100, 100, key);
+	//Phaser.Sprite.call(this, game, 9500, 4500, key);
 	//for level 2 testing
 	//Phaser.Sprite.call(this, game, 5940, 3610, key);
 	// Animation settings
@@ -148,9 +148,9 @@ P2layer.prototype.update = function() {
 				this.animations.play(this.animations.currentAnim);
 		}
 		else{
-			// For stage 2
-			//this.angle = 30;
-			//this.body.angle = 30;
+			//For stage 2
+			this.angle = 30;
+			this.body.angle = 30;
 		}
 		if (move.up.justDown)
 		{
