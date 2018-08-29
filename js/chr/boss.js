@@ -4,13 +4,15 @@ function Boss(game, x, y, key, type, bFrame){
 	game.physics.p2.enable(this, false);
 	this.body.fixedRotation = true;
 	this.body.velocity.x = 150;
-	this.body.data.gravityScale = 0;
+	this.game.physics.p2.gravity.y = 100;
+	this.body.data.gravityScale = 2;
 	this.type = type;
 	this.anchor.setTo(0.5, 0.5);
 	// this.alpha = 0.5;
-	this.health = 50;
+	this.health = 20;
 	game.time.events.add(Phaser.Timer.SECOND * 3, this.charge, this);
 	game.time.events.add(Phaser.Timer.SECOND * 3, this.deer , this);
+	game.time.events.add(Phaser.Timer.SECOND * 3, this.spawn , this);
 	this.isInvincible = false;
 	
 	// sound effects for boss
@@ -155,9 +157,9 @@ Boss.prototype.death = function(player, bullet) {
 }
 
 Boss.prototype.deer = function(){
-	deer1 = new Enemy(game, 0, 100, 'deer', null, null, 'deer');
+	deer1 = new Enemy(game, 0, 550, 'deer', null, null, 'deer');
 	game.add.existing(deer1);
 
-	deer2 = new Enemy(game, 800, 100, 'deer', null, null, 'deer');
+	deer2 = new Enemy(game, 800, 550, 'deer', null, null, 'deer');
 	game.add.existing(deer2);
 }
