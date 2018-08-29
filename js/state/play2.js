@@ -46,6 +46,13 @@ play2.prototype = {
 		ground.body.angularDamping = 0;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1000, 25);
+
+		ground = this.platform.create(3800, 3900, 'bush');
+		ground.scale.setTo(30, 0.6 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(9000, 25);
 		
 
 		ground = this.platform.create(1150, 963, 'bush');
