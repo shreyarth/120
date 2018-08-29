@@ -280,7 +280,8 @@ play2.prototype = {
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
-
+		
+		// For now, flat platforms are set to same collision group, but might have to set it to separate group
 		this.fPlatform.forEach(function(plat) {
 			plat.body.kinematic = true;
 			plat.body.debug = devMode;
@@ -293,73 +294,64 @@ play2.prototype = {
 		this.toil.enableBody = true;
 
 		let toilets = new Toilet(game, 900, 754, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.angle = 30;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 1530, 390, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 2530, 1120, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 3620, 2332, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.angle = 30;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 4034, 1945, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 5020, 3145, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.angle = 30;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 6040, 3727, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.angle = 30;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 7050, 3500, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 7500, 4800, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 9300, 5400, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
 		toilets.body.debug = true;
-
-		this.platform.forEach(function(plat) {
+		/*
+		this.toil.forEach(function(tt) {
 			plat.body.setCollisionGroup(this.collidePlat);
 			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
 		}, this);
+		*/
 
 		//sign for end of level
 		game.add.sprite(9570, 5100, 'sign2');

@@ -26,13 +26,13 @@
 	<script type="text/javascript" src="js/load.js"></script>
 	<script type="text/javascript" src="js/boot.js"></script>
 	<script type="text/javascript" src="js/pre.js"></script>
-	<script type="text/javascript" src="js/state/tutorial.js"></script>
 	<script type="text/javascript" src="js/state/menu.js"></script>
 	<script type="text/javascript" src="js/state/setting.js"></script>
 	<script type="text/javascript" src="js/state/play.js"></script>
 	<script type="text/javascript" src="js/state/play2.js"></script>
 	<script type="text/javascript" src="js/state/boss.js"></script>
 	<script type="text/javascript" src="js/state/end.js"></script>
+	<script type="text/javascript" src="js/state/tutorial.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>

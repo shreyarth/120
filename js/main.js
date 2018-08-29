@@ -20,6 +20,7 @@ var inPlay2 = false;
 // State management
 game.state.add('boot', boot);
 game.state.add('load', load);
+game.state.add('pre', pre);
 game.state.add('menu', menu);
 game.state.add('setting', setting);
 game.state.add('play', play);

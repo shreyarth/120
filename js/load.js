@@ -4,9 +4,26 @@
 load.prototype = {
 	preload: function() {
 		// Load loading bar
-		let loadBar = this.add.sprite(game.width/2, game.height/2, 'load');
-		loadBar.anchor.set(0.5);
+		let loadBar = this.add.sprite(game.width/2 - 256, game.height/2 - 8, 'load');
+		loadBar.anchor.set(0, 0.5);
 		game.load.setPreloadSprite(loadBar);
+		// Custom loading screen
+		let style = {font: 'Press Start 2P', fontSize: '12px', fill: '#fff'};
+		let warning = game.add.text(game.world.centerX, game.world.centerY - 32,
+			'Warning: This game is recommended for 3 year olds', style);
+		warning.anchor.set(0.5);
+		game.time.events.add(1500, function() {
+			let w_txt = game.add.text(game.world.centerX, game.world.centerY + 24,
+			'... or anyone who has sense of humor equivalent to 3 year olds.', style);
+			w_txt.anchor.set(0.5);
+		}, this);
+		// Fire this when loading takes forever for some god knows what reason
+		game.time.events.add(5000, function() {
+			let w_txt = game.add.text(game.world.centerX, game.world.centerY + 64,
+			'Uh, you might want to talk with your internet provider about this.', style);
+			w_txt.anchor.set(0.5);
+			console.log('asdf');
+		}, this);
 
 		// Load all the assets
 		// Graphic
@@ -19,6 +36,7 @@ load.prototype = {
 		game.load.spritesheet('boo_ico', 'ui_ico0.png', 66, 63);
 		game.load.image('poo_gauge', 'ui_gauge.png');
 		game.load.image('poo_fill', 'ui_fill.png');
+		game.load.image('team_logo', 'notuniv_border.png');
 
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
@@ -126,7 +144,7 @@ load.prototype = {
 		SFX[10].allowMultiple = false;
 		SFX[11] = game.add.audio('pooSplat', 0.2);
 		SFX[11].allowMultiple = true;
-
-		game.state.start('play2');
+		
+		game.state.start('pre');
 	}
 }
