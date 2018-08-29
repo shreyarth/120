@@ -76,7 +76,7 @@ menu.prototype = {
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 			switch (this.mCount%3) {
 				case 0:
-					game.state.start('play2');
+					game.state.start('play');
 					BGM[0].stop();
 					break;
 				case 1:
