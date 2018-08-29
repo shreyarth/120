@@ -43,16 +43,16 @@ boss.prototype = {
 		var background = game.add.sprite(-500, 0, 'bookstore');
 		
 		//ground
-		// this.platform = game.add.group();
-		// this.platform.physicsBodyType = Phaser.Physics.P2JS;
-		// this.platform.enableBody = true;
-		// this.platform.collideWorldBounds = true;
+		this.platform = game.add.group();
+		this.platform.physicsBodyType = Phaser.Physics.P2JS;
+		this.platform.enableBody = true;
+		this.platform.collideWorldBounds = true;
 
-		// let ground = this.platform.create(0, game.world.height, 'sidewalk');
-		// ground.body.clearShapes();
-		// ground.body.addRectangle(ground.width, ground.height);
-		// ground.body.setCollisionGroup(this.collidePlat);
-		// ground.scale.y = 0.5;	
+		let ground = this.platform.create(0, game.world.height, 'sidewalk');
+		ground.body.clearShapes();
+		ground.body.addRectangle(800, 50);
+		ground.body.setCollisionGroup(this.collidePlat);
+		ground.scale.y = 0.5;	
 
 		
 		// the background wrap
