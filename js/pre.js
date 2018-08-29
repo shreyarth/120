@@ -15,7 +15,7 @@ pre.prototype = {
 		txt.alpha = 0;
 		game.add.tween(txt).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 0, 1, true);
 
-		game.time.events.add(2100, this.moveOn, this);
+		game.time.events.add(2500, this.moveOn, this);
 	},
 	moveOn: function() {
 		game.state.start('menu');

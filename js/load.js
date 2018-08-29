@@ -12,7 +12,7 @@ load.prototype = {
 		let warning = game.add.text(game.world.centerX, game.world.centerY - 32,
 			'Warning: This game is recommended for 3 year olds', style);
 		warning.anchor.set(0.5);
-		game.time.events.add(1500, function() {
+		game.time.events.add(1200, function() {
 			let w_txt = game.add.text(game.world.centerX, game.world.centerY + 24,
 			'... or anyone who has sense of humor equivalent to 3 year olds.', style);
 			w_txt.anchor.set(0.5);
@@ -145,6 +145,6 @@ load.prototype = {
 		SFX[11] = game.add.audio('pooSplat', 0.2);
 		SFX[11].allowMultiple = true;
 		
-		game.state.start('pre');
+		game.state.start('play2');
 	}
 }

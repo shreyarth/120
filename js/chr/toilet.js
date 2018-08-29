@@ -9,7 +9,9 @@ function Toilet(game, x, y, key) {
 
 	// physics crap
 	game.physics.p2.enable(this);
-	//this.body.collideWorldBounds = true;
+
+	// Devmode settings
+	this.body.debug = devMode;
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
