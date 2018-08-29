@@ -387,7 +387,6 @@ play.prototype = {
 		game.physics.arcade.moveToObject(en, player);
 	},
 	assignCollisionGroup_Enemy: function(ene, isTurk) {
-		ene.body.debug = devMode;
 		ene.body.setCollisionGroup(this.collideEnemy);
 		ene.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		ene.body.createGroupCallback(this.collidePB, function(ene, bull) {
