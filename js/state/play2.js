@@ -132,7 +132,13 @@ play2.prototype = {
 			plat.body.kinematic = true;
 			plat.body.debug = devMode;
 			plat.body.setCollisionGroup(this.collidePlat);
-		});
+			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
+		}, this);
+
+		// flat grounds
+		this.fPlatform = game.add.group();
+		this.fPlatform.physicsBodyType = Phaser.Physics.P2JS;
+		this.fPlatform.enableBody = true;
 
 		//the ones not calling a sprite are the ceilings
 		ground = this.fPlatform.create(4600, 1950, '');
@@ -182,7 +188,7 @@ play2.prototype = {
 		ground = this.fPlatform.create(1800, 952, 'branch');
 		ground.scale.setTo(0.35, 0.5);
 		ground.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
+		ground.body.addRectangle(100, 25);
 		ground.body.kinematic = true;
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
@@ -275,8 +281,12 @@ play2.prototype = {
 		ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
-		this.fPlatform.forEach(function (plat){
-		});
+		this.fPlatform.forEach(function(plat) {
+			plat.body.kinematic = true;
+			plat.body.debug = devMode;
+			plat.body.setCollisionGroup(this.collidePlat);
+			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
+		}, this);
 
 		this.toil = game.add.group();
 		this.toil.physicsBodyType = Phaser.Physics.P2JS;
