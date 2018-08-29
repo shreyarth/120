@@ -1,14 +1,11 @@
 var play2 = function() {
-	// Global state variables
-	this.bullets, this.enemy;
-	this.platform; this.en3;
-	this.obstacle;
-	this.ui, this.full_width, this.cropRect;
+	this.enemy;
+	this.platform, this.fPlatform, this.toil;
+
+	this.ui, this.full_width, this.cropRect, this.toiletCounter;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;
-	// inPlay2 = true;
-	// 7 toilets
 }
 
 play2.prototype = {
@@ -16,7 +13,7 @@ play2.prototype = {
 		
 	},
 	create: function() {
-		// Music play setting depreceated since it continues to play music even after the state change
+		if (devMode) game.time.advancedTiming = true;
 
 		// Setting up game world
 		game.world.setBounds(0, 0, 10000, 6000);
@@ -25,17 +22,6 @@ play2.prototype = {
 		
 		// Asset implementaion
 		game.stage.backgroundColor = "#cb741c";
-
-		//bg to put in for reaching bookstore
-		// var background = game.add.sprite(-400, -645, 'slopehill');
-		// background = game.add.sprite(1040, 185, 'slopehill');
-		// background = game.add.sprite(2200, 854, 'heller2');
-		// background = game.add.sprite(3200, 1431, 'c9-10v2');
-		// background = game.add.sprite(4400, 2123, 'c9-10v2');
-		// background = game.add.sprite(5600, 2815, 'heller2');
-		// background = game.add.sprite(8000, 4640, 'porter');
-		// //last heller crap
-		// background = game.add.sprite(6800, 3507, 'heller2');
 		var background = game.add.sprite(0, -335, 'lvl2');
 		
 		// Setting up collision groups
@@ -59,9 +45,7 @@ play2.prototype = {
 		ground.body.angularDamping = 0;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1000, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
+		
 
 		ground = this.platform.create(1150, 963, 'bush');
 		ground.scale.setTo(3.15, 0.6 );
@@ -69,18 +53,12 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1000, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(1360, 960, 'bus');
 		ground.scale.setTo(1, 1);
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(394, 176);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(1980, 1443, 'bush');
 		ground.scale.setTo(0.95, 0.6 );
@@ -88,9 +66,6 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(300, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(2680, 1847, 'bush');
 		ground.scale.setTo(0.3, 0.6 );
@@ -100,18 +75,12 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(90, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(3450, 2160, 'bus');
 		ground.scale.setTo(1, 1);
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(394, 176);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(3480, 2310, 'bush');
 		ground.scale.setTo(2.85, 0.6 );
@@ -119,9 +88,6 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(900, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(4600, 2957, 'bush');
 		ground.scale.setTo(3.15, 0.6 );
@@ -129,9 +95,6 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1000, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(5580, 3522, 'bush');
 		ground.scale.setTo(0.95, 0.6 );
@@ -141,9 +104,6 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(300, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(6000, 3765, 'bush');
 		ground.scale.setTo(0.3, 0.6 );
@@ -151,9 +111,6 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(90, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(6880, 4273, 'bush');
 		ground.scale.setTo(0.15, 0.6 );
@@ -163,9 +120,6 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(40, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		ground = this.platform.create(8200, 5035, 'bush');
 		ground.scale.setTo(5.7, 0.6);
@@ -173,12 +127,21 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1800, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
+
+		this.platform.forEach(function(plat) {
+			plat.body.kinematic = true;
+			plat.body.debug = devMode;
+			plat.body.setCollisionGroup(this.collidePlat);
+			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
+		}, this);
+
+		// flat grounds
+		this.fPlatform = game.add.group();
+		this.fPlatform.physicsBodyType = Phaser.Physics.P2JS;
+		this.fPlatform.enableBody = true;
 
 		//the ones not calling a sprite are the ceilings
-		ground = this.platform.create(4600, 1950, '');
+		ground = this.fPlatform.create(4600, 1950, '');
 		ground.scale.setTo(game.world.width, 1 );
 		ground.body.angle = 30;
 		ground.body.clearShapes();
@@ -188,208 +151,137 @@ play2.prototype = {
 		ground.body.setCollisionGroup(this.collidePlat);
 
 		//flat surface at end
-		ground = this.platform.create(9500, 5450, 'sidewalk');
+		ground = this.fPlatform.create(9500, 5450, 'sidewalk');
 		ground.scale.setTo(1, 0.6 );
 		ground.body.damping.x = 0;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1800, 25);
-		ground.body.kinematic = true;
-		//ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 
 		// wrecked cars to cover flaws in background
-		ground = this.platform.create(9100, 5200, 'carObs');
+		ground = this.fPlatform.create(9100, 5200, 'carObs');
 		ground.body.angle = -30;
 		ground.body.clearShapes();
 		ground.body.loadPolygon('physicsbox', 'carObs');
-		ground.body.kinematic = true;
-		ground.body.setCollisionGroup(this.collidePlat);
 		
 		//platforms and enemies in order, left to right
+		ground = this.fPlatform.create(700, 250, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		let ePlat = this.platform.create(700, 250, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(1525, 440, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(1525, 440, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(1800, 952, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(1800, 952, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(2522, 1170, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(2522, 1170, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(3080, 1550, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(3080, 1550, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(3480, 1650, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(3480, 1650, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(4020, 1995, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(4020, 1995, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(4260, 2460, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(4260, 2460, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(5450, 2950, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(5450, 2950, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.platform.create(6000, 3150, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(6000, 3150, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(6700, 3750, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(6700, 3750, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(7040, 3550, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(7040, 3550, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(7305, 4120, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
 
-		ePlat = this.platform.create(7305, 4120, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
-
-		ePlat = this.platform.create(7870, 4450, 'branch');
-		ePlat.scale.setTo(0.35, 0.5);
-		ePlat.body.clearShapes();
-		ePlat.body.addRectangle(100, 25);
-		ePlat.body.kinematic = true;
-		ePlat.body.debug = true;
-		ePlat.body.setCollisionGroup(this.collidePlat);
+		ground = this.fPlatform.create(7870, 4450, 'branch');
+		ground.scale.setTo(0.35, 0.5);
+		ground.body.clearShapes();
+		ground.body.addRectangle(100, 25);
+		
+		// For now, flat platforms are set to same collision group, but might have to set it to separate group
+		this.fPlatform.forEach(function(plat) {
+			plat.body.kinematic = true;
+			plat.body.debug = devMode;
+			plat.body.setCollisionGroup(this.collidePlat);
+			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
+		}, this);
 
 		this.toil = game.add.group();
 		this.toil.physicsBodyType = Phaser.Physics.P2JS;
 		this.toil.enableBody = true;
 
 		let toilets = new Toilet(game, 900, 754, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
 		toilets.body.angle = 30;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 1530, 390, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 2530, 1120, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 3620, 2332, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
 		toilets.body.angle = 30;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 4034, 1945, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 5020, 3145, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
 		toilets.body.angle = 30;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 6040, 3727, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
 		toilets.body.angle = 30;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 7050, 3500, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 7500, 4800, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		toilets.body.debug = true;
 
 		toilets = new Toilet(game, 9300, 5400, 'toilet');
-		game.add.existing(toilets);
 		this.toil.add(toilets);
-		toilets.body.kinematic = true;
-		//toilets.body.debug = true;
-
-		this.platform.forEach(function(plat) {
-			plat.body.setCollisionGroup(this.collidePlat);
-			plat.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
+		
+		this.toil.forEach(function(tt) {
+			tt.body.kinematic = true;
 		}, this);
 
 		//sign for end of level
@@ -399,7 +291,7 @@ play2.prototype = {
 		let temp_poo = 0;
 		if (player) temp_poo = player.pooCount;
 		player = new P2layer(game, 64, 250, 'player', null, 'poo');
-		if (temp_poo != 0) player.pooCount = temp_poo;
+		if (temp_poo != 0) player.pooCount = temp_poo;	// Rollover from prev stage
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
 		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB]);
@@ -420,224 +312,79 @@ play2.prototype = {
 		
 		//enemies on platforms, left to right
 		let en = new Enemy(game, 710, 220, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
-		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 1535, 410, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
-		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 1810, 922, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
-		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 2532, 1140, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
-		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 3090, 1520, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 		
 		en = new Enemy(game, 3490, 1620, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
-
+		this.assignCollisionGroup_Enemy(en, false);
+		
 		en = new Enemy(game, 4030, 1965, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 4270, 2430, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 5460, 2920, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 6010, 3120, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 6710, 3720, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 7315, 4090, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		en = new Enemy(game, 7865, 4380, 'deer', null, 'pepto');
-		game.add.existing(en);
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 9351, 5350, 'deer', null, 'pepto');
-		game.add.existing(en);
+		en = new Enemy(game, 9351, 5360, 'deer', null, 'pepto');
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
-		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 9231, 5350, 'deer', null, 'pepto');
-		game.add.existing(en);
+		en = new Enemy(game, 9231, 5360, 'deer', null, 'pepto');
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
-		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 9551, 5350, 'deer', null, 'pepto');
-		game.add.existing(en);
-		this.enemy.add(en);		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
-		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
-
-		en = new Enemy(game, 9700, 5360, 'deer', null, 'pepto');
-		game.add.existing(en);
+		en = new Enemy(game, 9451, 5360, 'deer', null, 'pepto');
 		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
-		en.bulletE.forEach(function(bull) {
-			bull.body.setCollisionGroup(this.collideEB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
+
+		en = new Enemy(game, 9751, 5360, 'deer', null, 'pepto');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
 
 		//test for flying enemy
 		for(var i = 0; i < 5; ++i){
 			en = new Enemy(game, game.rnd.integerInRange(1000,4800),
 			 400, 'enemy');
-			game.add.existing(en);
 			this.enemy.add(en);
+			this.assignCollisionGroup_Enemy(en, true);
 		}
 
 		// Set camera to platformer follow up
@@ -665,17 +412,11 @@ play2.prototype = {
 		this.toiletCounter.cameraOffset.setTo(game.width - 78, 16);
 	},
 	update: function() {
-		// Update function
-		
-		// enemy movement towards player
-		// if(game.physics.arcade.collide(enemy, platform)){
-		// 	game.physics.arcade.moveToObject(enemy, player);
-		// }
-		//game.physics.arcade.moveToObject(this.en3, player);
-
 		// UI update
-		this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
-		this.ui.updateCrop();
+		if (player.pooCount >= 0) {
+			this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
+			this.ui.updateCrop();
+		}
 		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level
@@ -683,10 +424,32 @@ play2.prototype = {
 			BGM[1].stop();
 			game.state.start('boss');
 		}
-
 	},
 	movToPl: function(en, platform) {
 		game.physics.arcade.moveToObject(en, player);
+	},
+	assignCollisionGroup_Enemy: function(ene, isTurk) {
+		ene.body.setCollisionGroup(this.collideEnemy);
+		ene.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		ene.body.createGroupCallback(this.collidePB, function(ene, bull) {
+			ene.sprite.kill();
+			bull.sprite.kill();
+		}, ene);
+		if (isTurk){
+			ene.body.createGroupCallback(this.collidePlat, function() {this.kill();}, ene);
+		 	ene.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, ene);
+		}
+		else {
+			ene.bulletE.forEach(function(bull) {
+				bull.body.setCollisionGroup(this.collideEB);
+				bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();}, this);
+			}, this);
+		}
+	},
+	render: function() {
+		if (devMode) {
+			game.debug.text('fps: ' + game.time.fps, 32, 86, 'yellow');
+			game.debug.text('num of enemy: ' + this.enemy.total, 32, 102, 'yellow');
+		}
 	}
-	// Char control is implemented in player.js
 }

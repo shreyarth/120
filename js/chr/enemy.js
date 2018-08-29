@@ -6,7 +6,6 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	
 	// anchor: Origin of the texture
 	// 0.5 = center
-	//this.scale.setTo(0.1);
 	this.anchor.set(0.5);
 	// Animation depending on key
 	if (key == 'deer') {
@@ -47,6 +46,9 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	// Collision
 	this.body.createBodyCallback(player, this.collideBody, this);
 	this.bulletE.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
+
+	// devMode settings
+	this.body.debug = devMode;
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor
@@ -94,7 +96,6 @@ Enemy.prototype.update = function() {
 
 Enemy.prototype.collideBody = function() {
 	if (!player.isInvincible) {
-	//this.turkey();
 	SFX[2].play();
 	this.pooModifier();
 	}
@@ -102,7 +103,7 @@ Enemy.prototype.collideBody = function() {
 
 Enemy.prototype.pooModifier = function() {
 		player.pooCount -= 1;
-		console.log(player.pooCount);
+		if (devMode) console.log(player.pooCount);
 		player.death();
 		player.hit();
 }
@@ -135,12 +136,9 @@ Enemy.prototype.fire = function() {
 }
 
 Enemy.prototype.death = function(player, bullet) {
-	//this.turkey();
 	SFX[2].play();
 	// game.camera.shake(0.005, 400);
 	this.kill();
-	//this.reset(game.rnd.integerInRange(2500,5000),
-	//	game.rnd.integerInRange(600,1000));
 	bullet.kill();
 }
 

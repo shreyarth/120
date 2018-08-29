@@ -1,11 +1,8 @@
 var play = function() {
-	// Global state variables
-	this.bullets, this.enemy;
-	this.platform; this.en3;
-	this.obstacle;
-	this.heller = null;
-	this.ui, this.full_width, this.cropRect;
-	this.toil; this.toiletCount;
+	this.enemy;
+	this.platform, this.toil;
+
+	this.ui, this.full_width, this.cropRect, this.toiletCounter;
 
 	this.collidePlayer, this.collideEmeny, this.collidePlat;
 	this.collidePB, this.collideEB;
@@ -16,7 +13,7 @@ play.prototype = {
 		
 	},
 	create: function() {
-		game.time.advancedTiming = true;
+		if (devMode) game.time.advancedTiming = true;
 		if (!BGM[1].isPlaying)
 			BGM[1].play();
 
