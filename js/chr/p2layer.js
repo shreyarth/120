@@ -9,7 +9,7 @@ function P2layer(game, x, y, key, frame, bulletKey) {
 	//for level 2 testing
 	//Phaser.Sprite.call(this, game, 5940, 3610, key);
 	// Animation settings
-	this.animations.add('idle', [7], 2); 
+	this.animations.add('idle', [7], 2);
 	this.animations.add('jump', [2, 3, 4, 5, 4, 3, 2], 15);
 	this.animations.add('off', [6, 1], 1);
 	this.animations.add('on', [1, 6], 1);
