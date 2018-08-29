@@ -81,6 +81,9 @@ function P2layer(game, x, y, key, frame, bulletKey) {
 		}, this.bullets);
 	}, this);
 	game.timer.start();
+
+	// Devmode settings
+	this.body.debug = devMode;
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor

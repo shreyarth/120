@@ -11,7 +11,7 @@ const BGVOL = 0.5;
 var bgcolor = "#000"
 var noset = true;
 const MAXPOO = 10;
-var devMode = true;
+var devMode = false;
 
 // Main char
 var player;
