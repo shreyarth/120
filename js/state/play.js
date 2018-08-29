@@ -16,7 +16,7 @@ play.prototype = {
 		
 	},
 	create: function() {
-		game.time.advancedTiming = true;
+		if (devMode) game.time.advancedTiming = true;
 		if (!BGM[1].isPlaying)
 			BGM[1].play();
 
