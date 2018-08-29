@@ -25,7 +25,7 @@ load.prototype = {
 		game.load.image('enemy', 'enemy.png');
 		game.load.image('boss', 'boss.png');
 		game.load.spritesheet('deer', 'deer_spritesheet.png', 44, 49);
-		// game.load.image('deer', 'img/deer1.png');
+		game.load.image('deer', 'img/deer1.png');
 		
 		// Bullets, particles, effects etc
 		game.load.image('poo', 'poo.png');
@@ -36,6 +36,7 @@ load.prototype = {
 		game.load.image('poosplat', 'shit.png');
 		game.load.image('bloodsplat', 'blood.png');
 		game.load.image('twater', 'toiletwater.png');
+		game.load.image('lax', 'laxative.png');
 
 		// Backgrounds
 		game.load.image('porter', 'finalPorter.png');

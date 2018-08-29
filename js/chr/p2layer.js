@@ -99,7 +99,10 @@ P2layer.prototype.update = function() {
 			this.direction = 'left';
 			if(this.state == 'jump')
 				this.animations.play('jump');
-			else
+			else if(this.state == 'shoot'){
+				this.animations.play('shoot');
+				this.animations.currentAnim.onComplete.add(function(){this.animations.play('walk');}, this);
+			}else
 				this.animations.play('walk');
 
 			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
@@ -113,7 +116,10 @@ P2layer.prototype.update = function() {
 			this.direction = 'right';
 			if(this.state == 'jump')
 				this.animations.play('jump');
-			else
+			else if(this.state == 'shoot'){
+				this.animations.play('shoot');
+				this.animations.currentAnim.onComplete.add(function(){this.animations.play('walk');}, this);
+			}else
 				this.animations.play('walk');
 			
 			this.animations.currentAnim.onComplete.add(function(){this.animations.play('idle');}, this);
@@ -220,6 +226,7 @@ P2layer.prototype.fire = function(isJump) {
 			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
 			if (this.direction == 'right') {
+				this.state = 'shoot';
 				this.animations.play('shoot');
 				star.reset(this.x + 10, this.y);
 				star.scale.setTo(game.rnd.integerInRange(7,14)/10,
@@ -237,6 +244,7 @@ P2layer.prototype.fire = function(isJump) {
 			}
 			else {
 				this.scale.x = -1;
+				this.state = 'shoot';
 				this.animations.play('shoot');
 				star.reset(player.x - 10, player.y);
 				star.scale.setTo(game.rnd.integerInRange(7,14)/10,
