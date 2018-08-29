@@ -76,6 +76,10 @@ Enemy.prototype.update = function() {
 	if(this.type == 'kamikaze_turkey'){
 		this.boom();
 	}
+	if(this.type == 'deer'){
+		this.charge();
+	}
+
 	if(this.friction == true){
 		if (this.body.velocity.x > 0) {
 			this.body.velocity.x -= 300;
@@ -98,17 +102,7 @@ Enemy.prototype.collideBody = function() {
 }
 
 Enemy.prototype.pooModifier = function() {
-		//let rando = game.rnd.integerInRange(1, 1000);
-		//if (rando % 4 == 0) {
-			//if(player.pooCount > 15)
-				//player.pooCount += 1;
-			//else
-				player.pooCount -= 1;
-		//}
-		//else {
-			//player.pooCount += 1;
-		//}
-
+		player.pooCount -= 1;
 		if (devMode) console.log(player.pooCount);
 		player.death();
 		player.hit();
@@ -173,5 +167,14 @@ Enemy.prototype.boom = function(){
 		if(Math.abs(this.x - player.x) < 100 && Math.abs(player.y - this.y) > 75){
 			this.body.velocity.y += 70;
 		}
+	}
+}
+
+Enemy.prototype.charge = function() {
+	if(player.body.x > this.body.x){
+		this.body.velocity.x = 200;
+	}
+	else{
+		this.body.velocity.x = -200;
 	}
 }
