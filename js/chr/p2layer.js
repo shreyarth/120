@@ -104,7 +104,7 @@ P2layer.prototype.update = function() {
 				this.animations.play('jump');
 			else if(this.state == 'shoot'){
 				this.animations.play('shoot');
-				this.animations.currentAnim.onComplete.add(function(){this.animations.play('walk');}, this);
+				this.animations.currentAnim.onComplete.add(function(){this.state = 'walk', this.animations.play('walk');}, this);
 			}else
 				this.animations.play('walk');
 
