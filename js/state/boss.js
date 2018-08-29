@@ -4,7 +4,7 @@ var boss = function() {
 	this.platform;
 
 	this.ui, this.full_width, this.cropRect;
-	this.bossHealthUI, this.full_widthBH, this.cropRect_BH;
+	this.bossHealthUI, this.bossMaxHP, this.full_widthBH, this.cropRect_BH;
 
 	this.collidePlayer, this.collidePlat, this.collideEnemy, this.collideBoss;
 	this.collidePB, this.collideBB;
@@ -85,36 +85,15 @@ boss.prototype = {
 		this.boss.body.setCollisionGroup(this.collideBoss);
 		this.boss.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		this.boss.body.createGroupCallback(this.collidePB, function(boss, bull) {
-			boss.health--;
-			console.log(boss.health);
+			this.health--;
 			bull.sprite.kill();
 		}, this.boss);
 		this.boss.bulletB.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collideBB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {console.log('this bullete ded?'); this.kill();}, bull);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {this.kill();}, bull);
 		}, this);
 		game.camera.follow(this.boss);
 		
-		
-
-		this.bullets = game.add.group();
-		this.bullets.enableBody = true;
-		this.bullets.physicsBodyType = Phaser.Physics.p2;
-		//this.bullets.createMultiple(200, 'star');
-		//bullets.setAll('checkWorldBounds', true);
-		//bullets.callAll('events.onOutOfBounds.add', 'events.outOfBounds', resetstar);
-		this.bullets.checkWorldBounds = true;
-		this.bullets.outOfBoundsKill = true;
-		//bullets.gravity = 300;
-
-		//enemies bullets
-		this.bulletE = game.add.group();
-		this.bulletE.enableBody = true;
-		this.bullets.physicsBodyType = Phaser.Physics.p2;
-		this.bullets.createMultiple(200, 'star');
-		this.bullets.checkWorldBounds = true;
-		this.bullets.outOfBoundsKill = true;
-
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
 		// game.camera.follow('player', FOLLOW_PLATFORMER, 0.25, 0.25);
@@ -124,29 +103,19 @@ boss.prototype = {
 		this.full_width = this.ui.width;
 		this.cropRect = new Phaser.Rectangle(0, 0, player.pooCount/MAXPOO * this.ui.width, this.ui.height);
 		this.ui.crop(this.cropRect);
+
+		// Boss health bar UI that follows
+		this.full_widthBH = 120;
+		this.bossMaxHP = this.boss.health;
+		this.bossHealthUI = this.bossHealthBar();
 	},
-	// bossHealth: funtion(bosshp){
-	// 	let obje = null;
-	// 	//boss health bar
-	// 	let b = game.add.graphics();
-	// 	b.beginFill(0x492008);
-	// 	b.drawRect(32, 32, pooNum * 5, 32);	// Starting point, width, height
-	// 	b.endFill();
-
-	// 	obj = game.add.sprite(700, 500, g.generateTexture());
-	// 	obj.fixedToCamera = true;
-	// 	obj.cameraOffset.setTo(32, 16);
-	// 	g.destroy();
-
-	// 	return obje;
-	// },
 	update: function() {
 		// Update function
 		// if(this.boss.x > 800){
 		// 	bossmouth.body.velocity.x -= 500;
 		// 	console.log(bossmouth.body.velocity.x);
 		// }
-		if(boss.health == 6 && boss.type == 'eyes'){
+		if(this.boss.health == 6 && this.boss.type == 'eyes'){
 			this.changeBoss();
 		}
 		// UI update
@@ -154,8 +123,9 @@ boss.prototype = {
 			this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
 			this.ui.updateCrop();
 		}
+		this.bossHealthUI.destroy();
+		this.bossHealthUI = this.bossHealthBar();
 	},
-
 	changeBoss: function(){
 		console.log('asfad');
 		let boss1 = new Boss(game, boss.x, boss.y, 'boss', 'mouth', 'lax');
@@ -166,7 +136,19 @@ boss.prototype = {
 		game.camera.follow(boss1);
 		this.boss.destroy();
 		this.boss = bossl;
-	}
+	},
+	bossHealthBar: function() {
+		let obj = null;
+		
+		let g = game.add.graphics();
+		g.beginFill(0x00ff00);
+		g.drawRect(0, 0, this.boss.health/this.bossMaxHP * this.full_widthBH, 12);	// Starting point, width, height
+		g.endFill();
 
-	// Char control is implemented in player.js
+		// transform primitive into sprite and destroy primitive
+		obj = game.add.sprite(this.boss.x - this.boss.width/4, this.boss.y - this.boss.height/2 - 32, g.generateTexture());
+		g.destroy();
+
+		return obj;
+	}
 }
