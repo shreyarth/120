@@ -305,7 +305,7 @@ play2.prototype = {
 				temp_poo = player.pooCount - 3;
 			}
 		}
-		player = new P2layer(game, 64, 250, 'player', null, 'poo');
+		player = new P2layer(game, 64, 250, 'player', null, 'poo', 1000);
 		if (temp_poo != 0) player.pooCount = temp_poo;	// Rollover from prev stage
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);

@@ -181,7 +181,7 @@ play.prototype = {
 		});
 
 		// player
-		player = new P2layer(game, 64, game.world.height - 100, 'player', null, 'poo');
+		player = new P2layer(game, 64, game.world.height - 100, 'player', null, 'poo', 600);
 		// player = new P2layer(game, 7000, game.world.height - 100, 'player', null, 'poo');
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);

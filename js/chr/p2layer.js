@@ -1,10 +1,10 @@
 // Global var for player prefab
 var PIXBIT = 8;
 
-function P2layer(game, x, y, key, frame, bulletKey) {
+function P2layer(game, x, y, key, frame, bulletKey, poofillR) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
-	Phaser.Sprite.call(this, game, x, y, key);
+	Phaser.Sprite.call(this, game, x, y, key, poofillR);
 	//Phaser.Sprite.call(this, game, 9500, 4500, key);
 	//for level 2 testing
 	//Phaser.Sprite.call(this, game, 5940, 3610, key);
@@ -17,6 +17,7 @@ function P2layer(game, x, y, key, frame, bulletKey) {
 	this.animations.add('shoot', [6, 1, 1, 6], 15);
 	// Play animation
 	this.animations.play('idle');
+	this.poofillR = poofillR;
 
 	// Player SFX
 	this.sfx = [];
@@ -48,7 +49,7 @@ function P2layer(game, x, y, key, frame, bulletKey) {
 	// Character info
 	this.pooCount = MAXPOO/2;
 	game.timer = game.time.create(true);
-	game.timer.loop(600, function() {
+	game.timer.loop(poofillR, function() {
 		if (this.alive) {
 		this.pooCount++;
 		this.death();
@@ -149,6 +150,14 @@ P2layer.prototype.update = function() {
 		}
 		else{
 			// For stage 2
+			
+		// game.timer.loop(2000, function() {
+		// if (this.alive) {
+		// this.pooCount++;
+		// this.death();
+		// }}, this);
+
+
 			
 		}
 		if (move.up.justDown)
