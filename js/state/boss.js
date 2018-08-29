@@ -85,13 +85,14 @@ boss.prototype = {
 		this.boss.body.setCollisionGroup(this.collideBoss);
 		this.boss.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		this.boss.body.createGroupCallback(this.collidePB, function(boss, bull) {
+			console.log(boss);
 			boss.health--;
 			console.log(boss.health);
 			bull.sprite.kill();
-		}, this.boss);
+		}, this);
 		this.boss.bulletB.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collideBB);
-			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {console.log('this bullete ded?'); this.kill();}, bull);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {this.kill();}, bull);
 		}, this);
 		game.camera.follow(this.boss);
 		
@@ -146,7 +147,7 @@ boss.prototype = {
 		// 	bossmouth.body.velocity.x -= 500;
 		// 	console.log(bossmouth.body.velocity.x);
 		// }
-		if(boss.health == 6 && boss.type == 'eyes'){
+		if(this.boss.health == 6 && this.boss.type == 'eyes'){
 			this.changeBoss();
 		}
 		// UI update
