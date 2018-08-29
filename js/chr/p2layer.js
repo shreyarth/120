@@ -149,8 +149,7 @@ P2layer.prototype.update = function() {
 		}
 		else{
 			// For stage 2
-			this.angle = 30;
-			this.body.angle = 30;
+			
 		}
 		if (move.up.justDown)
 		{
