@@ -204,9 +204,10 @@ play.prototype = {
 		this.enemy.physicsBodyType = Phaser.Physics.P2JS;
 		
 		//hardcoding enemy placement from left to right
-		let en = new Enemy(game, 696, 540, 'deer', null, 'pepto');
+		let en = new Enemy(game, 696, 540, 'bad2', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
+		en.scale.setTo(0.2,0.3);
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		en.body.createGroupCallback(this.collidePB, function(en, bull) {
@@ -219,7 +220,7 @@ play.prototype = {
 		}, this);
 		en.body.immovable = true;
 		
-		en = new Enemy(game, 960, 540, 'deer', null, 'pepto');
+		en = new Enemy(game, 960, 540, 'bad1', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
