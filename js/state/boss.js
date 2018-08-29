@@ -7,8 +7,8 @@ var boss = function() {
 	this.ui, this.full_width, this.cropRect;
 	this.toil, this.toiletCount;
 
-	this.collidePlayer, this.collideEmeny, this.collidePlat;
-	this.collidePB, this.collideEB, this.collideBoss;
+	this.collidePlayer, this.collidePlat, this.collideBoss;
+	this.collidePB, this.collideBB;
 }
 
 boss.prototype = {
@@ -25,34 +25,35 @@ boss.prototype = {
 		if (!BGM[2].isPlaying) BGM[2].play();
 		
 		// Game world setting
-		game.world.setBounds( 0, 0, 1000, 800);
+		game.world.setBounds( 0, 0, 800, 600);
 		console.log("play state to check implementation");
 		game.physics.startSystem(Phaser.Physics.P2JS);
 
 		// Setting up collision groups
 		this.collidePlayer = game.physics.p2.createCollisionGroup();
-		this.collideEnemy = game.physics.p2.createCollisionGroup();
 		this.collidePlat = game.physics.p2.createCollisionGroup();
 		this.collidePB = game.physics.p2.createCollisionGroup();
-		this.collideEB = game.physics.p2.createCollisionGroup();
+		this.collideBB = game.physics.p2.createCollisionGroup();
 		this.collideBoss = game.physics.p2.createCollisionGroup();
-		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collideEnemy, this.collidePlat, 
-			this.collidePB, this.collideEB]);
+		game.physics.p2.updateBoundsCollisionGroup([this.collidePlayer, this.collidePlat, this.collideBoss,
+			this.collidePB, this.collideBB]);
 		game.physics.startSystem(Phaser.Physics.P2JS);
 		
 		var background = game.add.sprite(-500, 0, 'bookstore');
 		
-		//ground
-		this.platform = game.add.group();
-		this.platform.physicsBodyType = Phaser.Physics.P2JS;
-		this.platform.enableBody = true;
-		this.platform.collideWorldBounds = true;
 
-		let ground = this.platform.create(0, game.world.height, 'sidewalk');
-		ground.body.clearShapes();
-		ground.body.addRectangle(800, 50);
-		ground.body.setCollisionGroup(this.collidePlat);
-		ground.scale.y = 0.5;	
+		// ground
+		// this.platform = game.add.group();
+		// this.platform.physicsBodyType = Phaser.Physics.P2JS;
+		// this.platform.enableBody = true;
+		// this.platform.collideWorldBounds = true;
+
+		// let ground = this.platform.create(10, 550, 'sidewalk');
+		// ground.body.clearShapes();
+		// ground.body.addRectangle(500, 42);
+		// ground.body.setCollisionGroup(this.collidePlat);
+		// ground.scale.y = 0.5;	
+		// ground.scale.x = 0.5;	
 
 		
 		// the background wrap
@@ -67,17 +68,35 @@ boss.prototype = {
 		player = new P2layer(game, 100, 100, 'player', null, 'poo');
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
-		player.body.collides([this.collidePlat, this.collideEnemy, this.collideEB, this.collideBoss]);
+		player.body.collides([this.collidePlat, this.collideBB, this.collideBoss]);
+		player.bullets.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collidePB);
+			bull.body.collides([this.collidePlat, this.collideBoss]);
+			bull.body.createGroupCallback(this.collidePlat, function(bull, plat){
+				if (bull.velocity != 0){
+					player.groundSplat(bull.x, bull.y);
+				}
+			});
+		}, this);
 
 		//camera
 		// game.camera.follow(player);
 
 		//boss
-		boss = new Boss(game, 410, 600, 'boss', 'eyes', 'toilet');
+		boss = new Boss(game, 410, 500, 'boss', 'eyes', 'lax');
 		game.add.existing(boss);
 		boss.body.setCollisionGroup(this.collideBoss);
-		boss.body.collides([this.collidePlat, this.collidePlayer]);
+		boss.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		game.camera.follow(boss);
+		boss.body.createGroupCallback(this.collidePB, function(boss, bull) {
+			boss.sprite.kill();
+			bull.sprite.kill();
+			}, boss);
+		boss.bulletB.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideBB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function() {console.log('this bullete ded?'), bull.kill();},this);
+			}, this);
+		
 		
 
 		this.bullets = game.add.group();
@@ -137,13 +156,10 @@ boss.prototype = {
 		this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
 		this.ui.updateCrop();
 	},
-	movToPl: function(en, platform) {
-		game.physics.arcade.moveToObject(en, player);
-	},
 
 	changeBoss: function(){
 		console.log('asfad');
-		boss1 = new Boss(game, boss.x, boss.y, 'boss', 'mouth', 'toilet');
+		boss1 = new Boss(game, boss.x, boss.y, 'boss', 'mouth', 'lax');
 		game.add.existing(boss1);
 		boss1.body.setCollisionGroup(this.collideBoss);
 		boss1.body.collides([this.collidePlat, this.collidePlayer]);
