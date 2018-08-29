@@ -27,7 +27,9 @@ load.prototype = {
 		game.load.spritesheet('deer', 'deer_spritesheet.png', 44, 49);
 		game.load.image('bad1', 'enemy0Throw3.png');
 		game.load.image('bad2', 'enemy5Idle.png');
-	
+		game.load.image('bad3', 'enemy2Throw2.png');
+		game.load.image('bad4', 'enemy3Throw3.png');
+		game.load.image('bad5', 'enemy4Throw1.png');
 
 		
 		// Bullets, particles, effects etc
@@ -127,6 +129,6 @@ load.prototype = {
 		SFX[11] = game.add.audio('pooSplat', 0.2);
 		SFX[11].allowMultiple = true;
 
-		game.state.start('tutorial');
+		game.state.start('play2');
 	}
 }

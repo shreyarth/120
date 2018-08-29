@@ -194,7 +194,7 @@ play2.prototype = {
 		ground.body.clearShapes();
 		ground.body.addRectangle(1800, 25);
 		ground.body.kinematic = true;
-		ground.body.debug = true;
+		//ground.body.debug = true;
 		ground.body.setCollisionGroup(this.collidePlat);
 
 		// wrecked cars to cover flaws in background
@@ -385,7 +385,7 @@ play2.prototype = {
 		game.add.existing(toilets);
 		this.toil.add(toilets);
 		toilets.body.kinematic = true;
-		toilets.body.debug = true;
+		//toilets.body.debug = true;
 
 		this.platform.forEach(function(plat) {
 			plat.body.setCollisionGroup(this.collidePlat);
@@ -589,7 +589,7 @@ play2.prototype = {
 		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
-		en = new Enemy(game, 9351, 5360, 'deer', null, 'pepto');
+		en = new Enemy(game, 9351, 5350, 'deer', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
@@ -600,7 +600,7 @@ play2.prototype = {
 			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
-		en = new Enemy(game, 9231, 5360, 'deer', null, 'pepto');
+		en = new Enemy(game, 9231, 5350, 'deer', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
@@ -611,10 +611,9 @@ play2.prototype = {
 			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
-		en = new Enemy(game, 9451, 5360, 'deer', null, 'pepto');
+		en = new Enemy(game, 9551, 5350, 'deer', null, 'pepto');
 		game.add.existing(en);
-		this.enemy.add(en);
-		en.body.setCollisionGroup(this.collideEnemy);
+		this.enemy.add(en);		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		en.body.createGroupCallback(this.collidePlat, function() {en.friction = true;}, en);
 		en.bulletE.forEach(function(bull) {
@@ -622,7 +621,7 @@ play2.prototype = {
 			bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
 		}, this);
 
-		en = new Enemy(game, 9751, 5360, 'deer', null, 'pepto');
+		en = new Enemy(game, 9700, 5360, 'deer', null, 'pepto');
 		game.add.existing(en);
 		this.enemy.add(en);
 		en.body.setCollisionGroup(this.collideEnemy);
