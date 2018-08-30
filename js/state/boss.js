@@ -91,6 +91,7 @@ boss.prototype = {
 			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {this.kill();}, bull);
 		}, this);
 		game.time.events.loop(Phaser.Timer.SECOND * 10, this.spawnDeer, this);
+		game.time.events.add(Phaser.Timer.SECOND * 6, this.spawnTurk, this);
 		
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
@@ -188,5 +189,22 @@ boss.prototype = {
 		d2.body.createGroupCallback(this.collidePlayer, function() {
 			d2.kill();
 		}, d2);
+	},
+
+	spawnTurk: function(){
+		console.log('In kamikaze_turkey');
+		for(var i = 0; i < 3; ++i){
+			turkie = new Enemy(game, game.rnd.integerInRange(100, 1000), 100, 'enemy', null, null, 'kamikaze_turkey');
+			game.add.existing(turkie);
+		}
+		turkie.body.setCollisionGroup(this.collideEnemy);
+		turkie.body.collides([this.collidePlat,  this.collidePlayer, this.collidePB]);
+		turkie.body.createGroupCallback(this.collidePB, function(turkie, bull) {
+			turkie.sprite.kill();
+			bull.sprite.kill();
+		}, turkie);
+		turkie.body.createGroupCallback(this.collidePlayer, function() {
+			turkie.kill();
+		}, turkie);
 	}
 }

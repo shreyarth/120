@@ -38,6 +38,7 @@ function Boss(game, x, y, key, type, bFrame){
 	this.bulletB.physicsBodyType = Phaser.Physics.P2JS;
 	this.bulletB.createMultiple(50, bFrame);
 	this.bulletB.forEach(function(bull) {bull.body.clearShapes(), bull.body.addCircle(35);});
+	this.bulletB.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
 
 	// Timer events for groups
 	timer = game.time.create(false);
@@ -77,16 +78,8 @@ Boss.prototype.charge = function() {
 	else{
 		this.body.velocity.x = -600;
 	}
-	for(var i = 0; i < 3; ++i){
-		this.spawn();
-	}
 	game.camera.shake(0.005, 400);
 	
-}
-
-Boss.prototype.spawn = function() {
-	kami = new Enemy(game, game.rnd.integerInRange(100, 1000), 300, 'enemy', null, null, 'kamikaze_turkey');
-	game.add.existing(kami);
 }
 
 Boss.prototype.fire = function() {
@@ -141,4 +134,11 @@ Boss.prototype.death = function(player, bullet) {
 	SFX[2].play();
 	this.kill();
 	bullet.kill();
+}
+
+Boss.prototype.pooModifier = function() {
+		player.pooCount += 2;
+		if (devMode) console.log(player.pooCount);
+		player.death();
+		player.hit();
 }
