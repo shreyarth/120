@@ -12,6 +12,8 @@ function Boss(game, x, y, key, type, bFrame){
 	game.time.events.loop(Phaser.Timer.SECOND * 3, this.charge, this);
 	this.isInvincible = false;
 	this.body.kinematic = true;
+	this.animations.add('half', [0,1], 2);
+	this.animations.add('ded', [0,1], 2);
 	
 	// sound effects for boss
 	this.sfx = [];
@@ -49,11 +51,6 @@ function Boss(game, x, y, key, type, bFrame){
 	}, this);
 	timer.start();
 
-	// Collision
-	//this.body.createBodyCallback(player, this.collideBody, this);
-	// this.body.createBodyCallback(player, this.healthDec, this);
-	//this.bulletB.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
-
 	// Devmode
 	this.body.debug = devMode;
 }
@@ -63,10 +60,6 @@ Boss.prototype.constructor = Boss;
 
 Boss.prototype.update = function() {
 	//Wut?
-	//console.log(this.health);
-	// if(Math.abs((game.world.width - 990) - this.body.x) < 100){
-	// 	this.spawn();
-	// }
 	if(player.body.x > this.body.x){
 		this.scale.x = -1;
 	}
@@ -79,10 +72,10 @@ Boss.prototype.charge = function() {
 	console.log('cahgingings?');
 	if(this.body.x < player.body.x){
 		this.scale.x = -1;
-		this.body.velocity.x = 700;
+		this.body.velocity.x = 600;
 	}
 	else{
-		this.body.velocity.x = -700;
+		this.body.velocity.x = -600;
 	}
 	for(var i = 0; i < 3; ++i){
 		this.spawn();
@@ -126,11 +119,6 @@ Boss.prototype.fire = function() {
 	}
 }
 
-// Boss.prototype.hp = function() {
-// 	console.log('in hp fn');
-// 	this.health --;
-// 	console.log('hheaaaallllllttthhhhh: ' + this.health);
-// }
 
 Boss.prototype.hit = function() {
 	// Check if the boss is already invincible
@@ -149,16 +137,8 @@ Boss.prototype.hit = function() {
 	inviTime.start();
 }
 
-// Boss.prototype.collideBody = function() {
-// 	this.health -= 1;
-// }
-
 Boss.prototype.death = function(player, bullet) {
-	//this.turkey();
 	SFX[2].play();
-	// game.camera.shake(0.005, 400);
 	this.kill();
-	//this.reset(game.rnd.integerInRange(2500,5000),
-	//	game.rnd.integerInRange(600,1000));
 	bullet.kill();
 }
