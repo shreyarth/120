@@ -4,6 +4,9 @@ var cut2 = function() {
 cut2.prototype = {
 	create: function() {
 		//c2.1
+		someShit.progress = 2;
+		localStorage.setItem('someShit', JSON.stringify(someShit));
+		game.world.setBounds(0, 0, game.width, game.height);
 		let logo = game.add.sprite(game.world.centerX, game.world.centerY, 'cut2_1');
 		logo.anchor.set(0.5);
 		logo.alpha = 0;

@@ -34,7 +34,7 @@ function P2layer(game, x, y, key, frame, bulletKey, poofillR) {
 	this.sfx[12] = game.add.audio('shoot');
 	this.sfx[12].allowMultiple = true;
 	this.sfx[14] = game.add.audio('playercol');
-	this.sfx[14].allowMultiple = false;
+	this.sfx[14].allowMultiple = true;
 
 	game.physics.p2.enable(this, true);
 

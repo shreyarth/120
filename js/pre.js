@@ -14,10 +14,19 @@ pre.prototype = {
 		txt.anchor.set(0.5);
 		txt.alpha = 0;
 		game.add.tween(txt).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
-
+		
 		game.time.events.add(4250, this.moveOn, this);
 	},
+	update: function() {
+		// In case player wants to skip dat logo
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+			this.moveOn();
+		}
+	},
 	moveOn: function() {
-		game.state.start('menu');
+		if (someShit && someShit.progress > 0)
+			game.state.start('menu');
+		else
+			game.state.start('tutorial');
 	}
 }

@@ -54,8 +54,9 @@ boss.prototype = {
 		
 		// Player
 		let temp_poo = 0;
-		if (player) temp_poo = player.pooCount;
-		player = new P2layer(game, 100, 100, 'player', null, 'poo', 600);
+		if (player && player.pooCount >= 5)
+				temp_poo = player.pooCount - 3;
+		player = new P2layer(game, 64, 250, 'player', null, 'poo', 850);
 		if (temp_poo != 0) player.pooCount = temp_poo;	// Rollover from prev stage
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
@@ -88,6 +89,7 @@ boss.prototype = {
 			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {this.kill();}, bull);
 		}, this);
 		game.time.events.loop(Phaser.Timer.SECOND * 10, this.spawnDeer, this);
+		game.time.events.add(Phaser.Timer.SECOND * 6, this.spawnTurk, this);
 		
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
@@ -106,10 +108,9 @@ boss.prototype = {
 	},
 	update: function() {
 		// Update function
-		// if(this.boss.health <= 10 && this.boss.type == 'eyes'){
-		// 	this.changeBoss();
-		// 	this.boss.health = 100;
-		// }
+		if(this.boss.health == 10 && this.boss.type == 'eyes'){
+			this.changeBoss();
+		}
 
 		// UI update
 		if (player.pooCount >= 0) {
@@ -122,15 +123,17 @@ boss.prototype = {
 
 	changeBoss: function(){
 		console.log('asfad');
-		this.boss1 = new Boss(game, boss.x, boss.y, 'boss1', 'mouth', 'lax');
-		game.add.existing(this.boss1);
-		this.boss1.health = 10;
-		this.boss1.body.setCollisionGroup(this.collideBoss);
-		this.boss1.body.collides([this.collidePlat, this.collidePlayer]);
-		this.boss1.health = this.boss.health;
-		this.boss.kill();
-	},
+		let temp = new Boss(game, this.boss.x, this.boss.y, 'boss1', 'mouth', 'lax');
+		game.add.existing(temp);
+		temp.health = 10;
+		temp.body.setCollisionGroup(this.collideBoss);
+		temp.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		this.boss.destroy();
+		// Reinitialize
+		this.boss = temp;
+		this.bossMaxHP = this.boss.health;
 
+	},
 	bossHealthBar: function() {
 		let obj = null;
 		
@@ -145,22 +148,6 @@ boss.prototype = {
 
 		return obj;
 	},
-
-	boss1HealthBar: function() {
-		let obj = null;
-		
-		let g = game.add.graphics();
-		g.beginFill(0x00ff00);
-		g.drawRect(0, 0, this.boss1.health/this.boss1MaxHP * this.full_widthBH, 12);	// Starting point, width, height
-		g.endFill();
-
-		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(this.boss1.x - this.boss1.width/4, this.boss1.y - this.boss1.height/2 - 32, g.generateTexture());
-		g.destroy();
-
-		return obj;
-	},
-
 	spawnDeer: function(){
 		d1 = new Enemy(game, 0, 550, 'deer', null, null, 'deer');
 		game.add.existing(d1);
@@ -185,5 +172,22 @@ boss.prototype = {
 		d2.body.createGroupCallback(this.collidePlayer, function() {
 			d2.kill();
 		}, d2);
+	},
+
+	spawnTurk: function(){
+		console.log('In kamikaze_turkey');
+		for(var i = 0; i < 3; ++i){
+			turkie = new Enemy(game, game.rnd.integerInRange(100, 1000), 100, 'enemy', null, null, 'kamikaze_turkey');
+			game.add.existing(turkie);
+		}
+		turkie.body.setCollisionGroup(this.collideEnemy);
+		turkie.body.collides([this.collidePlat,  this.collidePlayer, this.collidePB]);
+		turkie.body.createGroupCallback(this.collidePB, function(turkie, bull) {
+			turkie.sprite.kill();
+			bull.sprite.kill();
+		}, turkie);
+		turkie.body.createGroupCallback(this.collidePlayer, function() {
+			turkie.kill();
+		}, turkie);
 	}
 }

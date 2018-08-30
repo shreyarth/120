@@ -18,17 +18,15 @@ load.prototype = {
 			w_txt.anchor.set(0.5);
 		}, this);
 		// Fire this when loading takes forever for some god knows what reason
-		game.time.events.add(5000, function() {
+		game.time.events.add(10000, function() {
 			let w_txt = game.add.text(game.world.centerX, game.world.centerY + 64,
 			'Uh, you might want to talk with your internet provider about this.', style);
 			w_txt.anchor.set(0.5);
-			console.log('asdf');
 		}, this);
 
 		// Load all the assets
 		// Graphic
 		game.load.path = 'assets/img/';
-		game.load.image('star', 'star.png');	// This is temp asset
 		
 		// UI
 		game.load.image('title', 'title.png');
@@ -37,6 +35,11 @@ load.prototype = {
 		game.load.image('poo_gauge', 'ui_gauge.png');
 		game.load.image('poo_fill', 'ui_fill.png');
 		game.load.image('team_logo', 'notuniv_border.png');
+		game.load.spritesheet('leaf_ico', 'ui_icof.png', 66, 63);
+		game.load.image('arrow', 'arrow.png');
+		game.load.image('star', 'star.png');
+		game.load.image('rate_this', 'rating.png');
+		game.load.image('tPPr', 'toiletPaper.png');
 
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
@@ -63,6 +66,8 @@ load.prototype = {
 		game.load.image('bloodsplat', 'blood.png');
 		game.load.image('twater', 'toiletwater.png');
 		game.load.image('lax', 'laxative.png');
+		game.load.image('feather', 'feather.png');
+		game.load.image('psplat', 'splat.png');
 
 		// Backgrounds
 		game.load.image('porter', 'finalPorter.png');
@@ -171,13 +176,13 @@ load.prototype = {
 		SFX[11].allowMultiple = true;
 		SFX[12] = game.add.audio('shoot', 0.2);
 		SFX[12].allowMultiple = true;
-		SFX[13] = game.add.audio('enemydeath', 0.2);
+		SFX[13] = game.add.audio('enemydeath');
 		SFX[13].allowMultiple = true;
 		SFX[14] = game.add.audio('playercol', 0.2);
 		SFX[14].allowMultiple = true;
 		
 		// Local storage initialization for storing game data
-		localStorage.clear();	// Delete or comment out this line when dev is done
+		//localStorage.clear();	// Delete or comment out this line when dev is done
 		if (localStorage.getItem('someShit') != null)
 			someShit = JSON.parse(localStorage.getItem('someShit'));
 		else {
@@ -192,6 +197,5 @@ load.prototype = {
 		}
 
 		game.state.start('pre');
-		//game.state.start('cut3');
 	}
 }

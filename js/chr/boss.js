@@ -9,7 +9,6 @@ function Boss(game, x, y, key, type, bFrame){
 	this.type = type;
 	this.anchor.setTo(0.5, 0.5);
 	this.health = 20;
-	game.time.events.loop(Phaser.Timer.SECOND * 3, this.charge, this);
 	this.isInvincible = false;
 	this.body.kinematic = true;
 	this.animations.add('half', [0,1], 2);
@@ -38,18 +37,20 @@ function Boss(game, x, y, key, type, bFrame){
 	this.bulletB.physicsBodyType = Phaser.Physics.P2JS;
 	this.bulletB.createMultiple(50, bFrame);
 	this.bulletB.forEach(function(bull) {bull.body.clearShapes(), bull.body.addCircle(35);});
+	this.bulletB.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
 
 	// Timer events for groups
-	timer = game.time.create(false);
-	timer.loop(game.rnd.integerInRange(700,1300), this.fire, this);
-	game.timer.loop(500, function() {
+	this.timer = game.time.create();
+	this.timer.loop(game.rnd.integerInRange(700,1300), this.fire, this);
+	this.timer.loop(500, function() {
 		this.bulletB.forEachAlive(function(bull) {
 			bull.alpha -= 0.05;
 			if (bull.alpha <= 0)
 				bull.alive = false;
 		}, this.bullets);
 	}, this);
-	timer.start();
+	this.timer.loop(Phaser.Timer.SECOND * 3, this.charge, this);
+	this.timer.start();
 
 	// Devmode
 	this.body.debug = devMode;
@@ -70,23 +71,19 @@ Boss.prototype.update = function() {
 
 Boss.prototype.charge = function() {
 	console.log('cahgingings?');
-	if(this.body.x < player.body.x){
-		this.scale.x = -1;
-		this.body.velocity.x = 600;
+	console.log(this);
+	if (this.body){
+		if(this.body.x < player.body.x){
+			this.scale.x = -1;
+			this.body.velocity.x = 600;
+		}
+		else{
+			this.body.velocity.x = -600;
+		}
+		game.camera.shake(0.005, 400);
 	}
-	else{
-		this.body.velocity.x = -600;
-	}
-	for(var i = 0; i < 3; ++i){
-		this.spawn();
-	}
-	game.camera.shake(0.005, 400);
-	
-}
-
-Boss.prototype.spawn = function() {
-	kami = new Enemy(game, game.rnd.integerInRange(100, 1000), 300, 'enemy', null, null, 'kamikaze_turkey');
-	game.add.existing(kami);
+	else
+		this.timer.destroy();
 }
 
 Boss.prototype.fire = function() {
@@ -141,4 +138,11 @@ Boss.prototype.death = function(player, bullet) {
 	SFX[2].play();
 	this.kill();
 	bullet.kill();
+}
+
+Boss.prototype.pooModifier = function() {
+		player.pooCount += 2;
+		if (devMode) console.log(player.pooCount);
+		player.death();
+		player.hit();
 }

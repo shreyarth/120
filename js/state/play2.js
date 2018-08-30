@@ -14,6 +14,8 @@ play2.prototype = {
 	},
 	create: function() {
 		if (devMode) game.time.advancedTiming = true;
+		if (!BGM[1].isPlaying)
+			BGM[1].play();
 
 		// Setting up game world
 		game.world.setBounds(0, 0, 10000, 6000);
@@ -302,14 +304,8 @@ play2.prototype = {
 		
 		// player
 		let temp_poo = 0;
-		if (player) {
-			if(player.pooCount < 5){
-				temp_poo = player.pooCount;
-			}
-			else{
+		if (player && player.pooCount >= 5)
 				temp_poo = player.pooCount - 3;
-			}
-		}
 		player = new P2layer(game, 64, 250, 'player', null, 'poo', 850);
 		if (temp_poo != 0) player.pooCount = temp_poo;	// Rollover from prev stage
 		game.add.existing(player);
@@ -457,6 +453,7 @@ play2.prototype = {
 		ene.body.setCollisionGroup(this.collideEnemy);
 		ene.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		ene.body.createGroupCallback(this.collidePB, function(ene, bull) {
+			SFX[13].play();
 			ene.sprite.kill();
 			bull.sprite.kill();
 		}, ene);

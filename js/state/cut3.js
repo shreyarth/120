@@ -4,6 +4,9 @@ var cut3 = function() {
 cut3.prototype = {
 	create: function() {
 		//c3.1
+		someShit.progress = 3;
+		localStorage.setItem('someShit', JSON.stringify(someShit));
+		game.world.setBounds(0, 0, game.width, game.height);
 		let logo = game.add.sprite(game.world.centerX, game.world.centerY, 'cut3_1');
 		logo.anchor.set(0.5);
 		logo.alpha = 0;
@@ -13,8 +16,7 @@ cut3.prototype = {
 
 		// skip
 		let style = {font: 'Press Start 2P', fontSize: '12px', fill: '#fff'};
-		let txt = game.add.text(500, 570,
-			'Press Spacebar to skip', style);
+		let txt = game.add.text(500, 570, 'Press Spacebar to skip', style);
 
 	},
 	moveOn: function(){

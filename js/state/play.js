@@ -16,6 +16,8 @@ play.prototype = {
 		if (devMode) game.time.advancedTiming = true;
 		if (!BGM[1].isPlaying)
 			BGM[1].play();
+		someShit.progress = 1;
+		localStorage.setItem('someShit', JSON.stringify(someShit));
 
 		// Setting up game world
 		game.world.setBounds(0, 0, 8000, 800);
@@ -203,7 +205,6 @@ play.prototype = {
 		
 		//hardcoding enemy placement from left to right
 		let en = new Enemy(game, 696, 555, 'bad', null, 'pepto', 'throw');
-		game.add.existing(en);
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
@@ -389,6 +390,7 @@ play.prototype = {
 		ene.body.setCollisionGroup(this.collideEnemy);
 		ene.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		ene.body.createGroupCallback(this.collidePB, function(ene, bull) {
+			SFX[13].play();
 			ene.sprite.kill();
 			bull.sprite.kill();
 		}, ene);
