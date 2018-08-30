@@ -32,15 +32,19 @@ cut3_5.prototype = {
 		// ground.scale.x = 0.5;
 		ground.body.kinematic = true;
 
-		this.enemy = game.add.group();
-		this.enemy.physicsBodyType = Phaser.Physics.P2JS;
-		this.enemy.enableBody = true;
+		// this.enemy = game.add.group();
+		// this.enemy.physicsBodyType = Phaser.Physics.P2JS;
+		// this.enemy.enableBody = true;
 		// for(var i = 0; i < 12; ++i){
-		// en = new Enemy(game, 100, 555, 'bad', null, null, 'deer');
-		// game.add.existing(en);
-		// this.enemy.add(en);
-		// }
+		// 	en = new Enemy(game, 100, 555, 'bad', null, null, 'hooman');
+		// 	game.add.existing(en);
+		// 	this.enemy.add(en);
+		// 	}
 		// en.body.setCollisionGroup(this.collideEnemy);
 		// en.body.collides(this.collidePlat);
+
+		// runner = new Enemy(game, 100, 500, 'bad', null, null, 'hooman');
+		// game.add.existing(runner);
+		// this.enemy.add(runner);
 	}
 }
