@@ -31,6 +31,10 @@ function P2layer(game, x, y, key, frame, bulletKey, poofillR) {
 	this.sfx[4] = game.add.audio('bgrunt');
 	this.sfx[4].allowMultiple = true;
 	this.sfx[5] = game.add.audio('bDeath');
+	this.sfx[12] = game.add.audio('shoot');
+	this.sfx[12].allowMultiple = true;
+	this.sfx[14] = game.add.audio('playercol');
+	this.sfx[14].allowMultiple = false;
 
 	game.physics.p2.enable(this, true);
 
@@ -198,7 +202,7 @@ P2layer.prototype.update = function() {
 	}
 
 	// If player poo meter is too high, tirgger jittering behavior
-	if (this.pooCount > MAXPOO * .8) {
+	if (this.pooCount > MAXPOO * .75) {
 		this.body.x += game.rnd.integerInRange(-5, 5);
 		this.body.y += game.rnd.integerInRange(-5, 5);
 	}
@@ -237,6 +241,7 @@ P2layer.prototype.fire = function(isJump) {
 			star.body.gravity.y = 90;
 			star.body.collideWorldBounds = false;
 			if (this.direction == 'right') {
+				this.sfx[12].play();
 				this.state = 'shoot';
 				this.animations.play('shoot');
 				star.reset(this.x + 10, this.y);
@@ -254,6 +259,7 @@ P2layer.prototype.fire = function(isJump) {
 				emitter.setXSpeed(100,400);
 			}
 			else {
+				this.sfx[12].play();
 				this.scale.x = -1;
 				this.state = 'shoot';
 				this.animations.play('shoot');
@@ -320,6 +326,7 @@ P2layer.prototype.hit = function() {
 	// If it is, return nada
 	if (this.isInvincible) return;
 	// Else, run this code
+	this.sfx[14].play();
 	this.isInvincible = true;
 	game.camera.shake(0.003, 100);
 	var inviTime = game.time.create(true);

@@ -8,21 +8,17 @@ function Boss(game, x, y, key, type, bFrame){
 	this.body.data.gravityScale = 2;
 	this.type = type;
 	this.anchor.setTo(0.5, 0.5);
-	// this.alpha = 0.5;
 	this.health = 20;
-	game.time.events.add(Phaser.Timer.SECOND * 3, this.charge, this);
-	// game.time.events.add(Phaser.Timer.SECOND * 3, this.deer , this);
-	// game.time.events.add(Phaser.Timer.SECOND * 3, this.spawn , this);
+	game.time.events.loop(Phaser.Timer.SECOND * 3, this.charge, this);
 	this.isInvincible = false;
-	this.deer1;
-	this.deer2;
+	this.body.kinematic = true;
 	
 	// sound effects for boss
 	this.sfx = [];
 	this.sfx[7] = game.add.audio('bossdeath');
 	this.sfx[8] = game.add.audio('bossyell');
 
-	// this.typecheck();
+	// Typecheck
 	if(this.type == 'eyes') {
 		this.body.setRectangle(72, 36, -29, -100);
 		this.body.addRectangle(190, 90 , -20, 90);
@@ -34,7 +30,6 @@ function Boss(game, x, y, key, type, bFrame){
 	}
 	
 	this.body.collideWorldBounds = true;
-	// this.shapeCount = 2;
 
 	this.bulletB = game.add.group();
 	this.bulletB.enableBody = true;
@@ -69,8 +64,14 @@ Boss.prototype.constructor = Boss;
 Boss.prototype.update = function() {
 	//Wut?
 	//console.log(this.health);
-	if(Math.abs((game.world.width - 990) - this.body.x) < 100){
-		this.spawn();
+	// if(Math.abs((game.world.width - 990) - this.body.x) < 100){
+	// 	this.spawn();
+	// }
+	if(player.body.x > this.body.x){
+		this.scale.x = -1;
+	}
+	else{
+		this.scale.x = 1;
 	}
 }
 
@@ -78,11 +79,15 @@ Boss.prototype.charge = function() {
 	console.log('cahgingings?');
 	if(this.body.x < player.body.x){
 		this.scale.x = -1;
-		this.body.velocity.x = 500;
+		this.body.velocity.x = 700;
 	}
 	else{
-		this.body.velocity.x = -500;
+		this.body.velocity.x = -700;
 	}
+	for(var i = 0; i < 3; ++i){
+		this.spawn();
+	}
+	game.camera.shake(0.005, 400);
 	
 }
 
@@ -121,11 +126,11 @@ Boss.prototype.fire = function() {
 	}
 }
 
-Boss.prototype.hp = function() {
-	console.log('in hp fn');
-	this.health --;
-	console.log('hheaaaallllllttthhhhh: ' + this.health);
-}
+// Boss.prototype.hp = function() {
+// 	console.log('in hp fn');
+// 	this.health --;
+// 	console.log('hheaaaallllllttthhhhh: ' + this.health);
+// }
 
 Boss.prototype.hit = function() {
 	// Check if the boss is already invincible
@@ -144,9 +149,9 @@ Boss.prototype.hit = function() {
 	inviTime.start();
 }
 
-Boss.prototype.collideBody = function() {
-	this.health -= 1;
-}
+// Boss.prototype.collideBody = function() {
+// 	this.health -= 1;
+// }
 
 Boss.prototype.death = function(player, bullet) {
 	//this.turkey();
@@ -157,13 +162,3 @@ Boss.prototype.death = function(player, bullet) {
 	//	game.rnd.integerInRange(600,1000));
 	bullet.kill();
 }
-
-// Boss.prototype.deer = function(){
-// 	this.deer1 = new Enemy(game, 0, 550, 'deer', null, null, 'deer');
-// 	game.add.existing(this.deer1);
-// 	game.time.events.add(Phaser.Timer.SECOND * 3, function(){this.deer1.kill();}, this.deer1);
-
-
-// 	this.deer2 = new Enemy(game, 800, 550, 'deer', null, null, 'deer');
-// 	game.add.existing(this.deer2);
-// }
