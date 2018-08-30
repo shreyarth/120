@@ -172,7 +172,7 @@ load.prototype = {
 		SFX[11].allowMultiple = true;
 		SFX[12] = game.add.audio('shoot', 0.2);
 		SFX[12].allowMultiple = true;
-		SFX[13] = game.add.audio('enemydeath', 0.2);
+		SFX[13] = game.add.audio('enemydeath');
 		SFX[13].allowMultiple = true;
 		SFX[14] = game.add.audio('playercol', 0.2);
 		SFX[14].allowMultiple = true;
@@ -192,6 +192,6 @@ load.prototype = {
 			localStorage.setItem('someShit', JSON.stringify(someShit));
 		}
 
-		game.state.start('boss');
+		game.state.start('play2');
 	}
 }
