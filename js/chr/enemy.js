@@ -101,6 +101,9 @@ Enemy.prototype.update = function() {
 	if(this.type == 'deer'){
 		this.charge();
 	}
+	if(this.type == 'hooman'){
+		this.run();
+	}
 
 	if(this.friction == true){
 		if (this.body.velocity.x > 0) {
@@ -201,6 +204,15 @@ Enemy.prototype.boom = function(){
 Enemy.prototype.charge = function() {
 	if(player.body.x > this.body.x){
 		this.body.velocity.x = 200;
+	}
+	else{
+		this.body.velocity.x = -200;
+	}
+}
+
+Enemy.prototype.run = function(){
+	if(this.body.x < 500){
+		this.body.velocity.x = 200;	
 	}
 	else{
 		this.body.velocity.x = -200;
