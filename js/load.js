@@ -38,6 +38,8 @@ load.prototype = {
 		game.load.spritesheet('leaf_ico', 'ui_icof.png', 66, 63);
 		game.load.image('arrow', 'arrow.png');
 		game.load.image('star', 'star.png');
+		game.load.image('rate_this', 'rating.png');
+		game.load.image('tPPr', 'toiletPaper.png');
 
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
