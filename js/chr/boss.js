@@ -12,6 +12,8 @@ function Boss(game, x, y, key, type, bFrame){
 	game.time.events.loop(Phaser.Timer.SECOND * 3, this.charge, this);
 	this.isInvincible = false;
 	this.body.kinematic = true;
+	this.animations.add('half', [0,1], 2);
+	this.animations.add('ded', [0,1], 2);
 	
 	// sound effects for boss
 	this.sfx = [];
@@ -70,10 +72,10 @@ Boss.prototype.charge = function() {
 	console.log('cahgingings?');
 	if(this.body.x < player.body.x){
 		this.scale.x = -1;
-		this.body.velocity.x = 700;
+		this.body.velocity.x = 600;
 	}
 	else{
-		this.body.velocity.x = -700;
+		this.body.velocity.x = -600;
 	}
 	for(var i = 0; i < 3; ++i){
 		this.spawn();
@@ -136,11 +138,7 @@ Boss.prototype.hit = function() {
 }
 
 Boss.prototype.death = function(player, bullet) {
-	//this.turkey();
 	SFX[2].play();
-	// game.camera.shake(0.005, 400);
 	this.kill();
-	//this.reset(game.rnd.integerInRange(2500,5000),
-	//	game.rnd.integerInRange(600,1000));
 	bullet.kill();
 }

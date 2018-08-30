@@ -87,8 +87,7 @@ boss.prototype = {
 			bull.body.setCollisionGroup(this.collideBB);
 			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {this.kill();}, bull);
 		}, this);
-		game.time.events.add(Phaser.Timer.SECOND * 3, this.spawnDeer, this);
-		// game.camera.follow(this.boss);
+		game.time.events.loop(Phaser.Timer.SECOND * 10, this.spawnDeer, this);
 		
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
@@ -107,13 +106,11 @@ boss.prototype = {
 	},
 	update: function() {
 		// Update function
-		// if(this.boss.x > 800){
-		// 	bossmouth.body.velocity.x -= 500;
-		// 	console.log(bossmouth.body.velocity.x);
+		// if(this.boss.health <= 10 && this.boss.type == 'eyes'){
+		// 	this.changeBoss();
+		// 	this.boss.health = 100;
 		// }
-		// if(this.boss.health == 0 && this.boss.type == 'eyes'){
-			// this.changeBoss();
-		// }
+
 		// UI update
 		if (player.pooCount >= 0) {
 			this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
@@ -125,11 +122,12 @@ boss.prototype = {
 
 	changeBoss: function(){
 		console.log('asfad');
-		this.boss1 = new Boss(game, boss.x, boss.y, 'boss', 'mouth', 'lax');
+		this.boss1 = new Boss(game, boss.x, boss.y, 'boss1', 'mouth', 'lax');
 		game.add.existing(this.boss1);
-		this.boss1.health = 100;
+		this.boss1.health = 10;
 		this.boss1.body.setCollisionGroup(this.collideBoss);
 		this.boss1.body.collides([this.collidePlat, this.collidePlayer]);
+		this.boss1.health = this.boss.health;
 		this.boss.kill();
 	},
 
@@ -143,6 +141,21 @@ boss.prototype = {
 
 		// transform primitive into sprite and destroy primitive
 		obj = game.add.sprite(this.boss.x - this.boss.width/4, this.boss.y - this.boss.height/2 - 32, g.generateTexture());
+		g.destroy();
+
+		return obj;
+	},
+
+	boss1HealthBar: function() {
+		let obj = null;
+		
+		let g = game.add.graphics();
+		g.beginFill(0x00ff00);
+		g.drawRect(0, 0, this.boss1.health/this.boss1MaxHP * this.full_widthBH, 12);	// Starting point, width, height
+		g.endFill();
+
+		// transform primitive into sprite and destroy primitive
+		obj = game.add.sprite(this.boss1.x - this.boss1.width/4, this.boss1.y - this.boss1.height/2 - 32, g.generateTexture());
 		g.destroy();
 
 		return obj;
