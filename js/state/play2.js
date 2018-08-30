@@ -435,10 +435,11 @@ play2.prototype = {
 	},
 	update: function() {
 		// UI update
-		if (player.pooCount >= 0) {
+		if (player.pooCount >= 0)
 			this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
-			this.ui.updateCrop();
-		}
+		else
+			this.cropRect.width = 0;
+		this.ui.updateCrop();
 		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level

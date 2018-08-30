@@ -78,9 +78,7 @@ setting.prototype = {
 
 		if (playMode < 0)	playMode = 0;
 		else if (playMode > 2)	playMode = 2;
-		if (playMode == 0)	MAXPOO = 20;
-		else if (playMode == 1)	MAXPOO = 10;	// Default setting
-		else if (playMode == 2)	MAXPOO = 5;
+
 		if (this.mCount < 0)	this.mCount = 0;
 		else if (this.mCount > 2)	this.mCount = 2;
 

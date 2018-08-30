@@ -3,16 +3,29 @@ var menu = function() {
 	this.menu = ['start', 'settings', 'exit'];
 	this.mCount = 0;
 	this.select;
+	this.cont = null;
 }
 
 menu.prototype = {
 	create: function() {
 		// Asset implementaion
+		if (someShit && someShit.nathan)	bgcolor = "#facade";
 		game.stage.backgroundColor = bgcolor;
 		// Takes care of music in case player transitions from game state
 		if (BGM[1].isPlaying) BGM[1].stop();
 		if (BGM[2].isPlaying) BGM[2].stop();
 		if (!BGM[0].isPlaying) BGM[0].play();
+
+		// Initialization based on prevData (or new data)
+		if (someShit) {
+			this.cont = someShit.progress;
+			playMode = someShit.mode;
+			devMode = someShit.dev;
+
+			if (playMode == 0)	MAXPOO = 20;
+			else if (playMode == 1)	MAXPOO = 10;	// Default setting
+			else if (playMode == 2)	MAXPOO = 5;
+		}
 		
 		let tt = game.add.sprite(570, 500, 'poosplat');
 		tt.anchor.set(0.5);
@@ -20,7 +33,12 @@ menu.prototype = {
 		tt = game.add.sprite(game.width/2, 200, 'title');
 		tt.anchor.set(0.5);
 
-		style = {font: 'Press Start 2P', fontSize: '20px', fill: '#fff'};
+		// Cleared trophy asset
+		if (someShit && someShit.cleared){
+			// game add somethin
+		}
+
+		let style = {font: 'Press Start 2P', fontSize: '20px', fill: '#fff'};
 
 		let playText = game.add.text(game.world.centerX, game.height*.76, 'START', style);
 		playText.anchor.setTo(0.5);
