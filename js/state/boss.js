@@ -18,7 +18,7 @@ boss.prototype = {
 		if (!BGM[2].isPlaying) BGM[2].play();
 		
 		// Game world setting
-		game.world.setBounds(0, 0, 800, 600);
+		game.world.setBounds(0, 0, 1000, 600);
 		game.physics.startSystem(Phaser.Physics.P2JS);
 		game.physics.p2.setImpactEvents(true);
 
@@ -36,26 +36,21 @@ boss.prototype = {
 		
 
 		// ground
-		//this.platform = game.add.group();
-		//this.platform.physicsBodyType = Phaser.Physics.P2JS;
-		//this.platform.enableBody = true;
-		// this.platform.collideWorldBounds = true;
+		this.platform = game.add.group();
+		this.platform.physicsBodyType = Phaser.Physics.P2JS;
+		this.platform.enableBody = true;
+		this.platform.collideWorldBounds = true;
 
-		//let ground = this.platform.create(10, 550, 'sidewalk');
-		//ground.body.clearShapes();
-		//ground.body.addRectangle(500, 42);
-		//ground.body.setCollisionGroup(this.collidePlat);
-		//ground.body.collides([this.collidePlayer, this.collideBB, this.collideBoss, this.collidePB]);
-		//ground.scale.y = 0.5;	
-		//ground.scale.x = 0.5;
-		//ground.body.kinematic = true;
+		let ground = this.platform.create(500, 600, 'sidewalk');
+		ground.body.clearShapes();
+		ground.body.addRectangle(1000, 42);
+		ground.body.anchor = 0.5;
+		ground.body.setCollisionGroup(this.collidePlat);
+		ground.body.collides([this.collidePlayer, this.collideBB, this.collideBoss, this.collidePB]);
+		ground.scale.y = 0.5;	
+		// ground.scale.x = 0.5;
+		ground.body.kinematic = true;
 
-		
-		// the background wrap
-		// var wrapGround = game.add.sprite(0, game.world.height - 300, 'heller');
-		// wrapGround.scale.setTo(2,0.8);
-		// wrapGround.width = game.width;
-		// this.heller = this.add.tileSprite(0, game.world.height - 500, game.world.width, game.height/2, 'heller');
 		
 		// Player
 		let temp_poo = 0;
@@ -64,7 +59,7 @@ boss.prototype = {
 		if (temp_poo != 0) player.pooCount = temp_poo;	// Rollover from prev stage
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
-		player.body.collides([this.collidePlat, this.collideBB, this.collideBoss]);
+		player.body.collides([this.collidePlat, this.collideBB, this.collideBoss, this.collideEnemy]);
 		player.bullets.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collidePB);
 			bull.body.collides([this.collidePlat, this.collideBoss]);
@@ -76,10 +71,10 @@ boss.prototype = {
 		}, this);
 
 		//camera
-		// game.camera.follow(player);
+		game.camera.follow(player);
 
 		//boss
-		this.boss = new Boss(game, 410, 500, 'boss', 'eyes', 'lax');
+		this.boss = new Boss(game, 410, 400, 'boss', 'eyes', 'lax');
 		game.add.existing(this.boss);
 		console.log(this.boss);
 		this.boss.body.setCollisionGroup(this.collideBoss);
@@ -92,7 +87,8 @@ boss.prototype = {
 			bull.body.setCollisionGroup(this.collideBB);
 			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {this.kill();}, bull);
 		}, this);
-		game.camera.follow(this.boss);
+		game.time.events.add(Phaser.Timer.SECOND * 3, this.spawnDeer, this);
+		// game.camera.follow(this.boss);
 		
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
@@ -115,9 +111,9 @@ boss.prototype = {
 		// 	bossmouth.body.velocity.x -= 500;
 		// 	console.log(bossmouth.body.velocity.x);
 		// }
-		if(this.boss.health == 6 && this.boss.type == 'eyes'){
-			this.changeBoss();
-		}
+		// if(this.boss.health == 0 && this.boss.type == 'eyes'){
+			// this.changeBoss();
+		// }
 		// UI update
 		if (player.pooCount >= 0) {
 			this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
@@ -126,17 +122,17 @@ boss.prototype = {
 		this.bossHealthUI.destroy();
 		this.bossHealthUI = this.bossHealthBar();
 	},
+
 	changeBoss: function(){
 		console.log('asfad');
-		let boss1 = new Boss(game, boss.x, boss.y, 'boss', 'mouth', 'lax');
-		game.add.existing(boss1);
-		bossl.health = 100;
-		boss1.body.setCollisionGroup(this.collideBoss);
-		boss1.body.collides([this.collidePlat, this.collidePlayer]);
-		game.camera.follow(boss1);
-		this.boss.destroy();
-		this.boss = bossl;
+		this.boss1 = new Boss(game, boss.x, boss.y, 'boss', 'mouth', 'lax');
+		game.add.existing(this.boss1);
+		this.boss1.health = 100;
+		this.boss1.body.setCollisionGroup(this.collideBoss);
+		this.boss1.body.collides([this.collidePlat, this.collidePlayer]);
+		this.boss.kill();
 	},
+
 	bossHealthBar: function() {
 		let obj = null;
 		
@@ -150,5 +146,31 @@ boss.prototype = {
 		g.destroy();
 
 		return obj;
+	},
+
+	spawnDeer: function(){
+		d1 = new Enemy(game, 0, 550, 'deer', null, null, 'deer');
+		game.add.existing(d1);
+		d1.body.setCollisionGroup(this.collideEnemy);
+		d1.body.collides([this.collidePlat,  this.collidePlayer, this.collidePB]);
+		d1.body.createGroupCallback(this.collidePB, function(d1, bull) {
+			d1.sprite.kill();
+			bull.sprite.kill();
+		}, d1);
+		d1.body.createGroupCallback(this.collidePlayer, function() {
+			d1.kill();
+		}, d1);
+
+		d2 = new Enemy(game, 800, 550, 'deer', null, null, 'deer');
+		game.add.existing(d2);
+		d2.body.setCollisionGroup(this.collideEnemy);
+		d2.body.collides([this.collidePlat,  this.collidePlayer, this.collidePB]);
+		d2.body.createGroupCallback(this.collidePB, function(d2, bull) {
+			d2.sprite.kill();
+			bull.sprite.kill();
+		}, d2);
+		d2.body.createGroupCallback(this.collidePlayer, function() {
+			d2.kill();
+		}, d2);
 	}
 }
