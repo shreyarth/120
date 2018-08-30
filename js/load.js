@@ -42,7 +42,8 @@ load.prototype = {
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
 		game.load.image('enemy', 'enemy.png');
-		game.load.image('boss', 'boss.png');
+		game.load.image('boss', 'bossBase.png');
+		game.load.image('boss1', 'bossFinal.png');
 		game.load.spritesheet('deer', 'deer_spritesheet.png', 44, 49);
 		game.load.spritesheet('bad0', 'enemy0_spritesheet.png', 61, 81);
 		game.load.spritesheet('bad1', 'enemy1_spritesheet.png', 61, 81);
@@ -91,6 +92,20 @@ load.prototype = {
 		game.load.image('rcar', 'redCar.png');
 		game.load.image('wreckC', 'wreckedcar.png');
 		game.load.image('wreckB', 'wreckedbus.png');
+
+		// Cutscenes
+		game.load.image('cut1_1', 'cutscene1_1.png');
+		game.load.image('cut1_2', 'cutscene1_2.png');
+		game.load.image('cut1_3', 'cutscene1_3.png');
+		game.load.image('cut2_1', 'cutscene2_1.png');
+		game.load.image('cut2_2', 'cutscene2_2.png');
+		game.load.image('cut2_3', 'cutscene2_3.png');
+		game.load.image('cut2_4', 'cutscene2_4.png');
+		game.load.image('cut2_5', 'cutscene2_5.png');
+		game.load.image('cut3_1', 'cutscene3_1.png');
+		game.load.image('cut3_2', 'cutscene3_2.png');
+		game.load.image('cut3_3', 'cutscene3_3.png');
+		game.load.image('cut4_1', 'cutscene4_1.png');
 
 		// Ethan Mars: "JASON!"
 		// (Heavy Rain 2010)

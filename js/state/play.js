@@ -381,7 +381,7 @@ play.prototype = {
 		
 		//for end of level
 		if(player.x +50 > game.world.width && this.toil.total == 0)
-			game.state.start('play2');
+			game.state.start('cut2');
 
 	},
 	movToPl: function(en, platform) {

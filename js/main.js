@@ -19,6 +19,11 @@ var player;
 var inPlay2 = false;
 
 // State management
+game.state.add('cut1', cut1);
+game.state.add('cut2', cut2);
+game.state.add('cut3', cut3);
+game.state.add('cut3_5', cut3_5);
+game.state.add('cut4', cut4);
 game.state.add('boot', boot);
 game.state.add('load', load);
 game.state.add('pre', pre);
@@ -29,6 +34,10 @@ game.state.add('play2', play2);
 game.state.add('boss', boss);
 game.state.add('end', end);
 game.state.add('tutorial', tutorial);
+// game.state.add('cut1', cut1);
+// game.state.add('cut2', cut2);
+// game.state.add('cut3', cut3);
+// game.state.add('cut4', cut4);
 
 // Start from menu screen
 // Might need separate loading screen in case asset loading takes time
