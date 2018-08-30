@@ -202,141 +202,125 @@ play.prototype = {
 		this.enemy.enableBody = true;
 		
 		//hardcoding enemy placement from left to right
-		let en = new Enemy(game, 696, 540, 'bad1', null, 'pepto');
+		let en = new Enemy(game, 696, 540, 'bad', null, 'pepto', 'throw');
 		game.add.existing(en);
 		this.enemy.add(en);
-		en.scale.setTo(0.2,0.2);
-		en.body.clearShapes();
-		en.body.addRectangle(30, 70);
-		en.body.setCollisionGroup(this.collideEnemy);
-		en.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
-		en.body.createGroupCallback(this.collidePB, function(en, bull) {
-		en.sprite.kill();
-		bull.sprite.kill();
-		}, en);
-		en.bulletE.forEach(function(bull) {
-		bull.body.setCollisionGroup(this.collideEB);
-		bull.body.collides([this.collidePlayer, this.collidePlat], function() {bull.kill();},this);
-		}, this);
+		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 		
-		en = new Enemy(game, 960, 540, 'bad2', null, 'pepto');
-		game.add.existing(en);
-		this.enemy.add(en);
-		en.scale.setTo(0.2,0.2);
-		en.body.clearShapes();
-		en.body.addRectangle(30, 70);
-		this.assignCollisionGroup_Enemy(en, false);
-		en.body.immovable = true;
-
-		en = new Enemy(game, 1273, 615, 'deer', null, 'pepto');
+		en = new Enemy(game, 960, 540, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 1467, 214, 'deer', null, 'pepto');
+		en = new Enemy(game, 1273, 615, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 1450, 746, 'deer', null, 'pepto');
-		this.enemy.add(en);
-		this.assignCollisionGroup_Enemy(en, false);
-
-		en = new Enemy(game, 1864, 746, 'deer', null, 'pepto');
-		this.enemy.add(en);
-		this.assignCollisionGroup_Enemy(en, false);
-
-		en = new Enemy(game, 2111, 223, 'deer', null, 'pepto');
+		en = new Enemy(game, 1467, 214, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 2373, 205, 'deer', null, 'pepto');
+		en = new Enemy(game, 1450, 746, 'bad', null, 'pepto', 'throw');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
+
+		en = new Enemy(game, 1864, 746, 'bad', null, 'pepto', 'throw');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
+
+		en = new Enemy(game, 2111, 223, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 2717, 746, 'deer', null, 'pepto');
-		this.enemy.add(en);
-		this.assignCollisionGroup_Enemy(en, false);
-
-		en = new Enemy(game, 3110, 746, 'deer', null, 'pepto');
+		en = new Enemy(game, 2373, 205, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 4020, 746, 'deer', null, 'pepto');
+		en = new Enemy(game, 2717, 746, 'bad', null, 'pepto', 'throw');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
+
+		en = new Enemy(game, 3110, 746, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 3263, 608, 'deer', null, 'pepto');
+		en = new Enemy(game, 4020, 746, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 4308, 746, 'deer', null, 'pepto');
-		this.enemy.add(en);
-		this.assignCollisionGroup_Enemy(en, false);
-
-		en = new Enemy(game, 4472, 270, 'deer', null, 'pepto');
+		en = new Enemy(game, 3263, 608, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 4775, 264, 'deer', null, 'pepto');
+		en = new Enemy(game, 4308, 746, 'bad', null, 'pepto', 'throw');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
+
+		en = new Enemy(game, 4472, 270, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 4944, 746, 'deer', null, 'pepto');
-		this.enemy.add(en);
-		this.assignCollisionGroup_Enemy(en, false);
-
-		en = new Enemy(game, 5200, 746, 'deer', null, 'pepto');
-		this.enemy.add(en);
-		this.assignCollisionGroup_Enemy(en, false);
-
-		en = new Enemy(game, 5600, 746, 'deer', null, 'pepto');
-		this.enemy.add(en);
-		this.assignCollisionGroup_Enemy(en, false);
-
-		en = new Enemy(game, 5278, 746, 'deer', null, 'pepto');
-		this.enemy.add(en);
-		this.assignCollisionGroup_Enemy(en, false);
-
-		en = new Enemy(game, 6290, 605, 'deer', null, 'pepto');
+		en = new Enemy(game, 4775, 264, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 6678, 267, 'deer', null, 'pepto');
+		en = new Enemy(game, 4944, 746, 'bad', null, 'pepto', 'throw');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
+
+		en = new Enemy(game, 5200, 746, 'bad', null, 'pepto', 'throw');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
+
+		en = new Enemy(game, 5600, 746, 'bad', null, 'pepto', 'throw');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
+
+		en = new Enemy(game, 5278, 746, 'bad', null, 'pepto', 'throw');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
+
+		en = new Enemy(game, 6290, 605, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 6841, 267, 'deer', null, 'pepto');
+		en = new Enemy(game, 6678, 267, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 7354, 498, 'deer', null, 'pepto');
+		en = new Enemy(game, 6841, 267, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 7492, 221, 'deer', null, 'pepto');
+		en = new Enemy(game, 7354, 498, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 7598, 214, 'deer', null, 'pepto');
+		en = new Enemy(game, 7492, 221, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 7743, 205, 'deer', null, 'pepto');
+		en = new Enemy(game, 7598, 214, 'bad', null, 'pepto', 'throw');
+		this.enemy.add(en);
+		this.assignCollisionGroup_Enemy(en, false);
+		en.body.immovable = true;
+
+		en = new Enemy(game, 7743, 205, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
