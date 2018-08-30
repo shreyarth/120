@@ -148,7 +148,22 @@ load.prototype = {
 		SFX[10].allowMultiple = false;
 		SFX[11] = game.add.audio('pooSplat', 0.2);
 		SFX[11].allowMultiple = true;
+		
+		// Local storage initialization for storing game data
+		localStorage.clear();	// Delete or comment out this line when dev is done
+		if (localStorage.getItem('someShit') != null)
+			someShit = JSON.parse(localStorage.getItem('someShit'));
+		else {
+			someShit = {
+				progress: 0,	// Stage number. 0 is tutorial
+				mode: 1,	// See main.js for more info
+				dev: false,
+				nathan: false,
+				cleared: false	// Did this brouwser finished the game at least once?
+			}
+			localStorage.setItem('someShit', JSON.stringify(someShit));
+		}
 
-		game.state.start('play2');
+		game.state.start('pre');
 	}
 }
