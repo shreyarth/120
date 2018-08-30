@@ -42,10 +42,12 @@ menu.prototype = {
 
 		let playText = game.add.text(game.world.centerX, game.height*.76, 'START', style);
 		playText.anchor.setTo(0.5);
-
-		playText = game.add.text(game.world.centerX, game.height*.82, 'SETTINGS', style);
+		let str = '';
+		if (someShit.progress > 1)	str = 'CONTINUE';
+		else	str = '(NO SAVES)';
+		playText = game.add.text(game.world.centerX, game.height*.82, str, style);
 		playText.anchor.setTo(0.5);
-		playText = game.add.text(game.world.centerX, game.height*.88, 'Exit (Alt + F4)', style);
+		playText = game.add.text(game.world.centerX, game.height*.88, 'SETTINGS', style);
 		playText.anchor.setTo(0.5);
 
 		this.select = this.drawMark(game.world.centerX-50, game.height*.6-5);
@@ -90,10 +92,12 @@ menu.prototype = {
 					BGM[0].stop();
 					break;
 				case 1:
-					game.state.start('setting');
+					if (someShit.progress == 2)	game.state.start('play2');
+					if (someShit.progress == 3)	game.state.start('boss');
+					BGM[0].stop();
 					break;
 				case 2:
-					game.state.start('end');
+					game.state.start('setting');
 					break;
 			}
 		}
@@ -105,15 +109,13 @@ menu.prototype = {
 					this.select = this.drawMark(game.world.centerX-75, game.height*.75);
 					break;
 				case 1:
-						this.select = this.drawMark(game.world.centerX-102, game.height*.81);
+					if (someShit.progress > 1)	this.select = this.drawMark(game.world.centerX-100, game.height*.81);
+					else	this.select = this.drawMark(game.world.centerX-120, game.height*.81);
 					break;
 				case 2:
-					this.select = this.drawMark(game.world.centerX-175, game.height*.87);
+					this.select = this.drawMark(game.world.centerX-102, game.height*.87);
 					break;
 		}
-	},
-	render: function() {
-		game.debug.text('Arrow keys to select, SPACECBAR to select', 32, 32, 'yellow');
 	}
 }
 

@@ -16,6 +16,8 @@ boss.prototype = {
 	},
 	create: function() {
 		if (!BGM[2].isPlaying) BGM[2].play();
+		someShit.progress = 3;
+		localStorage.setItem('someShit', JSON.stringify(someShit));
 		
 		// Game world setting
 		game.world.setBounds(0, 0, 1000, 600);
@@ -54,8 +56,9 @@ boss.prototype = {
 		
 		// Player
 		let temp_poo = 0;
-		if (player) temp_poo = player.pooCount;
-		player = new P2layer(game, 100, 100, 'player', null, 'poo', 600);
+		if (player && player.pooCount >= 5)
+				temp_poo = player.pooCount - 3;
+		player = new P2layer(game, 64, 250, 'player', null, 'poo', 850);
 		if (temp_poo != 0) player.pooCount = temp_poo;	// Rollover from prev stage
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);

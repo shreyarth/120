@@ -6,7 +6,7 @@ end.prototype = {
 	create: function() {
 		//game.stage.backgroundColor = bgcolor;
 		game.world.setBounds(0, 0, game.width, game.height);
-		game.stage.backgroundColor = "#cb741c";
+		game.stage.backgroundColor = bgcolor;
 		if(player.pooCount <= 0){
 			game.add.text(game.width/2-100, game.height*.3, 
 			'Could not hold shit', 

@@ -16,6 +16,8 @@ play.prototype = {
 		if (devMode) game.time.advancedTiming = true;
 		if (!BGM[1].isPlaying)
 			BGM[1].play();
+		someShit.progress = 1;
+		localStorage.setItem('someShit', JSON.stringify(someShit));
 
 		// Setting up game world
 		game.world.setBounds(0, 0, 8000, 800);

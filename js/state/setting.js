@@ -83,6 +83,11 @@ setting.prototype = {
 		else if (this.mCount > 2)	this.mCount = 2;
 
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+			someShit.mode = playMode;
+			someShit.dev = devMode;
+			if (bgcolor != '#facade')	someShit.nathan = false;
+			else someShit.nathan = true;
+			localStorage.setItem('someShit', JSON.stringify(someShit));
 			game.state.start('menu');
 		}
 	},
