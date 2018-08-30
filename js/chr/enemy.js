@@ -26,7 +26,10 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 			this.animations.play('walk');
 		}
 	}
-
+	// sfx
+	// this.sfx = [];
+	// this.sfx[13] = game.add.audio('enemydeath');
+	// this.sfx[13].allowMultiple = true;
 	// physics crap
 	game.physics.p2.enable(this);
 	this.body.fixedRotation = true;
@@ -160,7 +163,7 @@ Enemy.prototype.fire = function() {
 }
 
 Enemy.prototype.death = function(player, bullet) {
-	SFX[2].play();
+	//SFX[13].play(); not playing? or too soft?
 	// game.camera.shake(0.005, 400);
 	// this.kill();
 	bullet.kill();

@@ -104,6 +104,9 @@ load.prototype = {
 		game.load.audio('bosslevel', 'finalMusic.wav');
 
 		// SFX
+		// Sound effects from:
+		// http://www.freesfx.co.uk/
+		// https://freesound.org/
 		game.load.audio('fart', 'fart.mp3');
 		game.load.audio('rasp', 'Rasp.mp3');
 		game.load.audio('turkey', 'turkey.mp3');
