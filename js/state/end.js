@@ -4,7 +4,6 @@ var end = function() {
 
 end.prototype = {
 	create: function() {
-		//game.stage.backgroundColor = bgcolor;
 		game.world.setBounds(0, 0, game.width, game.height);
 		game.stage.backgroundColor = bgcolor;
 		if(player.pooCount <= 0){

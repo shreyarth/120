@@ -13,14 +13,7 @@ cut1.prototype = {
 
 		//enter to skip
 		let style = {font: 'Press Start 2P', fontSize: '12px', fill: '#fff'};
-		let txt = game.add.text(500, 570,
-			'Press Spacebar to skip', style);
-		//txt.anchor.set(0.5);
-		//txt.alpha = 0;
-		
-
-
-		
+		let txt = game.add.text(500, 570, 'Press Spacebar to skip', style);		
 	},
 	moveOn: function() {
 		//c1.2
