@@ -21,11 +21,11 @@ menu.prototype = {
 			this.cont = someShit.progress;
 			playMode = someShit.mode;
 			devMode = someShit.dev;
-
-			if (playMode == 0)	MAXPOO = 20;
-			else if (playMode == 1)	MAXPOO = 10;	// Default setting
-			else if (playMode == 2)	MAXPOO = 5;
 		}
+
+		if (playMode == 0)	MAXPOO = 20;
+		else if (playMode == 1)	MAXPOO = 10;	// Default setting
+		else if (playMode == 2)	MAXPOO = 5;
 		
 		let tt = game.add.sprite(570, 500, 'poosplat');
 		tt.anchor.set(0.5);
