@@ -164,6 +164,7 @@ load.prototype = {
 			localStorage.setItem('someShit', JSON.stringify(someShit));
 		}
 
-		game.state.start('pre');
+		// game.state.start('pre');
+		game.state.start('boss');
 	}
 }
