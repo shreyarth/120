@@ -25,6 +25,8 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 			this.animations.add('walk', [1, 2, 3, 4, 3, 2], 5, true);
 			this.animations.play('walk');
 		}
+		this.body.clearShapes();
+		this.body.addRectangle(30, 70);
 	}
 
 	// physics crap
@@ -36,10 +38,6 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	// needs enemy type
 	this.type = type;
 	this.friction = false;
-	if (isHuman){
-		this.body.clearShapes();
-		this.body.addRectangle(30, 70);
-	}
 
 	//enemy bullets
 	this.bulletE = game.add.group();
