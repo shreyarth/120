@@ -88,10 +88,7 @@ menu.prototype = {
 					this.select = this.drawMark(game.world.centerX-75, game.height*.75);
 					break;
 				case 1:
-					if (noset)
-						this.select = this.drawMark(game.world.centerX-330, game.height*.81);
-					else
-						this.select = this.drawMark(game.world.centerX-85, game.height*.81);
+						this.select = this.drawMark(game.world.centerX-102, game.height*.81);
 					break;
 				case 2:
 					this.select = this.drawMark(game.world.centerX-175, game.height*.87);
