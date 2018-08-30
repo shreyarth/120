@@ -10,6 +10,7 @@ const BGVOL = 0.5;
 // Settings
 var bgcolor = "#000"
 var MAXPOO = 10;
+var someShit;	// For local data storage
 var playMode = 1;	// 0: Easy, 1: Reg, 2: Guy Fieri
 var devMode = false;
 

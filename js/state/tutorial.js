@@ -1,11 +1,9 @@
 var tutorial = function() {
-	// state global var
 	this.tplayer;
 }
 
 tutorial.prototype = {
 	create: function() {
-		
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.stage.backgroundColor = "#1A7209";
 

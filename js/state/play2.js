@@ -310,7 +310,7 @@ play2.prototype = {
 				temp_poo = player.pooCount - 3;
 			}
 		}
-		player = new P2layer(game, 64, 250, 'player', null, 'poo', 1000);
+		player = new P2layer(game, 64, 250, 'player', null, 'poo', 850);
 		if (temp_poo != 0) player.pooCount = temp_poo;	// Rollover from prev stage
 		game.add.existing(player);
 		player.body.setCollisionGroup(this.collidePlayer);
@@ -401,13 +401,15 @@ play2.prototype = {
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		//test for flying enemy
-		for(var i = 0; i < 5; ++i){
-			en = new Enemy(game, game.rnd.integerInRange(1000,4800),
-			 400, 'enemy');
+
+		//turkeys
+		for(var i = 0; i < 10; ++i){
+			en = new Enemy(game, game.rnd.integerInRange(9000,10000), 
+				game.rnd.integerInRange(3000, 4000), 'enemy', null, null, 'kamikaze_turkey');
 			this.enemy.add(en);
 			this.assignCollisionGroup_Enemy(en, true);
 		}
+		
 
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
@@ -435,10 +437,11 @@ play2.prototype = {
 	},
 	update: function() {
 		// UI update
-		if (player.pooCount >= 0) {
+		if (player.pooCount >= 0)
 			this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
-			this.ui.updateCrop();
-		}
+		else
+			this.cropRect.width = 0;
+		this.ui.updateCrop();
 		this.toiletCounter.text = this.toil.total;
 		
 		//for end of level
