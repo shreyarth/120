@@ -49,11 +49,6 @@ function Boss(game, x, y, key, type, bFrame){
 	}, this);
 	timer.start();
 
-	// Collision
-	//this.body.createBodyCallback(player, this.collideBody, this);
-	// this.body.createBodyCallback(player, this.healthDec, this);
-	//this.bulletB.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
-
 	// Devmode
 	this.body.debug = devMode;
 }
@@ -63,10 +58,6 @@ Boss.prototype.constructor = Boss;
 
 Boss.prototype.update = function() {
 	//Wut?
-	//console.log(this.health);
-	// if(Math.abs((game.world.width - 990) - this.body.x) < 100){
-	// 	this.spawn();
-	// }
 	if(player.body.x > this.body.x){
 		this.scale.x = -1;
 	}
@@ -126,11 +117,6 @@ Boss.prototype.fire = function() {
 	}
 }
 
-// Boss.prototype.hp = function() {
-// 	console.log('in hp fn');
-// 	this.health --;
-// 	console.log('hheaaaallllllttthhhhh: ' + this.health);
-// }
 
 Boss.prototype.hit = function() {
 	// Check if the boss is already invincible
@@ -148,10 +134,6 @@ Boss.prototype.hit = function() {
 
 	inviTime.start();
 }
-
-// Boss.prototype.collideBody = function() {
-// 	this.health -= 1;
-// }
 
 Boss.prototype.death = function(player, bullet) {
 	//this.turkey();
