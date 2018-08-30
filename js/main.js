@@ -22,6 +22,7 @@ var inPlay2 = false;
 game.state.add('cut1', cut1);
 game.state.add('cut2', cut2);
 game.state.add('cut3', cut3);
+game.state.add('cut3_5', cut3_5);
 game.state.add('cut4', cut4);
 game.state.add('boot', boot);
 game.state.add('load', load);

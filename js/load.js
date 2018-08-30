@@ -192,6 +192,6 @@ load.prototype = {
 		}
 
 		// game.state.start('pre');
-		game.state.start('menu');
+		game.state.start('cut3_5');
 	}
 }
