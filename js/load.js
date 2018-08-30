@@ -43,11 +43,13 @@ load.prototype = {
 		game.load.image('enemy', 'enemy.png');
 		game.load.image('boss', 'boss.png');
 		game.load.spritesheet('deer', 'deer_spritesheet.png', 44, 49);
-		game.load.image('bad1', 'enemy0Throw3.png');
-		game.load.image('bad2', 'enemy5Idle.png');
-		game.load.image('bad3', 'enemy2Throw2.png');
-		game.load.image('bad4', 'enemy3Throw3.png');
-		game.load.image('bad5', 'enemy4Throw1.png');
+		game.load.spritesheet('bad0', 'enemy0_spritesheet.png', 61, 81);
+		game.load.spritesheet('bad1', 'enemy1_spritesheet.png', 61, 81);
+		game.load.spritesheet('bad2', 'enemy2_spritesheet.png', 61, 81);
+		game.load.spritesheet('bad3', 'enemy3_spritesheet.png', 61, 81);
+		game.load.spritesheet('bad4', 'enemy4_spritesheet.png', 58, 81);
+		game.load.spritesheet('bad5', 'enemy4_spritesheet.png', 58, 81);
+		game.load.spritesheet('bad6', 'enemy4_spritesheet.png', 58, 81);
 
 		
 		// Bullets, particles, effects etc
@@ -147,6 +149,6 @@ load.prototype = {
 		SFX[11] = game.add.audio('pooSplat', 0.2);
 		SFX[11].allowMultiple = true;
 
-		game.state.start('boss');
+		game.state.start('play');
 	}
 }
