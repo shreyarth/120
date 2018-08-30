@@ -6,9 +6,6 @@ var menu = function() {
 }
 
 menu.prototype = {
-	preload: function() {
-		
-	},
 	create: function() {
 		// Asset implementaion
 		game.stage.backgroundColor = bgcolor;
@@ -25,15 +22,10 @@ menu.prototype = {
 
 		style = {font: 'Press Start 2P', fontSize: '20px', fill: '#fff'};
 
-		let playText = game.add.text(game.world.centerX, game.height*.76, 'Start', style);
+		let playText = game.add.text(game.world.centerX, game.height*.76, 'START', style);
 		playText.anchor.setTo(0.5);
 
-		let str;
-		if (noset)
-			str = 'Settings (there is no settings)';
-		else
-			str = 'NADA';
-		playText = game.add.text(game.world.centerX, game.height*.82, str, style);
+		playText = game.add.text(game.world.centerX, game.height*.82, 'SETTINGS', style);
 		playText.anchor.setTo(0.5);
 		playText = game.add.text(game.world.centerX, game.height*.88, 'Exit (Alt + F4)', style);
 		playText.anchor.setTo(0.5);
