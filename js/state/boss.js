@@ -16,8 +16,6 @@ boss.prototype = {
 	},
 	create: function() {
 		if (!BGM[2].isPlaying) BGM[2].play();
-		someShit.progress = 3;
-		localStorage.setItem('someShit', JSON.stringify(someShit));
 		
 		// Game world setting
 		game.world.setBounds(0, 0, 1000, 600);
@@ -110,10 +108,9 @@ boss.prototype = {
 	},
 	update: function() {
 		// Update function
-		// if(this.boss.health <= 10 && this.boss.type == 'eyes'){
-		// 	this.changeBoss();
-		// 	this.boss.health = 100;
-		// }
+		if(this.boss.health == 10 && this.boss.type == 'eyes'){
+			this.changeBoss();
+		}
 
 		// UI update
 		if (player.pooCount >= 0) {
@@ -126,15 +123,17 @@ boss.prototype = {
 
 	changeBoss: function(){
 		console.log('asfad');
-		this.boss1 = new Boss(game, boss.x, boss.y, 'boss1', 'mouth', 'lax');
-		game.add.existing(this.boss1);
-		this.boss1.health = 10;
-		this.boss1.body.setCollisionGroup(this.collideBoss);
-		this.boss1.body.collides([this.collidePlat, this.collidePlayer]);
-		this.boss1.health = this.boss.health;
-		this.boss.kill();
-	},
+		let temp = new Boss(game, this.boss.x, this.boss.y, 'boss1', 'mouth', 'lax');
+		game.add.existing(temp);
+		temp.health = 10;
+		temp.body.setCollisionGroup(this.collideBoss);
+		temp.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		this.boss.destroy();
+		// Reinitialize
+		this.boss = temp;
+		this.bossMaxHP = this.boss.health;
 
+	},
 	bossHealthBar: function() {
 		let obj = null;
 		
@@ -149,22 +148,6 @@ boss.prototype = {
 
 		return obj;
 	},
-
-	boss1HealthBar: function() {
-		let obj = null;
-		
-		let g = game.add.graphics();
-		g.beginFill(0x00ff00);
-		g.drawRect(0, 0, this.boss1.health/this.boss1MaxHP * this.full_widthBH, 12);	// Starting point, width, height
-		g.endFill();
-
-		// transform primitive into sprite and destroy primitive
-		obj = game.add.sprite(this.boss1.x - this.boss1.width/4, this.boss1.y - this.boss1.height/2 - 32, g.generateTexture());
-		g.destroy();
-
-		return obj;
-	},
-
 	spawnDeer: function(){
 		d1 = new Enemy(game, 0, 550, 'deer', null, null, 'deer');
 		game.add.existing(d1);
