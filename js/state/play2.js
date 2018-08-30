@@ -47,6 +47,11 @@ play2.prototype = {
 		ground.body.clearShapes();
 		ground.body.addRectangle(1000, 25);
 
+		ground = this.platform.create(470, 507, 'rcar');
+		ground.body.clearShapes();
+		ground.body.angle = 60;
+		ground.body.loadPolygon('physicsbox', 'yellowCar');
+
 		ground = this.platform.create(3800, 3900, 'bush');
 		ground.scale.setTo(30, 0.6 );
 		ground.body.damping.x = 0;
