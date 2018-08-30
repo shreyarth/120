@@ -202,10 +202,9 @@ play.prototype = {
 		this.enemy.enableBody = true;
 		
 		//hardcoding enemy placement from left to right
-		let en = new Enemy(game, 696, 540, 'bad1', null, 'pepto');
+		let en = new Enemy(game, 696, 540, 'bad', null, 'pepto', 'throw');
 		game.add.existing(en);
 		this.enemy.add(en);
-		en.scale.setTo(0.2,0.2);
 		en.body.clearShapes();
 		en.body.addRectangle(30, 70);
 		en.body.setCollisionGroup(this.collideEnemy);
@@ -220,16 +219,15 @@ play.prototype = {
 		}, this);
 		en.body.immovable = true;
 		
-		en = new Enemy(game, 960, 540, 'bad2', null, 'pepto');
+		en = new Enemy(game, 960, 540, 'bad', null, 'pepto', 'throw');
 		game.add.existing(en);
 		this.enemy.add(en);
-		en.scale.setTo(0.2,0.2);
 		en.body.clearShapes();
 		en.body.addRectangle(30, 70);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
 
-		en = new Enemy(game, 1273, 615, 'deer', null, 'pepto');
+		en = new Enemy(game, 1273, 615, 'deer', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		en.body.immovable = true;
