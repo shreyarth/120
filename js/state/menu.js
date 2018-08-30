@@ -72,8 +72,7 @@ menu.prototype = {
 					BGM[0].stop();
 					break;
 				case 1:
-					if (noset)
-						game.state.start('setting');
+					game.state.start('setting');
 					break;
 				case 2:
 					game.state.start('end');
