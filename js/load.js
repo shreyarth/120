@@ -116,6 +116,9 @@ load.prototype = {
 		game.load.audio('deerSound', 'deerSound.wav');
 		game.load.audio('bDeath', 'deathBloodSplat.wav');
 		game.load.audio('pooSplat', 'shitSplatter.wav');
+		game.load.audio('enemydeath', 'enemyDeath.mp3');
+		game.load.audio('shoot', 'shooting.mp3');
+		game.load.audio('playercol', 'playercollision.mp3');
 
 	},
 	create: function() {
@@ -148,6 +151,12 @@ load.prototype = {
 		SFX[10].allowMultiple = false;
 		SFX[11] = game.add.audio('pooSplat', 0.2);
 		SFX[11].allowMultiple = true;
+		SFX[12] = game.add.audio('shoot', 0.2);
+		SFX[12].allowMultiple = true;
+		SFX[13] = game.add.audio('enemydeath', 0.2);
+		SFX[13].allowMultiple = true;
+		SFX[14] = game.add.audio('playercol', 0.2);
+		SFX[14].allowMultiple = true;
 		
 		// Local storage initialization for storing game data
 		localStorage.clear();	// Delete or comment out this line when dev is done
