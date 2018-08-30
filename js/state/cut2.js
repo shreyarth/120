@@ -1,4 +1,4 @@
-var cut2 = function(game) {
+var cut2 = function() {
 };
 
 cut2.prototype = {
@@ -10,6 +10,11 @@ cut2.prototype = {
 		game.add.tween(logo).to({alpha: 1}, 7000, Phaser.Easing.Linear.None, true, 0, 0, true);
 
 		game.time.events.add(12000, this.moveOn, this);
+
+		// to skip
+		let style = {font: 'Press Start 2P', fontSize: '12px', fill: '#fff'};
+		let txt = game.add.text(500, 570,
+			'Press Spacebar to skip', style);
 
 		
 	},
@@ -51,5 +56,10 @@ cut2.prototype = {
 	},
 	moveOn5: function() {
 		game.state.start('play2');
+	},
+	update: function(){
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
+			game.state.start('play2');
+		}
 	}
 }
