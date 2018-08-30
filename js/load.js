@@ -64,6 +64,8 @@ load.prototype = {
 		game.load.image('bloodsplat', 'blood.png');
 		game.load.image('twater', 'toiletwater.png');
 		game.load.image('lax', 'laxative.png');
+		game.load.image('feather', 'feather.png');
+		game.load.image('psplat', 'splat.png');
 
 		// Backgrounds
 		game.load.image('porter', 'finalPorter.png');
@@ -192,6 +194,6 @@ load.prototype = {
 			localStorage.setItem('someShit', JSON.stringify(someShit));
 		}
 
-		game.state.start('play2');
+		game.state.start('pre');
 	}
 }
