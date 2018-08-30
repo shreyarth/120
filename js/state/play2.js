@@ -447,7 +447,7 @@ play2.prototype = {
 		//for end of level
 		if(player.x +50 > game.world.width && this.toil.total == 0){
 			BGM[1].stop();
-			game.state.start('boss');
+			game.state.start('cut3');
 		}
 	},
 	movToPl: function(en, platform) {
