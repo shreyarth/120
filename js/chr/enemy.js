@@ -19,7 +19,7 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	}
 	if (isHuman) {
 		if (type == 'throw') {
-			this.animations.add('throw', [5, 6, 7, 8, 9, 0], 5);
+			this.animations.add('throw', [5, 6, 7, 8, 9, 0], 15);
 		}
 		else {
 			this.animations.add('walk', [1, 2, 3, 4, 3, 2], 5, true);
