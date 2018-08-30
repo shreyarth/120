@@ -149,6 +149,6 @@ load.prototype = {
 		SFX[11] = game.add.audio('pooSplat', 0.2);
 		SFX[11].allowMultiple = true;
 
-		game.state.start('play');
+		game.state.start('play2');
 	}
 }
