@@ -453,7 +453,7 @@ play2.prototype = {
 		ene.body.setCollisionGroup(this.collideEnemy);
 		ene.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		ene.body.createGroupCallback(this.collidePB, function(ene, bull) {
-			SFX[13].play();
+			this.poof();
 			ene.sprite.kill();
 			bull.sprite.kill();
 		}, ene);

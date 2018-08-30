@@ -152,18 +152,6 @@ P2layer.prototype.update = function() {
 			else
 				this.animations.play(this.animations.currentAnim);
 		}
-		else{
-			// For stage 2
-			
-		// game.timer.loop(2000, function() {
-		// if (this.alive) {
-		// this.pooCount++;
-		// this.death();
-		// }}, this);
-
-
-			
-		}
 		if (move.up.justDown)
 		{
 			if(this.pooCount > MAXPOO * 0.65){

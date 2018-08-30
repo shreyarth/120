@@ -224,6 +224,6 @@ Enemy.prototype.poof = function() {
 		emitter.makeParticles('psplat');
 	}
 	emitter.start(true, 500, 0, 5);
-	emitter.setXSpeed(100,400);
-	emitter.setYSpeed(100,400);
+	emitter.setXSpeed(50, 200);
+	emitter.setYSpeed(50, 200);
 }

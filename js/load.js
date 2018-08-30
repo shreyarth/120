@@ -66,8 +66,8 @@ load.prototype = {
 		game.load.image('bloodsplat', 'blood.png');
 		game.load.image('twater', 'toiletwater.png');
 		game.load.image('lax', 'laxative.png');
-		game.load.image('feather', 'feather.png');
-		game.load.image('psplat', 'splat.png');
+		game.load.image('feather', 'feather_orig.png');
+		game.load.image('psplat', 'splat_orig.png');
 
 		// Backgrounds
 		game.load.image('porter', 'finalPorter.png');
