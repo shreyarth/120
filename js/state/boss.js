@@ -87,6 +87,7 @@ boss.prototype = {
 			bull.body.setCollisionGroup(this.collideBB);
 			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {this.kill();}, bull);
 		}, this);
+		game.time.events.add(Phaser.Timer.SECOND * 3, this.spawnDeer, this);
 		// game.camera.follow(this.boss);
 		
 		// Set camera to platformer follow up
@@ -145,5 +146,31 @@ boss.prototype = {
 		g.destroy();
 
 		return obj;
+	},
+
+	spawnDeer: function(){
+		d1 = new Enemy(game, 0, 550, 'deer', null, null, 'deer');
+		game.add.existing(d1);
+		d1.body.setCollisionGroup(this.collideEnemy);
+		d1.body.collides([this.collidePlat,  this.collidePlayer, this.collidePB]);
+		d1.body.createGroupCallback(this.collidePB, function(d1, bull) {
+			d1.sprite.kill();
+			bull.sprite.kill();
+		}, d1);
+		d1.body.createGroupCallback(this.collidePlayer, function() {
+			d1.kill();
+		}, d1);
+
+		d2 = new Enemy(game, 800, 550, 'deer', null, null, 'deer');
+		game.add.existing(d2);
+		d2.body.setCollisionGroup(this.collideEnemy);
+		d2.body.collides([this.collidePlat,  this.collidePlayer, this.collidePB]);
+		d2.body.createGroupCallback(this.collidePB, function(d2, bull) {
+			d2.sprite.kill();
+			bull.sprite.kill();
+		}, d2);
+		d2.body.createGroupCallback(this.collidePlayer, function() {
+			d2.kill();
+		}, d2);
 	}
 }

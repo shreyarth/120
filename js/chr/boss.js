@@ -11,9 +11,11 @@ function Boss(game, x, y, key, type, bFrame){
 	// this.alpha = 0.5;
 	this.health = 20;
 	game.time.events.add(Phaser.Timer.SECOND * 3, this.charge, this);
-	game.time.events.add(Phaser.Timer.SECOND * 3, this.deer , this);
-	game.time.events.add(Phaser.Timer.SECOND * 3, this.spawn , this);
+	// game.time.events.add(Phaser.Timer.SECOND * 3, this.deer , this);
+	// game.time.events.add(Phaser.Timer.SECOND * 3, this.spawn , this);
 	this.isInvincible = false;
+	this.deer1;
+	this.deer2;
 	
 	// sound effects for boss
 	this.sfx = [];
@@ -156,10 +158,12 @@ Boss.prototype.death = function(player, bullet) {
 	bullet.kill();
 }
 
-Boss.prototype.deer = function(){
-	deer1 = new Enemy(game, 0, 550, 'deer', null, null, 'deer');
-	game.add.existing(deer1);
+// Boss.prototype.deer = function(){
+// 	this.deer1 = new Enemy(game, 0, 550, 'deer', null, null, 'deer');
+// 	game.add.existing(this.deer1);
+// 	game.time.events.add(Phaser.Timer.SECOND * 3, function(){this.deer1.kill();}, this.deer1);
 
-	deer2 = new Enemy(game, 800, 550, 'deer', null, null, 'deer');
-	game.add.existing(deer2);
-}
+
+// 	this.deer2 = new Enemy(game, 800, 550, 'deer', null, null, 'deer');
+// 	game.add.existing(this.deer2);
+// }
