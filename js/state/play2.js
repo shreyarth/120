@@ -47,6 +47,11 @@ play2.prototype = {
 		ground.body.clearShapes();
 		ground.body.addRectangle(1000, 25);
 
+		ground = this.platform.create(470, 507, 'rcar');
+		ground.body.clearShapes();
+		ground.body.angle = 60;
+		ground.body.loadPolygon('physicsbox', 'yellowCar');
+
 		ground = this.platform.create(3800, 3900, 'bush');
 		ground.scale.setTo(30, 0.6 );
 		ground.body.damping.x = 0;
@@ -217,7 +222,7 @@ play2.prototype = {
 		ground.body.clearShapes();
 		ground.body.addRectangle(100, 25);
 
-		ground = this.platform.create(6000, 3150, 'branch');
+		ground = this.fPlatform.create(6000, 3150, 'branch');
 		ground.scale.setTo(0.35, 0.5);
 		ground.body.clearShapes();
 		ground.body.addRectangle(100, 25);
@@ -328,71 +333,71 @@ play2.prototype = {
 		this.enemy.physicsBodyType = Phaser.Physics.P2JS;
 		
 		//enemies on platforms, left to right
-		let en = new Enemy(game, 710, 220, 'deer', null, 'pepto');
+		let en = new Enemy(game, 710, 205, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 1535, 410, 'deer', null, 'pepto');
+		en = new Enemy(game, 1535, 395, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 1810, 922, 'deer', null, 'pepto');
+		en = new Enemy(game, 1810, 907, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 2532, 1140, 'deer', null, 'pepto');
+		en = new Enemy(game, 2532, 1125, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 3090, 1520, 'deer', null, 'pepto');
+		en = new Enemy(game, 3090, 1505, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		
-		en = new Enemy(game, 3490, 1620, 'deer', null, 'pepto');
+		en = new Enemy(game, 3490, 1605, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 		
-		en = new Enemy(game, 4030, 1965, 'deer', null, 'pepto');
+		en = new Enemy(game, 4030, 1950, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 4270, 2430, 'deer', null, 'pepto');
+		en = new Enemy(game, 4270, 2415, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 5460, 2920, 'deer', null, 'pepto');
+		en = new Enemy(game, 5460, 2905, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 6010, 3120, 'deer', null, 'pepto');
+		en = new Enemy(game, 6010, 3105, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 6710, 3720, 'deer', null, 'pepto');
+		en = new Enemy(game, 6710, 3705, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 7315, 4090, 'deer', null, 'pepto');
+		en = new Enemy(game, 7315, 4075, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 7865, 4380, 'deer', null, 'pepto');
+		en = new Enemy(game, 7865, 4400, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 9351, 5360, 'deer', null, 'pepto');
+		en = new Enemy(game, 9351, 5395, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 9231, 5360, 'deer', null, 'pepto');
+		en = new Enemy(game, 9231, 5395, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 9451, 5360, 'deer', null, 'pepto');
+		en = new Enemy(game, 9451, 5395, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 
-		en = new Enemy(game, 9751, 5360, 'deer', null, 'pepto');
+		en = new Enemy(game, 9751, 5395, 'bad', null, 'pepto', 'throw');
 		this.enemy.add(en);
 		this.assignCollisionGroup_Enemy(en, false);
 

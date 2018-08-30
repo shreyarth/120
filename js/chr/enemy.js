@@ -2,6 +2,11 @@
 function Enemy(game, x, y, key, frame, bFrame, type) {
 	// Phaser.Sprite(game, x, y, key)
 	// game.rnd.integerInRange(min, max) returns rand int between min, max
+	let isHuman = false;
+	if (key == 'bad') {
+		key += game.rnd.integerInRange(0, 6);
+		isHuman = true;
+	}
 	Phaser.Sprite.call(this, game, x, y, key, frame);
 	
 	// anchor: Origin of the texture
@@ -9,7 +14,17 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	this.anchor.set(0.5);
 	// Animation depending on key
 	if (key == 'deer') {
-		this.animations.add('walk', [0, 1], 2);
+		this.animations.add('walk', [0, 1], 2, true);
+		this.animations.play('walk');
+	}
+	if (isHuman) {
+		if (type == 'throw') {
+			this.animations.add('throw', [5, 6, 7, 8, 9, 0], 15);
+		}
+		else {
+			this.animations.add('walk', [1, 2, 3, 4, 3, 2], 5, true);
+			this.animations.play('walk');
+		}
 	}
 
 	// physics crap
@@ -21,6 +36,10 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 	// needs enemy type
 	this.type = type;
 	this.friction = false;
+	if (isHuman){
+		this.body.clearShapes();
+		this.body.addRectangle(30, 70);
+	}
 
 	//enemy bullets
 	this.bulletE = game.add.group();
@@ -132,6 +151,11 @@ Enemy.prototype.fire = function() {
 				}
 			}
 		}
+		if (player.x < this.x)
+			this.scale.x = -1;
+		else
+			this.scale.x = 1;
+		this.animations.play('throw');
 	}
 }
 

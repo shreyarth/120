@@ -6,9 +6,6 @@ var menu = function() {
 }
 
 menu.prototype = {
-	preload: function() {
-		
-	},
 	create: function() {
 		// Asset implementaion
 		game.stage.backgroundColor = bgcolor;
@@ -25,15 +22,10 @@ menu.prototype = {
 
 		style = {font: 'Press Start 2P', fontSize: '20px', fill: '#fff'};
 
-		let playText = game.add.text(game.world.centerX, game.height*.76, 'Start', style);
+		let playText = game.add.text(game.world.centerX, game.height*.76, 'START', style);
 		playText.anchor.setTo(0.5);
 
-		let str;
-		if (noset)
-			str = 'Settings (there is no settings)';
-		else
-			str = 'NADA';
-		playText = game.add.text(game.world.centerX, game.height*.82, str, style);
+		playText = game.add.text(game.world.centerX, game.height*.82, 'SETTINGS', style);
 		playText.anchor.setTo(0.5);
 		playText = game.add.text(game.world.centerX, game.height*.88, 'Exit (Alt + F4)', style);
 		playText.anchor.setTo(0.5);
@@ -76,12 +68,11 @@ menu.prototype = {
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 			switch (this.mCount%3) {
 				case 0:
-					game.state.start('boss');
+					game.state.start('play');
 					BGM[0].stop();
 					break;
 				case 1:
-					if (noset)
-						game.state.start('setting');
+					game.state.start('setting');
 					break;
 				case 2:
 					game.state.start('end');
@@ -96,10 +87,7 @@ menu.prototype = {
 					this.select = this.drawMark(game.world.centerX-75, game.height*.75);
 					break;
 				case 1:
-					if (noset)
-						this.select = this.drawMark(game.world.centerX-330, game.height*.81);
-					else
-						this.select = this.drawMark(game.world.centerX-85, game.height*.81);
+						this.select = this.drawMark(game.world.centerX-102, game.height*.81);
 					break;
 				case 2:
 					this.select = this.drawMark(game.world.centerX-175, game.height*.87);
