@@ -1,6 +1,6 @@
 var boss = function() {
 	// Global state variables
-	this.bullets, this.enemy, this.boss;
+	this.bullets, this.enemy, this.boss, this.phase;
 	this.platform;
 
 	this.ui, this.full_width, this.cropRect;
@@ -8,12 +8,11 @@ var boss = function() {
 
 	this.collidePlayer, this.collidePlat, this.collideEnemy, this.collideBoss;
 	this.collidePB, this.collideBB;
+
+	this.boss_ps, this.bx, this.by, this.end;
 }
 
 boss.prototype = {
-	preload: function() {
-		
-	},
 	create: function() {
 		if (!BGM[2].isPlaying) BGM[2].play();
 		
@@ -90,7 +89,9 @@ boss.prototype = {
 		}, this);
 		game.time.events.loop(Phaser.Timer.SECOND * 10, this.spawnDeer, this);
 		game.time.events.add(Phaser.Timer.SECOND * 6, this.spawnTurk, this);
-		
+		this.phase = 1;
+		this.boss_ps = true;
+
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
 		// game.camera.follow('player', FOLLOW_PLATFORMER, 0.25, 0.25);
@@ -108,8 +109,37 @@ boss.prototype = {
 	},
 	update: function() {
 		// Update function
-		if(this.boss.health == 10 && this.boss.type == 'eyes'){
+		if((this.boss.health == 10 && this.phase == 1) || (this.boss.health <= 0 && this.phase < 5))
 			this.changeBoss();
+		if (this.phase == 5){
+			// Boss defeated
+			let temp = game.add.sprite(this.boss.x, this.boss.y, 'boss4');
+			temp.anchor.setTo(0.5);
+			this.boss.destroy();
+			this.boss = temp;
+			this.phase++;
+		}
+		if (this.phase > 5) {
+			if (this.boss_ps) {
+				this.bx = this.boss.x;
+				this.by = this.boss.y;
+
+				this.boss.x += game.rnd.integerInRange(5, 5);
+				this.boss.y += game.rnd.integerInRange(5, 5);
+				this.boss_ps = false;
+			}
+			else{
+				this.boss.x = this.bx;
+				this.boss.y = this.by;
+				this.boss_ps = true;
+			}
+			// Shake cam
+			game.camera.shake(0.005, 500);
+			if (this.end == null || this.end == undefined){
+				this.end = game.time.events.add(5000, this.moveOn, this);
+				someShit.cleared = true;
+				localStorage.setItem('someShit', JSON.stringify(someShit));
+			}
 		}
 
 		// UI update
@@ -117,13 +147,21 @@ boss.prototype = {
 			this.cropRect.width = player.pooCount/MAXPOO * this.full_width;
 			this.ui.updateCrop();
 		}
-		this.bossHealthUI.destroy();
-		this.bossHealthUI = this.bossHealthBar();
+		if (this.boss.health >= 0){
+			this.bossHealthUI.destroy();
+			this.bossHealthUI = this.bossHealthBar();
+		}
 	},
 
 	changeBoss: function(){
-		console.log('asfad');
-		let temp = new Boss(game, this.boss.x, this.boss.y, 'boss1', 'mouth', 'lax');
+		let key = 'boss' + this.phase;
+		console.log(key);
+		let temp;
+		if (this.boss.type == 'eyes')
+			temp = new Boss(game, this.boss.x, this.boss.y, key, 'mouth', 'lax');
+		if (this.boss.type == 'mouth')
+			temp = new Boss(game, this.boss.x, this.boss.y, key, 'eyes', 'lax');
+		
 		game.add.existing(temp);
 		temp.health = 10;
 		temp.body.setCollisionGroup(this.collideBoss);
@@ -132,7 +170,18 @@ boss.prototype = {
 		// Reinitialize
 		this.boss = temp;
 		this.bossMaxHP = this.boss.health;
+		this.boss.body.setCollisionGroup(this.collideBoss);
+		this.boss.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
+		this.boss.body.createGroupCallback(this.collidePB, function(boss, bull) {
+			this.health--;
+			bull.sprite.kill();
+		}, this.boss);
+		this.boss.bulletB.forEach(function(bull) {
+			bull.body.setCollisionGroup(this.collideBB);
+			bull.body.collides([this.collidePlayer, this.collidePlat], function(bull) {this.kill();}, bull);
+		}, this);
 
+		this.phase++;	// Count phases
 	},
 	bossHealthBar: function() {
 		let obj = null;
@@ -173,7 +222,6 @@ boss.prototype = {
 			d2.kill();
 		}, d2);
 	},
-
 	spawnTurk: function(){
 		console.log('In kamikaze_turkey');
 		for(var i = 0; i < 3; ++i){
@@ -189,5 +237,8 @@ boss.prototype = {
 		turkie.body.createGroupCallback(this.collidePlayer, function() {
 			turkie.kill();
 		}, turkie);
+	},
+	moveOn: function() {
+		game.state.start('end');
 	}
 }

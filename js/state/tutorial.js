@@ -6,6 +6,7 @@ var tutorial = function() {
 
 tutorial.prototype = {
 	create: function() {
+		BGM[3].play();	// Really nice forest vibe
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.stage.backgroundColor = "#1A7209";
 
@@ -189,6 +190,7 @@ tutorial.prototype = {
 		this.proceed();
 	},
 	moveOn: function() {
+		BGM[3].stop();
 		someShit.progress = 1;
 		localStorage.setItem('someShit', JSON.stringify(someShit));
 		game.state.start('menu');

@@ -34,10 +34,7 @@ game.state.add('play2', play2);
 game.state.add('boss', boss);
 game.state.add('end', end);
 game.state.add('tutorial', tutorial);
-// game.state.add('cut1', cut1);
-// game.state.add('cut2', cut2);
-// game.state.add('cut3', cut3);
-// game.state.add('cut4', cut4);
+ game.state.add('credit', credit);
 
 // Start from menu screen
 // Might need separate loading screen in case asset loading takes time
@@ -63,8 +60,6 @@ function barUI() {
 	t_ui.cameraOffset.setTo(375, 8);
 
 	// Gauge fill
-	//pooMeter(MAXPOO, 0x000000);
-	//return pooMeter(player.pooCount, 0x492008);
 	t_ui = game.add.sprite(83, 19, 'poo_fill');
 	t_ui.fixedToCamera = true;
 	t_ui.cameraOffset.setTo(83, 19);
