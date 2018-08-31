@@ -26,7 +26,7 @@ menu.prototype = {
 		}
 
 		if (playMode == 0)	MAXPOO = 20;
-		else if (playMode == 1)	MAXPOO = 10000;	// Default setting
+		else if (playMode == 1)	MAXPOO = 10;	// Default setting
 		else if (playMode == 2)	MAXPOO = 5;
 		
 		let tt = game.add.sprite(570, 500, 'poosplat');

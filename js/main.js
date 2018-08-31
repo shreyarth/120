@@ -9,7 +9,7 @@ const BGVOL = 0.5;
 
 // Settings
 var bgcolor = "#000"
-var MAXPOO = 10;
+var MAXPOO = 10000;
 var someShit;	// For local data storage
 var playMode = 1;	// 0: Easy, 1: Reg, 2: Guy Fieri
 var devMode = false;
@@ -24,6 +24,7 @@ game.state.add('cut2', cut2);
 game.state.add('cut3', cut3);
 game.state.add('cut3_5', cut3_5);
 game.state.add('cut4', cut4);
+game.state.add('cutfinal', cutfinal);
 game.state.add('boot', boot);
 game.state.add('load', load);
 game.state.add('pre', pre);
