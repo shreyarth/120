@@ -24,7 +24,7 @@ credit.prototype = {
 			"HANEUL JUNG",
 			"", "", "", "", "","","",
 			"Special Thanks To",
-			"SUNG \"Good cop and bad cop\"",
+			"Good cop and bad cop",
 			"","","","","",
 			"No animal was harmed", "in the making of this shit game.",
 			"Except for these developers."

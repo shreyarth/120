@@ -182,7 +182,7 @@ P2layer.prototype.update = function() {
 		}
 		//cheatmode
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.P)){
-			this.pooCount = 5;
+			this.pooCount = MAXPOO / 2;
 		}
 		// Attack move
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR))
