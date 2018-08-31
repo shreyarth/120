@@ -40,6 +40,7 @@ load.prototype = {
 		game.load.image('star', 'star.png');
 		game.load.image('rate_this', 'rating.png');
 		game.load.image('tPPr', 'toiletPaper.png');
+		game.load.image('phaser', 'img.png');
 
 		// Chr sprites
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
