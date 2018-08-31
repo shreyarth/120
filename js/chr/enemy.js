@@ -39,31 +39,36 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 		this.body.clearShapes();
 		this.body.addRectangle(30, 70);
 	}
-
-	//enemy bullets
-	this.bulletE = game.add.group();
-	this.bulletE.enableBody = true;
-	this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
-	this.bulletE.createMultiple(50, bFrame);
-	this.bulletE.forEach(function(bull) {bull.body.clearShapes(), bull.body.addCircle(5);});
-	this.bulletE.checkWorldBounds = false;
-	this.bulletE.outOfBoundsKill = true;
-
-	// Timer events for groups
-	timer = game.time.create(false);
-	timer.loop(game.rnd.integerInRange(700,1300), this.fire, this);
-	game.timer.loop(500, function() {
-		this.bulletE.forEachAlive(function(bull) {
-			bull.alpha -= 0.05;
-			if (bull.alpha <= 0)
-				bull.alive = false;
-		}, this.bullets);
-	}, this);
-	timer.start();
+	
+	// Limit to throwing enemies
+	if (type == 'throw'){
+		//enemy bullets
+		this.bulletE = game.add.group();
+		this.bulletE.enableBody = true;
+		this.bulletE.physicsBodyType = Phaser.Physics.P2JS;
+		this.bulletE.createMultiple(50, bFrame);
+		this.bulletE.forEach(function(bull) {bull.body.clearShapes(), bull.body.addCircle(5);});
+		this.bulletE.checkWorldBounds = false;
+		this.bulletE.outOfBoundsKill = true;
+	
+		// Timer events for groups
+		timer = game.time.create(false);
+		timer.loop(game.rnd.integerInRange(700,1300), this.fire, this);
+		game.timer.loop(500, function() {
+			this.bulletE.forEachAlive(function(bull) {
+				bull.alpha -= 0.05;
+				if (bull.alpha <= 0)
+					bull.alive = false;
+			}, this.bullets);
+		}, this);
+		timer.start();
+	}
 
 	// Collision
-	this.body.createBodyCallback(player, this.collideBody, this);
-	this.bulletE.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
+	if (type != 'hooman')
+		this.body.createBodyCallback(player, this.collideBody, this);
+	if (type == 'throw')
+		this.bulletE.forEach(function(bull) {bull.body.createBodyCallback(player, function(){if(!player.isInvincible) this.pooModifier();}, this);}, this);
 
 	// devMode settings
 	this.body.debug = devMode;
