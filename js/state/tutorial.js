@@ -44,6 +44,7 @@ tutorial.prototype = {
 			game.physics.arcade.collide(this.tplayer, this.tut_sprite, this.collectStar, null, this);
 		//to return to game
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ENTER)){
+			BGM[3].stop();
 			game.state.start('menu');
 		}
 		if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
