@@ -38,23 +38,18 @@ cut3_5.prototype = {
 			}
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides(this.collidePlat);
+		game.time.events.add(Phaser.Timer.SECOND * 4, this.changeState, this);
 
 
-		// runner = new Enemy(game, 100, 500, 'bad', null, null, 'hooman');
-		// game.add.existing(runner);
-		// this.enemy.add(runner);
-		// game.time.events.add(8000, this.moveOn, this);
-	},
-	moveOn: function(){
-		game.state.start('cut4');
-
-		// runner = new Enemy(game, 100, 500, 'bad', null, null, 'hooman');
-		// game.add.existing(runner);
-		// this.enemy.add(runner);
-
+	
 	},
 	update: function(){
 		game.camera.shake(0.005, 500);
+
+
+	}
+	changeState: function(){
+		game.state.start('cut4');
 
 	}
 }
