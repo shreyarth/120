@@ -4,6 +4,7 @@ var cut4 = function(game) {
 cut4.prototype = {
 	create: function() {
 		//c4.1
+		game.world.setBounds(0, 0, 800, 600);
 		BGM[6].fadeOut(3000);
 		let logo = game.add.sprite(game.world.centerX, game.world.centerY, 'cut4_1');
 		logo.anchor.set(0.5);
