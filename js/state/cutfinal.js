@@ -4,6 +4,7 @@ var cutfinal = function() {
 cutfinal.prototype = {
 	create: function() {
 		//c3.1
+		BGM[7].play();
 		someShit.progress = 3;
 		localStorage.setItem('someShit', JSON.stringify(someShit));
 		game.world.setBounds(0, 0, game.width, game.height);
@@ -17,6 +18,7 @@ cutfinal.prototype = {
 	},
 	moveOn: function(){
 	//c3.2
+		BGM[7].fadeOut(4500);
 		logo = game.add.sprite(game.world.centerX, game.world.centerY, 'cutf2');
 		logo.anchor.set(0.5);
 		logo.alpha = 0;
@@ -25,7 +27,7 @@ cutfinal.prototype = {
 		game.time.events.add(9000, this.moveOn2, this);
 	},
 	moveOn2: function(){
-		game.state.start('');
+		game.state.start('credit');
 	}
 	
 }

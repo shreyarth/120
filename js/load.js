@@ -129,6 +129,9 @@ load.prototype = {
 		game.load.audio('bosslevel', 'finalMusic.wav');
 		game.load.audio('tuto','tut.mp3');
 		game.load.audio('cred','cred.mp3');
+		game.load.audio('c1bg','cut1.mp3');
+		game.load.audio('c3bg','cut3.mp3');
+		game.load.audio('cfinalbg','finalcut.mp3');
 
 		// SFX
 		// Sound effects from:
@@ -149,6 +152,7 @@ load.prototype = {
 		game.load.audio('enemydeath', 'enemyDeath.mp3');
 		game.load.audio('shoot', 'shooting.mp3');
 		game.load.audio('playercol', 'playercollision.mp3');
+		game.load.audio('shake', 'equake6.mp3');
 
 	},
 	create: function() {
@@ -158,6 +162,9 @@ load.prototype = {
 		BGM[2] = game.add.audio('bosslevel', BGVOL, true);	// Boss BGM
 		BGM[3] = game.add.audio('tuto', BGVOL, true);	// Bulid that fake asthetic for tutorial
 		BGM[4] = game.add.audio('cred', BGVOL, true);	// Epic credits
+		BGM[5] = game.add.audio('c1bg', 0.3, true);	// Cutscene 1 BGM
+		BGM[6] = game.add.audio('c3bg', 0.3, true);	// Cutscene 3 BGM
+		BGM[7] = game.add.audio('cfinalbg', 0.3, true);
 
 		SFX[0] = game.add.audio('fart');
 		SFX[0].allowMultiple = true;
@@ -189,6 +196,7 @@ load.prototype = {
 		SFX[13].allowMultiple = true;
 		SFX[14] = game.add.audio('playercol', 0.2);
 		SFX[14].allowMultiple = true;
+		SFX[15] = game.add.audio('shake');
 		
 		// Local storage initialization for storing game data
 		//localStorage.clear();	// Delete or comment out this line when dev is done
@@ -204,6 +212,6 @@ load.prototype = {
 			}
 			localStorage.setItem('someShit', JSON.stringify(someShit));
 		}
-		game.state.start('cut3');
+		game.state.start('pre');
 	}
 }

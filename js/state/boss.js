@@ -135,6 +135,7 @@ boss.prototype = {
 			// Shake cam
 			game.camera.shake(0.005, 500);
 			if (this.end == null || this.end == undefined){
+				SFX[15].play();
 				this.end = game.time.events.add(5000, this.moveOn, this);
 				someShit.cleared = true;
 				localStorage.setItem('someShit', JSON.stringify(someShit));
@@ -238,6 +239,8 @@ boss.prototype = {
 		}, turkie);
 	},
 	moveOn: function() {
+		BGM[2].stop();
+		if (SFX[15].isPlaying)	SFX[15].stop();
 		game.state.start('cutfinal');
 	}
 }

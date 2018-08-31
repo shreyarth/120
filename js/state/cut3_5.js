@@ -5,6 +5,7 @@ var cut3_5 = function(game){
 
 cut3_5.prototype = {
 	create: function(){
+		SFX[15].play();
 		game.world.setBounds(0, 0, 1000, 600);
 		game.physics.startSystem(Phaser.Physics.P2JS);
 		game.physics.p2.setImpactEvents(true);
@@ -50,6 +51,7 @@ cut3_5.prototype = {
 		game.state.start('cut4');
 	},
 	spawnBoss: function() {
+		SFX[15].stop();
 		let sample = this.enemy.getFirstExists();
 		let b = game.add.sprite(sample.body.x, sample.body.y - 110, 'boss');
 		b.anchor.setTo(0.5);
