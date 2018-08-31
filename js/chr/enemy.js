@@ -122,8 +122,8 @@ Enemy.prototype.update = function() {
 
 Enemy.prototype.collideBody = function() {
 	if (!player.isInvincible) {
-	SFX[2].play();
-	this.pooModifier();
+		if (this.type == 'kamikaze_turkey')	SFX[2].play();
+		this.pooModifier();
 	}
 }
 
@@ -179,12 +179,6 @@ Enemy.prototype.chasePlayer = function() {
 	else if (player.body.x > this.body.x) {
 		this.velocity.x = 50;
 	}
-}
-
-Enemy.prototype.turkey = function(){
-	let turk = game.add.audio('turkey', 0.1);
-	turk.allowMultiple = false;
-	turk.play();
 }
 
 Enemy.prototype.boom = function(){
