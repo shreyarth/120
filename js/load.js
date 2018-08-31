@@ -45,15 +45,18 @@ load.prototype = {
 		game.load.spritesheet('player', 'player_spritesheet.png', 63, 81);
 		game.load.image('enemy', 'enemy.png');
 		game.load.image('boss', 'bossBase.png');
-		game.load.image('boss1', 'bossFinal.png');
+		game.load.image('boss1', 'boss.png');
+		game.load.image('boss2', 'bossHalf.png');
+		game.load.image('boss3', 'bossFinal.png');
+		game.load.image('boss4', 'bossDefeated.png');
 		game.load.spritesheet('deer', 'deer_spritesheet.png', 44, 49);
 		game.load.spritesheet('bad0', 'enemy0_spritesheet.png', 61, 81);
 		game.load.spritesheet('bad1', 'enemy1_spritesheet.png', 61, 81);
 		game.load.spritesheet('bad2', 'enemy2_spritesheet.png', 61, 81);
 		game.load.spritesheet('bad3', 'enemy3_spritesheet.png', 61, 81);
 		game.load.spritesheet('bad4', 'enemy4_spritesheet.png', 58, 81);
-		game.load.spritesheet('bad5', 'enemy4_spritesheet.png', 58, 81);
-		game.load.spritesheet('bad6', 'enemy4_spritesheet.png', 58, 81);
+		game.load.spritesheet('bad5', 'enemy5_spritesheet.png', 58, 81);
+		game.load.spritesheet('bad6', 'enemy6_spritesheet.png', 58, 81);
 
 		
 		// Bullets, particles, effects etc
@@ -124,6 +127,8 @@ load.prototype = {
 		game.load.audio('menumusic', 'blocks.wav');
 		game.load.audio('stage1bgm', 'actionMusic.wav');
 		game.load.audio('bosslevel', 'finalMusic.wav');
+		game.load.audio('tuto','tut.mp3');
+		game.load.audio('cred','cred.mp3');
 
 		// SFX
 		// Sound effects from:
@@ -151,6 +156,8 @@ load.prototype = {
 		BGM[0] = game.add.audio('menumusic', BGVOL, true);	// Menu BGM
 		BGM[1] = game.add.audio('stage1bgm', BGVOL, true);	// Stage BGM
 		BGM[2] = game.add.audio('bosslevel', BGVOL, true);	// Boss BGM
+		BGM[3] = game.add.audio('tuto', BGVOL, true);	// Bulid that fake asthetic for tutorial
+		BGM[4] = game.add.audio('cred', BGVOL, true);	// Epic credits
 
 		SFX[0] = game.add.audio('fart');
 		SFX[0].allowMultiple = true;

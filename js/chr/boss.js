@@ -7,6 +7,7 @@ function Boss(game, x, y, key, type, bFrame){
 	this.game.physics.p2.gravity.y = 100;
 	this.body.data.gravityScale = 2;
 	this.type = type;
+	this.key = key;
 	this.anchor.setTo(0.5, 0.5);
 	this.health = 20;
 	this.isInvincible = false;
@@ -24,7 +25,6 @@ function Boss(game, x, y, key, type, bFrame){
 		this.body.setRectangle(72, 36, -29, -100);
 		this.body.addRectangle(190, 90 , -20, 90);
 	}
-	
 	if(this.type == 'mouth') {
 		this.body.setRectangle(72, 75, -20, 0);
 		this.body.addRectangle(190, 90 , -20, 90);	
@@ -60,7 +60,6 @@ Boss.prototype = Object.create(Phaser.Sprite.prototype);
 Boss.prototype.constructor = Boss;
 
 Boss.prototype.update = function() {
-	//Wut?
 	if(player.body.x > this.body.x){
 		this.scale.x = -1;
 	}
@@ -70,8 +69,6 @@ Boss.prototype.update = function() {
 }
 
 Boss.prototype.charge = function() {
-	console.log('cahgingings?');
-	console.log(this);
 	if (this.body){
 		if(this.body.x < player.body.x){
 			this.scale.x = -1;
