@@ -47,7 +47,7 @@ cut3_5.prototype = {
 		game.camera.shake(0.005, 500);
 
 
-	}
+	},
 	changeState: function(){
 		game.state.start('cut4');
 
