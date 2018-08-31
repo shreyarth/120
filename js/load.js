@@ -75,7 +75,7 @@ load.prototype = {
 		// Backgrounds
 		game.load.image('porter', 'finalPorter.png');
 		game.load.image('heller', 'HellerDr.png');
-		game.load.image('nerdhill', 'nerdhill.png');
+		game.load.image('nerdhill', 'nerdHill.png');
 		game.load.image('c9-10', 'C9-C10.png');
 		game.load.image('bookstore', 'BTBS.png');
 		game.load.image('lvl2', 'level2bg.png');
@@ -92,7 +92,7 @@ load.prototype = {
 		// Obstacles
 		game.load.image('bcar', 'blackCar.png');
 		game.load.image('ycar', 'yellowCar.png');
-		game.load.image('wcar', 'whitecar.png');
+		game.load.image('wcar', 'whiteCar.png');
 		game.load.image('bus', 'bus.png');
 		game.load.image('busObs', 'busObs.png');
 		game.load.image('carObs', 'carObs.png');
@@ -124,7 +124,7 @@ load.prototype = {
 		// Load all sounds into corresponding array
 		game.load.path = 'assets/audio/';
 		// BG
-		game.load.audio('menumusic', 'blocks.wav');
+		game.load.audio('menumusic', 'Blocks.wav');
 		game.load.audio('stage1bgm', 'actionMusic.wav');
 		game.load.audio('bosslevel', 'finalMusic.wav');
 		game.load.audio('tuto','tut.mp3');
