@@ -250,5 +250,11 @@ boss.prototype = {
 		BGM[2].stop();
 		if (SFX[15].isPlaying)	SFX[15].stop();
 		game.state.start('cutfinal');
+	},
+	render: function() {
+		if (devMode){
+			game.debug.text('fps: ' + game.time.fps, 32, 86, 'yellow');
+			game.debug.text('num of enemy: ' + this.enemy.total, 32, 102, 'yellow');
+		}
 	}
 }
