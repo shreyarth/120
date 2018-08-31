@@ -19,6 +19,7 @@ function Boss(game, x, y, key, type, bFrame){
 	this.sfx = [];
 	this.sfx[7] = game.add.audio('bossdeath');
 	this.sfx[8] = game.add.audio('bossyell');
+	this.sfx[8].allowMultiple = true;
 
 	// Typecheck
 	if(this.type == 'eyes') {

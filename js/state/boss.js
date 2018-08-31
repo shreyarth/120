@@ -79,6 +79,7 @@ boss.prototype = {
 		this.boss.body.setCollisionGroup(this.collideBoss);
 		this.boss.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		this.boss.body.createGroupCallback(this.collidePB, function(boss, bull) {
+			this.sfx[8].play();
 			this.health--;
 			bull.sprite.kill();
 		}, this.boss);
@@ -90,6 +91,8 @@ boss.prototype = {
 		game.time.events.add(Phaser.Timer.SECOND * 6, this.spawnTurk, this);
 		this.phase = 1;
 		this.boss_ps = true;
+		this.sfx = [];
+		this.sfx[7] = game.add.audio('bossdeath');
 
 		// Set camera to platformer follow up
 		// lerp set for smooth camera movement
@@ -136,6 +139,7 @@ boss.prototype = {
 			game.camera.shake(0.005, 500);
 			if (this.end == null || this.end == undefined){
 				SFX[15].play();
+				this.sfx[7].play();
 				this.end = game.time.events.add(5000, this.moveOn, this);
 				someShit.cleared = true;
 				localStorage.setItem('someShit', JSON.stringify(someShit));
@@ -173,6 +177,7 @@ boss.prototype = {
 		this.boss.body.setCollisionGroup(this.collideBoss);
 		this.boss.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		this.boss.body.createGroupCallback(this.collidePB, function(boss, bull) {
+			this.sfx[8].play();
 			this.health--;
 			bull.sprite.kill();
 		}, this.boss);
