@@ -15,9 +15,7 @@ cut4.prototype = {
 		//toskip
 		// to skip
 		let style = {font: 'Press Start 2P', fontSize: '12px', fill: '#fff'};
-		let txt = game.add.text(500, 570,
-			'Press Spacebar to skip', style);
-		
+		let txt = game.add.text(500, 570, 'Press Spacebar to skip', style);
 	},
 	moveOn: function() {
 		game.state.start('boss');

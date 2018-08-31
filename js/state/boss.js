@@ -140,6 +140,11 @@ boss.prototype = {
 			if (this.end == null || this.end == undefined){
 				SFX[15].play();
 				this.sfx[7].play();
+				game.time.events.loop(500, function() {
+					SFX[13].play();
+					let p = game.add.sprite(game.rnd.integerInRange(this.boss.x - 50, this.boss.x + 50), game.rnd.integerInRange(this.boss.y - 100, this.boss.y + 100), 'psplat');
+					p.scale.setTo(game.rnd.realInRange(1, 5));
+				}, this);
 				this.end = game.time.events.add(5000, this.moveOn, this);
 				someShit.cleared = true;
 				localStorage.setItem('someShit', JSON.stringify(someShit));
@@ -159,7 +164,6 @@ boss.prototype = {
 
 	changeBoss: function(){
 		let key = 'boss' + this.phase;
-		console.log(key);
 		let temp;
 		if (this.boss.type == 'eyes')
 			temp = new Boss(game, this.boss.x, this.boss.y, key, 'mouth', 'lax');
@@ -228,7 +232,6 @@ boss.prototype = {
 		}, d2);
 	},
 	spawnTurk: function(){
-		console.log('In kamikaze_turkey');
 		for(var i = 0; i < 3; ++i){
 			turkie = new Enemy(game, game.rnd.integerInRange(100, 1000), 100, 'enemy', null, null, 'kamikaze_turkey');
 			game.add.existing(turkie);
