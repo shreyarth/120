@@ -32,4 +32,5 @@ Toilet.prototype.toiletmeter = function(){
 	emitter.setYSpeed(-50,-150);
 	game.time.events.add(2600, function() {this.destroy();}, emitter);
 	game.time.events.add(500, function() {this.destroy();}, this);
+	if (!SFX[16].isPlaying)	SFX[16].play();
 }

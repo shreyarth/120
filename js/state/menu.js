@@ -103,6 +103,14 @@ menu.prototype = {
 					break;
 			}
 		}
+
+		if (game.input.keyboard.isDown(Phaser.Keyboard.G) && game.input.keyboard.isDown(Phaser.Keyboard.O) &&
+			game.input.keyboard.isDown(Phaser.Keyboard.D)) {
+			MAXPOO = 10000;
+			let t = game.add.text(game.world.centerX, game.world.centerY, 'CHEATER.',
+				{font: 'Press Start 2P', fontSize: '36px', fill: '#ff0000', strokeThickness: 5, stroke: 'white'});
+			t.anchor.setTo(0.5);
+		}
 	},
 	selection: function() {
 		this.select.destroy();

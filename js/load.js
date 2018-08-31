@@ -153,6 +153,7 @@ load.prototype = {
 		game.load.audio('shoot', 'shooting.mp3');
 		game.load.audio('playercol', 'playercollision.mp3');
 		game.load.audio('shake', 'equake6.mp3');
+		game.load.audio('tplosion', 'tSound.wav');
 
 	},
 	create: function() {
@@ -197,6 +198,8 @@ load.prototype = {
 		SFX[14] = game.add.audio('playercol', 0.2);
 		SFX[14].allowMultiple = true;
 		SFX[15] = game.add.audio('shake');
+		SFX[16] = game.add.audio('tplosion');
+		SFX[16].allowMultiple = false;
 		
 		// Local storage initialization for storing game data
 		//localStorage.clear();	// Delete or comment out this line when dev is done
