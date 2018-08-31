@@ -53,15 +53,7 @@ play2.prototype = {
 		ground.body.clearShapes();
 		ground.body.angle = 60;
 		ground.body.loadPolygon('physicsbox', 'yellowCar');
-
-		ground = this.platform.create(3800, 3900, 'bush');
-		ground.scale.setTo(30, 0.6 );
-		ground.body.damping.x = 0;
-		ground.body.angle = 30;
-		ground.body.clearShapes();
-		ground.body.addRectangle(9000, 25);
 		
-
 		ground = this.platform.create(1150, 963, 'bush');
 		ground.scale.setTo(3.15, 0.6 );
 		ground.body.damping = 0;
@@ -142,6 +134,14 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1800, 25);
+
+		//lowest platform, need collision to kill player
+		ground = this.platform.create(3800, 3900, 'bush');
+		ground.scale.setTo(30, 0.6 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(9000, 25);
 
 		this.platform.forEach(function(plat) {
 			plat.body.kinematic = true;
