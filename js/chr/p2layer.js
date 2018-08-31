@@ -282,17 +282,17 @@ P2layer.prototype.fire = function(isJump) {
 	}
 }
 
-P2layer.prototype.death = function() {
+P2layer.prototype.death = function(isFall) {
 	// Apply diff sprite for death cases
 	let deathSprite;
-	if(this.pooCount < 0)
+	if(this.pooCount < 0 || isFall)
 		deathSprite = game.add.sprite(this.x, this.y, 'bloodsplat');
 
 	else if(this.pooCount > MAXPOO)
 		deathSprite = game.add.sprite(this.x, this.y, 'poosplat');
 
 	if (deathSprite){
-		if(this.pooCount < 0)
+		if(this.pooCount < 0 || isFall)
 			this.sfx[5].play();
 		else
 			this.sfx[1].play();

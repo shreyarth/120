@@ -135,14 +135,6 @@ play2.prototype = {
 		ground.body.clearShapes();
 		ground.body.addRectangle(1800, 25);
 
-		//lowest platform, need collision to kill player
-		ground = this.platform.create(3800, 3900, 'bush');
-		ground.scale.setTo(30, 0.6 );
-		ground.body.damping.x = 0;
-		ground.body.angle = 30;
-		ground.body.clearShapes();
-		ground.body.addRectangle(9000, 25);
-
 		this.platform.forEach(function(plat) {
 			plat.body.kinematic = true;
 			plat.body.debug = devMode;
@@ -161,13 +153,10 @@ play2.prototype = {
 		ground.body.angle = 30;
 		ground.body.clearShapes();
 		ground.body.addRectangle(game.world.width, 25);
-		ground.body.kinematic = true;
-		ground.body.debug = true;
-		ground.body.setCollisionGroup(this.collideFPlat);
 
 		//flat surface at end
 		ground = this.fPlatform.create(9500, 5450, 'sidewalk');
-		ground.scale.setTo(1, 0.6 );
+		ground.scale.setTo(1, 0.6);
 		ground.body.damping.x = 0;
 		ground.body.clearShapes();
 		ground.body.addRectangle(1800, 25);
@@ -316,12 +305,29 @@ play2.prototype = {
 		player.friction = false;
 		player.bullets.forEach(function(bull) {
 			bull.body.setCollisionGroup(this.collidePB);
-			bull.body.collides([this.collidePlat, this.collideEnemy]);
+			bull.body.collides([this.collidePlat, this.collideFPlat, this.collideEnemy]);
 			bull.body.createGroupCallback(this.collidePlat, function(bull, plat){
 				if (bull.velocity != 0)
 					player.groundSplat(bull.x, bull.y);
 			});
+			bull.body.createGroupCallback(this.collideFPlat, function(bull, plat){
+				if (bull.velocity != 0)
+					player.groundSplat(bull.x, bull.y);
+			});
 		}, this);
+
+		//lowest platform, need collision to kill player
+		ground = this.platform.create(3800, 3900, 'bush');
+		ground.scale.setTo(30, 0.6 );
+		ground.body.damping.x = 0;
+		ground.body.angle = 30;
+		ground.body.clearShapes();
+		ground.body.addRectangle(9000, 25);
+		ground.body.kinematic = true;
+		ground.body.debug = devMode;
+		ground.body.setCollisionGroup(this.collidePlat);
+		ground.body.collides([this.collidePlayer, this.collideEnemy, this.collidePB, this.collideEB]);
+		ground.body.createBodyCallback(player, function(){player.death(true);}, this);
 
 		//enemy
 		this.enemy = game.add.group();

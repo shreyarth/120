@@ -29,11 +29,10 @@ end.prototype = {
 			//end.animations.add('play', [0, 1], 5, true);
 			//end.animations.play('play');
 		}
-		else {
-			let txt = game.add.text(game.width/2, game.height*.3, 'You Win', style);
+		else {	// Falling death
+			let txt = game.add.text(game.width/2, game.height/2, 'YOU DIED',
+			{font: 'Georgia', fontSize: '64px', fontWeight: '500', fill: '#ff0000', stroke: '#000', strokeThickness: 3});
 			txt.anchor.setTo(0.5);
-			var end = game.add.sprite(game.width/2, game.height/2 + 30,'tPPr');
-			end.anchor.setTo(0.5,0.5);
 		}
 
 		var playText = game.add.text(game.width/2, game.height*.8, 
