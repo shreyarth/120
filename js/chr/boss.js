@@ -96,7 +96,7 @@ Boss.prototype.fire = function() {
 				if(this.body.x < player.x + game.rnd.integerInRange(250,400)){
 					star.reset(this.x + 10, this.y - 10);
 					star.alpha = 1;
-					star.body.velocity.x = game.rnd.integerInRange(-200, -100);
+					star.body.velocity.x = game.rnd.integerInRange(-300, -100);
 					star.body.velocity.y = game.rnd.integerInRange(-250, -100);	
 					throwing.play();
 				}
@@ -104,7 +104,7 @@ Boss.prototype.fire = function() {
 			else {
 				if(this.body.x > player.x - game.rnd.integerInRange(250, 400)){
 					star.reset(this.x - 10, this.y - 10);
-					star.body.velocity.x = game.rnd.integerInRange(100, 200);
+					star.body.velocity.x = game.rnd.integerInRange(100, 300);
 					star.body.velocity.y = game.rnd.integerInRange(-250, -100);	
 					throwing.play();			
 				}
@@ -135,6 +135,7 @@ Boss.prototype.death = function(player, bullet) {
 	SFX[2].play();
 	this.kill();
 	bullet.kill();
+	//game.state.start('cutfinal');
 }
 
 Boss.prototype.pooModifier = function() {

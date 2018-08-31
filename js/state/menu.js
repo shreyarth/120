@@ -22,6 +22,7 @@ menu.prototype = {
 			this.cont = someShit.progress;
 			playMode = someShit.mode;
 			devMode = someShit.dev;
+
 		}
 
 		if (playMode == 0)	MAXPOO = 20;

@@ -1,27 +1,26 @@
 ASSET
 * temp artwork for prototype //DONE
-* porto potty
 * URGENT!! platforms// DONE
-* platforms for level2? 
-* Player animation
-* More enemy sprites
-* Enemies animation
-* Splatter to load on screen when player dies, brown and red//DONE
+* platforms for level2? //DONE
+* Player animation  //DONE
+* More enemy sprites  //DONE
+* Enemies animation //DONE
+* Splatter to load on screen when player dies, brown and red //DONE
 * URGENT!! layout of first level//DONE
 * URGENT!! tilemap?  //NO
-* Effects & particles:  add effects to player when poo is being shot out
-* enemy projectiles(pepto and laxative?)
-* Level design for 2nd level
+* Effects & particles:  add effects to player when poo is being shot out //DONE
+* enemy projectiles(pepto and laxative?) //DONE
+* Level design for 2nd level  //DONE
 * Final boss sprite.  Will need 3 seperate sprites that we can put together in programming, 
-* since there will be 3 different hit boxes.  Or we can put invisible boxes in 1 sprite, that may work...?
+* since there will be 3 different hit boxes.  Or we can put invisible boxes in 1 sprite, that may work...? //DONE
 * 
 
 
 SOUNDS
-* Splat sound for when poo collides
-* Music for level1
-* Music for level2
-* Music for bosslevel
+* Splat sound for when poo collides //DONE
+* Music for level1 //DONE
+* Music for level2 //DONE
+* Music for bosslevel //DONE
 
 Programming
 * A counter variable to keep track of poop usage for shooting/jumping//DONE
@@ -30,10 +29,10 @@ Programming
 * add recoil to player when shooting //Done
 * temp poo meter, placed either at top or bottom of screen //DONE 
 * Enemies that fire projectiles//DONE
-* Enemies will shoot two different types depending on poobar/sort of done
-* Fix player and enemies(?) collision box and mechanic
+* Enemies will shoot two different types depending on poobar//DONE
+* Fix player and enemies(?) collision box and mechanic //DONE p2ftw
 * URGENT:  Implement the first map/world//DONE
-* Fix poo creation, after the created count, it stops shooting
+* Fix poo creation, after the created count, it stops shooting //DONE
 
 
 SYSTEM

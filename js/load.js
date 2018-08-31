@@ -113,6 +113,8 @@ load.prototype = {
 		game.load.image('cut3_2', 'cutscene3_2.png');
 		game.load.image('cut3_3', 'cutscene3_3.png');
 		game.load.image('cut4_1', 'cutscene4_1.png');
+		game.load.image('cutf1', 'cutfinal1.png');
+		game.load.image('cutf2', 'cutfinal2.png');
 
 		// Ethan Mars: "JASON!"
 		// (Heavy Rain 2010)
@@ -202,7 +204,6 @@ load.prototype = {
 			}
 			localStorage.setItem('someShit', JSON.stringify(someShit));
 		}
-
-		game.state.start('cut3_5');
+		game.state.start('cut3');
 	}
 }

@@ -41,14 +41,13 @@ cut3_5.prototype = {
 		en.body.collides(this.collidePlat);
 		this.bossy = false;
 		game.time.events.add(3500, this.spawnBoss, this);
-		// game.time.events.add(Phaser.Timer.SECOND * 4, this.changeState, this);
-
+		game.time.events.add(Phaser.Timer.SECOND * 4, this.changeState, this);
 	},
 	update: function(){
 		if (!this.bossy)	game.camera.shake(0.005, 500);
 	},
 	changeState: function(){
-		// game.state.start('cut4');
+		game.state.start('cut4');
 	},
 	spawnBoss: function() {
 		let sample = this.enemy.getFirstExists();
