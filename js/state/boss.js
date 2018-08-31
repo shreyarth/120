@@ -76,7 +76,6 @@ boss.prototype = {
 		//boss
 		this.boss = new Boss(game, 410, 400, 'boss', 'eyes', 'lax');
 		game.add.existing(this.boss);
-		console.log(this.boss);
 		this.boss.body.setCollisionGroup(this.collideBoss);
 		this.boss.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		this.boss.body.createGroupCallback(this.collidePB, function(boss, bull) {

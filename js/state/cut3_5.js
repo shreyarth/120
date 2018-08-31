@@ -1,5 +1,6 @@
 var cut3_5 = function(game){
 	this.collideEnemy, this.collidePlat;
+	this.bossy;
 };
 
 cut3_5.prototype = {
@@ -38,14 +39,22 @@ cut3_5.prototype = {
 			}
 		en.body.setCollisionGroup(this.collideEnemy);
 		en.body.collides(this.collidePlat);
+		this.bossy = false;
+		game.time.events.add(3500, this.spawnBoss, this);
 		// game.time.events.add(Phaser.Timer.SECOND * 4, this.changeState, this);
 
 	},
 	update: function(){
-		game.camera.shake(0.005, 500);
+		if (!this.bossy)	game.camera.shake(0.005, 500);
 	},
-
 	changeState: function(){
 		// game.state.start('cut4');
+	},
+	spawnBoss: function() {
+		let sample = this.enemy.getFirstExists();
+		let b = game.add.sprite(sample.body.x, sample.body.y - 110, 'boss');
+		b.anchor.setTo(0.5);
+		this.enemy.destroy();
+		this.bossy = true;
 	}
 }
