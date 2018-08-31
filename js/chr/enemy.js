@@ -26,10 +26,6 @@ function Enemy(game, x, y, key, frame, bFrame, type) {
 			this.animations.play('walk');
 		}
 	}
-	// sfx
-	// this.sfx = [];
-	// this.sfx[13] = game.add.audio('enemydeath');
-	// this.sfx[13].allowMultiple = true;
 	// physics crap
 	game.physics.p2.enable(this);
 	this.body.fixedRotation = true;
@@ -166,9 +162,6 @@ Enemy.prototype.fire = function() {
 }
 
 Enemy.prototype.death = function(player, bullet) {
-	//SFX[13].play(); not playing? or too soft?
-	// game.camera.shake(0.005, 400);
-	// this.kill();
 	bullet.kill();
 	this.destroy();
 }
@@ -217,4 +210,20 @@ Enemy.prototype.run = function(){
 	else{
 		this.body.velocity.x = -200;
 	}
+}
+
+Enemy.prototype.poof = function() {
+	let emitter = game.add.emitter(this.x, this.y, 5);
+	// diff poof particles for different enemy types
+	if(this.type == 'kamikaze_turkey'){
+		SFX[2].play();
+		emitter.makeParticles('feather');
+	}
+	else{
+		SFX[13].play();
+		emitter.makeParticles('psplat');
+	}
+	emitter.start(true, 500, 0, 5);
+	emitter.setXSpeed(100,400);
+	emitter.setYSpeed(100,400);
 }

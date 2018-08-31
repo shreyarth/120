@@ -390,13 +390,13 @@ play.prototype = {
 		ene.body.setCollisionGroup(this.collideEnemy);
 		ene.body.collides([this.collidePlat, this.collidePlayer, this.collidePB]);
 		ene.body.createGroupCallback(this.collidePB, function(ene, bull) {
-			SFX[13].play();
+			this.poof();
 			ene.sprite.kill();
 			bull.sprite.kill();
 		}, ene);
 		if (isTurk){
-			ene.body.createGroupCallback(this.collidePlat, function() {this.kill();}, ene);
-		 	ene.body.createGroupCallback(this.collidePlayer, function() {this.kill();}, ene);
+			ene.body.createGroupCallback(this.collidePlat, function() {this.poof(); this.kill();}, ene);
+		 	ene.body.createGroupCallback(this.collidePlayer, function() {this.poof(); this.kill();}, ene);
 		}
 		else {
 			ene.bulletE.forEach(function(bull) {
