@@ -239,6 +239,6 @@ boss.prototype = {
 		}, turkie);
 	},
 	moveOn: function() {
-		game.state.start('end');
+		game.state.start('cutfinal');
 	}
 }

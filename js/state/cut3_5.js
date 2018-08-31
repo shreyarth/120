@@ -3,10 +3,6 @@ var cut3_5 = function(game){
 };
 
 cut3_5.prototype = {
-	preload: function(){
-
-	},
-
 	create: function(){
 		game.world.setBounds(0, 0, 1000, 600);
 		game.physics.startSystem(Phaser.Physics.P2JS);
@@ -46,5 +42,13 @@ cut3_5.prototype = {
 		runner = new Enemy(game, 100, 500, 'bad', null, null, 'hooman');
 		game.add.existing(runner);
 		this.enemy.add(runner);
+		game.time.events.add(8000, this.moveOn, this);
+	},
+	moveOn: function(){
+		game.state.start('cut4');
+	},
+	update: function(){
+		game.camera.shake(0.005, 500);
+
 	}
 }
