@@ -25,7 +25,7 @@ cutfinal.prototype = {
 		game.time.events.add(9000, this.moveOn2, this);
 	},
 	moveOn2: function(){
-		game.state.start('');
+		game.state.start('credit');
 	}
 	
 }
