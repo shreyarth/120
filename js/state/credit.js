@@ -25,7 +25,6 @@ credit.prototype = {
 			"", "", "", "", "","","",
 			"Special Thanks To",
 			"SUNG \"Good cop and bad cop\"",
-			"HANEUL \"C8H10N4O2, R3COH, C12H22O11\"",
 			"","","","","",
 			"No animal was harmed", "in the making of this shit game.",
 			"Except for these developers."
@@ -38,9 +37,14 @@ credit.prototype = {
 			if (devMode)	console.log(i+" "+linesArr[i]);
 			let line = game.add.text(game.world.centerX, game.height + 516 + 23 * i, linesArr[i], style);
 			line.anchor.set(0.5);
-			if (i == 31)	line.fill = 'red';
+			if (i == 30)	line.fill = 'red';
 			this.credLines.add(line);
 		}
+		tt = game.add.graphics();
+		tt.beginFill(0xffffff);
+		tt.drawRect(game.world.centerX-52, game.height + 533, 117, 3);
+		tt.endFill();
+		this.credLines.add(tt);
 		tt = this.credLines.create(game.world.centerX, game.height * 3.5, 'team_logo');
 		tt.anchor.setTo(0.5);
 		this.credLines.add(tt);
@@ -58,21 +62,10 @@ credit.prototype = {
 		txt.alpha = 0.5;
 		txt.fontSize = '12px';
 	},
-	moveOn: function(){
-	//c3.2
-		logo = game.add.sprite(game.world.centerX, game.world.centerY, 'cut3_2');
-		logo.anchor.set(0.5);
-		logo.alpha = 0;
-		game.add.tween(logo).to({alpha: 1}, 5000, Phaser.Easing.Linear.None, true, 0, 0, true);
-
-		game.time.events.add(8000, this.moveOn2, this);
-	},
-	moveOn2: function() {
-		game.state.start('boss');
-	},
 	update: function(){
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
-			game.state.start('boss');
+			BGM[4].stop();
+			game.state.start('menu');
 		}
 	}
 }
