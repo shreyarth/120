@@ -1,5 +1,5 @@
 # Runs
-#### *[Click here to play](https://dr9632.itch.io/runs)
+#### [Click here to play](https://dr9632.itch.io/runs)
 
 ## 120----FINAL PROJECT
 
